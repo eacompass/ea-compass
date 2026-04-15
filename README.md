@@ -1,52 +1,20 @@
-# E&A Compass — Investment Thinking Layer
+# E&A Compass v19 — Expert Mode
+*In memory of Elizabeth and Albert*
 
-> *"The thesis protects against ignorance."* — Siyabonga Mazibuko, Founder
+## What's new in v19
 
-E&A Compass is the investment discipline tool for serious retail investors. Built for JSE + US stocks, ETFs, and bonds. The discipline layer between impulse and execution.
+### Full Expert Mode Canvas (Pro+)
+- Valuation method selector: P/E · DCF · EV/EBITDA · NAV · Dividend Yield · P/Book
+- Margin of Safety calculator — intrinsic value vs current price, live %
+- Competitive moat selector — Cost Advantage, Network Effect, Switching Costs, Intangibles, Efficient Scale
+- Comparable companies field — peers you're measuring against
+- Pre-trade checklist — 5 items before you submit
+- Expert data saved to trade record and displayed on position cards
 
-## Live URLs
+### AI Interrogator Upgrade
+- Expert mode → 3 harder Charlie Munger questions
+  (challenges valuation assumptions, moat durability, key risks)
+- Beginner mode → same 2 questions as before
+- Expert badge on challenge output
 
-- **Landing page:** `https://[username].github.io/ea-compass/`
-- **App:** `https://[username].github.io/ea-compass/app/`
-
-## Structure
-
-```
-ea-compass/
-├── index.html        ← Landing page (EA Compass landing v3)
-├── app/
-│   └── index.html    ← The Compass app (v11)
-└── README.md
-```
-
-## Deploy to GitHub Pages — 5 minutes
-
-1. Push this repo to GitHub
-2. Go to **Settings → Pages**
-3. Source: **Deploy from a branch**
-4. Branch: **main** · Folder: **/ (root)**
-5. Click **Save** — live in ~2 minutes
-
-## What's in v11
-
-- Guided thesis builder — 4 simple questions for beginner investors
-- Expert mode — full thesis canvas (Pro feature)
-- Philosophy onboarding screen
-- Tier 1 / Tier 2 discipline framework
-- AI Thesis Interrogator, Drift Detection, Sanity Check
-- Position Anniversary Alerts (6, 12, 18, 24, 36, 48, 60 months)
-- Weekly Digest with Intelligence Brief preview
-- Mobile wizard for trade logging on phone
-- JSE + US + ETF support
-- Import from broker CSV
-
-## Built by
-
-Siyabonga Mazibuko · Elizabeth and Albert (Pty) Ltd · Durban, KwaZulu-Natal, South Africa
-
-*In memory of Elizabeth (Stanger, North Coast KZN) and Albert (Eshowe).*
-*Their grandchild is building generational wealth in their name.*
-
----
-
-© 2026 Elizabeth and Albert (Pty) Ltd · elizabethalbert.com
+© 2026 Elizabeth and Albert (Pty) Ltd

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn to invest with discipline. Plain English guides for South African investors — from complete beginner to confident value investor.">
+<title>Learn to Invest — E&A Compass</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#09161F;--navy-1:#0D1E2B;--navy-2:#122435;--navy-3:#1A3347;
+  --gold:#C09B45;--gold-light:#D4B46A;--gold-dim:#8A6B2E;
+  --cream:#F2EDE4;--white:#FAFAF8;--muted:#5A7A8E;--muted-light:#8AA4B4;
+  --border:rgba(192,155,69,0.15);--border-strong:rgba(192,155,69,0.35);
+}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse 80% 50% at 50% -10%,rgba(192,155,69,0.08) 0%,transparent 60%),
+  radial-gradient(ellipse 40% 40% at 90% 80%,rgba(192,155,69,0.04) 0%,transparent 60%);
+  pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;
+  background:rgba(9,22,31,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1200px;margin:0 auto}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);letter-spacing:-0.5px;text-decoration:none}
+.nav-logo span{color:var(--white)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a.active{color:var(--gold-light)}
+.nav-cta{padding:9px 20px;background:var(--gold);border-radius:7px;color:var(--navy)!important;font-weight:700!important;font-size:13px!important;transition:all 0.2s!important}
+.nav-cta:hover{background:var(--gold-light)!important;transform:translateY(-1px)}
+@media(max-width:640px){.nav-links{display:none}}
+
+/* LAYOUT */
+.page-wrap{max-width:1120px;margin:0 auto;padding:100px 5% 80px;position:relative;z-index:1}
+.two-col{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:96px}
+.sidebar-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;font-weight:600}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px}
+.sidebar-link{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:all 0.2s;border:1px solid transparent}
+.sidebar-link:hover{background:rgba(192,155,69,0.06);border-color:var(--border)}
+.sidebar-link.active{background:rgba(192,155,69,0.1);border-color:var(--border-strong)}
+.sidebar-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold-dim);margin-top:2px;flex-shrink:0}
+.sidebar-label{font-size:12px;color:var(--muted-light);line-height:1.4;transition:color 0.2s}
+.sidebar-link:hover .sidebar-label,.sidebar-link.active .sidebar-label{color:var(--white)}
+.sidebar-cta{margin-top:24px;padding:12px 16px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;text-align:center;text-decoration:none;display:block;transition:all 0.2s}
+.sidebar-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(192,155,69,0.3)}
+.sidebar-cta-label{font-size:12px;font-weight:700;color:var(--navy);display:block}
+.sidebar-cta-sub{font-size:10px;color:rgba(9,22,31,0.7);margin-top:2px;display:block}
+
+/* HERO */
+.learn-hero{margin-bottom:64px}
+.learn-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;
+  background:rgba(192,155,69,0.1);border:1px solid var(--border-strong);
+  border-radius:20px;font-size:11px;color:var(--gold-light);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+.learn-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:600;color:var(--cream);line-height:1.1;margin-bottom:16px}
+.learn-headline em{color:var(--gold);font-style:italic}
+.learn-sub{font-size:16px;color:var(--muted-light);line-height:1.7;max-width:560px}
+
+/* ARTICLES */
+.article{margin-bottom:80px;padding-bottom:80px;border-bottom:1px solid var(--border)}
+.article:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.article-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.article-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold-dim);padding:3px 10px;background:rgba(192,155,69,0.08);border:1px solid var(--border);border-radius:20px}
+.article-read-time{font-size:11px;color:var(--muted)}
+.article-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,40px);font-weight:600;color:var(--cream);line-height:1.15;margin-bottom:8px}
+.article-subtitle{font-size:14px;color:var(--muted);font-style:italic;margin-bottom:32px;line-height:1.6}
+.article-body{font-size:16px;line-height:1.85;color:var(--muted-light)}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin:36px 0 14px}
+.article-body h3:first-child{margin-top:0}
+.article-body p{margin-bottom:20px}
+.article-body p:last-child{margin-bottom:0}
+.article-body strong{color:var(--white);font-weight:600}
+.article-body em{color:var(--cream);font-style:italic}
+
+/* Code blocks for examples */
+.article-body .example-block{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-left:3px solid var(--gold-dim);
+  border-radius:0 10px 10px 0;
+  padding:16px 20px;
+  margin:24px 0;
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--muted-light);
+  line-height:1.8;
+}
+.article-body .quote-block{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;
+  font-style:italic;
+  color:var(--cream);
+  padding:20px 24px;
+  border-left:3px solid var(--gold);
+  background:rgba(192,155,69,0.05);
+  border-radius:0 10px 10px 0;
+  margin:28px 0;
+  line-height:1.65;
+}
+.article-body .quote-cite{
+  display:block;
+  font-size:12px;
+  color:var(--gold-dim);
+  font-style:normal;
+  margin-top:8px;
+  font-family:'DM Sans',sans-serif;
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+.article-body .checklist{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin:20px 0;
+}
+.article-body .checklist li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:15px;color:var(--muted-light);line-height:1.5;
+}
+.article-body .checklist li::before{content:'✓';color:var(--gold-dim);flex-shrink:0;font-weight:600;margin-top:1px}
+.article-body .checklist li.warn::before{content:'✗';color:#E05252}
+.article-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:32px;padding:14px 28px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border-radius:10px;color:var(--navy);font-weight:700;
+  font-size:14px;text-decoration:none;transition:all 0.2s;
+}
+.article-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,155,69,0.35)}
+
+/* DIVIDER */
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-strong),transparent);margin:0}
+
+/* FOOTER */
+footer{padding:48px 5% 32px;border-top:1px solid var(--border);position:relative;z-index:1}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--white)}
+.footer-memory{font-size:11px;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;text-align:right}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .two-col{grid-template-columns:1fr}
+  .sidebar{position:static;margin-bottom:40px}
+  .sidebar-nav{flex-direction:row;flex-wrap:wrap;gap:8px}
+  .sidebar-link{flex:0 0 auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">E&A <span>Compass</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="learn.html" class="active">Learn</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="app/" class="nav-cta">Open Compass →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="two-col">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-title">In this guide</div>
+      <nav class="sidebar-nav">
+        <a href="#article-1" class="sidebar-link active">
+          <span class="sidebar-num">01</span>
+          <span class="sidebar-label">What is an investment thesis?</span>
+        </a>
+        <a href="#article-2" class="sidebar-link">
+          <span class="sidebar-num">02</span>
+          <span class="sidebar-label">What is value investing?</span>
+        </a>
+        <a href="#article-3" class="sidebar-link">
+          <span class="sidebar-num">03</span>
+          <span class="sidebar-label">Tier 1 vs Tier 2 explained</span>
+        </a>
+        <a href="#article-4" class="sidebar-link">
+          <span class="sidebar-num">04</span>
+          <span class="sidebar-label">What is an exit trigger?</span>
+        </a>
+        <a href="#article-5" class="sidebar-link">
+          <span class="sidebar-num">05</span>
+          <span class="sidebar-label">How to start investing in SA</span>
+        </a>
+      </nav>
+      <a href="app/" class="sidebar-cta">
+        <span class="sidebar-cta-label">Open Compass →</span>
+        <span class="sidebar-cta-sub">Apply what you learn. Free forever.</span>
+      </a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+      <!-- HERO -->
+      <div class="learn-hero reveal">
+        <div class="learn-eyebrow">Investor Education · SA-First</div>
+        <h1 class="learn-headline">Learn to invest<br>with <em>discipline.</em></h1>
+        <p class="learn-sub">Plain English guides for South African investors. From complete beginner to your first disciplined trade — no jargon, no hype, no tips.</p>
+      </div>
+
+      <!-- ARTICLE 1 -->
+      <article class="article reveal" id="article-1">
+        <div class="article-meta">
+          <span class="article-num">Article 01</span>
+          <span class="article-read-time">5 min read</span>
+        </div>
+        <h2 class="article-title">What is an investment thesis?</h2>
+        <p class="article-subtitle">And why writing one could be the best financial decision you ever make</p>
+        <div class="article-body">
+          <p>Most people buy stocks the same way they buy lottery tickets.</p>
+          <p>They hear a name. A friend mentions it. They see it trending on Twitter. The price looks cheap. Something feels right. They tap buy — and hope for the best.</p>
+          <p>Then the price drops 20% and they have no idea whether to hold, sell, or buy more. Because they never actually knew why they bought it in the first place.</p>
+          <p>An investment thesis solves this problem.</p>
+
+          <h3>In plain English — what is a thesis?</h3>
+          <p>A thesis is simply your written answer to one question:</p>
+          <div class="quote-block">"Why is this stock worth buying right now?"</div>
+          <p>Not "it looks cheap." Not "everyone is talking about it." A specific, honest argument for why this particular business is mispriced by the market — and why you believe that gap will close.</p>
+
+          <h3>A real example — Sanlam (SLM on the JSE)</h3>
+          <p>Here's what a <strong>bad reason</strong> to buy looks like:</p>
+          <div class="example-block">"Sanlam looks cheap and someone said it's going up."</div>
+          <p>Here's what an <strong>investment thesis</strong> looks like:</p>
+          <div class="example-block">"Sanlam is a 100-year-old South African insurer that has dropped 15% due to once-off restructuring noise. The underlying business is strong — new business flows grew 18% and management reaffirmed guidance. Analyst consensus puts fair value at R111. At R84 I'm getting a wonderful business at a meaningful discount. I will exit if the restructuring permanently impairs their core insurance operations."</div>
+          <p>Same stock. Completely different level of thinking.</p>
+
+          <h3>Why does writing it down matter?</h3>
+          <p><strong>First</strong> — it forces clarity. You cannot write a vague thesis. The moment you try to put it in writing, you discover whether you actually understand the business or not.</p>
+          <p><strong>Second</strong> — it protects you when the price drops. Every stock drops at some point. Without a thesis, a price drop feels like a crisis. With a thesis, you can ask one question: <em>Has anything changed in the business, or just the price?</em></p>
+          <p><strong>Third</strong> — it teaches you over time. Every thesis you write becomes a record of your thinking. When a trade goes wrong, you can go back and see exactly where your reasoning failed.</p>
+
+          <h3>The E&A Compass rule</h3>
+          <div class="quote-block">"The thesis protects against ignorance."<span class="quote-cite">— Siyabonga Mazibuko, Founder · Elizabeth and Albert (Pty) Ltd</span></div>
+          <p>In Compass, the rule is simple: no thesis, no trade. You cannot log a position without writing your reason. Not because we want to make your life harder — but because the discipline of writing it is exactly where the value is.</p>
+          <p>A thesis doesn't need to be long. It doesn't need to use fancy financial terms. It just needs to be honest, specific, and yours.</p>
+        </div>
+        <a href="app/" class="article-cta">Write your first thesis in Compass →</a>
+      </article>
+
+      <!-- ARTICLE 2 -->
+      <article class="article reveal" id="article-2">
+        <div class="article-meta">
+          <span class="article-num">Article 02</span>
+          <span class="article-read-time">6 min read</span>
+        </div>
+        <h2 class="article-title">What is value investing?</h2>
+        <p class="article-subtitle">The strategy that turned Warren Buffett into the world's greatest investor — explained simply</p>
+        <div class="article-body">
+          <p>Every few months a new investing trend appears. Crypto. NFTs. Meme stocks. Options trading. AI penny stocks. Each one promises extraordinary returns. Each one attracts millions of people. And each one eventually leaves most of those people worse off than when they started.</p>
+          <p>Value investing has been around for nearly 100 years. It has never stopped working.</p>
+
+          <h3>The simple idea behind value investing</h3>
+          <p>Every business has a real worth — what it's actually worth based on its assets, earnings, and future prospects. Investors call this <strong>intrinsic value.</strong></p>
+          <p>The stock market doesn't always price businesses at their intrinsic value. Sometimes it prices them higher. Sometimes — especially during panic, bad news, or misunderstanding — it prices them much lower.</p>
+          <p>Value investing is simply the discipline of buying businesses when the market is pricing them below what they're actually worth — and waiting for the market to correct its mistake.</p>
+          <p>Buy R100 worth of business for R70. Wait. Collect the difference.</p>
+
+          <h3>Warren Buffett's one-sentence explanation</h3>
+          <div class="quote-block">"The stock market is a device for transferring money from the impatient to the patient."<span class="quote-cite">— Warren Buffett</span></div>
+          <p>The impatient buy on excitement and sell on fear. The patient buy on logic and hold until the market agrees with them. Value investing is patience with a thesis.</p>
+
+          <h3>A South African example</h3>
+          <p>Imagine Shoprite drops 25% because of temporary load shedding costs and a poor quarterly result. The headlines are bad. Most retail investors panic and sell.</p>
+          <p>But you do your research. Shoprite is still the dominant food retailer in Africa. Their store count is growing. The load shedding costs are temporary. The business itself hasn't changed — only the sentiment around it has.</p>
+          <p>You buy at R180. The market eventually recovers to R240. You made 33% — not because you were lucky, but because you were right about the business when everyone else was emotional about the price.</p>
+
+          <h3>The two types of value investing</h3>
+          <p>Compass is built around two approaches — reflected in the Tier 1 and Tier 2 framework:</p>
+          <p><strong>Tier 1 — Wonderful businesses at fair prices.</strong> Buy exceptional companies and hold them for years. Quality at a reasonable price. Capitec at a fair price beats a bad bank at a cheap price every time. This is Buffett's modern approach.</p>
+          <p><strong>Tier 2 — Deeply undervalued businesses with a catalyst.</strong> Buy a business that is genuinely cheap because of a specific temporary problem. You have a clear reason why the price will recover and a timeline for when. This is Benjamin Graham's original approach.</p>
+
+          <h3>What value investing is NOT</h3>
+          <ul class="checklist">
+            <li class="warn">Day trading — profiting from price movements hour to hour</li>
+            <li class="warn">Momentum investing — buying because the price is going up</li>
+            <li class="warn">Speculation — guessing rather than reasoning</li>
+            <li class="warn">Following tips on a WhatsApp group</li>
+          </ul>
+        </div>
+        <a href="app/" class="article-cta">Start value investing with Compass →</a>
+      </article>
+
+      <!-- ARTICLE 3 -->
+      <article class="article reveal" id="article-3">
+        <div class="article-meta">
+          <span class="article-num">Article 03</span>
+          <span class="article-read-time">7 min read</span>
+        </div>
+        <h2 class="article-title">Tier 1 vs Tier 2 — what's the difference?</h2>
+        <p class="article-subtitle">The two-tier framework that gives your portfolio structure, discipline, and clarity</p>
+        <div class="article-body">
+          <p>Most retail investors treat every stock the same way. They buy. They watch the price. They sell when it goes up enough — or panic when it goes down too much. There's no framework. No structure. No difference between a stock they plan to hold for 10 years and one they bought because of a short-term opportunity.</p>
+          <p>The Tier 1 / Tier 2 framework solves this before you buy.</p>
+
+          <h3>Tier 1 — Core Holdings</h3>
+          <p>A Tier 1 position is a business so good that you'd be genuinely happy to own it for the next 10 years — regardless of what the market does in between. You're buying because the business itself is exceptional. It has a durable competitive advantage. It generates consistent cash flow. It operates in an industry that isn't going anywhere.</p>
+          <div class="example-block">Max 25% of portfolio per position
+Hold indefinitely — no time limit
+No stop loss — thesis-based exits only
+Exit only if the thesis permanently breaks</div>
+          <p><strong>Real Tier 1 examples on the JSE:</strong> Capitec, Naspers/Prosus, Shoprite — businesses you buy, monitor annually, and let compound.</p>
+
+          <h3>Tier 2 — Tactical Value</h3>
+          <p>A Tier 2 position is different. You're buying because the price is exceptionally low relative to what the business is actually worth — and you have a specific reason why that gap will close. The key word is <strong>catalyst.</strong></p>
+          <p>Something specific needs to happen for the thesis to play out. A restructuring completes. A bad quarter gets lapped. Management changes. Without a catalyst — it's not Tier 2. It's just hope.</p>
+          <div class="example-block">Max 15% of portfolio per position
+18 month maximum — then promote or exit
+Specific named catalyst MANDATORY
+Minimum 30% margin of safety
+Review at 12 months — Compass alerts you automatically</div>
+
+          <h3>How the two tiers work together</h3>
+          <p>Think of your portfolio as having two engines:</p>
+          <p><strong>Tier 1</strong> is the foundation. Slow, steady, compounding. These positions don't require much attention — just an annual review to confirm the thesis still holds.</p>
+          <p><strong>Tier 2</strong> is the opportunity layer. Active, specific, time-limited. These positions require more monitoring — you're watching for the catalyst to play out.</p>
+          <div class="example-block">Tier 1 — 60-70% of portfolio  →  3-5 exceptional businesses
+Tier 2 — 20-30% of portfolio  →  2-3 specific opportunities
+Cash   — 10-20%               →  Patience is a position</div>
+
+          <h3>Why this framework matters</h3>
+          <p>Without tiers — every price drop feels like a crisis. You don't know whether to hold or fold because you never defined what kind of investment this was.</p>
+          <p>With tiers — you always know what to do. Tier 1 drops 20%? Check the thesis. If the business is fine — consider buying more. Tier 2 drops 20%? Check the catalyst. If it's still on track — hold. If the catalyst has disappeared — exit. No emotion. Just logic.</p>
+        </div>
+        <a href="app/" class="article-cta">Log your first Tier 1 position →</a>
+      </article>
+
+      <!-- ARTICLE 4 -->
+      <article class="article reveal" id="article-4">
+        <div class="article-meta">
+          <span class="article-num">Article 04</span>
+          <span class="article-read-time">6 min read</span>
+        </div>
+        <h2 class="article-title">What is an exit trigger?</h2>
+        <p class="article-subtitle">The decision you need to make before you buy — not after</p>
+        <div class="article-body">
+          <p>Most investors spend all their time thinking about when to buy. They research the company. They check the price. They build conviction. They buy. And then they have absolutely no plan for what happens next.</p>
+          <p>The problem isn't that they bought the wrong stock. The problem is they never decided why they would sell before they bought.</p>
+          <p>An exit trigger solves this.</p>
+
+          <h3>What is an exit trigger?</h3>
+          <p>An exit trigger is a specific <strong>business condition</strong> — defined before you buy — that tells you when it's time to sell. Not a price. A condition.</p>
+          <div class="example-block">❌ "I will sell if the price drops 20%"
+   This is an emotional stop loss, not an exit trigger.
+
+✓  "I will sell if Capitec loses its banking licence or if 
+   a new entrant captures more than 15% of their retail 
+   banking market share within 3 years."
+   This is an exit trigger.</div>
+
+          <h3>Why price-based exits fail</h3>
+          <p>Price drops happen for two completely different reasons:</p>
+          <p><strong>Reason 1 — The business has genuinely deteriorated.</strong> New competition. Management failure. Industry disruption. In this case — yes, sell. The thesis is broken.</p>
+          <p><strong>Reason 2 — The market is being emotional.</strong> Bad sentiment. Macro fear. Short-term miss. In this case — hold. Or buy more. The business is fine.</p>
+          <p>A price-based exit doesn't distinguish between these two situations. A thesis-based exit does.</p>
+
+          <h3>How to write a good exit trigger</h3>
+          <p>A good exit trigger answers one question: <em>What would have to be true about this business for my thesis to be permanently wrong?</em></p>
+          <div class="example-block">Tier 1 — Capitec:
+"I will exit if Capitec loses its banking licence, if a 
+superior digital bank captures more than 20% of their 
+core retail market, or if management makes a capital 
+allocation decision that permanently impairs the balance sheet."
+
+Tier 2 — Sanlam restructuring:
+"I will exit if the restructuring is abandoned, if management 
+withdraws guidance, or if 18 months pass without the market 
+re-rating toward fair value."</div>
+
+          <h3>The psychological power of pre-committing</h3>
+          <p>You write your exit trigger when you're calm, rational, and fully informed. Before you own the position. Before you're emotionally attached to being right.</p>
+          <p>The moment you buy — everything changes. Your brain starts filtering information to confirm your thesis. You downplay bad news. You overweight good news. This is confirmation bias and every human being does it.</p>
+          <div class="quote-block">Your exit trigger — written before you bought — is your past rational self holding your future emotional self accountable.</div>
+          <p>When bad news hits and you're tempted to hold because "it'll recover" — your exit trigger asks the only question that matters: <em>Has the business condition I defined actually occurred?</em> If yes — sell. If no — hold.</p>
+
+          <h3>How Compass Intelligence reads your exit trigger</h3>
+          <p>When you type your exit trigger into Compass, it reads whether you've written a price-based or thesis-based condition. If it detects price language, it nudges you gently — <em>"This looks like a price-based trigger. Consider defining the business condition instead."</em> Not a lecture. Just a question most investors have never been asked.</p>
+        </div>
+        <a href="app/" class="article-cta">Define your first exit trigger →</a>
+      </article>
+
+      <!-- ARTICLE 5 -->
+      <article class="article reveal" id="article-5">
+        <div class="article-meta">
+          <span class="article-num">Article 05</span>
+          <span class="article-read-time">8 min read</span>
+        </div>
+        <h2 class="article-title">How to start investing in South Africa</h2>
+        <p class="article-subtitle">A no-nonsense guide for first-time investors — from zero to your first disciplined trade</p>
+        <div class="article-body">
+          <p>Everyone tells you to invest. Your parents. Your colleagues. Financial advisors on YouTube. Motivational posts on Instagram. But nobody actually tells you <em>how.</em> Step by step. In South Africa. With real numbers and real platforms that work for normal people.</p>
+          <p>This is that guide.</p>
+
+          <h3>Step 1 — Understand what you're actually doing</h3>
+          <p>Investing is not gambling. It's not trading. It's not trying to get rich quickly. Investing is buying a small ownership stake in a real business — and sharing in that business's growth over time.</p>
+          <p>When you buy one share of Capitec on the JSE, you literally own a tiny piece of Capitec Bank. When Capitec makes money and grows its profits — your share becomes more valuable. That's it.</p>
+
+          <h3>Step 2 — Sort your finances first</h3>
+          <ul class="checklist">
+            <li>Emergency fund — 3 to 6 months of expenses in a savings account. Don't invest without this.</li>
+            <li>High interest debt — credit cards and personal loans first. No investment beats 20%+ interest.</li>
+            <li>Monthly budget — know exactly what comes in and goes out. Invest what's genuinely left over.</li>
+          </ul>
+          <p>Investing R500/month while paying 22% interest on a credit card is not wealth building. Get the foundation right. Then invest.</p>
+
+          <h3>Step 3 — Open a brokerage account</h3>
+          <p>In South Africa the easiest starting point for retail investors is <strong>EasyEquities.</strong></p>
+          <ul class="checklist">
+            <li>No minimum investment — start with R10</li>
+            <li>JSE and US stocks on one platform</li>
+            <li>Simple mobile app</li>
+            <li>Fractional shares — buy part of expensive stocks</li>
+            <li>Low fees compared to traditional brokers</li>
+            <li>Regulated by the FSCA</li>
+          </ul>
+
+          <h3>Step 4 — Understand what you can invest in</h3>
+          <p><strong>JSE Stocks</strong> — South African companies listed on the Johannesburg Stock Exchange. You buy in rands. Examples: Capitec, Naspers, Shoprite, MTN, Sanlam.</p>
+          <p><strong>US Stocks</strong> — Companies listed on NYSE or NASDAQ. You buy in US dollars. Examples: Apple, Google, Amazon, Microsoft.</p>
+          <p><strong>ETFs</strong> — Instead of buying one company, you buy a basket of companies in one transaction. Lower risk. Great for beginners. Examples: Satrix 40 (top 40 JSE companies), Satrix S&P 500 (top 500 US companies).</p>
+          <p><em>For absolute beginners — start with ETFs.</em> They give you instant diversification while you're still learning.</p>
+
+          <h3>Step 5 — Research before you buy</h3>
+          <p>Before you buy any stock — ask yourself three questions:</p>
+          <div class="example-block">1. Do I understand this business?
+   Can you explain in one sentence what this company does 
+   and how it makes money? If not — don't buy it.
+
+2. Why is this stock worth buying right now?
+   A specific reason — not "it looks cheap" or "my friend said so."
+
+3. What would make me sell?
+   A business condition — not a price target.</div>
+          <p>These three questions are the foundation of an investment thesis. And writing that thesis down — before you buy — is the single habit that separates disciplined investors from everyone else.</p>
+
+          <h3>Step 6 — Use a discipline tool</h3>
+          <p>Knowing you should write a thesis and actually doing it every time are two different things. That's why E&A Compass exists.</p>
+          <p>Compass is built specifically for South African retail investors. Before you log any trade, you write your thesis. If you're new, the guided builder walks you through four simple questions — no jargon, no blank page. If you're experienced, expert mode gives you the full technical canvas.</p>
+
+          <h3>The honest truth about starting</h3>
+          <p>Most people never start because they're waiting to know enough. That day never comes. There's always more to learn.</p>
+          <div class="quote-block">You don't need to know everything to start. You need to start to know anything.</div>
+          <p>Start with R100. Buy one ETF. Write a thesis for why. Define when you'd sell. Review it in 12 months. That's investing. Everything else is just refinement.</p>
+        </div>
+        <a href="app/" class="article-cta">Open Compass and make your first trade →</a>
+      </article>
+
+    </main>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">E&A Compass</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="app/">Open App</a>
+    </div>
+    <div class="footer-memory">In memory of Elizabeth (Stanger) and Albert (Eshowe)</div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active sidebar link on scroll
+const articles = document.querySelectorAll('article[id]');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  articles.forEach(a => { if(window.scrollY >= a.offsetTop - 120) current = a.id; });
+  sidebarLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#'+current);
+  });
+});
+</script>
+</body>
+</html>
