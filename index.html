@@ -284,7 +284,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .cache-dot.fetching{background:var(--gold);animation:pulse-dot 0.8s infinite}
 
 /* ── POSITIONS ── */
-.pos-card{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;margin-bottom:10px;animation:card-in 0.3s ease both}
+.pos-card{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;margin-bottom:10px;animation:card-in 0.3s ease both;will-change:transform}
 @keyframes card-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .pos-card:nth-child(1){animation-delay:0.04s}
 .pos-card:nth-child(2){animation-delay:0.08s}
@@ -338,6 +338,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 /* ── MODALS ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:overlay-in 0.2s ease}
+body.modal-open{overflow:hidden;position:fixed;width:100%}
 @keyframes overlay-in{from{opacity:0}to{opacity:1}}
 .modal{background:var(--navy-2);border:1px solid var(--border-strong);border-radius:20px;padding:30px;max-width:500px;width:100%;box-shadow:0 40px 80px rgba(0,0,0,0.8);animation:modal-in 0.25s cubic-bezier(0.34,1.56,0.64,1)}
 @keyframes modal-in{from{opacity:0;transform:scale(0.94) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
@@ -358,6 +359,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .modal-pnl-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .modal-pnl-value{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600}
 .sell-max-btn{font-size:11px;color:var(--gold);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;margin-top:4px;display:block;transition:color 0.15s}
+.sell-reason-btn{padding:8px 10px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;color:var(--muted-light);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;text-align:left}
+.sell-reason-btn:hover{border-color:var(--gold-dim);color:var(--white)}
+.sell-reason-btn.selected{background:rgba(192,155,69,0.1);border-color:var(--gold);color:var(--gold-light);font-weight:600}
 .sell-max-btn:hover{color:var(--gold-light);text-decoration:underline}
 
 /* ── IMPORT MODAL ── */
@@ -855,6 +859,52 @@ body.beginner-mode .beginner-hint{display:block}
 .tax-alert-body{font-size:13px;color:var(--muted-light);line-height:1.6}
 .tax-alert-saving{font-family:'Cormorant Garamond',serif;font-size:22px;color:#F5C842;font-weight:600;margin:8px 0 4px}
 
+/* ══ EXPERT MODE CANVAS ══ */
+.expert-section{margin-bottom:16px}
+.expert-section-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:10px}
+
+/* Valuation method grid */
+.expert-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:480px){.expert-method-grid{grid-template-columns:repeat(2,1fr)}}
+.expert-method-btn{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:10px 8px;cursor:pointer;text-align:center;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.expert-method-btn:hover{border-color:var(--gold-dim);background:rgba(192,155,69,0.06)}
+.expert-method-btn.active{background:rgba(192,155,69,0.12);border-color:var(--gold);box-shadow:0 0 0 1px rgba(192,155,69,0.2)}
+.expert-method-icon{font-size:18px}
+.expert-method-name{font-size:12px;font-weight:600;color:var(--white);font-family:'DM Sans',sans-serif}
+.expert-method-sub{font-size:10px;color:var(--muted);font-family:'DM Sans',sans-serif}
+
+/* Margin of safety */
+.expert-mos-panel{background:rgba(192,155,69,0.05);border:1px solid var(--border-strong);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:none}
+.expert-mos-panel.show{display:block;animation:page-in 0.2s ease}
+.expert-mos-row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.expert-mos-field{flex:1;min-width:120px}
+.expert-field-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:500}
+.expert-input{font-size:13px;padding:9px 12px}
+.expert-mos-result{text-align:center;padding:8px 16px;background:rgba(0,0,0,0.2);border-radius:9px;min-width:90px}
+.expert-mos-pct{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1}
+.expert-mos-pct.good{color:#3DB87A}
+.expert-mos-pct.ok{color:#F5A623}
+.expert-mos-pct.bad{color:#E05252}
+.expert-mos-label{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:0.5px;text-transform:uppercase}
+
+/* Moat selector */
+.expert-moat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.expert-moat-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:12px;color:var(--muted-light);transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.expert-moat-item:hover{border-color:var(--gold-dim);color:var(--white)}
+.expert-moat-item input{accent-color:var(--gold);width:14px;height:14px;cursor:pointer}
+.expert-moat-item:has(input:checked){background:rgba(192,155,69,0.08);border-color:var(--gold-dim);color:var(--gold-light)}
+
+/* Pre-submit checklist */
+.expert-checklist{background:rgba(61,184,122,0.04);border:1px solid rgba(61,184,122,0.18);border-radius:12px;padding:14px 16px;margin-top:14px}
+.expert-checklist-title{font-size:11px;font-weight:700;color:#3DB87A;letter-spacing:0.5px;margin-bottom:10px}
+.expert-checklist-items{display:flex;flex-direction:column;gap:7px}
+.expert-check-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:color 0.2s}
+.expert-check-item:hover{color:var(--white)}
+.expert-check-item input{accent-color:#3DB87A;width:14px;height:14px;cursor:pointer}
+.expert-check-item:has(input:checked){color:#3DB87A}
+.expert-checklist-score{font-size:11px;color:var(--muted);margin-top:10px;font-family:'DM Mono',monospace;text-align:right}
+.expert-checklist-score.complete{color:#3DB87A;font-weight:600}
+
 /* ══ THESIS HISTORY ══ */
 .thesis-history-toggle{font-size:11px;color:var(--gold-dim);cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:5px;border:none;background:none;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.3px;transition:color 0.2s;margin-top:6px}
 .thesis-history-toggle:hover{color:var(--gold-light)}
@@ -1155,8 +1205,9 @@ body.beginner-mode .beginner-hint{display:block}
         <input class="form-input" id="li-pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doUnlock()">
       </div>
       <button class="btn-primary" onclick="doUnlock()">Unlock →</button>
-      <div class="auth-divider">different device?</div>
-      <button class="btn-ghost" onclick="showSetup()">Set up fresh</button>
+      <div class="auth-divider">trouble getting in?</div>
+      <button class="btn-ghost" onclick="forgotPIN()">Forgot PIN</button>
+      <button class="btn-ghost" onclick="showSetup()" style="margin-top:6px;font-size:11px;opacity:0.6">Different device — start fresh</button>
     </div>
   </div>
 </div>
@@ -1232,6 +1283,7 @@ body.beginner-mode .beginner-hint{display:block}
     <button class="nav-tab" data-tab="watchlist" onclick="switchTab('watchlist',this)">Watchlist</button>
     <button class="nav-tab" data-tab="digest" onclick="switchTab('digest',this)">Digest</button>
     <button class="nav-tab" data-tab="letter" onclick="switchTab('letter',this)">Annual Letter <span class="nav-badge" style="background:var(--gold-dim);font-size:8px">AI</span></button>
+    <button class="nav-tab" data-tab="learn" onclick="switchTab('learn',this)">📖 Learn</button>
     <button class="nav-tab" data-tab="settings" onclick="switchTab('settings',this)">⚙ Settings</button>
   </div>
 
@@ -1344,7 +1396,9 @@ body.beginner-mode .beginner-hint{display:block}
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Price Per Share</label><input type="number" step="0.01" min="0" class="form-input" id="stock-price" placeholder="0.00" oninput="updateCalc()"></div>
+        <div class="form-group"><label class="form-label">Price Per Share
+          <span id="price-zac-hint" style="display:none;font-size:10px;color:var(--gold-dim);font-weight:400;margin-left:6px">JSE prices in ZAC (cents) — e.g. MTN = 20365c = R203.65</span>
+        </label><input type="number" step="0.01" min="0" class="form-input" id="stock-price" placeholder="0.00" oninput="updateCalc()" onblur="normaliseJSEPrice()"></div>
         <div class="form-group"><label class="form-label">Number of Shares</label>
           <input type="number" step="0.0001" min="0" class="form-input" id="stock-shares" placeholder="0" oninput="updateCalc()">
           <div id="sell-shares-hint" class="form-hint hidden"></div>
@@ -1359,9 +1413,13 @@ body.beginner-mode .beginner-hint{display:block}
       <div class="sizing-panel" id="sizing-panel">
         <div class="sizing-title">📐 Position Sizing Guide</div>
         <div class="sizing-input-row">
-          <label>Total portfolio value:</label>
-          <input type="number" class="sizing-input" id="sizing-portfolio-val" placeholder="e.g. 50000" oninput="updateSizing()" min="0" step="100">
-          <span style="font-size:12px;color:var(--muted)">ZAR</span>
+          <label>Portfolio value:</label>
+          <input type="number" class="sizing-input" id="sizing-portfolio-val"
+            placeholder="Auto-calculated from positions"
+            oninput="this.dataset.manualOverride='true';updateSizing()" min="0" step="100"
+            title="Auto-calculated from your positions. Override manually if needed.">
+          <span style="font-size:11px;color:var(--muted)">ZAR</span>
+          <span id="sizing-auto-badge" style="font-size:10px;color:#3DB87A;display:none">auto ✓</span>
         </div>
         <div class="sizing-row">
           <span class="sizing-label">Tier max allocation</span>
@@ -1480,38 +1538,123 @@ body.beginner-mode .beginner-hint{display:block}
 
         <!-- EXPERT MODE (Pro) -->
         <div id="expert-thesis-mode" style="display:none">
+
+          <!-- ── VALUATION METHOD ── -->
+          <div class="form-group expert-section">
+            <label class="form-label">Valuation Method</label>
+            <div class="expert-method-grid" id="expert-method-grid">
+              <button type="button" class="expert-method-btn" onclick="selectValMethod('pe',this)">
+                <span class="expert-method-icon">📊</span>
+                <span class="expert-method-name">P/E Ratio</span>
+                <span class="expert-method-sub">Earnings multiple</span>
+              </button>
+              <button type="button" class="expert-method-btn" onclick="selectValMethod('dcf',this)">
+                <span class="expert-method-icon">📈</span>
+                <span class="expert-method-name">DCF</span>
+                <span class="expert-method-sub">Discounted cash flow</span>
+              </button>
+              <button type="button" class="expert-method-btn" onclick="selectValMethod('ev',this)">
+                <span class="expert-method-icon">⚖️</span>
+                <span class="expert-method-name">EV/EBITDA</span>
+                <span class="expert-method-sub">Enterprise value</span>
+              </button>
+              <button type="button" class="expert-method-btn" onclick="selectValMethod('nav',this)">
+                <span class="expert-method-icon">🏗️</span>
+                <span class="expert-method-name">NAV</span>
+                <span class="expert-method-sub">Net asset value</span>
+              </button>
+              <button type="button" class="expert-method-btn" onclick="selectValMethod('div',this)">
+                <span class="expert-method-icon">💰</span>
+                <span class="expert-method-name">Dividend Yield</span>
+                <span class="expert-method-sub">Income-based</span>
+              </button>
+              <button type="button" class="expert-method-btn" onclick="selectValMethod('book',this)">
+                <span class="expert-method-icon">📚</span>
+                <span class="expert-method-name">P/Book</span>
+                <span class="expert-method-sub">Book value multiple</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ── MARGIN OF SAFETY ── -->
+          <div class="expert-mos-panel" id="expert-mos-panel">
+            <div class="expert-section-title">Margin of Safety</div>
+            <div class="expert-mos-row">
+              <div class="expert-mos-field">
+                <label class="expert-field-label">Intrinsic Value (per share)</label>
+                <input type="number" class="form-input expert-input" id="expert-intrinsic" placeholder="0.00" step="0.01" oninput="calcMOS()">
+              </div>
+              <div class="expert-mos-field">
+                <label class="expert-field-label">Current Price (per share)</label>
+                <input type="number" class="form-input expert-input" id="expert-current-price" placeholder="0.00" step="0.01" oninput="calcMOS()">
+              </div>
+              <div class="expert-mos-result" id="expert-mos-result">
+                <div class="expert-mos-pct" id="expert-mos-pct">–</div>
+                <div class="expert-mos-label">Margin of Safety</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── MOAT SELECTOR ── -->
+          <div class="form-group expert-section">
+            <label class="form-label">Competitive Moat <span style="font-size:10px;color:var(--muted);font-weight:400">(select all that apply)</span></label>
+            <div class="expert-moat-grid">
+              <label class="expert-moat-item"><input type="checkbox" value="cost" onchange="updateMoatSummary()"> Cost Advantage</label>
+              <label class="expert-moat-item"><input type="checkbox" value="network" onchange="updateMoatSummary()"> Network Effect</label>
+              <label class="expert-moat-item"><input type="checkbox" value="switching" onchange="updateMoatSummary()"> Switching Costs</label>
+              <label class="expert-moat-item"><input type="checkbox" value="intangibles" onchange="updateMoatSummary()"> Intangibles / Brand</label>
+              <label class="expert-moat-item"><input type="checkbox" value="scale" onchange="updateMoatSummary()"> Efficient Scale</label>
+              <label class="expert-moat-item"><input type="checkbox" value="none" onchange="updateMoatSummary()"> No moat — mispricing only</label>
+            </div>
+          </div>
+
+          <!-- ── COMPARABLE COMPANIES ── -->
+          <div class="form-group expert-section">
+            <label class="form-label">Comparable Companies <span style="font-size:10px;color:var(--muted);font-weight:400">(peers you're comparing against)</span></label>
+            <input type="text" class="form-input expert-input" id="expert-comps" placeholder="e.g. CPI, FSR, ABG — or Apple, Google for US">
+          </div>
+
+          <!-- ── INVESTMENT THESIS ── -->
           <div class="form-group" style="margin-top:0">
             <div class="thesis-field-wrap">
               <div class="thesis-field-top">
                 <div class="thesis-field-label">
                   Investment Thesis <span style="color:var(--danger)">*</span>
-                  <span class="tooltip-icon" onclick="toggleTooltip('tt-thesis')" style="margin-left:4px">?</span>
-                  <div class="tooltip-box" id="tt-thesis">
-                    <strong>What is an investment thesis?</strong><br>
-                    Your written argument for why this stock is worth buying right now. Not "it looks cheap" — a specific reason the business is mispriced.<br><br>
-                    The more honest and specific, the more defensible your position becomes.<br><br>
-                    <a href="../learn.html#article-1" target="_blank">Learn how to write one →</a>
-                  </div>
                 </div>
                 <div class="thesis-quality-row" id="thesis-quality-row">
                   <div class="thesis-quality-bar"><div class="thesis-quality-fill" id="thesis-quality-fill"></div></div>
                   <span class="thesis-quality-label" id="thesis-quality-label">–</span>
                 </div>
               </div>
-              <div class="thesis-guide">What does the market misunderstand about this business right now?</div>
+              <div class="thesis-guide">What does the market misunderstand? Why is this business mispriced right now?</div>
               <textarea
                 class="thesis-textarea"
                 id="stock-thesis"
                 rows="4"
-                placeholder="Write your specific, falsifiable argument here. What's your edge? Why is this business mispriced? The more honest and specific, the more defensible your position becomes…"
+                placeholder="Write your specific, falsifiable argument. What's your edge? Reference the valuation method and moat you selected above. The more honest and specific, the more defensible your position becomes…"
                 oninput="onThesisInput(this)"
               ></textarea>
               <div class="thesis-wordcount" id="thesis-wordcount">0 words</div>
             </div>
           </div>
+
           <div id="thesis-interrogator-panel" style="display:none;margin-bottom:14px">
             <div class="ai-interrogator-output" id="ai-interrogator-output"></div>
           </div>
+
+          <!-- ── PRE-SUBMIT CHECKLIST ── -->
+          <div class="expert-checklist" id="expert-checklist">
+            <div class="expert-checklist-title">✓ Pre-Trade Checklist</div>
+            <div class="expert-checklist-items">
+              <label class="expert-check-item"><input type="checkbox" id="chk-mgmt"> Management quality assessed</label>
+              <label class="expert-check-item"><input type="checkbox" id="chk-balance"> Balance sheet reviewed</label>
+              <label class="expert-check-item"><input type="checkbox" id="chk-moat"> Competitive position confirmed</label>
+              <label class="expert-check-item"><input type="checkbox" id="chk-val"> Valuation vs peers checked</label>
+              <label class="expert-check-item"><input type="checkbox" id="chk-exit-defined"> Exit trigger is thesis-based (not price-based)</label>
+            </div>
+            <div class="expert-checklist-score" id="expert-checklist-score">0/5 completed</div>
+          </div>
+
         </div>
 
         <!-- EXIT TRIGGER — shown in both modes -->
@@ -1535,7 +1678,11 @@ body.beginner-mode .beginner-hint{display:block}
           <div class="exit-nudge" id="exit-nudge"></div>
           <div class="form-hint">Pre-commit before emotion enters. If you can't write this, you shouldn't be buying.</div>
         </div>
-        <button type="button" class="ai-interrogate-btn" id="ai-interrogate-btn" onclick="interrogateThesis()" style="display:none">✦ Challenge my thesis</button>
+        <button type="button" class="ai-interrogate-btn" id="ai-interrogate-btn" onclick="interrogateThesis()">✦ Challenge my thesis</button>
+        <!-- Shared interrogator output — works in both guided and expert mode -->
+        <div id="thesis-interrogator-panel-shared" style="display:none;margin-bottom:14px">
+          <div class="ai-interrogator-output" id="ai-interrogator-output-shared"></div>
+        </div>
       </div>
       <div id="sell-reason-section" class="hidden">
         <div class="form-group" style="margin-top:14px">
@@ -2012,67 +2159,50 @@ body.beginner-mode .beginner-hint{display:block}
     <div class="digest-card">
       <div class="digest-card-title">
         ✦ Intelligence Brief
-        <span class="brief-coming-badge">Coming May 2026</span>
+        <span class="brief-coming-badge" id="brief-tier-badge">Elite feature</span>
       </div>
-      <div class="brief-sub" style="font-size:13px;color:var(--muted-light);line-height:1.7;margin-bottom:20px">
-        Every Monday morning, Compass researches your watchlist and sends you a one-page brief per stock.
-        You read it. You decide. One tap to log the trade.
+      <div class="brief-sub" style="font-size:13px;color:var(--muted-light);line-height:1.7;margin-bottom:16px">
+        Compass researches your watchlist and portfolio and writes you a one-page investment brief. Read it. Decide. One tap to log the trade.
+      </div>
+
+      <!-- Generate Brief Button -->
+      <div id="brief-generate-section">
+        <button onclick="generateIntelligenceBrief()" id="brief-generate-btn"
+          style="width:100%;padding:14px;background:linear-gradient(135deg,rgba(192,155,69,0.15),rgba(192,155,69,0.05));border:1px solid var(--gold-dim);border-radius:10px;color:var(--gold-light);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-bottom:14px">
+          ✦ Generate This Week's Brief
+        </button>
+        <div id="brief-output" style="display:none"></div>
       </div>
 
       <!-- How it works -->
       <div class="brief-flow">
         <div class="brief-flow-step">
           <div class="bfs-num">1</div>
-          <div><div class="bfs-title">Compass scans your watchlist</div><div class="bfs-desc">Every stock you're watching gets researched — news, earnings moves, analyst sentiment, price action.</div></div>
+          <div><div class="bfs-title">Compass reads your watchlist + portfolio</div><div class="bfs-desc">Every stock you're watching and holding gets analysed against your original thesis.</div></div>
         </div>
         <div class="brief-flow-step">
           <div class="bfs-num">2</div>
-          <div><div class="bfs-title">AI drafts a one-page brief per stock</div><div class="bfs-desc">Not a news summary — a thesis-aware brief. It knows your original interest. It tells you what changed.</div></div>
+          <div><div class="bfs-title">AI drafts a one-page brief</div><div class="bfs-desc">Thesis-aware — it knows why you're watching each stock. It surfaces what's changed.</div></div>
         </div>
         <div class="brief-flow-step">
           <div class="bfs-num">3</div>
-          <div><div class="bfs-title">You receive it Monday 7am</div><div class="bfs-desc">Email or WhatsApp. You read it over coffee. You decide — log the trade, pass, or keep watching.</div></div>
-        </div>
-        <div class="brief-flow-step">
-          <div class="bfs-num">4</div>
-          <div><div class="bfs-title">One tap to log</div><div class="bfs-desc">Brief includes a pre-filled thesis draft. You edit it, confirm, and the trade is logged with full discipline intact.</div></div>
-        </div>
-      </div>
-
-      <!-- Sample preview -->
-      <div class="brief-preview">
-        <div class="brief-preview-label">Sample Brief — What It Looks Like</div>
-        <div class="brief-ticker-row">
-          <span class="brief-ticker">SLM</span>
-          <span class="brief-company">Sanlam Ltd · JSE · Tier 2 Watchlist</span>
-        </div>
-        <div class="brief-sample-text">
-          "Sanlam closed at R86.20 this week — through your R84 alert price. The restructuring noise that drove the 15% drawdown appears to be unwinding; Q3 new business flows came in at +18% and management reiterated full-year guidance. Analyst consensus remains R111. Your original thesis appears intact. Draft entry thesis below — edit before confirming."
+          <div><div class="bfs-title">You decide</div><div class="bfs-desc">Log the trade, pass, or keep watching. Full discipline intact.</div></div>
         </div>
       </div>
 
       <!-- Watchlist Brief toggles -->
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:0.3px">
-        When briefs launch, select which watchlist items to include:
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:0.3px;margin-top:16px">
+        Select which watchlist items to include in briefs:
       </div>
       <div id="brief-watchlist-list"></div>
 
       <!-- Delivery preference -->
       <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
-        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:600">Delivery Preference</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="brief-freq-btn digest-freq-btn active" id="brief-del-email" onclick="setBriefDelivery('email',this)">📧 Email</button>
-          <button class="brief-freq-btn digest-freq-btn" id="brief-del-wa" onclick="setBriefDelivery('whatsapp',this)">💬 WhatsApp</button>
-          <button class="brief-freq-btn digest-freq-btn" id="brief-del-both" onclick="setBriefDelivery('both',this)">Both</button>
-        </div>
-        <div style="margin-top:12px">
-          <input class="form-input" id="brief-email-input" type="email" placeholder="your@email.com — for when briefs launch"
-            style="margin-bottom:8px" oninput="saveBriefPrefs()">
-          <div style="font-size:11px;color:var(--muted);font-style:italic">
-            Save your preference now — you'll be first on the list when Intelligence Briefs launch in May 2026.
-          </div>
-        </div>
-        <button class="digest-save-btn" onclick="saveBriefPrefs(true)" style="margin-top:10px">Save preferences →</button>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:600">Email Delivery (launching May 2026)</div>
+        <input class="form-input" id="brief-email-input" type="email" placeholder="your@email.com — for weekly delivery"
+          style="margin-bottom:8px" oninput="saveBriefPrefs()">
+        <div style="font-size:11px;color:var(--muted);font-style:italic">Save your email now — weekly briefs launch May 2026.</div>
+        <button class="digest-save-btn" onclick="saveBriefPrefs(true)" style="margin-top:10px">Save email →</button>
       </div>
     </div>
 
@@ -2082,6 +2212,129 @@ body.beginner-mode .beginner-hint{display:block}
       <div id="digest-past-list"></div>
     </div>
 
+  </div>
+
+  <!-- ═══ SETTINGS ═══ -->
+  <!-- ═══ LEARN ═══ -->
+  <div id="page-learn" class="page">
+    <div class="section-hd" style="margin-bottom:24px">
+      <div class="section-title">📖 Education Centre</div>
+      <div style="font-size:12px;color:var(--muted)">Learn the fundamentals of disciplined investing</div>
+    </div>
+
+    <!-- Article cards -->
+    <div style="display:flex;flex-direction:column;gap:12px">
+
+      <div class="rebalance-panel" style="cursor:pointer" onclick="toggleLearnArticle('art1')">
+        <div class="rebalance-header">
+          <div>
+            <div class="rebalance-title">What is an Investment Thesis?</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">The foundation of disciplined investing</div>
+          </div>
+          <span id="art1-chevron" style="color:var(--gold-dim)">▸</span>
+        </div>
+        <div id="art1" style="display:none;margin-top:16px;font-size:13px;color:var(--muted-light);line-height:1.8">
+          <p>An investment thesis is your written argument for why a stock is worth buying right now. Not "it looks cheap" or "my friend recommended it" — a specific, falsifiable reason the business is mispriced relative to its intrinsic value.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Why it matters:</strong> The moment you write your thesis, you create accountability. You can no longer claim you "had a feeling" — you have a documented argument that either holds or breaks.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">A good thesis answers:</strong></p>
+          <ul style="margin:8px 0 0 16px;list-style:disc">
+            <li style="margin-bottom:6px">What does the market misunderstand about this business?</li>
+            <li style="margin-bottom:6px">What is your variant perception — why do you see something others don't?</li>
+            <li style="margin-bottom:6px">What specific business condition would prove you wrong?</li>
+          </ul>
+          <p style="margin-top:12px"><strong style="color:var(--gold-light)">Example:</strong> "Capitec is undervalued because the market is pricing it as a credit business, when it's actually becoming a full-service digital bank. As digital account penetration grows past 40%, the re-rating should reflect the platform premium — not the credit risk."</p>
+          <p style="margin-top:12px;font-style:italic;color:var(--muted)">That's a thesis. "Capitec looks cheap" is not.</p>
+        </div>
+      </div>
+
+      <div class="rebalance-panel" style="cursor:pointer" onclick="toggleLearnArticle('art2')">
+        <div class="rebalance-header">
+          <div>
+            <div class="rebalance-title">Tier 1 vs Tier 2 — Know Before You Buy</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">The classification that forces clarity</div>
+          </div>
+          <span id="art2-chevron" style="color:var(--gold-dim)">▸</span>
+        </div>
+        <div id="art2" style="display:none;margin-top:16px;font-size:13px;color:var(--muted-light);line-height:1.8">
+          <p><strong style="color:#3DB87A">Tier 1 — Hold indefinitely unless the thesis breaks.</strong> These are businesses you believe in deeply. You're not buying them for a catalyst or a price target — you're buying them because the business is exceptional and you plan to compound alongside it for years. You sell when the business changes, not when the price does.</p>
+          <p style="margin-top:12px"><strong style="color:#F5A623">Tier 2 — Catalyst-driven. Reviewed at 12 months.</strong> These positions have a specific event or re-rating that you're waiting for. A new management team, a regulatory change, a product launch. If the catalyst hasn't materialised by 12 months — you exit. No sentiment. No hoping. Out.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Why this matters:</strong> Most investors hold Tier 2 positions like Tier 1 ones. They wait for the catalyst, it doesn't come, and suddenly they've held a mediocre business for 3 years telling themselves "it's still coming." The tier system prevents this.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Rule of thumb:</strong> Never let Tier 2 exceed 30% of your portfolio. The clock is always running.</p>
+        </div>
+      </div>
+
+      <div class="rebalance-panel" style="cursor:pointer" onclick="toggleLearnArticle('art3')">
+        <div class="rebalance-header">
+          <div>
+            <div class="rebalance-title">What is an Exit Trigger?</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">The pre-commitment that protects you from yourself</div>
+          </div>
+          <span id="art3-chevron" style="color:var(--gold-dim)">▸</span>
+        </div>
+        <div id="art3" style="display:none;margin-top:16px;font-size:13px;color:var(--muted-light);line-height:1.8">
+          <p>An exit trigger is the specific business condition that would make you sell — defined before you buy. Not a price. Not a percentage drop. A condition.</p>
+          <p style="margin-top:12px"><strong style="color:#E05252">Price-based exit (wrong):</strong> "I'll sell if it drops 20%." This is reactive. You're letting the market tell you when your thesis is broken — but prices move for all kinds of reasons unrelated to your thesis.</p>
+          <p style="margin-top:12px"><strong style="color:#3DB87A">Thesis-based exit (right):</strong> "I'll sell if Capitec's digital account growth drops below 15% for two consecutive quarters." Now you're watching the business, not the price.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">The key insight:</strong> You define the exit trigger when you're calm, rational, and doing research — before you have money on the line. The moment you're watching your position fall, emotion takes over. Your pre-committed trigger protects you from that version of yourself.</p>
+          <p style="margin-top:12px;color:var(--gold-dim);font-style:italic">"The need to sell is clearest when you're about to buy. Write it then."</p>
+        </div>
+      </div>
+
+      <div class="rebalance-panel" style="cursor:pointer" onclick="toggleLearnArticle('art4')">
+        <div class="rebalance-header">
+          <div>
+            <div class="rebalance-title">What is Value Investing?</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">The philosophy behind Compass</div>
+          </div>
+          <span id="art4-chevron" style="color:var(--gold-dim)">▸</span>
+        </div>
+        <div id="art4" style="display:none;margin-top:16px;font-size:13px;color:var(--muted-light);line-height:1.8">
+          <p>Value investing is the practice of buying businesses that trade below their intrinsic value — and holding them until the market recognises that value. It was formalised by Benjamin Graham and refined by Warren Buffett.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">The core idea:</strong> In the short term, the market is a voting machine — it reflects sentiment, fear, and momentum. In the long term, it's a weighing machine — it reflects the actual value of businesses. Value investors exploit the gap between the two.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Margin of Safety:</strong> Graham's most important concept. Always buy at a significant discount to your estimate of intrinsic value. This protects you when your analysis is wrong — which it will be, sometimes.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">On the JSE:</strong> SA equities are often structurally under-owned by domestic investors anchored to global benchmarks. This creates persistent mispricing in quality local businesses — exactly the gap a disciplined value investor can exploit.</p>
+          <p style="margin-top:12px"><strong style="color:var(--gold-light)">Buffett's most important lesson:</strong> "It's far better to buy a wonderful company at a fair price than a fair company at a wonderful price."</p>
+        </div>
+      </div>
+
+      <div class="rebalance-panel" style="cursor:pointer" onclick="toggleLearnArticle('art5')">
+        <div class="rebalance-header">
+          <div>
+            <div class="rebalance-title">How to Start Investing in South Africa</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">Practical steps for SA investors</div>
+          </div>
+          <span id="art5-chevron" style="color:var(--gold-dim)">▸</span>
+        </div>
+        <div id="art5" style="display:none;margin-top:16px;font-size:13px;color:var(--muted-light);line-height:1.8">
+          <p><strong style="color:var(--white)">Step 1 — Open a brokerage account.</strong> EasyEquities is the most accessible for SA retail investors. Low fees, fractional shares, and access to JSE and US markets. Standard Bank, FNB, and Investec also offer trading accounts.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Step 2 — Use your TFSA first.</strong> Your Tax-Free Savings Account allows R46,000/year (R500,000 lifetime) of tax-free growth. No CGT, no dividends tax, no income tax on returns. Always max this before taxable accounts.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Step 3 — Start with ETFs.</strong> Before picking individual stocks, get market exposure through ETFs like the Satrix 40 (JSE Top 40) or Satrix World (global equities). You get instant diversification and don't need to pick winners.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Step 4 — Learn before you stock-pick.</strong> When you're ready to pick individual stocks, write a thesis for every position. Compass is designed for exactly this — it forces the discipline that separates long-term wealth builders from gamblers.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Step 5 — Be patient.</strong> Compounding takes time. R1,000/month at 15% annual return for 20 years becomes R1.5M. The strategy is not the hard part. Staying the course is.</p>
+          <p style="margin-top:12px;padding:12px;background:rgba(192,155,69,0.06);border-left:3px solid var(--gold-dim);border-radius:0 8px 8px 0;color:var(--gold-light);font-style:italic">"The stock market is a device for transferring money from the impatient to the patient." — Warren Buffett</p>
+        </div>
+      </div>
+
+      <div class="rebalance-panel" style="cursor:pointer" onclick="toggleLearnArticle('art6')">
+        <div class="rebalance-header">
+          <div>
+            <div class="rebalance-title">Understanding Valuation Methods</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">P/E · DCF · EV/EBITDA · NAV · Dividend · P/Book</div>
+          </div>
+          <span id="art6-chevron" style="color:var(--gold-dim)">▸</span>
+        </div>
+        <div id="art6" style="display:none;margin-top:16px;font-size:13px;color:var(--muted-light);line-height:1.8">
+          <p><strong style="color:var(--white)">P/E Ratio</strong> — Price divided by earnings per share. Simple and widely used. A P/E of 15x means you're paying R15 for every R1 of earnings. Compare to sector peers and historical averages. Works best for stable, profitable businesses.</p>
+          <p style="margin-top:10px"><strong style="color:var(--white)">DCF (Discounted Cash Flow)</strong> — Projects future cash flows and discounts them back to today's value. Most theoretically correct. Most sensitive to assumptions. If you're wrong about growth rates or discount rates, the valuation swings wildly. Use it as a sanity check, not gospel.</p>
+          <p style="margin-top:10px"><strong style="color:var(--white)">EV/EBITDA</strong> — Enterprise Value divided by earnings before interest, tax, depreciation, and amortisation. Better than P/E for comparing companies with different capital structures or tax situations. Common in M&A analysis.</p>
+          <p style="margin-top:10px"><strong style="color:var(--white)">NAV (Net Asset Value)</strong> — The book value of assets minus liabilities. Most relevant for banks, REITs, and holding companies. A bank trading at 0.8x NAV may be cheap — or it may have bad assets. Know which.</p>
+          <p style="margin-top:10px"><strong style="color:var(--white)">Dividend Yield</strong> — Annual dividend divided by share price. 6% yield means R6 per R100 invested annually. Works for income investors and mature businesses with stable payouts. Watch the payout ratio — is it sustainable?</p>
+          <p style="margin-top:10px"><strong style="color:var(--white)">P/Book</strong> — Price relative to book value per share. A P/B below 1 means you're buying assets for less than their stated value. Classic Graham territory. Common in banking and property sectors.</p>
+          <p style="margin-top:12px;color:var(--muted);font-style:italic">No single method is right. The best investors triangulate across multiple methods and use the result as a range, not a number.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ═══ SETTINGS ═══ -->
@@ -2142,30 +2395,37 @@ body.beginner-mode .beginner-hint{display:block}
       <button class="add-tier-btn" onclick="showToast('Custom tiers coming in Year 2 — stay tuned 🧭')">+ Add custom tier <span style="font-size:10px;color:var(--gold-dim);font-weight:600;margin-left:4px">Coming Year 2</span></button>
     </div>
 
-    <!-- API Keys -->
-    <div class="settings-section">
-      <div class="settings-section-title">API Keys & Integrations</div>
+    <!-- API Keys — simplified for users -->
+    <div class="settings-section" id="settings-api-section">
+      <div class="settings-section-title">Compass Intelligence</div>
       <div class="settings-row">
         <div>
-          <div class="settings-row-label">Twelve Data — JSE Prices</div>
-          <div class="settings-row-sub">Free · 800 requests/day · Best for JSE stocks · twelvedata.com</div>
+          <div class="settings-row-label">AI Features</div>
+          <div class="settings-row-sub" id="ai-key-status">Thesis challenge · Drift detection · Annual letter · Portfolio narrative</div>
         </div>
-        <button class="logout-btn" onclick="promptTDKey()" style="flex-shrink:0">Set key</button>
+        <button class="logout-btn" onclick="promptAnthropicKey()" style="flex-shrink:0" id="ai-key-btn">Enable AI</button>
       </div>
-      <div class="settings-row">
-        <div>
-          <div class="settings-row-label">Alpha Vantage — US Prices</div>
-          <div class="settings-row-sub">Free · 25 requests/day · US stocks · alphavantage.co</div>
+      <!-- Advanced — only shown to Pro+ users who want it -->
+      <div id="advanced-api-section" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+        <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:600">Price Data Sources</div>
+        <div class="settings-row" style="padding:8px 0">
+          <div>
+            <div class="settings-row-label" style="font-size:12px">JSE Live Prices</div>
+            <div class="settings-row-sub">Twelve Data · free · 800/day · twelvedata.com</div>
+          </div>
+          <button class="logout-btn" onclick="promptTDKey()" style="flex-shrink:0;font-size:11px" id="td-key-btn">Set key</button>
         </div>
-        <button class="logout-btn" onclick="promptAVKey()" style="flex-shrink:0">Set key</button>
-      </div>
-      <div class="settings-row">
-        <div>
-          <div class="settings-row-label">Anthropic — Compass Intelligence</div>
-          <div class="settings-row-sub">Powers all AI features · Thesis Interrogator, Drift Detection, Sanity Check, Annual Letter</div>
+        <div class="settings-row" style="padding:8px 0">
+          <div>
+            <div class="settings-row-label" style="font-size:12px">US Live Prices</div>
+            <div class="settings-row-sub">Alpha Vantage · free · 25/day · alphavantage.co</div>
+          </div>
+          <button class="logout-btn" onclick="promptAVKey()" style="flex-shrink:0;font-size:11px" id="av-key-btn">Set key</button>
         </div>
-        <button class="logout-btn" onclick="promptAnthropicKey()" style="flex-shrink:0">Set key</button>
       </div>
+      <button onclick="document.getElementById('advanced-api-section').style.display=document.getElementById('advanced-api-section').style.display==='none'?'block':'none'" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:8px 0 0;font-family:'DM Sans',sans-serif">
+        ⚙ Advanced price settings
+      </button>
     </div>
 
     <!-- Data -->
@@ -2192,6 +2452,13 @@ body.beginner-mode .beginner-hint{display:block}
         </div>
         <button class="logout-btn" onclick="doLock()" style="flex-shrink:0;color:#E05252;border-color:rgba(181,50,50,0.3)">Lock</button>
       </div>
+      <div class="settings-row" style="margin-top:4px">
+        <div>
+          <div class="settings-row-label" style="color:var(--muted)">Reset app</div>
+          <div class="settings-row-sub">Clear all data and start fresh — export a backup first</div>
+        </div>
+        <button class="logout-btn" onclick="clearAllData()" style="flex-shrink:0;color:#E05252;border-color:rgba(181,50,50,0.2);font-size:11px">Clear all</button>
+      </div>
     </div>
 
     <!-- Upgrade Plan -->
@@ -2203,7 +2470,7 @@ body.beginner-mode .beginner-hint{display:block}
     <!-- About -->
     <div class="settings-section" style="text-align:center">
       <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);margin-bottom:6px">E&A Compass</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Investment Thinking Layer · v18</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Investment Thinking Layer · v21</div>
       <div style="font-size:12px;color:var(--muted);font-style:italic;margin-bottom:14px">"The thesis protects against ignorance." — Siyabonga Mazibuko</div>
       <div style="font-size:11px;color:var(--muted);line-height:1.7">
         Built by Elizabeth and Albert (Pty) Ltd<br>
@@ -2265,9 +2532,22 @@ body.beginner-mode .beginner-hint{display:block}
       <div class="modal-pnl-label">Realised P&L on this sale</div>
       <div class="modal-pnl-value" id="sell-pnl-preview" style="color:var(--muted)">–</div>
     </div>
+    <!-- WHY ARE YOU SELLING — critical for Graveyard -->
+    <div class="form-group" style="margin-top:14px">
+      <label class="form-label">Why are you selling? <span style="color:var(--danger)">*</span></label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px" id="sell-reason-btns">
+        <button type="button" class="sell-reason-btn" onclick="selectSellReason('thesis_broken',this)">🔴 Thesis broken</button>
+        <button type="button" class="sell-reason-btn" onclick="selectSellReason('taking_profits',this)">✅ Taking profits</button>
+        <button type="button" class="sell-reason-btn" onclick="selectSellReason('rebalancing',this)">⚖️ Rebalancing</button>
+        <button type="button" class="sell-reason-btn" onclick="selectSellReason('better_opportunity',this)">🔄 Better opportunity</button>
+        <button type="button" class="sell-reason-btn" onclick="selectSellReason('stop_loss',this)">🛑 Stop loss hit</button>
+        <button type="button" class="sell-reason-btn" onclick="selectSellReason('other',this)">📝 Other</button>
+      </div>
+      <textarea class="form-textarea" id="sell-reason-detail" rows="2" placeholder="Add detail — what specifically happened? This goes into your Thesis Graveyard." style="font-size:12px"></textarea>
+    </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="document.getElementById('sell-modal').classList.add('hidden')">Cancel</button>
-      <button class="modal-confirm" onclick="executeSell()">Confirm Sale</button>
+      <button class="modal-confirm" onclick="executeSell()">Confirm Sale →</button>
     </div>
   </div>
 </div>
@@ -2925,11 +3205,15 @@ function acSelect(ticker, name, mkt, mode, inputId, dropId){
     const cur=document.getElementById('stock-currency');
     if(mkt==='JSE'||mkt==='ETF') cur.value='ZAR';
     else if(mkt==='US') cur.value='USD';
+    showZACHint(mkt==='JSE'||(mkt==='ETF'&&STOCKS[ticker]?.yf?.includes('.JO')));
     updateCalc();
     if(priceCache[ticker]){
       const p=priceCache[ticker].price;
       document.getElementById('stock-price').value=p.toFixed(2);
       updateCalc();
+      // Auto-fill expert current price if expert mode active
+      const expertPrice=document.getElementById('expert-current-price');
+      if(expertPrice && !expertPrice.value) expertPrice.value=p.toFixed(2);
     }
     // Show mood prompt seamlessly after ticker selected (BUY only)
     const action=document.getElementById('stock-action')?.value||'BUY';
@@ -3023,13 +3307,71 @@ async function fetchPriceAV(ticker){
   return null;
 }
 
-// ── SOURCE 2: TWELVE DATA (free, 800 req/day, NO proxy needed) ──
+// ── SOURCE 0: YAHOO FINANCE (no-cors mode) ──────────────
+// Yahoo's chart API works without CORS if we use no-cors mode
+// We get an opaque response but can extract price via a different approach
+async function fetchPriceStooq(ticker){
+  // Use Yahoo Finance query endpoint — works from static sites
+  const s=STOCKS[ticker];
+  if(!s) return null;
+  const sym=s.yf||ticker;
+
+  // Try Yahoo Finance v7 quote endpoint
+  const urls=[
+    `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(sym)}`,
+    `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(sym)}`,
+  ];
+
+  for(const url of urls){
+    try{
+      const res=await Promise.race([
+        fetch(url,{cache:'no-store',headers:{'Accept':'application/json'}}),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),5000))
+      ]);
+      if(!res.ok) continue;
+      const data=await res.json();
+      const result=data?.quoteResponse?.result?.[0];
+      if(result){
+        const p=result.regularMarketPrice||result.ask||result.bid;
+        if(p&&p>0) return p;
+      }
+    }catch(e){continue;}
+  }
+  return null;
+}
+
+// ── SOURCE 0b: STOOQ CSV (fallback) ─────────────────────
+async function fetchPriceStooqCSV(ticker){
+  const s=STOCKS[ticker];
+  if(!s) return null;
+  const sym=s.mkt==='JSE'||(s.mkt==='ETF'&&s.yf?.includes('.JO'))
+    ? `${ticker.toLowerCase()}.jo`
+    : ticker.toLowerCase();
+  const url=`https://stooq.com/q/l/?s=${encodeURIComponent(sym)}&f=sd2t2ohlcvn&h&e=csv`;
+  try{
+    const res=await Promise.race([
+      fetch(url,{cache:'no-store'}),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),5000))
+    ]);
+    if(!res.ok) return null;
+    const text=await res.text();
+    const lines=text.trim().split('\n');
+    if(lines.length<2) return null;
+    const vals=lines[1].split(',');
+    const close=parseFloat(vals[6]);
+    return close>0?close:null;
+  }catch(e){return null;}
+}
+
+// ── SOURCE 1: ALPHA VANTAGE (embedded key) ──────────────
 // Twelve Data supports CORS directly — no proxy required.
 // JSE tickers use exchange suffix :JSE
 let _tdKey=null;
+const _SHARED_TD_KEY='aa85591c77bc4e75a72b53d601f42869'; // Shared beta key — E&A Compass
 function getTDKey(){
   if(_tdKey) return _tdKey;
-  _tdKey=DB.get('td_key')||null;
+  // User's own key takes priority — shared key as fallback
+  _tdKey=DB.get('td_key')||_SHARED_TD_KEY;
   return _tdKey;
 }
 function getTDSymbol(ticker){
@@ -3043,11 +3385,24 @@ async function fetchPriceTD(ticker){
   const key=getTDKey();
   if(!key) return null;
   const sym=getTDSymbol(ticker);
-  const url=`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${key}`;
-  const data=await tryFetch(url,8000);
-  if(!data||data.status==='error') return null;
-  const p=parseFloat(data.price);
-  return p>0?p:null;
+
+  // Try our Vercel proxy first — no CORS issues
+  const proxyUrl=`/api/price?ticker=${encodeURIComponent(sym)}`;
+  const directUrl=`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${key}`;
+  const fallbackUrls=[
+    `https://corsproxy.io/?url=${encodeURIComponent(directUrl)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`,
+  ];
+
+  // Try proxy first, then direct, then fallbacks
+  for(const url of [proxyUrl, directUrl, ...fallbackUrls]){
+    const data=await tryFetch(url, 8000);
+    if(!data) continue;
+    if(data.status==='error') continue;
+    const p=parseFloat(data.price);
+    if(p>0) return p;
+  }
+  return null;
 }
 
 // ── SOURCE 3: YAHOO FINANCE via proxies ─────────────────
@@ -3103,9 +3458,7 @@ async function fetchPriceFMP(ticker){
 
 // ── MAIN PRICE FETCH — waterfall through all sources ────
 async function fetchPrice(ticker){
-  // Live prices are Pro+ only
-  if(!hasTier('live_prices')) return null;
-
+  // Prices available to all users via shared key — Pro gets priority refresh
   if(isCacheFresh(ticker)) return priceCache[ticker].price;
 
   const s=STOCKS[ticker];
@@ -3113,19 +3466,27 @@ async function fetchPrice(ticker){
 
   let price=null;
 
-  // Try each source in order — stop at first success
-  // JSE order: TD → Yahoo → AV
-  // US order: AV → TD → Yahoo → FMP
+  // Vercel proxy makes TD reliable — put it first
+  // JSE: TD → Yahoo → Stooq → AV
+  // US:  TD → AV → Yahoo → Stooq
   const sources=isJSE
-    ?[fetchPriceTD, fetchPriceYahoo, fetchPriceAV, fetchPriceFMP]
-    :[fetchPriceAV, fetchPriceTD, fetchPriceYahoo, fetchPriceFMP];
+    ?[fetchPriceTD, fetchPriceStooq, fetchPriceStooqCSV, fetchPriceYahoo, fetchPriceAV, fetchPriceFMP]
+    :[fetchPriceTD, fetchPriceAV, fetchPriceStooq, fetchPriceYahoo, fetchPriceFMP];
 
+  let priceSource='';
   for(const source of sources){
     try{ price=await source(ticker); }catch(e){ price=null; }
-    if(price&&price>0) break;
+    if(price&&price>0){ priceSource=source.name; break; }
   }
 
   if(price&&price>0){
+    // ZAC→ZAR: Yahoo v7 returns in ZAR already for JSE
+    // Stooq CSV returns in ZAR already
+    // TD/AV return in ZAC (cents) — convert if >1000
+    const zarSources=['fetchPriceStooq','fetchPriceStooqCSV'];
+    if(isJSE && price>1000 && !zarSources.includes(priceSource)){
+      price=price/100;
+    }
     priceCache[ticker]={price,ts:Date.now()};
     return price;
   }
@@ -3177,14 +3538,22 @@ async function testPriceConnection(){
 function promptAVKey(){
   const current=getAVKey();
   const msg=current
-    ?`Update your Alpha Vantage key.\nCurrent: ${current.slice(0,8)}…\nLeave blank to keep.`
-    :`Alpha Vantage: free 25 req/day.\nGet key at: alphavantage.co/support/#api-key\nPaste below:`;
+    ? `Update your Alpha Vantage API key.\n\nCurrent key: ${current.slice(0,8)}…\n\nLeave blank to keep current key.`
+    : `To enable live JSE + US prices, you need a free Alpha Vantage API key.\n\nSteps:\n1. Go to: alphavantage.co/support/#api-key\n2. Enter your email address\n3. Copy the key from your email\n4. Paste it below\n\nFree tier: 25 price lookups/day — enough for most portfolios.`;
   const key=prompt(msg);
   if(key===null) return;
   if(key.trim().length>5){
-    _avKey=key.trim();DB.set('av_key',_avKey);priceCache={};
-    showToast('✓ Alpha Vantage key saved','success');renderPortfolio();initTickerTape();
-  } else if(key.trim()===''&&current){showToast('Key unchanged');}
+    _avKey=key.trim();
+    DB.set('av_key',_avKey);
+    priceCache={};
+    showToast('✓ Key saved — fetching live prices…','success');
+    renderPortfolio();
+    initTickerTape();
+  } else if(key.trim()===''&&current){
+    showToast('Key unchanged','');
+  } else if(key.trim().length>0){
+    showToast('⚠ That doesn\'t look like a valid key','error');
+  }
 }
 
 function promptTDKey(){
@@ -3219,27 +3588,6 @@ async function fetchAllPrices(tickers, onEach){
     }
   }
   return results;
-}
-
-function promptAVKey(){
-  const current=getAVKey();
-  const msg=current
-    ? `Update your Alpha Vantage API key.\n\nCurrent key: ${current.slice(0,8)}…\n\nLeave blank to keep current key.`
-    : `To enable live JSE + US prices, you need a free Alpha Vantage API key.\n\nSteps:\n1. Go to: alphavantage.co/support/#api-key\n2. Enter your email address\n3. Copy the key from your email\n4. Paste it below\n\nFree tier: 25 price lookups/day — enough for most portfolios.`;
-  const key=prompt(msg);
-  if(key===null) return; // cancelled
-  if(key.trim().length>5){
-    _avKey=key.trim();
-    DB.set('av_key',_avKey);
-    priceCache={};
-    showToast('✓ Key saved — fetching live prices…','success');
-    renderPortfolio();
-    initTickerTape();
-  } else if(key.trim()===''&&current){
-    showToast('Key unchanged','');
-  } else if(key.trim().length>0){
-    showToast('⚠ That doesn\'t look like a valid key','error');
-  }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -3291,6 +3639,33 @@ function doSetup(){
   },600);
 }
 
+function forgotPIN(){
+  const confirmed=confirm(
+    'Forgot your PIN?\n\n' +
+    'Option 1: If you have a backup file, restore it after resetting.\n' +
+    'Option 2: Reset everything and start fresh.\n\n' +
+    'WARNING: Resetting clears all your trades, theses and data.\n\n' +
+    'Do you want to reset and start fresh?'
+  );
+  if(!confirmed) return;
+  const doubleConfirm=confirm('Are you absolutely sure? All your data will be deleted permanently.');
+  if(!doubleConfirm) return;
+  // Clear all EA data
+  Object.keys(localStorage).filter(k=>k.startsWith('ea_')).forEach(k=>localStorage.removeItem(k));
+  showToast('Data cleared — setting up fresh','success');
+  setTimeout(()=>location.reload(), 1000);
+}
+
+function clearAllData(){
+  const confirmed=confirm('Clear ALL Compass data?\n\nThis deletes every trade, thesis, and note. Download a backup first if you want to keep your data.\n\nThis cannot be undone.');
+  if(!confirmed) return;
+  const doubleConfirm=confirm('Last chance — delete everything?');
+  if(!doubleConfirm) return;
+  Object.keys(localStorage).filter(k=>k.startsWith('ea_')).forEach(k=>localStorage.removeItem(k));
+  showToast('All data cleared','success');
+  setTimeout(()=>location.reload(), 1000);
+}
+
 function doUnlock(){
   const pin=document.getElementById('li-pin').value.trim();
   const profile=DB.get('profile');
@@ -3338,6 +3713,26 @@ function initApp(name){
   updateTierBadge();
   const hint=document.getElementById('shortcuts-hint');
   if(hint&&!DB.get('shortcuts_dismissed')) hint.style.display='flex';
+
+  // ── Modal scroll lock — watch all modals for hidden class changes ──
+  const modalObserver=new MutationObserver(()=>{
+    const anyOpen=document.querySelectorAll('.modal-overlay:not(.hidden)').length>0;
+    document.body.classList.toggle('modal-open', anyOpen);
+  });
+  document.querySelectorAll('.modal-overlay').forEach(m=>{
+    modalObserver.observe(m,{attributes:true,attributeFilter:['class']});
+  });
+
+  // ── Memory cleanup on unload ──
+  window.addEventListener('beforeunload',()=>{
+    if(window._tickerInterval) clearInterval(window._tickerInterval);
+    if(window._priceRefreshInterval) clearInterval(window._priceRefreshInterval);
+    modalObserver.disconnect();
+  });
+
+  // ── Network status feedback ──
+  window.addEventListener('online',()=>showToast('✓ Back online','success'));
+  window.addEventListener('offline',()=>showToast('⚠ No internet — showing cost basis','error'));
 }
 
 async function loadAll(){
@@ -3355,6 +3750,24 @@ async function loadAll(){
   populateLetterPeriods();
   setTimeout(checkBackupReminder, 3000);
   setTimeout(()=>{ if(document.getElementById('page-insights')?.classList.contains('active')) renderInsights(); },500);
+  // Auto drift detection — silently check all positions, badge those overdue
+  setTimeout(autoCheckDrift, 5000);
+}
+
+function autoCheckDrift(){
+  if(!hasTier('drift')) return;
+  const overdue=allPositions.filter(p=>{
+    const months=(Date.now()-new Date(p.entry_date||0))/(1000*60*60*24*30);
+    const threshold=p.tier===2?3:6; // T2 check every 3mo, T1 every 6mo
+    const lastCheck=DB.get('drift_check_'+p.ticker)||0;
+    const daysSinceCheck=(Date.now()-lastCheck)/(1000*60*60*24);
+    return months>threshold && daysSinceCheck>30 && p.thesis && p.thesis.length>20;
+  });
+  if(overdue.length>0){
+    const badge=document.getElementById('pos-badge');
+    if(badge) badge.style.background='#F5A623';
+    showToast(`⚡ ${overdue.length} position${overdue.length!==1?'s':''} due for thesis review — check Portfolio`,'');
+  }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -3417,6 +3830,7 @@ function switchTab(tab,el){
   if(tab==='insights'){renderInsights();renderDividendInsights();renderCGT();renderSectorMap();checkTaxAlert();}
   if(tab==='digest'){renderDigest();loadGoalTracker();}
   if(tab==='settings')renderSettings();
+  if(tab==='learn'){}/* articles inline */
 }
 
 // ══════════════════════════════════════════════════════════
@@ -3475,6 +3889,27 @@ function renderSettings(){
   if(lifetimeEl&&tfsa.lifetime) lifetimeEl.value=tfsa.lifetime;
   updateTFSA();
   renderSettingsPlan();
+
+  // Update AI key status
+  const hasAI=!!getAnthropicKey();
+  const aiStatus=document.getElementById('ai-key-status');
+  const aiBtn=document.getElementById('ai-key-btn');
+  if(aiStatus) aiStatus.textContent=hasAI
+    ? '✓ Active — Thesis challenge · Drift detection · Annual letter'
+    : 'Enable to unlock: Thesis challenge · Drift detection · Annual letter';
+  if(aiBtn){
+    aiBtn.textContent=hasAI?'Update key':'Enable AI';
+    aiBtn.style.color=hasAI?'#3DB87A':'var(--gold-light)';
+    aiBtn.style.borderColor=hasAI?'rgba(61,184,122,0.3)':'var(--gold-dim)';
+  }
+
+  // Update price key statuses
+  const hasTD=!!getTDKey();
+  const hasAV=!!getAVKey();
+  const tdBtn=document.getElementById('td-key-btn');
+  const avBtn=document.getElementById('av-key-btn');
+  if(tdBtn){tdBtn.textContent=hasTD?'✓ Active':'Set key';tdBtn.style.color=hasTD?'#3DB87A':'';}
+  if(avBtn){avBtn.textContent=hasAV?'✓ Active':'Set key';avBtn.style.color=hasAV?'#3DB87A':'';}
 }
 
 function renderSettingsPlan(){
@@ -3515,22 +3950,95 @@ function renderSettingsPlan(){
           Upgrade to Compass Pro — R29/month →
         </button>
         <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px">14-day free trial · No card required · Beta pricing locked for life</div>
-      </div>`;
+      </div>
+      ${renderBetaCodeSection()}`;
   } else {
     const tierColors={student:'#3DB87A',pro:'var(--gold)',elite:'#D4B46A',fund:'var(--white)'};
     el.innerHTML=`
-      <div style="background:rgba(192,155,69,0.06);border:1px solid var(--border-strong);border-radius:12px;padding:18px 20px">
+      <div style="background:rgba(192,155,69,0.06);border:1px solid var(--border-strong);border-radius:12px;padding:18px 20px;margin-bottom:16px">
         <div style="display:flex;align-items:center;justify-content:space-between">
           <div>
             <div style="font-size:14px;font-weight:600;color:var(--white)">${info.label}</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:2px">R${info.price}/month${tier==='student'?' · .ac.za verified':''}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">R${info.price}/month${tier==='student'?' · .ac.za verified':tier==='pro'||tier==='elite'||tier==='fund'?' · Beta pricing locked':''}</div>
           </div>
           <span class="tier-badge ${tier==='student'?'pro':tier}">${info.label}</span>
         </div>
         <div style="font-size:12px;color:#3DB87A;margin-top:12px">✓ All features unlocked${tier==='elite'||tier==='fund'?' including Intelligence Brief':''}</div>
         ${tier!=='fund'?`<div style="font-size:11px;color:var(--muted);margin-top:8px;cursor:pointer" onclick="showUpgradeModal('brief')">Upgrade to Elite for the Intelligence Brief →</div>`:''}
-      </div>`;
+      </div>
+      ${renderBetaCodeSection()}`;
   }
+}
+
+function renderBetaCodeSection(){
+  return `<div style="margin-top:4px;padding:14px 16px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:10px">
+    <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px">Beta Access Code</div>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="beta-code-input" class="form-input" placeholder="Enter your access code" style="flex:1;font-size:13px;text-transform:uppercase;letter-spacing:1px" oninput="this.value=this.value.toUpperCase()">
+      <button onclick="redeemBetaCode()" style="padding:10px 16px;background:rgba(192,155,69,0.12);border:1px solid var(--gold-dim);border-radius:9px;color:var(--gold-light);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">Redeem</button>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px">Have a beta code? Enter it above to unlock your plan.</div>
+  </div>`;
+}
+
+// ── BETA ACCESS CODES ────────────────────────────────────
+// These are private codes — share directly with beta testers
+const BETA_CODES = {
+  // Pro tier codes
+  'EABETA2026':    {tier:'pro',   label:'Compass Pro',   note:'Beta tester — Pro unlocked 🧭'},
+  'EAPRO2026':     {tier:'pro',   label:'Compass Pro',   note:'Pro access activated'},
+  'COMPASSPRO':    {tier:'pro',   label:'Compass Pro',   note:'Pro access activated'},
+
+  // Student tier
+  'EASTUDENT':     {tier:'student',label:'Student Pro',  note:'Student access activated'},
+
+  // Elite tier codes
+  'EAELITE2026':   {tier:'elite', label:'Compass Elite', note:'Elite access activated — Intelligence Brief unlocked'},
+  'COMPASSELITE':  {tier:'elite', label:'Compass Elite', note:'Elite access activated'},
+
+  // Fund tier codes — keep these very private
+  'EAFUND2026':    {tier:'fund',  label:'Compass Fund',  note:'Fund tier activated — full access 🧭🔥'},
+  'ELIZABETHALBERT':{tier:'fund', label:'Compass Fund',  note:'Welcome — full Fund access activated'},
+};
+
+function redeemBetaCode(){
+  const input=document.getElementById('beta-code-input');
+  const code=(input?.value||'').trim().toUpperCase();
+  if(!code){showToast('Enter a code first','error');return;}
+
+  const match=BETA_CODES[code];
+  if(!match){
+    showToast('⚠ Invalid code — check and try again','error');
+    input.style.borderColor='#E05252';
+    setTimeout(()=>input.style.borderColor='',2000);
+    return;
+  }
+
+  // Check if already on this tier or higher
+  const currentTier=getUserTier();
+  const tierRank={free:0,student:1,pro:2,elite:3,fund:4};
+  if(tierRank[currentTier]>=tierRank[match.tier]){
+    showToast(`You already have ${TIERS[currentTier]?.label||currentTier} — no change needed`,'');
+    return;
+  }
+
+  // Activate
+  DB.set('user_tier', match.tier);
+  DB.set('beta_code_used', code);
+  DB.set('beta_code_ts', Date.now());
+  updateTierBadge();
+  renderPortfolio();
+  renderSettingsPlan();
+
+  // Big moment
+  showToast(`✓ ${match.note}`,'success');
+
+  // Special founder toast for fund tier
+  if(match.tier==='fund'){
+    setTimeout(()=>showToast('🧭 Fund tier activated — welcome to Elizabeth and Albert','success'),1500);
+  }
+
+  if(input) input.value='';
 }
 
 // ══════════════════════════════════════════════════════════
@@ -3563,22 +4071,39 @@ function updatePositionLimitBanner(){
   banner.classList.add('show');
 }
 function updateSizing(){
-  const portfolioVal=parseFloat(document.getElementById('sizing-portfolio-val')?.value)||0;
   const price=parseFloat(document.getElementById('stock-price')?.value)||0;
   const shares=parseFloat(document.getElementById('stock-shares')?.value)||0;
-  const tier=currentTier||1;
   const panel=document.getElementById('sizing-panel');
 
-  // Save portfolio value for reuse
+  // AUTO-CALCULATE portfolio value from actual positions
+  let portfolioVal=0;
+  if(allPositions.length>0){
+    allPositions.forEach(p=>{
+      const cp=(priceCache[p.ticker]?.price)||p.avg_price;
+      portfolioVal+=p.quantity*cp;
+    });
+    // Add current trade value to portfolio total
+    portfolioVal+=price*shares;
+    // Update the input field to show calculated value
+    const pvEl=document.getElementById('sizing-portfolio-val');
+    if(pvEl&&!pvEl.dataset.manualOverride){
+      pvEl.value=portfolioVal.toFixed(0);
+      pvEl.placeholder='Auto-calculated from your positions';
+      const badge=document.getElementById('sizing-auto-badge');
+      if(badge) badge.style.display='inline';
+    }
+  } else {
+    // No positions yet — use manual entry or saved value
+    portfolioVal=parseFloat(document.getElementById('sizing-portfolio-val')?.value)||
+                 parseFloat(DB.get('sizing_portfolio_val'))||0;
+  }
+
   if(portfolioVal>0) DB.set('sizing_portfolio_val', portfolioVal);
 
   if(!panel) return;
+  if(price>0||portfolioVal>0) panel.classList.add('show');
 
-  // Show panel if we have a price
-  if(price>0||portfolioVal>0){
-    panel.classList.add('show');
-  }
-
+  const tier=currentTier||1;
   const maxPct=tier===1?25:15;
   const maxRand=portfolioVal>0?(portfolioVal*(maxPct/100)):0;
   const suggestedShares=maxRand>0&&price>0?Math.floor(maxRand/price):0;
@@ -3606,7 +4131,10 @@ function updateSizing(){
     pctEl.className='sizing-value'+(currentPct>maxPct?' danger':currentPct>maxPct*0.9?' warn':' ok');
   }
   if(adviceEl){
-    if(currentPct>maxPct){
+    if(!portfolioVal&&!allPositions.length){
+      adviceEl.textContent='Log your first position to enable auto portfolio sizing.';
+      adviceEl.style.color='var(--muted)';
+    } else if(currentPct>maxPct){
       adviceEl.textContent=`⚠ This trade exceeds your Tier ${tier} limit of ${maxPct}%. Consider reducing to ${suggestedShares} shares.`;
       adviceEl.style.color='#E05252';
     } else if(currentPct>maxPct*0.9){
@@ -3616,7 +4144,7 @@ function updateSizing(){
       adviceEl.textContent=`✓ Within Tier ${tier} limits. Good discipline.`;
       adviceEl.style.color='#3DB87A';
     } else {
-      adviceEl.textContent='Enter shares and portfolio value to see sizing guidance.';
+      adviceEl.textContent='Enter shares to see sizing guidance.';
       adviceEl.style.color='var(--muted)';
     }
   }
@@ -4057,11 +4585,40 @@ function updateTFSA(){
     else lifetimeStatus.textContent='Enter your total lifetime contributions above';
   }
 }
-function selectAsset(asset,el){
-  currentAsset=asset;
-  document.querySelectorAll('.asset-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  ['stock','bond','property'].forEach(a=>document.getElementById(a+'-form').classList.toggle('hidden',a!==asset));
+function normaliseJSEPrice(){
+  // Auto-convert ZAC to ZAR when user blurs the price field
+  const ticker=document.getElementById('stock-ticker')?.value?.trim().toUpperCase();
+  const s=STOCKS[ticker];
+  const isJSE=s?.mkt==='JSE'||(s?.mkt==='ETF'&&s?.yf?.includes('.JO'));
+  if(!isJSE) return;
+  const priceEl=document.getElementById('stock-price');
+  const price=parseFloat(priceEl?.value)||0;
+  // If price looks like cents (>500) offer to convert
+  if(price>500){
+    const rand=(price/100).toFixed(2);
+    const confirm=window.confirm(
+      `JSE prices are in cents (ZAC).\n\nYou entered: ${price.toFixed(0)}c\nThat's R${rand}\n\nConvert to R${rand}?`
+    );
+    if(confirm){
+      priceEl.value=rand;
+      updateCalc();
+      showToast(`✓ Converted ${price.toFixed(0)}c → R${rand}`,'success');
+    }
+  }
+}
+
+function showZACHint(isJSE){
+  const hint=document.getElementById('price-zac-hint');
+  if(hint) hint.style.display=isJSE?'inline':'none';
+}
+
+function toggleLearnArticle(id){
+  const el=document.getElementById(id);
+  const chevron=document.getElementById(id+'-chevron');
+  if(!el) return;
+  const isOpen=el.style.display!=='none';
+  el.style.display=isOpen?'none':'block';
+  if(chevron) chevron.textContent=isOpen?'▸':'▾';
 }
 
 function selectAsset(asset,el){
@@ -4236,7 +4793,11 @@ function renderGraveyard(){
   const exited=soldTickers.filter(t=>!allPositions.find(p=>p.ticker===t));
 
   if(!exited.length){
-    out.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px;font-style:italic">No exited positions yet. Every position you close will be preserved here — with your original thesis and verdict.</div>';
+    out.innerHTML=`<div style="text-align:center;padding:40px 20px">
+      <div style="font-size:36px;margin-bottom:12px">💀</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);margin-bottom:8px">The Graveyard is empty</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto">Every position you close will be preserved here forever — original thesis, sell reason, and your verdict. The most honest record in investing.</div>
+    </div>`;
     return;
   }
 
@@ -4481,7 +5042,8 @@ function logStock(){
   if(!isSell && hasTier('sanity_check')) runSanityCheck(ticker, thesis, exit, currentTier, action);
 
   const isTfsa=document.getElementById('stock-is-tfsa')?.checked||false;
-  insertTrade({date:new Date().toISOString().split('T')[0], ticker, company, asset_type:'stock', action, currency, price, shares, entry_value:price*shares, tier:currentTier, thesis, exit_trigger:exit, is_tfsa:isTfsa});
+  const expertData=currentMode==='expert'?getExpertData():null;
+  insertTrade({date:new Date().toISOString().split('T')[0], ticker, company, asset_type:'stock', action, currency, price, shares, entry_value:price*shares, tier:currentTier, thesis, exit_trigger:exit, is_tfsa:isTfsa, ...(expertData?{expert:expertData}:{})});
 
   // Log mood if captured
   if(_tradeMood && action==='BUY') logJournalMood(_tradeMood);
@@ -4502,6 +5064,9 @@ function logStock(){
   // Reset TFSA checkbox
   const tfsaBox=document.getElementById('stock-is-tfsa');
   if(tfsaBox) tfsaBox.checked=false;
+
+  // Reset expert mode fields
+  if(DB.get('thesis_mode')==='expert') resetExpertMode();
 
   // Run Devil's Advocate in speed mode
   if(_speedMode && action==='BUY' && thesis && thesis.length>10){
@@ -4548,15 +5113,30 @@ function clearForm(type){
     document.getElementById('trade-calc').classList.add('hidden');
     document.getElementById('sell-shares-hint').classList.add('hidden');
     document.getElementById('stock-action').value='BUY';
-    // Reset thesis quality UI
     const qRow=document.getElementById('thesis-quality-row');if(qRow)qRow.classList.remove('visible');
     const wc=document.getElementById('thesis-wordcount');if(wc){wc.textContent='0 words';wc.className='thesis-wordcount'}
     const badge=document.getElementById('exit-type-badge');if(badge){badge.className='exit-type-badge';badge.textContent=''}
     const nudge=document.getElementById('exit-nudge');if(nudge)nudge.classList.remove('show');
+    // Reset expert mode fields
+    resetExpertMode();
+    // Reset sizing panel
+    const sizingPanel=document.getElementById('sizing-panel');if(sizingPanel)sizingPanel.classList.remove('show');
     onActionChange();
   }
   if(type==='bond'){['bond-face','bond-price','bond-units','bond-thesis','bond-exit'].forEach(id=>document.getElementById(id).value='')}
   if(type==='property'){['prop-name','prop-amount','prop-thesis','prop-exit'].forEach(id=>document.getElementById(id).value='')}
+}
+
+// ══════════════════════════════════════════════════════════
+// TIER SELECTOR — investment tier buttons
+// ══════════════════════════════════════════════════════════
+function selectTier(tier, el){
+  currentTier=tier;
+  document.querySelectorAll('.tier-btn').forEach(b=>b.classList.remove('active','active-t2'));
+  el.classList.add(tier===2?'active-t2':'active');
+  const catalystWarn=document.getElementById('catalyst-warn');
+  if(catalystWarn) catalystWarn.classList.toggle('hidden', tier!==2);
+  updateSizing();
 }
 
 // ══════════════════════════════════════════════════════════
@@ -4677,14 +5257,23 @@ function updateBadge(){
 // ══════════════════════════════════════════════════════════
 // PORTFOLIO — parallel price fetching
 // ══════════════════════════════════════════════════════════
+let _refreshDebounce=null;
 async function manualRefresh(){
-  // Clear entire price cache to force re-fetch
+  // Debounce — prevent rapid tapping
+  if(_refreshDebounce){
+    showToast('Already refreshing…');
+    return;
+  }
   priceCache={};
   showToast('Refreshing prices…');
   const btn=document.getElementById('refresh-btn');
-  if(btn) btn.classList.add('spinning');
-  await renderPortfolio();
-  if(btn) btn.classList.remove('spinning');
+  if(btn){btn.classList.add('spinning');btn.disabled=true;}
+  _refreshDebounce=setTimeout(()=>{_refreshDebounce=null;},10000);
+  try{
+    await renderPortfolio();
+  } finally {
+    if(btn){btn.classList.remove('spinning');btn.disabled=false;}
+  }
 }
 
 // Thesis health score — based on holding period vs tier
@@ -4704,10 +5293,14 @@ async function renderPortfolio(){
   updatePositionLimitBanner();
   const list=document.getElementById('positions-list');
   if(!allPositions.length){
-    list.innerHTML=`<div class="empty-state">
-      <div class="empty-icon">📊</div>
-      <p>No positions yet.<br>Log your first trade — or import from EasyEquities.</p>
-      <span class="start-hint" onclick="openImportModal()">📥 Import from EasyEquities</span>
+    list.innerHTML=`<div class="empty-state" style="padding:40px 20px;text-align:center">
+      <div style="font-size:48px;margin-bottom:16px">🧭</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);font-weight:600;margin-bottom:8px">Your portfolio is empty</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;max-width:280px;margin-left:auto;margin-right:auto">Log your first trade to start building your investment record. Every great portfolio starts with one position.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <button onclick="switchTab('log',document.querySelector('[data-tab=log]'))" style="padding:10px 24px;background:rgba(192,155,69,0.12);border:1px solid var(--gold-dim);border-radius:9px;color:var(--gold-light);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">+ Log your first trade</button>
+        <button onclick="openImportModal()" style="padding:8px 20px;background:transparent;border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">📥 Import from EasyEquities</button>
+      </div>
     </div>`;
     updateSummaryCards([],{});updateCacheBar({});
     const nb=document.getElementById('pf-narrative');if(nb)nb.style.display='none';
@@ -4823,15 +5416,9 @@ function updateCacheBar(prices){
     dot.className='cache-dot partial';
     const missing=sp.filter(p=>prices[p.ticker]==null).map(p=>p.ticker).join(', ');
     txt.innerHTML=`${live} of ${sp.length} prices live · <span style="color:var(--muted-light)">${missing}</span> using cost basis`;
-  } else if(!hasTD&&!hasAV){
-    dot.className='cache-dot none';
-    txt.innerHTML=`No live prices — ${btn('add free Twelve Data key (800/day, JSE)','promptTDKey')} or ${btn('Alpha Vantage (25/day)','promptAVKey')}`;
-  } else if(rateLimited&&!hasTD){
-    dot.className='cache-dot none';
-    txt.innerHTML=`AV rate limit (25/day) — ${btn('retry','manualRefresh')} · ${btn('add Twelve Data for 800/day','promptTDKey')}`;
   } else {
     dot.className='cache-dot none';
-    txt.innerHTML=`Prices unavailable — all sources failed. Showing cost basis. ${btn('Try again','manualRefresh')}${!hasTD?' · '+btn('Add Twelve Data key (most reliable)','promptTDKey'):''}`;
+    txt.innerHTML=`Fetching prices… ${btn('Try again','manualRefresh')}`;
   }
 }
 
@@ -4903,7 +5490,26 @@ function renderPositionCards(positions,prices,filter){
         <span class="tag tag-live"${live?'':' style="display:none"'}>🟢 Live</span>
         <span class="tag tag-avg"${live?' style="display:none"':''}>Avg price</span>
         <span class="tag tag-held">${heldLabel}</span>
+        ${(()=>{
+          const lots=getLots(p.ticker).filter(l=>l.remaining>0.0001);
+          if(lots.length<=1) return '';
+          return `<span class="tag" style="background:rgba(192,155,69,0.08);color:var(--gold-dim);border-color:var(--border-strong);cursor:pointer" title="${lots.map(l=>`${new Date(l.date).toLocaleDateString('en-ZA')}: ${l.remaining.toFixed(2)} @ ${p.currency} ${l.price.toFixed(2)}`).join('\n')}" onclick="toggleLotsPanel('${p.ticker}')">
+            ${lots.length} lots ▾
+          </span>`;
+        })()}
       </div>
+      ${(()=>{
+        const lots=getLots(p.ticker).filter(l=>l.remaining>0.0001);
+        if(lots.length<=1) return '';
+        return `<div class="lots-panel" id="lots-panel-${p.ticker}">
+          <div class="lots-title">Open Lots (FIFO)</div>
+          ${lots.map(l=>`<div class="lot-row">
+            <span>${new Date(l.date).toLocaleDateString('en-ZA',{day:'numeric',month:'short',year:'numeric'})}</span>
+            <span>${l.remaining.toFixed(2)} shares</span>
+            <span>${p.currency} ${l.price.toFixed(2)}</span>
+          </div>`).join('')}
+        </div>`;
+      })()}
       <div class="thesis-score ${score.cls}">
         <div class="thesis-score-bar"><div class="thesis-score-fill" style="width:${score.pct}%"></div></div>
         <div class="thesis-score-label">${score.label}</div>
@@ -4922,6 +5528,19 @@ function renderPositionCards(positions,prices,filter){
       </div>`:''}
       ${p.thesis?`<div class="pos-thesis-preview">"${p.thesis.length>140?p.thesis.slice(0,140)+'…':p.thesis}"</div>`:''}
       ${p.exit_trigger?`<div class="pos-exit-trigger"><div class="pos-exit-label">Exit trigger</div>${p.exit_trigger}</div>`:''}
+      ${(()=>{
+        // Show expert data if available
+        const buyTrade=allTrades.find(t=>t.ticker===p.ticker&&t.action==='BUY'&&t.expert);
+        if(!buyTrade?.expert) return '';
+        const ex=buyTrade.expert;
+        const methodLabels={pe:'P/E',dcf:'DCF',ev:'EV/EBITDA',nav:'NAV',div:'Dividend Yield',book:'P/Book'};
+        const parts=[];
+        if(ex.val_method) parts.push(`<span style="background:rgba(192,155,69,0.1);border:1px solid var(--border-strong);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--gold-dim);font-weight:600">${methodLabels[ex.val_method]||ex.val_method}</span>`);
+        if(ex.mos_pct!==null&&ex.mos_pct!==undefined) parts.push(`<span style="font-size:11px;color:${ex.mos_pct>=20?'#3DB87A':ex.mos_pct>=0?'#F5A623':'#E05252'}">MOS: ${ex.mos_pct>=0?'+':''}${ex.mos_pct?.toFixed(1)}%</span>`);
+        if(ex.moats?.length) parts.push(`<span style="font-size:11px;color:var(--muted)">Moat: ${ex.moats.join(', ')}</span>`);
+        if(!parts.length) return '';
+        return `<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;padding:6px 0">${parts.join('')}</div>`;
+      })()}
       ${(()=>{
         const history=getThesisHistory(p.ticker);
         if(history.length<=1) return '';
@@ -4943,7 +5562,7 @@ function renderPositionCards(positions,prices,filter){
       ${(()=>{
         const conv=getConvictionScore(p);
         const {cls,label}=getConvictionLabel(conv);
-        return `<div class="conviction-clock ${cls}">
+        return `<div class="conviction-clock ${cls}" title="Conviction decays over time if you don't review your thesis. Green = fresh conviction. Orange = review due. Red = thesis needs revisiting.">
           <div style="font-size:10px;color:var(--muted);white-space:nowrap">Conviction</div>
           <div class="conviction-bar-wrap"><div class="conviction-bar-fill" style="width:${conv}%"></div></div>
           <div class="conviction-label">${label}</div>
@@ -4953,6 +5572,7 @@ function renderPositionCards(positions,prices,filter){
       <div class="pos-actions">
         <button class="pos-action-btn sell" onclick="openSellModal('${p.ticker}')">Sell</button>
         <button class="pos-action-btn" onclick="copyThesis('${p.ticker}')">Copy Thesis</button>
+        <button class="pos-action-btn" onclick="shareThesis('${p.ticker}')">Share Thesis</button>
         <button class="pos-action-btn" onclick="editThesis('${p.ticker}')">Edit Thesis</button>
         <button class="pos-action-btn ai-action" onclick="checkThesisDrift('${p.ticker}',this)">✦ Drift</button>
         <button class="pos-action-btn" id="devils-btn-${p.ticker}" onclick="runDevilsAdvocate('${p.ticker}',\`${(p.thesis||'').replace(/`/g,"'")}\`,\`${(p.exit_trigger||'').replace(/`/g,"'")}\`)" style="color:#E05252;border-color:rgba(181,50,50,0.25)">😈 Devil</button>
@@ -5007,21 +5627,11 @@ function updateSummaryCards(positions,prices){
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el[id.includes('pnl')?'innerHTML':'textContent']=v};
 
   // For free users — show cost basis but tease live price
-  if(!hasTier('live_prices')){
-    const valEl=document.getElementById('pf-total-val');
-    if(valEl){
-      valEl.innerHTML=`${fmt(totalCost)} <span style="font-size:11px;color:var(--gold-dim);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600" onclick="showUpgradeModal('live_prices')">+ live prices →</span>`;
-    }
-    const noteEl=document.getElementById('pf-currency-note');
-    if(noteEl) noteEl.textContent=`${mainCur} cost basis · live prices on Pro`;
-    document.getElementById('pf-total-pnl').innerHTML=`<span style="color:var(--muted);font-size:13px;cursor:pointer" onclick="showUpgradeModal('live_prices')">Unlock live P&L →</span>`;
-    document.getElementById('pf-pnl-pct').innerHTML=`<span style="color:var(--muted);font-size:11px">requires live prices</span>`;
-  } else {
-    s('pf-total-val',fmt(totalMV));
-    document.getElementById('pf-currency-note').textContent=currencies.size>1?'⚠ Mixed currencies':`${mainCur} market value`;
-    document.getElementById('pf-total-pnl').innerHTML=`<span class="${pnlCls}">${pnlSym}${fmt(Math.abs(pnl))}</span>`;
-    document.getElementById('pf-pnl-pct').innerHTML=`<span class="${pnlCls}">${pnlSym}${pnlPct.toFixed(2)}% unrealised</span>`;
-  }
+  // Live prices available to all users via shared key
+  s('pf-total-val',fmt(totalMV));
+  document.getElementById('pf-currency-note').textContent=currencies.size>1?'⚠ Mixed currencies':`${mainCur} market value`;
+  document.getElementById('pf-total-pnl').innerHTML=`<span class="${pnlCls}">${pnlSym}${fmt(Math.abs(pnl))}</span>`;
+  document.getElementById('pf-pnl-pct').innerHTML=`<span class="${pnlCls}">${pnlSym}${pnlPct.toFixed(2)}% unrealised</span>`;
 
   document.getElementById('pf-count').textContent=positions.length;
   document.getElementById('pf-tier-split').textContent=`T1: ${t1} · T2: ${t2}`;
@@ -5196,6 +5806,39 @@ function copyThesis(ticker){
   navigator.clipboard.writeText(pos.thesis).then(()=>showToast('✓ Thesis copied'));
 }
 
+function toggleLotsPanel(ticker){
+  const panel=document.getElementById("lots-panel-"+ticker);
+  if(!panel) return;
+  panel.classList.toggle("show");
+}
+
+function shareThesis(ticker){
+  const pos=allPositions.find(p=>p.ticker===ticker);
+  if(!pos?.thesis){showToast('No thesis to share');return;}
+  const months=Math.floor((Date.now()-new Date(pos.entry_date||0))/(1000*60*60*24*30));
+  const shareText=`📊 My investment thesis on ${pos.name} (${ticker})
+
+"${pos.thesis}"
+
+Exit trigger: "${pos.exit_trigger||'Not defined'}"
+
+Held for ${months} month${months!==1?'s':''} · Tier ${pos.tier||1} position
+
+Built with E&A Compass — eacompass.co.za 🧭`;
+
+  if(navigator.share){
+    navigator.share({
+      title:`${ticker} Investment Thesis`,
+      text:shareText,
+    }).catch(()=>{
+      // Fallback to clipboard
+      navigator.clipboard.writeText(shareText).then(()=>showToast('✓ Thesis copied — ready to share'));
+    });
+  } else {
+    navigator.clipboard.writeText(shareText).then(()=>showToast('✓ Thesis copied — paste anywhere to share'));
+  }
+}
+
 function editThesis(ticker){
   // Redirects to new thesis history-aware version below
   editThesisWithHistory(ticker);
@@ -5356,17 +5999,52 @@ function updateSellPreview(){
   else{el.textContent='–';el.style.color='var(--muted)'}
 }
 
+let _sellReason='';
+function selectSellReason(reason, btn){
+  _sellReason=reason;
+  document.querySelectorAll('.sell-reason-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
 function executeSell(){
   if(!sellContext)return;
   const{pos}=sellContext;
   const qty=parseFloat(document.getElementById('sell-qty').value)||0;
   const price=parseFloat(document.getElementById('sell-price').value)||0;
-  if(!qty||qty<=0){showToast('⚠️ Enter shares to sell','error');return}
-  if(!price||price<=0){showToast('⚠️ Enter sale price','error');return}
+  const detail=document.getElementById('sell-reason-detail')?.value.trim()||'';
+  if(!qty||qty<=0){showToast('⚠ Enter shares to sell','error');return}
+  if(!price||price<=0){showToast('⚠ Enter sale price','error');return}
+  if(!_sellReason){showToast('⚠ Select a reason for selling','error');return}
   if(qty>pos.quantity){showToast(`❌ Max: ${pos.quantity.toFixed(4)} shares`,'error');return}
-  insertTrade({date:new Date().toISOString().split('T')[0], ticker:pos.ticker, company:pos.name, asset_type:pos.asset_type, action:'SELL', currency:pos.currency, price, shares:qty, entry_value:qty*price, tier:pos.tier, thesis:'Position exit', exit_trigger:'Manual sale'});
+
+  const sellReasonLabels={
+    thesis_broken:'Thesis broken',
+    taking_profits:'Taking profits',
+    rebalancing:'Rebalancing',
+    better_opportunity:'Better opportunity found',
+    stop_loss:'Stop loss hit',
+    other:'Other'
+  };
+  const reasonText=`${sellReasonLabels[_sellReason]||_sellReason}${detail?' — '+detail:''}`;
+
+  insertTrade({
+    date:new Date().toISOString().split('T')[0],
+    ticker:pos.ticker, company:pos.name, asset_type:pos.asset_type,
+    action:'SELL', currency:pos.currency, price, shares:qty,
+    entry_value:qty*price, tier:pos.tier,
+    thesis:reasonText,
+    exit_trigger:_sellReason,
+    sell_reason:_sellReason,
+    sell_detail:detail
+  });
+
   document.getElementById('sell-modal').classList.add('hidden');
-  showToast('✓ Sale logged!','success');
+  // Reset
+  _sellReason='';
+  document.querySelectorAll('.sell-reason-btn').forEach(b=>b.classList.remove('selected'));
+  if(document.getElementById('sell-reason-detail')) document.getElementById('sell-reason-detail').value='';
+
+  showToast('✓ Sale logged — position moved to Graveyard if fully exited','success');
   loadTrades(); rebuildPositionsFromTrades(); updateBadge(); renderPortfolio();
 }
 
@@ -5385,7 +6063,14 @@ function renderHistory(){
   if(search)trades=trades.filter(t=>t.ticker?.toLowerCase().includes(search)||t.company?.toLowerCase().includes(search));
   if(actionF)trades=trades.filter(t=>t.action===actionF);
   if(assetF)trades=trades.filter(t=>t.asset_type===assetF);
-  if(!trades.length){tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--muted)">No trades found</td></tr>`;return}
+  if(!trades.length){
+    tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--muted)">
+      ${allTrades.length===0
+        ? '<div style="font-size:32px;margin-bottom:10px">📋</div><div style="font-size:14px;color:var(--muted-light);margin-bottom:4px">No trades logged yet</div><div style="font-size:12px">Log your first trade to start your investment record</div>'
+        : '<div style="font-size:13px">No trades match your search</div>'}
+    </td></tr>`;
+    return;
+  }
   tbody.innerHTML=trades.map(t=>`<tr>
     <td class="mono" style="color:var(--muted);font-size:11px">${t.date}</td>
     <td style="font-weight:600;font-family:'Cormorant Garamond',serif;font-size:16px">${t.ticker}</td>
@@ -5441,7 +6126,11 @@ function renderWatchlist(){
   }
   const container=document.getElementById('watchlist-items');
   if(!container)return;
-  if(!watchlist.length){container.innerHTML=`<div class="empty-state"><div class="empty-icon">👁</div><p>Watchlist is empty.<br>Add tickers you're researching.</p></div>`;return}
+  if(!watchlist.length){container.innerHTML=`<div style="text-align:center;padding:40px 20px">
+    <div style="font-size:36px;margin-bottom:12px">👁</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);margin-bottom:8px">Nothing on your radar yet</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6;max-width:260px;margin:0 auto">Add stocks you're researching. When you're ready — one tap to log the trade with a pre-filled thesis.</div>
+  </div>`;return}
   // Render immediately, then fetch prices in parallel
   container.innerHTML=watchlist.map(w=>`
     <div class="watch-card" id="wc-${w.ticker}">
@@ -5624,21 +6313,27 @@ async function callClaude(prompt, maxTokens=400){
 
 // ── 1. THESIS INTERROGATOR ──────────────────────────────────
 async function interrogateThesis(){
-  // AI taste: 3/month free, unlimited Pro+
   if(!canUseAI()){
     showUpgradeModal('ai_unlimited','You\'ve used your 3 free AI challenges this month. Resets on the 1st.');
     return;
   }
 
-  const thesis=document.getElementById('stock-thesis')?.value?.trim();
-  const ticker=document.getElementById('stock-ticker')?.value?.trim()?.toUpperCase();
-  const exit=document.getElementById('stock-exit')?.value?.trim();
-  const btn=document.getElementById('ai-interrogate-btn');
-  const panel=document.getElementById('thesis-interrogator-panel');
-  const output=document.getElementById('ai-interrogator-output');
+  // Get thesis from whichever mode is active
+  const currentMode=DB.get('thesis_mode')||'guided';
+  let thesis='';
+  if(currentMode==='guided'){
+    const guidedPreview=document.getElementById('guided-preview-text');
+    thesis=guidedPreview?guidedPreview.textContent.trim():'';
+    if(!thesis){
+      const answers=Object.values(guidedAnswers||{}).filter(Boolean);
+      thesis=answers.join('. ');
+    }
+  } else {
+    thesis=document.getElementById('stock-thesis')?.value?.trim()||'';
+  }
 
   if(!thesis||thesis.length<20){
-    showToast('Write your thesis first','error');
+    showToast('Write your thesis first — answer the guided questions or switch to Expert mode','error');
     return;
   }
 
@@ -5647,12 +6342,49 @@ async function interrogateThesis(){
     return;
   }
 
-  btn.classList.add('loading');
-  btn.textContent='Thinking…';
+  const ticker=document.getElementById('stock-ticker')?.value?.trim()?.toUpperCase();
+  const exit=document.getElementById('stock-exit')?.value?.trim();
+  const btn=document.getElementById('ai-interrogate-btn');
+
+  // Use shared panel (works in both modes)
+  let panel=document.getElementById('thesis-interrogator-panel-shared');
+  let output=document.getElementById('ai-interrogator-output-shared');
+
+  // Fallback to expert panel if shared not found
+  if(!panel){
+    panel=document.getElementById('thesis-interrogator-panel');
+    output=document.getElementById('ai-interrogator-output');
+  }
+
+  if(!panel||!output){
+    showToast('UI error — try refreshing','error');
+    return;
+  }
+
+  if(btn){ btn.classList.add('loading'); btn.textContent='Thinking…'; }
   panel.style.display='block';
   output.innerHTML=`<div class="aio-loading"><div class="aio-spinner"></div><span>Reading your thesis…</span></div>`;
 
-  const prompt=`You are a rigorous investment partner — like Charlie Munger. A trader just wrote this investment thesis for ${ticker||'a stock'}:
+  const isExpert=DB.get('thesis_mode')==='expert';
+  const expertData=isExpert?getExpertData():null;
+
+  const prompt=isExpert
+    ? `You are Charlie Munger at his most demanding. A serious investor just wrote this thesis for ${ticker||'a stock'} using a ${expertData?.val_method?.toUpperCase()||'fundamental'} valuation approach:
+
+THESIS: "${thesis}"
+EXIT TRIGGER: "${exit||'Not defined'}"
+${expertData?.mos_pct!==null&&expertData?.mos_pct!==undefined?`MARGIN OF SAFETY: ${expertData.mos_pct.toFixed(1)}%`:''}
+${expertData?.moats?.length?`MOAT CLAIMED: ${expertData.moats.join(', ')}`:''}
+${expertData?.comps?`COMPARABLES: ${expertData.comps}`:''}
+
+This investor knows what they're doing. Give them 3 expert-level challenges — not beginner questions. Challenge:
+1. The specific valuation assumptions embedded in their thesis
+2. The durability of the moat they've identified
+3. The key risk they haven't addressed
+
+Format: 3 questions, one per line. No numbering. No preamble. Max 30 words each. Make them genuinely difficult.`
+
+    : `You are a rigorous investment partner — like Charlie Munger. A trader just wrote this investment thesis for ${ticker||'a stock'}:
 
 THESIS: "${thesis}"
 ${exit?`EXIT TRIGGER: "${exit}"`:''}
@@ -5667,7 +6399,7 @@ Focus on:
 
 Format: Return exactly 2 questions, one per line, no numbering, no preamble, no explanation. Just the questions. Each question max 25 words. Make them uncomfortable to answer.`;
 
-  const text=await callClaude(prompt, 200);
+  const text=await callClaude(prompt, isExpert?280:200);
 
   if(!text){
     output.innerHTML=`<div style="font-size:12px;color:var(--muted)">AI unavailable — check your key or connection.</div>`;
@@ -5676,10 +6408,10 @@ Format: Return exactly 2 questions, one per line, no numbering, no preamble, no 
     return;
   }
 
-  const questions=text.split('\n').map(q=>q.trim()).filter(q=>q.length>10).slice(0,2);
+  const questions=text.split('\n').map(q=>q.trim()).filter(q=>q.length>10).slice(0,isExpert?3:2);
 
   output.innerHTML=`
-    <div class="aio-header"><span class="aio-badge">✦ Thesis Challenge</span></div>
+    <div class="aio-header"><span class="aio-badge">${isExpert?'✦ Expert Challenge':'✦ Thesis Challenge'}</span></div>
     ${questions.map(q=>`<div class="aio-question">${q}</div>`).join('')}
     ${!hasTier('ai_unlimited')?`<div style="font-size:11px;color:var(--gold-dim);margin-top:10px;font-style:italic">${3-getAIUsageThisMonth()-1} free challenge${3-getAIUsageThisMonth()-1!==1?'s':''} left this month · <span style="cursor:pointer;text-decoration:underline" onclick="showUpgradeModal('ai_unlimited')">Upgrade for unlimited</span></div>`:''}
     <button class="aio-dismiss" onclick="document.getElementById('thesis-interrogator-panel').style.display='none'">Dismiss ↑</button>`;
@@ -6747,51 +7479,36 @@ function downloadLetterPDF(){
   if(!out||!out.innerHTML.trim()||out.innerHTML.includes('Generate a letter')){
     showToast('Generate a letter first','error');return;
   }
-  if(typeof html2pdf==='undefined'){
-    showToast('PDF library not loaded — try refreshing','error');return;
-  }
-  const btn=document.getElementById('pdf-letter-btn');
-  if(btn){btn.textContent='⏳ Generating…';btn.disabled=true;}
-
   const signatory=document.getElementById('letter-name')?.value||'E&A Compass';
-  const filename=`${signatory.replace(/\s+/g,'_')}_Investor_Letter_${new Date().toISOString().slice(0,10)}.pdf`;
-
-  // Clone the output for PDF — apply print-friendly styles
-  const clone=out.cloneNode(true);
-  clone.style.cssText='font-family:"Cormorant Garamond",Georgia,serif;color:#0D1B22;background:#fff;padding:40px;max-width:800px;margin:0 auto;font-size:14px;line-height:1.8';
-
-  // Fix colours for white background
-  clone.querySelectorAll('*').forEach(el=>{
-    const s=window.getComputedStyle(el);
-    if(s.color==='rgb(192, 155, 69)'||el.style.color?.includes('gold')||el.classList.contains('ls-title')){
-      el.style.color='#8B6914';
-    }
-    if(s.color==='rgb(255,255,255)'||s.color==='rgb(250,250,248)'){
-      el.style.color='#0D1B22';
-    }
-    el.style.background='transparent';
-    el.style.backgroundColor='transparent';
-  });
-
-  const opt={
-    margin:[15,15,15,15],
-    filename,
-    image:{type:'jpeg',quality:0.98},
-    html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},
-    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-  };
-
-  const wrapper=document.createElement('div');
-  wrapper.style.cssText='background:#fff;padding:0';
-  wrapper.appendChild(clone);
-
-  html2pdf().set(opt).from(wrapper).save().then(()=>{
-    if(btn){btn.textContent='⬇ PDF';btn.disabled=false;}
-    showToast('✓ PDF downloaded','success');
-  }).catch(()=>{
-    if(btn){btn.textContent='⬇ PDF';btn.disabled=false;}
-    showToast('PDF generation failed — try Copy instead','error');
-  });
+  const printWin=window.open('','_blank','width=800,height=900');
+  if(!printWin){showToast('Pop-up blocked — allow pop-ups and try again','error');return;}
+  printWin.document.write(`<!DOCTYPE html>
+<html><head>
+  <title>${signatory} — Investor Letter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Cormorant Garamond',Georgia,serif;color:#0D1B22;background:#fff;padding:48px;max-width:760px;margin:0 auto;font-size:15px;line-height:1.8}
+    .ls-header{border-bottom:2px solid #C09B45;padding-bottom:20px;margin-bottom:28px}
+    .ls-title{font-size:28px;font-weight:600;color:#0D1B22}
+    .ls-subtitle{font-size:13px;color:#666;margin-top:4px}
+    .ls-section{margin:24px 0}
+    .ls-section-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8B6914;font-weight:600;margin-bottom:12px}
+    p{margin-bottom:14px;color:#1a2a32}
+    strong{color:#0D1B22}
+    .ls-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+    .ls-stat{padding:14px;border:1px solid #e8d5a3;border-radius:8px}
+    .ls-stat-val{font-size:22px;font-weight:600;color:#0D1B22}
+    .ls-stat-label{font-size:11px;color:#666;margin-top:2px}
+    .ls-holding-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0e8d0}
+    .ls-holding-pct{color:#8B6914}
+    .ls-signoff{margin-top:32px;padding-top:20px;border-top:1px solid #e0d0a0}
+    @media print{body{padding:20px}}
+  </style>
+</head>
+<body>${out.innerHTML}<script>window.onload=function(){window.print();}<\/script></body></html>`);
+  printWin.document.close();
+  showToast('✓ Print dialog — save as PDF','success');
 }
 
 // ══════════════════════════════════════════════════════════
@@ -6951,9 +7668,23 @@ function checkStorageHealth(){
   const size=getStorageSize();
   const kb=(size/1024).toFixed(1);
   const lbl=document.getElementById('sync-label');
+  const WARN_THRESHOLD=3*1024*1024; // 3MB warning
+  const DANGER_THRESHOLD=4.5*1024*1024; // 4.5MB danger (localStorage ~5MB limit)
   if(lbl){
-    if(size>3*1024*1024) lbl.textContent=`Local · ⚠ ${kb}KB`;
-    else lbl.textContent=`Local · ${kb}KB`;
+    if(size>DANGER_THRESHOLD){
+      lbl.textContent=`⚠ Storage ${kb}KB — backup now!`;
+      lbl.style.color='#E05252';
+    } else if(size>WARN_THRESHOLD){
+      lbl.textContent=`Local · ⚠ ${kb}KB`;
+      lbl.style.color='#F5A623';
+    } else {
+      lbl.textContent=`Local · ${kb}KB`;
+      lbl.style.color='';
+    }
+  }
+  // Warn user if approaching limit
+  if(size>DANGER_THRESHOLD){
+    showToast('⚠ Storage nearly full — download a backup now','error');
   }
 }
 
@@ -7955,6 +8686,76 @@ function renderPastReflections(){
 // ══════════════════════════════════════════════════════════
 // INTELLIGENCE BRIEF
 // ══════════════════════════════════════════════════════════
+async function generateIntelligenceBrief(){
+  if(!hasTier('brief')){showUpgradeModal('brief');return;}
+  if(!getAnthropicKey()){promptAnthropicKey(()=>generateIntelligenceBrief());return;}
+
+  const btn=document.getElementById('brief-generate-btn');
+  const output=document.getElementById('brief-output');
+  if(!btn||!output) return;
+
+  btn.textContent='✦ Generating brief…';
+  btn.disabled=true;
+  output.style.display='none';
+
+  // Build context from portfolio + watchlist
+  const watchlist=DB.get('watchlist')||[];
+  const portfolioContext=allPositions.slice(0,8).map(p=>{
+    const history=getThesisHistory(p.ticker);
+    return `${p.ticker} (${p.name}) — held ${Math.floor((Date.now()-new Date(p.entry_date||0))/(1000*60*60*24*30))} months · Tier ${p.tier}
+Thesis: "${(p.thesis||'Not documented').slice(0,100)}"
+Exit trigger: "${(p.exit_trigger||'Not defined').slice(0,60)}"${history.length>1?' · Thesis evolved '+( history.length-1)+' times':''}`;
+  }).join('\n\n');
+
+  const watchlistContext=watchlist.slice(0,5).map(w=>`${w.ticker} (${w.name||w.ticker}) — on watchlist`).join('\n');
+
+  const prompt=`You are Compass Intelligence writing the weekly Intelligence Brief for a South African investor.
+
+THEIR PORTFOLIO (${allPositions.length} positions):
+${portfolioContext||'No positions logged yet.'}
+
+THEIR WATCHLIST:
+${watchlistContext||'No stocks on watchlist.'}
+
+Write a concise, honest intelligence brief covering:
+
+1. PORTFOLIO PULSE (2-3 sentences) — how is the overall portfolio doing, any thesis concerns?
+2. POSITIONS TO WATCH (pick 1-2 if applicable) — any position where the thesis needs checking?
+3. WATCHLIST SPOTLIGHT (1-2 stocks if on watchlist) — brief on their most interesting watchlist names
+4. THIS WEEK'S DISCIPLINE CHECK — one honest question the investor should answer this week
+
+Write in second person ("your portfolio", "you entered"). Honest. Specific. No generic advice.
+No bullet points in prose sections. Under 350 words total. End with one sharp question.`;
+
+  const text=await callClaude(prompt, 500);
+
+  btn.textContent='✦ Generate This Week\'s Brief';
+  btn.disabled=false;
+
+  if(!text){
+    showToast('Brief generation failed — check your API key','error');
+    return;
+  }
+
+  // Format output
+  const paragraphs=text.split('\n\n').filter(p=>p.trim());
+  output.style.display='block';
+  output.innerHTML=`
+    <div style="background:rgba(192,155,69,0.05);border:1px solid var(--border-strong);border-radius:12px;padding:20px;margin-bottom:16px">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:14px">
+        ✦ Intelligence Brief · ${new Date().toLocaleDateString('en-ZA',{weekday:'long',day:'numeric',month:'long'})}
+      </div>
+      ${paragraphs.map(p=>`<p style="font-size:13px;color:var(--muted-light);line-height:1.8;margin-bottom:12px">${p.trim()}</p>`).join('')}
+    </div>
+    <div style="display:flex;gap:8px">
+      <button onclick="this.parentElement.parentElement.style.display='none'" style="padding:8px 14px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">Dismiss</button>
+      <button onclick="navigator.clipboard.writeText(document.getElementById('brief-output').innerText).then(()=>showToast('✓ Copied'))" style="padding:8px 14px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">📋 Copy</button>
+    </div>`;
+
+  incrementAIUsage();
+  showToast('✓ Brief generated','success');
+}
+
 function renderBriefWatchlist(){
   const list=document.getElementById('brief-watchlist-list');
   if(!list) return;
@@ -8005,40 +8806,159 @@ function saveBriefPrefs(showMsg){
 const guidedAnswers = { reason:'', moat:'', risk:'', exit:'' };
 
 function setThesisMode(mode, el){
-  // Check if expert mode — Pro feature
-  if(mode === 'expert'){
-    const isProUser = DB.get('is_pro') || false;
-    if(!isProUser){
-      showToast('Expert mode is a Pro feature — coming May 2026 🧭');
-      return;
-    }
+  if(mode==='expert' && !hasTier('expert_mode')){
+    showUpgradeModal('expert_mode');
+    return;
   }
-
-  // Save preference
   DB.set('thesis_mode', mode);
-
-  // Toggle buttons
-  document.querySelectorAll('.thesis-mode-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.thesis-mode-btn').forEach(b=>b.classList.remove('active'));
   if(el) el.classList.add('active');
 
-  // Toggle panels
-  const guided = document.getElementById('guided-thesis-mode');
-  const expert = document.getElementById('expert-thesis-mode');
-  const exitGroup = document.getElementById('exit-trigger-group');
-  const interrogateBtn = document.getElementById('ai-interrogate-btn');
+  const guided=document.getElementById('guided-thesis-mode');
+  const expert=document.getElementById('expert-thesis-mode');
+  const exitGroup=document.getElementById('exit-trigger-group');
+  const interrogateBtn=document.getElementById('ai-interrogate-btn');
 
-  if(mode === 'guided'){
-    if(guided) guided.style.display = 'block';
-    if(expert) expert.style.display = 'none';
-    if(exitGroup) exitGroup.style.display = 'none';
-    if(interrogateBtn) interrogateBtn.style.display = 'none';
+  if(mode==='guided'){
+    if(guided) guided.style.display='block';
+    if(expert) expert.style.display='none';
+    if(exitGroup) exitGroup.style.display='none';
+    if(interrogateBtn) interrogateBtn.style.display='none';
   } else {
-    if(guided) guided.style.display = 'none';
-    if(expert) expert.style.display = 'block';
-    if(exitGroup) exitGroup.style.display = 'block';
-    if(interrogateBtn) interrogateBtn.style.display = '';
+    if(guided) guided.style.display='none';
+    if(expert) expert.style.display='block';
+    if(exitGroup) exitGroup.style.display='block';
+    if(interrogateBtn) interrogateBtn.style.display='';
+    // Restore saved expert state
+    restoreExpertState();
   }
 }
+
+// ══════════════════════════════════════════════════════════
+// EXPERT MODE — Valuation, MOS, Moat, Checklist
+// ══════════════════════════════════════════════════════════
+let _expertValMethod=null;
+
+function selectValMethod(method, btn){
+  _expertValMethod=method;
+  document.querySelectorAll('.expert-method-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  // Show MOS panel for methods that support it
+  const mosMethods=['pe','dcf','ev','nav','book'];
+  const mosPanel=document.getElementById('expert-mos-panel');
+  if(mosPanel) mosPanel.classList.toggle('show', mosMethods.includes(method));
+  // Auto-fill current price if we have live price
+  if(mosMethods.includes(method)){
+    const ticker=document.getElementById('stock-ticker')?.value?.trim().toUpperCase();
+    if(ticker && priceCache[ticker]){
+      const priceEl=document.getElementById('expert-current-price');
+      if(priceEl && !priceEl.value) priceEl.value=priceCache[ticker].price.toFixed(2);
+    }
+  }
+}
+
+function calcMOS(){
+  const intrinsic=parseFloat(document.getElementById('expert-intrinsic')?.value)||0;
+  const current=parseFloat(document.getElementById('expert-current-price')?.value)||0;
+  const resultEl=document.getElementById('expert-mos-result');
+  const pctEl=document.getElementById('expert-mos-pct');
+  const labelEl=document.getElementById('expert-mos-label');
+  if(!resultEl||!pctEl) return;
+  if(!intrinsic||!current){
+    pctEl.textContent='–';
+    pctEl.className='expert-mos-pct';
+    return;
+  }
+  const mos=((intrinsic-current)/intrinsic)*100;
+  pctEl.textContent=`${mos>=0?'+':''}${mos.toFixed(1)}%`;
+  pctEl.className=`expert-mos-pct ${mos>=20?'good':mos>=0?'ok':'bad'}`;
+  // Show interpretation
+  if(mos>=30) resultEl.title='Strong margin of safety — Buffett would approve';
+  else if(mos>=15) resultEl.title='Acceptable margin of safety';
+  else if(mos>=0) resultEl.title='Thin margin of safety — be careful';
+  else resultEl.title='Trading above intrinsic value — no margin of safety';
+}
+
+function updateMoatSummary(){
+  updateExpertChecklist();
+}
+
+function updateExpertChecklist(){
+  const checks=['chk-mgmt','chk-balance','chk-moat','chk-val','chk-exit-defined'];
+  const done=checks.filter(id=>document.getElementById(id)?.checked).length;
+  const scoreEl=document.getElementById('expert-checklist-score');
+  if(scoreEl){
+    scoreEl.textContent=`${done}/5 completed`;
+    scoreEl.className=`expert-checklist-score${done===5?' complete':''}`;
+  }
+}
+
+function getExpertData(){
+  // Collect all expert mode data for trade record
+  const moats=[];
+  document.querySelectorAll('.expert-moat-item input:checked').forEach(cb=>moats.push(cb.value));
+  const intrinsic=parseFloat(document.getElementById('expert-intrinsic')?.value)||null;
+  const currentPrice=parseFloat(document.getElementById('expert-current-price')?.value)||null;
+  const mos=intrinsic&&currentPrice?((intrinsic-currentPrice)/intrinsic)*100:null;
+  const comps=document.getElementById('expert-comps')?.value?.trim()||'';
+  const checks=['chk-mgmt','chk-balance','chk-moat','chk-val','chk-exit-defined'];
+  const checklist=checks.map(id=>document.getElementById(id)?.checked||false);
+  return {
+    val_method:_expertValMethod,
+    intrinsic_value:intrinsic,
+    mos_pct:mos?parseFloat(mos.toFixed(2)):null,
+    moats,
+    comps,
+    checklist_complete:checklist.every(Boolean),
+    checklist
+  };
+}
+
+function resetExpertMode(){
+  _expertValMethod=null;
+  document.querySelectorAll('.expert-method-btn').forEach(b=>b.classList.remove('active'));
+  const mosPanel=document.getElementById('expert-mos-panel');
+  if(mosPanel) mosPanel.classList.remove('show');
+  const intrinsicEl=document.getElementById('expert-intrinsic');
+  const currentPriceEl=document.getElementById('expert-current-price');
+  const mosPctEl=document.getElementById('expert-mos-pct');
+  if(intrinsicEl) intrinsicEl.value='';
+  if(currentPriceEl) currentPriceEl.value='';
+  if(mosPctEl){mosPctEl.textContent='–';mosPctEl.className='expert-mos-pct';}
+  document.querySelectorAll('.expert-moat-item input').forEach(cb=>cb.checked=false);
+  const compsEl=document.getElementById('expert-comps');
+  if(compsEl) compsEl.value='';
+  ['chk-mgmt','chk-balance','chk-moat','chk-val','chk-exit-defined'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.checked=false;
+  });
+  updateExpertChecklist();
+}
+
+function restoreExpertState(){
+  // Auto-fill current price from live price if ticker selected
+  const ticker=document.getElementById('stock-ticker')?.value?.trim().toUpperCase();
+  if(ticker && priceCache[ticker]){
+    const priceEl=document.getElementById('expert-current-price');
+    if(priceEl && !priceEl.value) priceEl.value=priceCache[ticker].price.toFixed(2);
+  }
+  updateExpertChecklist();
+}
+
+// Hook checklist update to exit trigger input
+document.addEventListener('DOMContentLoaded',()=>{
+  const exitEl=document.getElementById('stock-exit');
+  if(exitEl) exitEl.addEventListener('input',()=>{
+    const chk=document.getElementById('chk-exit-defined');
+    // Auto-check if exit trigger looks thesis-based (not price-based)
+    if(chk && exitEl.value.length>20){
+      const isPrice=/\d+.*%|drop|fall|price|R\d|\$\d/.test(exitEl.value.toLowerCase())&&
+                    !/thesis|business|revenue|management|earnings|loses|breaks/.test(exitEl.value.toLowerCase());
+      // Don't auto-check — let user decide
+    }
+    updateExpertChecklist();
+  });
+});
 
 function selectGuidedOpt(el, key, value){
   // Deselect siblings
