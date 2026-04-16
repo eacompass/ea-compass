@@ -2952,7 +2952,7 @@ const STOCKS = {
   WBC:  {name:"We Buy Cars",                mkt:"JSE", yf:"WBC.JO"},
   REM:  {name:"Remgro",                     mkt:"JSE", yf:"REM.JO"},
   PSG:  {name:"PSG Financial Services",     mkt:"JSE", yf:"PSG.JO"},
-  COR:  {name:"Coronation Fund Managers",   mkt:"JSE", yf:"CML.JO"},
+  COR:  {name:"Coronation Fund Managers",   mkt:"JSE", yf:"COR.JO"},
   N91:  {name:"Ninety One Ltd",             mkt:"JSE", yf:"N91.JO"},
   REN:  {name:"Renergen",                   mkt:"JSE", yf:"REN.JO"},
   PPH:  {name:"Pepkor Holdings",            mkt:"JSE", yf:"PPH.JO"},
@@ -3207,13 +3207,31 @@ function acSelect(ticker, name, mkt, mode, inputId, dropId){
     else if(mkt==='US') cur.value='USD';
     showZACHint(mkt==='JSE'||(mkt==='ETF'&&STOCKS[ticker]?.yf?.includes('.JO')));
     updateCalc();
+    // Fetch live price via Vercel proxy
+    const isJSE=mkt==='JSE'||(mkt==='ETF'&&STOCKS[ticker]?.yf?.includes('.JO'));
+    const sym=isJSE?`${ticker}:JSE`:ticker;
+
     if(priceCache[ticker]){
       const p=priceCache[ticker].price;
       document.getElementById('stock-price').value=p.toFixed(2);
       updateCalc();
-      // Auto-fill expert current price if expert mode active
       const expertPrice=document.getElementById('expert-current-price');
-      if(expertPrice && !expertPrice.value) expertPrice.value=p.toFixed(2);
+      if(expertPrice&&!expertPrice.value) expertPrice.value=p.toFixed(2);
+      calcMOS();
+    } else {
+      // Fetch fresh from proxy
+      fetch(`https://ea-compass.vercel.app/api/price?ticker=${encodeURIComponent(sym)}`)
+        .then(r=>r.json())
+        .then(data=>{
+          const p=parseFloat(data.price);
+          if(p>0){
+            priceCache[ticker]={price:p,ts:Date.now()};
+            document.getElementById('stock-price').value=p.toFixed(2);
+            updateCalc();
+            const expertPrice=document.getElementById('expert-current-price');
+            if(expertPrice&&!expertPrice.value){ expertPrice.value=p.toFixed(2); calcMOS(); }
+          }
+        }).catch(()=>{});
     }
     // Show mood prompt seamlessly after ticker selected (BUY only)
     const action=document.getElementById('stock-action')?.value||'BUY';
@@ -3386,15 +3404,14 @@ async function fetchPriceTD(ticker){
   if(!key) return null;
   const sym=getTDSymbol(ticker);
 
-  // Try our Vercel proxy first — no CORS issues
-  const proxyUrl=`/api/price?ticker=${encodeURIComponent(sym)}`;
+  // Vercel proxy — absolute URL works from any subfolder
+  const proxyUrl=`https://ea-compass.vercel.app/api/price?ticker=${encodeURIComponent(sym)}`;
   const directUrl=`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${key}`;
   const fallbackUrls=[
     `https://corsproxy.io/?url=${encodeURIComponent(directUrl)}`,
     `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`,
   ];
 
-  // Try proxy first, then direct, then fallbacks
   for(const url of [proxyUrl, directUrl, ...fallbackUrls]){
     const data=await tryFetch(url, 8000);
     if(!data) continue;
@@ -8936,13 +8953,38 @@ function resetExpertMode(){
 }
 
 function restoreExpertState(){
-  // Auto-fill current price from live price if ticker selected
   const ticker=document.getElementById('stock-ticker')?.value?.trim().toUpperCase();
-  if(ticker && priceCache[ticker]){
-    const priceEl=document.getElementById('expert-current-price');
-    if(priceEl && !priceEl.value) priceEl.value=priceCache[ticker].price.toFixed(2);
+  const priceEl=document.getElementById('expert-current-price');
+  if(!ticker||!priceEl||priceEl.value) { updateExpertChecklist(); return; }
+
+  // Use cached price if available
+  if(priceCache[ticker]?.price){
+    priceEl.value=priceCache[ticker].price.toFixed(2);
+    calcMOS();
+    updateExpertChecklist();
+    return;
   }
-  updateExpertChecklist();
+
+  // Fetch live from Vercel proxy
+  const s=STOCKS[ticker];
+  if(!s) { updateExpertChecklist(); return; }
+  const isJSE=s.mkt==='JSE'||(s.mkt==='ETF'&&s.yf?.includes('.JO'));
+  const sym=isJSE?`${ticker}:JSE`:ticker;
+  priceEl.placeholder='Fetching…';
+
+  fetch(`https://ea-compass.vercel.app/api/price?ticker=${encodeURIComponent(sym)}`)
+    .then(r=>r.json())
+    .then(data=>{
+      const p=parseFloat(data.price);
+      if(p>0){
+        priceEl.value=p.toFixed(2);
+        priceEl.placeholder='0.00';
+        priceCache[ticker]={price:p,ts:Date.now()};
+        calcMOS();
+      }
+    })
+    .catch(()=>{ priceEl.placeholder='0.00'; })
+    .finally(()=>updateExpertChecklist());
 }
 
 // Hook checklist update to exit trigger input
