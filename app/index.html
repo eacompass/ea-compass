@@ -3386,15 +3386,14 @@ async function fetchPriceTD(ticker){
   if(!key) return null;
   const sym=getTDSymbol(ticker);
 
-  // Try our Vercel proxy first — no CORS issues
-  const proxyUrl=`/api/price?ticker=${encodeURIComponent(sym)}`;
+  // Vercel proxy — absolute URL works from any subfolder
+  const proxyUrl=`https://ea-compass.vercel.app/api/price?ticker=${encodeURIComponent(sym)}`;
   const directUrl=`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${key}`;
   const fallbackUrls=[
     `https://corsproxy.io/?url=${encodeURIComponent(directUrl)}`,
     `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`,
   ];
 
-  // Try proxy first, then direct, then fallbacks
   for(const url of [proxyUrl, directUrl, ...fallbackUrls]){
     const data=await tryFetch(url, 8000);
     if(!data) continue;
