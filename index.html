@@ -3498,13 +3498,9 @@ async function fetchPrice(ticker){
   }
 
   if(price&&price>0){
-    // ZAC→ZAR: Yahoo v7 returns in ZAR already for JSE
-    // Stooq CSV returns in ZAR already
-    // TD/AV return in ZAC (cents) — convert if >1000
-    const zarSources=['fetchPriceStooq','fetchPriceStooqCSV'];
-    if(isJSE && price>1000 && !zarSources.includes(priceSource)){
-      price=price/100;
-    }
+    // Proxy already handles ZAC→ZAR conversion correctly
+    // using Yahoo's currency field (ZAc vs ZAR)
+    // No conversion needed here
     priceCache[ticker]={price,ts:Date.now()};
     return price;
   }
@@ -4604,23 +4600,24 @@ function updateTFSA(){
   }
 }
 function normaliseJSEPrice(){
-  // Auto-convert ZAC to ZAR when user blurs the price field
   const ticker=document.getElementById('stock-ticker')?.value?.trim().toUpperCase();
   const s=STOCKS[ticker];
   const isJSE=s?.mkt==='JSE'||(s?.mkt==='ETF'&&s?.yf?.includes('.JO'));
   if(!isJSE) return;
   const priceEl=document.getElementById('stock-price');
   const price=parseFloat(priceEl?.value)||0;
-  // If price looks like cents (>500) offer to convert
-  if(price>500){
+  if(!price) return;
+
+  // Only suggest conversion if price is suspiciously high
+  // JSE stocks above R10,000 do NOT exist (Capitec is ~R4,310)
+  // So if someone enters 43100, that's clearly 431.00 in cents
+  // Threshold: >10000 is definitely cents
+  if(price>10000){
     const rand=(price/100).toFixed(2);
-    const confirm=window.confirm(
-      `JSE prices are in cents (ZAC).\n\nYou entered: ${price.toFixed(0)}c\nThat's R${rand}\n\nConvert to R${rand}?`
-    );
-    if(confirm){
+    if(confirm(`That looks like a price in cents (ZAC).\n\nYou entered: ${price.toFixed(0)}c\nThat's R${rand}\n\nConvert to R${rand}?`)){
       priceEl.value=rand;
       updateCalc();
-      showToast(`✓ Converted ${price.toFixed(0)}c → R${rand}`,'success');
+      showToast(`✓ Converted to R${rand}`,'success');
     }
   }
 }
