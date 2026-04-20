@@ -633,6 +633,13 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .phil-quote-cite{font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:0.5px}
 .phil-begin-btn{padding:17px 42px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:0.5px;transition:var(--transition);white-space:nowrap;flex-shrink:0;opacity:0;animation:phil-rise 0.5s ease 0.75s forwards;position:relative;overflow:hidden}
 .phil-begin-btn::before{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:rgba(255,255,255,0.18);transform:skewX(-15deg);transition:left 0.5s ease}
+.quiz-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);transition:all 0.3s}
+.quiz-dot.active{background:var(--gold);transform:scale(1.2)}
+.quiz-dot.done{background:rgba(61,184,122,0.6)}
+.quiz-step{animation:page-in 0.3s ease}
+.quiz-option{width:100%;padding:13px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;color:var(--muted-light);font-size:13px;text-align:left;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.quiz-option:hover{background:rgba(192,155,69,0.08);border-color:var(--gold-dim);color:var(--white);transform:translateX(3px)}
+.quiz-option.selected{background:rgba(192,155,69,0.12);border-color:var(--gold);color:var(--white)}
 .phil-begin-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(192,155,69,0.38)}
 .phil-begin-btn:hover::before{left:130%}
 .phil-begin-btn:active{transform:translateY(0)}
@@ -827,6 +834,8 @@ body.beginner-mode .beginner-hint{display:block}
 .speed-mode-banner{background:rgba(192,155,69,0.05);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}
 .speed-mode-toggle{padding:4px 12px;background:transparent;border:1px solid var(--border-strong);border-radius:6px;color:var(--gold-dim);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
 .speed-mode-toggle.active{background:rgba(192,155,69,0.1);color:var(--gold-light);border-color:var(--gold-dim)}
+.speed-thesis-btn{padding:9px 10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--muted-light);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left;transition:all 0.15s}
+.speed-thesis-btn:hover,.speed-thesis-btn.selected{background:rgba(192,155,69,0.1);border-color:var(--gold-dim);color:var(--gold-light)}
 
 /* ══ CONVICTION CLOCK ══ */
 .conviction-clock{margin-top:8px;padding:8px 12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:10px}
@@ -1148,6 +1157,62 @@ body.beginner-mode .beginner-hint{display:block}
   </div>
 </div>
 
+<!-- ════ ONBOARDING QUIZ ════ -->
+<div id="quiz-screen" class="phil-screen hidden">
+  <div class="phil-wrap" style="max-width:480px">
+    <div class="phil-eyebrow">Quick setup · 3 questions</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);font-weight:600;line-height:1.2;margin-bottom:8px">Help us set up<br>your Compass</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.6">Three questions. No wrong answers. Sets the right defaults for you.</div>
+
+    <!-- Progress dots -->
+    <div style="display:flex;gap:6px;margin-bottom:28px">
+      <div class="quiz-dot active" id="qdot-0"></div>
+      <div class="quiz-dot" id="qdot-1"></div>
+      <div class="quiz-dot" id="qdot-2"></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-step" id="quiz-step-0">
+      <div style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">How long have you been investing?</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px">This sets your default mode — you can change it anytime.</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="quiz-option" onclick="quizPick(0,'beginner')">🌱 Just starting out — less than 1 year</button>
+        <button class="quiz-option" onclick="quizPick(0,'intermediate')">📈 Getting the hang of it — 1 to 3 years</button>
+        <button class="quiz-option" onclick="quizPick(0,'experienced')">🧭 Experienced — 3+ years, I know what I'm doing</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-step hidden" id="quiz-step-1">
+      <div style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">What best describes your approach?</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px">No right answer — just sets your portfolio defaults.</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="quiz-option" onclick="quizPick(1,'longterm')">🏦 Long-term — I buy quality and hold for years</button>
+        <button class="quiz-option" onclick="quizPick(1,'mixed')">⚖️ Mixed — some holds, some active positions</button>
+        <button class="quiz-option" onclick="quizPick(1,'active')">⚡ Active — I follow catalysts and trade more often</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-step hidden" id="quiz-step-2">
+      <div style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">What's your main market?</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Sets your default currency and stock suggestions.</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="quiz-option" onclick="quizPick(2,'jse')">🇿🇦 JSE — I invest mainly on the South African market</button>
+        <button class="quiz-option" onclick="quizPick(2,'us')">🇺🇸 US — I invest mainly in US stocks</button>
+        <button class="quiz-option" onclick="quizPick(2,'both')">🌍 Both — I have JSE and US positions</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="quiz-step hidden" id="quiz-step-3">
+      <div style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:16px">Your Compass is ready 🧭</div>
+      <div id="quiz-result-card" style="background:rgba(192,155,69,0.08);border:1px solid var(--border-strong);border-radius:12px;padding:18px 20px;margin-bottom:20px"></div>
+      <button onclick="quizComplete()" style="width:100%;padding:15px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif">Set up my account →</button>
+    </div>
+  </div>
+</div>
+
 <!-- ════ AUTH ════ -->
 <div id="auth-screen" class="auth-screen hidden">
 <div class="auth-wrap">
@@ -1162,10 +1227,10 @@ body.beginner-mode .beginner-hint{display:block}
       <cite id="auth-quote-author"></cite>
     </div>
     <div class="auth-pillars">
-      <div class="auth-pillar"><div class="auth-pillar-dot"></div>Works entirely offline — no server, no account</div>
+      <div class="auth-pillar"><div class="auth-pillar-dot"></div>Free forever — 10 positions, live prices included</div>
       <div class="auth-pillar"><div class="auth-pillar-dot"></div>Captures the WHY behind every position</div>
       <div class="auth-pillar"><div class="auth-pillar-dot"></div>Tier 1 & Tier 2 discipline framework</div>
-      <div class="auth-pillar"><div class="auth-pillar-dot"></div>Pre-trade Decision Journal — log your mindset</div>
+      <div class="auth-pillar"><div class="auth-pillar-dot"></div>3 Devil's Advocate challenges per month free</div>
       <div class="auth-pillar"><div class="auth-pillar-dot"></div>Berkshire-style narrative investor letters</div>
     </div>
     <div class="auth-ee-note">
@@ -1411,43 +1476,41 @@ body.beginner-mode .beginner-hint{display:block}
 
       <!-- POSITION SIZING CALCULATOR -->
       <div class="sizing-panel" id="sizing-panel">
-        <div class="sizing-title">📐 Position Sizing Guide</div>
-        <div class="sizing-input-row">
-          <label>Portfolio value:</label>
+        <div class="sizing-title">📐 Position Sizing</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
           <input type="number" class="sizing-input" id="sizing-portfolio-val"
-            placeholder="Auto-calculated from positions"
+            placeholder="Portfolio value (ZAR)"
             oninput="this.dataset.manualOverride='true';updateSizing()" min="0" step="100"
-            title="Auto-calculated from your positions. Override manually if needed.">
-          <span style="font-size:11px;color:var(--muted)">ZAR</span>
-          <span id="sizing-auto-badge" style="font-size:10px;color:#3DB87A;display:none">auto ✓</span>
+            style="flex:1">
+          <span id="sizing-auto-badge" style="font-size:10px;color:#3DB87A;display:none;white-space:nowrap">auto ✓</span>
         </div>
-        <div class="sizing-row">
-          <span class="sizing-label">Tier max allocation</span>
-          <span class="sizing-value" id="sz-tier-max">–</span>
+        <div id="sz-advice" style="font-size:12px;color:var(--muted);line-height:1.6"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px">
+          <div style="font-size:11px;color:var(--muted)">Max position <span style="font-size:10px">(Tier <span id="sz-tier-num">1</span>)</span></div>
+          <div style="font-size:12px;font-weight:600;color:var(--white);text-align:right" id="sz-max-rand">–</div>
+          <div style="font-size:11px;color:var(--muted)">Suggested shares</div>
+          <div style="font-size:12px;font-weight:600;color:var(--gold);text-align:right" id="sz-shares">–</div>
+          <div style="font-size:11px;color:var(--muted)">This trade</div>
+          <div style="font-size:12px;font-weight:600;text-align:right" id="sz-current">–</div>
+          <div style="font-size:11px;color:var(--muted)">% of portfolio</div>
+          <div style="font-size:12px;font-weight:600;text-align:right" id="sz-pct">–</div>
         </div>
-        <div class="sizing-row">
-          <span class="sizing-label">Max position size</span>
-          <span class="sizing-value" id="sz-max-rand">–</span>
-        </div>
-        <div class="sizing-row">
-          <span class="sizing-label">Suggested shares at current price</span>
-          <span class="sizing-value" id="sz-shares">–</span>
-        </div>
-        <div class="sizing-row">
-          <span class="sizing-label">Your current trade</span>
-          <span class="sizing-value" id="sz-current">–</span>
-        </div>
-        <div class="sizing-row">
-          <span class="sizing-label">% of portfolio</span>
-          <span class="sizing-value" id="sz-pct">–</span>
-        </div>
-        <div class="sizing-suggestion" id="sz-advice"></div>
       </div>
       <div id="thesis-section">
         <!-- THESIS MODE TOGGLE -->
         <div class="thesis-mode-toggle" style="margin-top:18px">
           <button class="thesis-mode-btn active" id="guided-mode-btn" onclick="setThesisMode('guided',this)">🧭 Guided</button>
           <button class="thesis-mode-btn pro-only" id="expert-mode-btn" onclick="setThesisMode('expert',this)" title="Expert mode — Pro feature">Expert</button>
+        </div>
+
+        <!-- SPEED MODE THESIS — shown only when speed mode is on -->
+        <div id="speed-thesis-section" style="display:none;margin-bottom:12px">
+          <label class="form-label" style="margin-bottom:6px">Investment Thesis <span style="color:var(--danger)">*</span> <span style="font-size:10px;color:var(--gold);font-weight:400">⚡ speed mode</span></label>
+          <textarea class="form-textarea" id="speed-thesis-input" rows="2"
+            placeholder="One line — why this stock, why now."
+            oninput="document.getElementById('stock-thesis').value=this.value"
+            style="font-size:13px"></textarea>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px">Keep it honest and specific. You can expand this later.</div>
         </div>
 
         <!-- GUIDED MODE -->
@@ -1624,6 +1687,16 @@ body.beginner-mode .beginner-hint{display:block}
                 <div class="thesis-quality-row" id="thesis-quality-row">
                   <div class="thesis-quality-bar"><div class="thesis-quality-fill" id="thesis-quality-fill"></div></div>
                   <span class="thesis-quality-label" id="thesis-quality-label">–</span>
+                </div>
+              </div>
+              <!-- SPEED MODE QUICK BUTTONS — hidden in normal mode -->
+              <div id="speed-thesis-btns" style="display:none;margin-bottom:8px">
+                <div style="font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:0.5px">Why are you buying? Tap one:</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+                  <button type="button" class="speed-thesis-btn" onclick="pickSpeedThesis('growth')">📈 Growth play</button>
+                  <button type="button" class="speed-thesis-btn" onclick="pickSpeedThesis('value')">💰 Undervalued</button>
+                  <button type="button" class="speed-thesis-btn" onclick="pickSpeedThesis('dividend')">💸 Dividend income</button>
+                  <button type="button" class="speed-thesis-btn" onclick="pickSpeedThesis('defensive')">🛡️ Defensive hold</button>
                 </div>
               </div>
               <div class="thesis-guide">What does the market misunderstand? Why is this business mispriced right now?</div>
@@ -1819,6 +1892,8 @@ body.beginner-mode .beginner-hint{display:block}
       <button class="pos-limit-upgrade" onclick="showUpgradeModal('unlimited_pos')">Upgrade for unlimited positions →</button>
     </div>
     <div id="cache-bar" class="cache-bar"><div class="cache-dot" id="cache-dot"></div><span id="cache-text">–</span></div>
+    <!-- STREAK BADGES -->
+    <div id="streak-badges" style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px"></div>
     <!-- PORTFOLIO NARRATIVE -->
     <div class="pf-narrative" id="pf-narrative" style="display:none">
       <div class="pf-narrative-header">
@@ -1833,6 +1908,23 @@ body.beginner-mode .beginner-hint{display:block}
       <div class="pf-card"><div class="pf-card-label">Unrealised P&L</div><div class="pf-card-value" id="pf-total-pnl">–</div><div class="pf-card-sub" id="pf-pnl-pct">–</div></div>
       <div class="pf-card"><div class="pf-card-label">Positions</div><div class="pf-card-value" id="pf-count">–</div><div class="pf-card-sub" id="pf-tier-split">–</div></div>
       <div class="pf-card"><div class="pf-card-label">Cost Basis</div><div class="pf-card-value" id="pf-cost">–</div><div class="pf-card-sub">Total deployed</div></div>
+    </div>
+    <!-- SPLIT CURRENCY BREAKDOWN — shows when mixed currencies detected -->
+    <div id="pf-currency-split" style="display:none;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="pf-card" id="pf-zar-card" style="display:none">
+        <div class="pf-card-label">🇿🇦 JSE Portfolio</div>
+        <div class="pf-card-value" id="pf-zar-val">–</div>
+        <div class="pf-card-sub" id="pf-zar-pnl">–</div>
+      </div>
+      <div class="pf-card" id="pf-usd-card" style="display:none">
+        <div class="pf-card-label">🇺🇸 US Portfolio</div>
+        <div class="pf-card-value" id="pf-usd-val">–</div>
+        <div class="pf-card-sub" id="pf-usd-pnl">–</div>
+      </div>
+    </div>
+    <div id="pf-benchmark-badge" style="display:none;margin-bottom:16px;padding:10px 16px;background:rgba(61,184,122,0.08);border:1px solid rgba(61,184,122,0.2);border-radius:10px;font-size:13px;color:#3DB87A;display:flex;align-items:center;gap:8px">
+      <span style="font-size:16px">🏆</span>
+      <span id="pf-benchmark-text"></span>
     </div>
     <div class="pf-charts">
       <div class="chart-card" style="grid-column:1/-1"><div class="chart-card-title" style="display:flex;align-items:center;justify-content:space-between">Portfolio Growth <div style="display:flex;gap:6px"><button class="pf-filter active" onclick="setPerfRange('all',this)" style="padding:3px 10px;font-size:10px">All</button><button class="pf-filter" onclick="setPerfRange('1y',this)" style="padding:3px 10px;font-size:10px">1Y</button><button class="pf-filter" onclick="setPerfRange('6m',this)" style="padding:3px 10px;font-size:10px">6M</button><button class="pf-filter" onclick="setPerfRange('3m',this)" style="padding:3px 10px;font-size:10px">3M</button></div></div><div class="chart-wrap" style="height:220px"><canvas id="chart-perf"></canvas></div></div>
@@ -2689,7 +2781,7 @@ const TIER_FEATURES = {
   goal_tracker:   ['free','student','pro','elite','fund'],
   tfsa_tracker:   ['free','student','pro','elite','fund'],
   sizing_calc:    ['free','student','pro','elite','fund'],
-  ai_taste:       ['free','student','pro','elite','fund'], // 3/month
+  ai_taste:       ['free','student','pro','elite','fund'], // 3 Devil's Advocates/month on free
   education:      ['free','student','pro','elite','fund'],
 
   // Pro+
@@ -2719,7 +2811,7 @@ const TIER_FEATURES = {
   audit_trail:    ['fund'],
 };
 
-const FREE_POSITION_LIMIT = 5;
+const FREE_POSITION_LIMIT = 10;
 
 function getUserTier(){
   return DB.get('user_tier')||'free';
@@ -2758,21 +2850,21 @@ function incrementAIUsage(){
 }
 function canUseAI(){
   if(hasTier('ai_unlimited')) return true;
-  return getAIUsageThisMonth()<3;
+  return getAIUsageThisMonth()<3; // 3 devil's advocates/month on free
 }
 
 // ── UPGRADE MODAL ──
 function showUpgradeModal(feature, context=''){
   const messages={
     unlimited_pos: {
-      title:'You\'ve reached 5 positions',
-      body:`The free tier includes up to ${FREE_POSITION_LIMIT} positions. Upgrade to Compass Pro for unlimited positions — and every other intelligence feature.`,
+      title:'You\'ve built a real portfolio',
+      body:`The free tier includes up to 10 positions with full thesis builder, live prices, and conviction tracking. Upgrade to Pro for unlimited positions — and every intelligence feature unlocked.`,
       cta:'Upgrade to Pro — R29/month →'
     },
     live_prices:{
-      title:'Live prices — Pro feature',
-      body:'Real-time JSE and US prices, including live performance on every position card. Upgrade to unlock.',
-      cta:'Upgrade to Pro — R29/month →'
+      title:'Live prices',
+      body:'Real-time JSE and US prices are included on all plans. Refresh your portfolio to load them.',
+      cta:'Got it'
     },
     expert_mode:{
       title:'Expert mode — Pro feature',
@@ -2785,8 +2877,8 @@ function showUpgradeModal(feature, context=''){
       cta:'Upgrade to Pro — R29/month →'
     },
     ai_unlimited:{
-      title:'AI limit reached',
-      body:`You've used your 3 free AI challenges this month. Upgrade to Pro for unlimited Compass Intelligence — thesis interrogation, drift detection, sanity check, and more.`,
+      title:"Devil's Advocate limit reached",
+      body:`You've used your 3 free Devil's Advocates this month. Upgrade to Pro for unlimited — thesis interrogation, drift detection, sanity check, and more.`,
       cta:'Upgrade to Pro — R29/month →'
     },
     drift:{
@@ -3683,7 +3775,7 @@ function doSetup(){
   const pin=document.getElementById('su-pin').value.trim();
   if(!name){showAuthStatus('Please enter your name','error');return}
   if(!/^\d{4}$/.test(pin)){showAuthStatus('PIN must be exactly 4 digits','error');return}
-  DB.set('profile',{name, pin});
+  DB.set('profile',{name, pin: String(pin)});
 
   // Founder gets Fund tier — Employee #1 of Elizabeth and Albert (Pty) Ltd
   const founderNames=['siyabonga','siya','mazibuko'];
@@ -3692,6 +3784,7 @@ function doSetup(){
     DB.set('user_tier','fund');
   }
 
+  sessionStorage.setItem('ea_session', Date.now());
   initApp(name);
   setTimeout(()=>{
     const tier=getUserTier();
@@ -3733,11 +3826,20 @@ function doUnlock(){
   const pin=document.getElementById('li-pin').value.trim();
   const profile=DB.get('profile');
   if(!profile){showSetup();return;}
-  if(pin!==profile.pin){
+  // Compare as strings — ensure both are trimmed strings
+  const storedPin=String(profile.pin||'').trim();
+  const enteredPin=String(pin||'').trim();
+  if(enteredPin!==storedPin){
     showAuthStatus('Incorrect PIN','error');
     document.getElementById('li-pin').value='';
+    // Shake animation
+    const input=document.getElementById('li-pin');
+    input.style.borderColor='#E05252';
+    setTimeout(()=>input.style.borderColor='',2000);
     return;
   }
+  // Save session so refresh doesn't lock
+  sessionStorage.setItem('ea_session', Date.now());
   // Ensure founder always has Fund tier
   const founderNames=['siyabonga','siya','mazibuko'];
   const isFounder=founderNames.some(n=>profile.name.toLowerCase().includes(n));
@@ -3748,6 +3850,7 @@ function doUnlock(){
 }
 
 function doLock(){
+  sessionStorage.removeItem('ea_session');
   document.getElementById('app').classList.add('hidden');
   document.getElementById('auth-screen').classList.remove('hidden');
   document.getElementById('li-pin').value='';
@@ -4002,12 +4105,12 @@ function renderSettingsPlan(){
             <div style="height:100%;width:${Math.min(100,(posUsed/FREE_POSITION_LIMIT)*100)}%;background:${posUsed>=FREE_POSITION_LIMIT?'#E05252':'var(--gold)'};border-radius:2px;transition:width 0.4s"></div>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:4px">
-            <span style="color:var(--muted)">AI challenges this month</span>
+            <span style="color:var(--muted)">Devil's Advocates this month</span>
             <span style="font-family:'DM Mono',monospace;color:${aiUsed>=3?'#E05252':'var(--muted-light)'}">${aiUsed}/3</span>
           </div>
         </div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6">
-          Upgrade to Pro for unlimited positions, live prices, all Compass Intelligence features, dividend tracking, CGT report, and more.
+          Upgrade to Pro for unlimited positions, all Compass Intelligence features, expert mode, dividend tracking, CGT report, and more.
         </div>
         <button onclick="showUpgradeModal('unlimited_pos')" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s">
           Upgrade to Compass Pro — R29/month →
@@ -4034,6 +4137,7 @@ function renderSettingsPlan(){
 }
 
 function renderBetaCodeSection(){
+  const currentTier=getUserTier();
   return `<div style="margin-top:4px;padding:14px 16px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:10px">
     <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px">Beta Access Code</div>
     <div style="display:flex;gap:8px">
@@ -4041,7 +4145,21 @@ function renderBetaCodeSection(){
       <button onclick="redeemBetaCode()" style="padding:10px 16px;background:rgba(192,155,69,0.12);border:1px solid var(--gold-dim);border-radius:9px;color:var(--gold-light);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">Redeem</button>
     </div>
     <div style="font-size:11px;color:var(--muted);margin-top:8px">Have a beta code? Enter it above to unlock your plan.</div>
+    ${currentTier!=='free'?`
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">Testing? Reset to Free tier to try a different code:</div>
+      <button onclick="resetTierForTesting()" style="padding:6px 14px;background:transparent;border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif">Reset to Free tier</button>
+    </div>`:''}
   </div>`;
+}
+
+function resetTierForTesting(){
+  if(!confirm('Reset to Free tier? You can re-enter a beta code to restore access.')) return;
+  DB.set('user_tier','free');
+  DB.set('beta_code_used',null);
+  updateTierBadge();
+  renderSettingsPlan();
+  showToast('Reset to Free — enter a code to restore','success');
 }
 
 // ── BETA ACCESS CODES ────────────────────────────────────
@@ -4175,16 +4293,16 @@ function updateSizing(){
 
   const fmt=n=>n.toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
 
-  const tierMaxEl=document.getElementById('sz-tier-max');
+  const tierMaxEl=document.getElementById('sz-tier-num');
   const maxRandEl=document.getElementById('sz-max-rand');
   const sharesEl=document.getElementById('sz-shares');
   const currentEl=document.getElementById('sz-current');
   const pctEl=document.getElementById('sz-pct');
   const adviceEl=document.getElementById('sz-advice');
 
-  if(tierMaxEl) tierMaxEl.textContent=`${maxPct}% (Tier ${tier} rule)`;
-  if(maxRandEl) maxRandEl.textContent=maxRand>0?`ZAR ${fmt(maxRand)}`:'Enter portfolio value';
-  if(sharesEl) sharesEl.textContent=suggestedShares>0?`${suggestedShares} shares (ZAR ${fmt(suggestedShares*price)})`:'–';
+  if(tierMaxEl) tierMaxEl.textContent=tier;
+  if(maxRandEl) maxRandEl.textContent=maxRand>0?`ZAR ${fmt(maxRand)}`:'–';
+  if(sharesEl) sharesEl.textContent=suggestedShares>0?`${suggestedShares} shares`:'Enter price first';
   if(currentEl){
     currentEl.textContent=currentTradeVal>0?`ZAR ${fmt(currentTradeVal)}`:'–';
     currentEl.className='sizing-value'+(currentPct>maxPct?' danger':currentPct>maxPct*0.9?' warn':' ok');
@@ -4195,19 +4313,19 @@ function updateSizing(){
   }
   if(adviceEl){
     if(!portfolioVal&&!allPositions.length){
-      adviceEl.textContent='Log your first position to enable auto portfolio sizing.';
+      adviceEl.textContent='Enter your portfolio value above to get sizing guidance.';
+      adviceEl.style.color='var(--muted)';
+    } else if(!price){
+      adviceEl.textContent='Select a stock with a price to see suggested shares.';
       adviceEl.style.color='var(--muted)';
     } else if(currentPct>maxPct){
-      adviceEl.textContent=`⚠ This trade exceeds your Tier ${tier} limit of ${maxPct}%. Consider reducing to ${suggestedShares} shares.`;
-      adviceEl.style.color='#E05252';
+      adviceEl.innerHTML=`<span style="color:#E05252">⚠ ${currentPct.toFixed(1)}% — over Tier ${tier} limit of ${maxPct}%.</span> Reduce to ${suggestedShares} shares.`;
     } else if(currentPct>maxPct*0.9){
-      adviceEl.textContent=`Near your Tier ${tier} limit. Max suggested: ${suggestedShares} shares.`;
-      adviceEl.style.color='#F5A623';
+      adviceEl.innerHTML=`<span style="color:#F5A623">Near limit</span> — max ${suggestedShares} shares for Tier ${tier}.`;
     } else if(currentPct>0){
-      adviceEl.textContent=`✓ Within Tier ${tier} limits. Good discipline.`;
-      adviceEl.style.color='#3DB87A';
+      adviceEl.innerHTML=`<span style="color:#3DB87A">✓ Within Tier ${tier} limits.</span> ${suggestedShares} shares is your max.`;
     } else {
-      adviceEl.textContent='Enter shares to see sizing guidance.';
+      adviceEl.textContent=`Enter shares to see your % of portfolio. Max ${suggestedShares} shares for Tier ${tier}.`;
       adviceEl.style.color='var(--muted)';
     }
   }
@@ -4728,24 +4846,80 @@ function toggleSpeedMode(btn){
   DB.set('speed_mode',_speedMode);
   btn.textContent=_speedMode?'On':'Off';
   btn.classList.toggle('active',_speedMode);
-  // In speed mode — collapse guided builder, show single textarea
+  applySpeedMode();
+  if(_speedMode) showToast('⚡ Speed mode — one-line thesis, log fast','info');
+}
+
+function applySpeedMode(){
   const guided=document.getElementById('guided-thesis-mode');
-  const expertArea=document.getElementById('stock-thesis');
+  const thesisArea=document.getElementById('stock-thesis');
+  const thesisGuide=document.querySelector('.thesis-guide');
+  const wordcount=document.getElementById('thesis-wordcount');
+  const thesisGroup=thesisArea?.closest('.form-group');
+  const speedBtns=document.getElementById('speed-thesis-btns');
+
   if(_speedMode){
     if(guided) guided.style.display='none';
-    if(expertArea){
-      expertArea.closest('.form-group').style.display='block';
-      expertArea.placeholder='Write your thesis in one sentence — why this, why now.';
-      expertArea.rows=2;
+    if(thesisGroup) thesisGroup.style.display='block';
+    if(speedBtns) speedBtns.style.display='block';
+    if(thesisArea){
+      thesisArea.placeholder='Tap a reason above, or type your own one-liner…';
+      thesisArea.rows=2;
+      thesisArea.style.minHeight='60px';
     }
-    showToast('⚡ Speed mode — write your thesis fast. Devil\'s Advocate fires after.','info');
+    if(thesisGuide) thesisGuide.style.display='none';
+    if(wordcount) wordcount.style.display='none';
   } else {
-    if(guided) guided.style.display='';
-    if(expertArea){
-      expertArea.placeholder='Your full investment thesis…';
-      expertArea.rows=4;
+    if(speedBtns) speedBtns.style.display='none';
+    if(thesisGroup) thesisGroup.style.display='';
+    if(thesisArea){
+      thesisArea.placeholder='Write your specific, falsifiable argument. What\'s your edge?…';
+      thesisArea.rows=4;
+      thesisArea.style.minHeight='';
     }
+    if(thesisGuide) thesisGuide.style.display='';
+    if(wordcount) wordcount.style.display='';
+    const savedMode=DB.get('thesis_mode')||'guided';
+    const btn=document.getElementById(savedMode==='expert'?'expert-mode-btn':'guided-mode-btn');
+    setThesisMode(savedMode, btn);
   }
+}
+
+// Speed mode thesis templates — fill + exit in one tap
+const SPEED_THESIS_TEMPLATES={
+  growth:{
+    thesis:(t,n)=>`Buying ${n||t} as a growth play. I expect earnings and revenue to compound above market rate over 3+ years, driven by expanding market share and improving margins.`,
+    exit:`If earnings growth stalls below 10% for two consecutive years, or the core growth thesis breaks.`
+  },
+  value:{
+    thesis:(t,n)=>`Buying ${n||t} because it is trading below intrinsic value. The market is mispricing the business relative to its earnings power and balance sheet strength.`,
+    exit:`If the valuation gap closes to fair value, or deteriorating fundamentals suggest the discount is deserved.`
+  },
+  dividend:{
+    thesis:(t,n)=>`Buying ${n||t} for dividend income. The yield is attractive relative to alternatives and the payout is sustainable given free cash flow generation.`,
+    exit:`If the dividend is cut or suspended, or the yield becomes uncompetitive versus risk-free alternatives.`
+  },
+  defensive:{
+    thesis:(t,n)=>`Buying ${n||t} as a defensive position. Stable, recurring revenues hold through economic cycles — portfolio ballast.`,
+    exit:`If defensive characteristics deteriorate — revenue becomes cyclical, debt rises, or the competitive moat erodes.`
+  }
+};
+
+function pickSpeedThesis(type){
+  const ticker=document.getElementById('stock-ticker')?.value?.toUpperCase()||'';
+  const name=document.getElementById('stock-company')?.value||ticker;
+  const tmpl=SPEED_THESIS_TEMPLATES[type];
+  if(!tmpl) return;
+  const thesisArea=document.getElementById('stock-thesis');
+  if(thesisArea){
+    thesisArea.value=tmpl.thesis(ticker,name);
+    thesisArea.dispatchEvent(new Event('input'));
+  }
+  const exitArea=document.getElementById('stock-exit');
+  if(exitArea&&!exitArea.value) exitArea.value=tmpl.exit;
+  document.querySelectorAll('.speed-thesis-btn').forEach(b=>b.classList.remove('selected'));
+  event?.target?.closest('.speed-thesis-btn')?.classList.add('selected');
+  showToast('✓ Thesis filled — edit before logging if needed','success');
 }
 
 // ── CRYPTO ──
@@ -5137,6 +5311,20 @@ function logStock(){
     setTimeout(()=>runDevilsAdvocate(ticker, thesis, exit), 800);
   }
 
+  // Retroactive thesis reminder for speed trades
+  // If thesis is a template (short/templated) remind them to strengthen later
+  if(_speedMode && action==='BUY'){
+    const isTemplateThesis=Object.values(SPEED_THESIS_TEMPLATES).some(t=>
+      thesis.startsWith('Buying '+company.split(' ')[0])||thesis.startsWith('Buying '+ticker)
+    );
+    if(isTemplateThesis){
+      DB.set('needs_thesis_strength_'+ticker, {ticker, company, ts:Date.now()});
+      setTimeout(()=>{
+        showToast(`⚡ ${ticker} logged fast — strengthen the thesis when you can`, 'info');
+      }, 1200);
+    }
+  }
+
   loadTrades(); rebuildPositionsFromTrades(); updateBadge(); renderPortfolio();
   setTimeout(()=>switchTab('portfolio',document.querySelector('[data-tab="portfolio"]')),400);
 }
@@ -5181,10 +5369,12 @@ function clearForm(type){
     const wc=document.getElementById('thesis-wordcount');if(wc){wc.textContent='0 words';wc.className='thesis-wordcount'}
     const badge=document.getElementById('exit-type-badge');if(badge){badge.className='exit-type-badge';badge.textContent=''}
     const nudge=document.getElementById('exit-nudge');if(nudge)nudge.classList.remove('show');
-    // Reset expert mode fields
     resetExpertMode();
-    // Reset sizing panel
     const sizingPanel=document.getElementById('sizing-panel');if(sizingPanel)sizingPanel.classList.remove('show');
+    // Apply default currency from quiz prefs
+    const defCur=DB.get('default_currency')||'ZAR';
+    const curEl=document.getElementById('stock-currency');
+    if(curEl) curEl.value=defCur;
     onActionChange();
   }
   if(type==='bond'){['bond-face','bond-price','bond-units','bond-thesis','bond-exit'].forEach(id=>document.getElementById(id).value='')}
@@ -5357,12 +5547,36 @@ async function renderPortfolio(){
   updatePositionLimitBanner();
   const list=document.getElementById('positions-list');
   if(!allPositions.length){
-    list.innerHTML=`<div class="empty-state" style="padding:40px 20px;text-align:center">
-      <div style="font-size:48px;margin-bottom:16px">🧭</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);font-weight:600;margin-bottom:8px">Your portfolio is empty</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;max-width:280px;margin-left:auto;margin-right:auto">Log your first trade to start building your investment record. Every great portfolio starts with one position.</div>
+    list.innerHTML=`
+    <div style="margin-bottom:20px;padding:16px 20px;background:rgba(192,155,69,0.06);border:1px solid var(--border-strong);border-radius:12px">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;font-weight:600">✦ Sample Position — How Compass Works</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:var(--white);font-family:'DM Mono',monospace">MTN</div>
+          <div style="font-size:12px;color:var(--muted)">MTN Group</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:15px;font-weight:700;color:#3DB87A">ZAR 134,928</div>
+          <div style="font-size:11px;color:#3DB87A">+ZAR 52,728 (+64.2%)</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Qty 668 · Avg ZAR 123.00 · Live ZAR 201.94 · Held 18 months</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="flex:1;height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden"><div style="height:100%;width:82%;background:#3DB87A;border-radius:2px"></div></div>
+        <div style="font-size:10px;font-weight:700;color:#3DB87A">Thesis 82/100</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+        <span style="font-size:10px;color:#3DB87A">✓ Strong reasoning</span>
+        <span style="font-size:10px;color:#3DB87A">✓ Good investment language</span>
+        <span style="font-size:10px;color:var(--gold)">~ Be more specific on exit</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted-light);font-style:italic;line-height:1.5;border-left:2px solid var(--gold-dim);padding-left:10px;margin-bottom:12px">"I am buying MTN because Africa's mobile data penetration is still below 40% in key markets. MTN's network infrastructure is a durable moat — competitors would need 10+ years and R200bn to replicate it. I expect earnings to compound at 12% annually as 4G penetration doubles."</div>
+      <div style="font-size:11px;color:var(--muted);font-style:italic">Exit trigger: If MTN loses its spectrum licences in Nigeria or data ARPU declines for 3 consecutive quarters.</div>
+    </div>
+    <div style="text-align:center;padding:20px 0 30px">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Your positions appear here. Every one requires a written thesis.</div>
       <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
-        <button onclick="switchTab('log',document.querySelector('[data-tab=log]'))" style="padding:10px 24px;background:rgba(192,155,69,0.12);border:1px solid var(--gold-dim);border-radius:9px;color:var(--gold-light);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">+ Log your first trade</button>
+        <button onclick="switchTab('log',document.querySelector('[data-tab=log]'))" style="padding:12px 28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">+ Log your first trade →</button>
         <button onclick="openImportModal()" style="padding:8px 20px;background:transparent;border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">📥 Import from EasyEquities</button>
       </div>
     </div>`;
@@ -5578,6 +5792,18 @@ function renderPositionCards(positions,prices,filter){
         <div class="thesis-score-bar"><div class="thesis-score-fill" style="width:${score.pct}%"></div></div>
         <div class="thesis-score-label">${score.label}</div>
       </div>
+      ${renderThesisBreakdown(score)}
+      ${(()=>{
+        const needsStrength=DB.get('needs_thesis_strength_'+p.ticker);
+        if(!needsStrength) return '';
+        return `<div style="margin-top:8px;padding:8px 12px;background:rgba(192,155,69,0.06);border:1px solid var(--border-strong);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <span style="font-size:11px;color:var(--gold-dim)">⚡ Logged fast — strengthen your thesis when you have 2 minutes</span>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button onclick="strengthenThesis('${p.ticker}')" style="padding:4px 10px;background:rgba(192,155,69,0.12);border:1px solid var(--gold-dim);border-radius:6px;color:var(--gold-light);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">Strengthen →</button>
+            <button onclick="dismissStrengthNudge('${p.ticker}')" style="padding:4px 8px;background:transparent;border:none;color:var(--muted);font-size:11px;cursor:pointer;font-family:inherit">Later</button>
+          </div>
+        </div>`;
+      })()}
       ${anniv?`
       <div class="anniv-banner${anniv.overdue?' overdue':''}" id="anniv-${p.ticker}">
         <div class="anniv-icon">${anniv.overdue?'⚠️':'🎂'}</div>
@@ -5636,8 +5862,9 @@ function renderPositionCards(positions,prices,filter){
       <div class="pos-actions">
         <button class="pos-action-btn sell" onclick="openSellModal('${p.ticker}')">Sell</button>
         <button class="pos-action-btn" onclick="copyThesis('${p.ticker}')">Copy Thesis</button>
-        <button class="pos-action-btn" onclick="shareThesis('${p.ticker}')">Share Thesis</button>
+        <button class="pos-action-btn" onclick="shareThesisCard('${p.ticker}')">Share Thesis</button>
         <button class="pos-action-btn" onclick="editThesis('${p.ticker}')">Edit Thesis</button>
+        <button class="pos-action-btn" onclick="setPriceAlert('${p.ticker}')" style="color:var(--gold)">🔔 Alert</button>
         <button class="pos-action-btn ai-action" onclick="checkThesisDrift('${p.ticker}',this)">✦ Drift</button>
         <button class="pos-action-btn" id="devils-btn-${p.ticker}" onclick="runDevilsAdvocate('${p.ticker}',\`${(p.thesis||'').replace(/`/g,"'")}\`,\`${(p.exit_trigger||'').replace(/`/g,"'")}\`)" style="color:#E05252;border-color:rgba(181,50,50,0.25)">😈 Devil</button>
         <button class="div-log-btn" onclick="${hasTier('dividend')?`logDividend('${p.ticker}','${p.name}',${p.avg_price},${p.quantity},'${cur}')`:`showUpgradeModal('dividend')`}">+ Dividend${!hasTier('dividend')?` 🔒`:''}</button>
@@ -5677,29 +5904,109 @@ function renderPositionCards(positions,prices,filter){
 }
 
 function updateSummaryCards(positions,prices){
-  const currencies=new Set(positions.map(p=>p.currency));
-  let totalMV=0,totalCost=0;
-  for(const p of positions){const cp=(prices[p.ticker]||null)||p.avg_price;totalMV+=p.quantity*cp;totalCost+=p.quantity*p.avg_price}
-  const pnl=totalMV-totalCost;
-  const pnlPct=totalCost>0?(pnl/totalCost)*100:0;
-  const t1=positions.filter(p=>p.tier===1).length;
-  const t2=positions.filter(p=>p.tier===2).length;
-  const pnlCls=pnl>=0?'profit':'loss';
-  const pnlSym=pnl>=0?'+':'';
-  const mainCur=[...currencies][0]||'ZAR';
   const fmt=v=>v.toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el[id.includes('pnl')?'innerHTML':'textContent']=v};
 
-  // For free users — show cost basis but tease live price
-  // Live prices available to all users via shared key
-  s('pf-total-val',fmt(totalMV));
-  document.getElementById('pf-currency-note').textContent=currencies.size>1?'⚠ Mixed currencies':`${mainCur} market value`;
-  document.getElementById('pf-total-pnl').innerHTML=`<span class="${pnlCls}">${pnlSym}${fmt(Math.abs(pnl))}</span>`;
-  document.getElementById('pf-pnl-pct').innerHTML=`<span class="${pnlCls}">${pnlSym}${pnlPct.toFixed(2)}% unrealised</span>`;
+  // ── SPLIT BY CURRENCY ─────────────────────────────────────
+  const zarPos=positions.filter(p=>p.currency==='ZAR'||!p.currency);
+  const usdPos=positions.filter(p=>p.currency==='USD');
+  const hasMixed=zarPos.length>0&&usdPos.length>0;
 
+  // ZAR bucket
+  let zarMV=0,zarCost=0;
+  for(const p of zarPos){const cp=(prices[p.ticker]||null)||p.avg_price;zarMV+=p.quantity*cp;zarCost+=p.quantity*p.avg_price;}
+  // USD bucket
+  let usdMV=0,usdCost=0;
+  for(const p of usdPos){const cp=(prices[p.ticker]||null)||p.avg_price;usdMV+=p.quantity*cp;usdCost+=p.quantity*p.avg_price;}
+
+  // Totals (same currency shown separately — don't mix)
+  const totalMV=zarMV+usdMV; // for single-currency display only
+  const totalCost=zarCost+usdCost;
+  const currencies=new Set(positions.map(p=>p.currency||'ZAR'));
+  const mainCur=[...currencies][0]||'ZAR';
+
+  // ── MAIN SUMMARY CARDS ────────────────────────────────────
+  if(hasMixed){
+    // Mixed: show combined cost, positions, tier split
+    // Market value shows "See below ↓"
+    s('pf-total-val','See below ↓');
+    document.getElementById('pf-currency-note').textContent='ZAR + USD — split below';
+    document.getElementById('pf-total-pnl').innerHTML=`<span style="color:var(--muted);font-size:13px">Split by currency</span>`;
+    document.getElementById('pf-pnl-pct').innerHTML=`<span style="color:var(--muted);font-size:11px">below ↓</span>`;
+  } else {
+    const pnl=totalMV-totalCost;
+    const pnlPct=totalCost>0?(pnl/totalCost)*100:0;
+    const pnlCls=pnl>=0?'profit':'loss';
+    const pnlSym=pnl>=0?'+':'';
+    const cur=mainCur==='USD'?'USD ':'ZAR ';
+    s('pf-total-val',cur+fmt(totalMV));
+    document.getElementById('pf-currency-note').textContent=`${mainCur} market value`;
+    document.getElementById('pf-total-pnl').innerHTML=`<span class="${pnlCls}">${pnlSym}${cur}${fmt(Math.abs(pnl))}</span>`;
+    document.getElementById('pf-pnl-pct').innerHTML=`<span class="${pnlCls}">${pnlSym}${pnlPct.toFixed(2)}% unrealised</span>`;
+  }
+
+  const t1=positions.filter(p=>p.tier===1).length;
+  const t2=positions.filter(p=>p.tier===2).length;
   document.getElementById('pf-count').textContent=positions.length;
   document.getElementById('pf-tier-split').textContent=`T1: ${t1} · T2: ${t2}`;
   document.getElementById('pf-cost').textContent=fmt(totalCost);
+
+  // ── SPLIT CURRENCY CARDS ──────────────────────────────────
+  const splitWrap=document.getElementById('pf-currency-split');
+  const zarCard=document.getElementById('pf-zar-card');
+  const usdCard=document.getElementById('pf-usd-card');
+
+  if(hasMixed&&splitWrap){
+    splitWrap.style.display='grid';
+    if(zarCard&&zarPos.length){
+      zarCard.style.display='block';
+      const zarPnl=zarMV-zarCost;
+      const zarPct=zarCost>0?(zarPnl/zarCost)*100:0;
+      const zarCls=zarPnl>=0?'profit':'loss';
+      const zarSym=zarPnl>=0?'+':'';
+      document.getElementById('pf-zar-val').textContent=`ZAR ${fmt(zarMV)}`;
+      document.getElementById('pf-zar-pnl').innerHTML=`<span class="${zarCls}">${zarSym}ZAR ${fmt(Math.abs(zarPnl))} (${zarSym}${zarPct.toFixed(1)}%)</span>`;
+    }
+    if(usdCard&&usdPos.length){
+      usdCard.style.display='block';
+      const usdPnl=usdMV-usdCost;
+      const usdPct=usdCost>0?(usdPnl/usdCost)*100:0;
+      const usdCls=usdPnl>=0?'profit':'loss';
+      const usdSym=usdPnl>=0?'+':'';
+      document.getElementById('pf-usd-val').textContent=`USD ${fmt(usdMV)}`;
+      document.getElementById('pf-usd-pnl').innerHTML=`<span class="${usdCls}">${usdSym}USD ${fmt(Math.abs(usdPnl))} (${usdSym}${usdPct.toFixed(1)}%)</span>`;
+    }
+  } else if(splitWrap){
+    splitWrap.style.display='none';
+  }
+
+  // ── BENCHMARK BADGE ───────────────────────────────────────
+  // Only show for ZAR positions vs JSE Top 40 (~12% avg annual)
+  const badge=document.getElementById('pf-benchmark-badge');
+  const badgeText=document.getElementById('pf-benchmark-text');
+  const zarPct=zarCost>0?((zarMV-zarCost)/zarCost)*100:0;
+  if(badge&&badgeText&&zarPos.length>0&&zarPct!==0){
+    const STX40=12;
+    const alpha=zarPct-STX40;
+    badge.style.display='flex';
+    if(zarPct>STX40){
+      badge.style.background='rgba(61,184,122,0.08)';badge.style.borderColor='rgba(61,184,122,0.2)';
+      badgeText.style.color='#3DB87A';
+      badgeText.textContent=`🏆 JSE portfolio beating Top 40 by ${alpha.toFixed(1)}% — alpha is real`;
+    } else if(zarPct>0){
+      badge.style.background='rgba(192,155,69,0.08)';badge.style.borderColor='rgba(192,155,69,0.2)';
+      badgeText.style.color='var(--gold)';
+      badgeText.textContent=`JSE up ${zarPct.toFixed(1)}% · ${Math.abs(alpha).toFixed(1)}% behind Top 40`;
+    } else {
+      badge.style.background='rgba(224,82,82,0.06)';badge.style.borderColor='rgba(224,82,82,0.15)';
+      badgeText.style.color='#E05252';
+      badgeText.textContent=`JSE down ${Math.abs(zarPct).toFixed(1)}% · review your thesis`;
+    }
+  } else if(badge){ badge.style.display='none'; }
+
+  // ── STREAKS & ALERTS ──────────────────────────────────────
+  renderStreakBadges();
+  setTimeout(checkPriceAlerts, 2000);
 }
 
 let _perfRange='all';
@@ -5876,36 +6183,182 @@ function toggleLotsPanel(ticker){
   panel.classList.toggle("show");
 }
 
-function shareThesis(ticker){
+// ══════════════════════════════════════════════════════════
+// SHAREABLE THESIS CARD
+// ══════════════════════════════════════════════════════════
+function shareThesisCard(ticker){
   const pos=allPositions.find(p=>p.ticker===ticker);
-  if(!pos?.thesis){showToast('No thesis to share');return;}
-  const months=Math.floor((Date.now()-new Date(pos.entry_date||0))/(1000*60*60*24*30));
-  const shareText=`📊 My investment thesis on ${pos.name} (${ticker})
+  if(!pos?.thesis){showToast('No thesis to share','error');return;}
+  const score=calcThesisScore(pos);
+  const prices={};
+  allPositions.forEach(p=>{if(priceCache[p.ticker])prices[p.ticker]=priceCache[p.ticker].price});
+  const livePrice=prices[ticker];
+  const pnlPct=livePrice&&pos.avg_price?(((livePrice-pos.avg_price)/pos.avg_price)*100):null;
+  const months=Math.max(0,Math.floor((Date.now()-new Date(pos.entry_date||Date.now()))/(1000*60*60*24*30)));
+
+  // Build share text with rich card data
+  const pnlStr=pnlPct!=null?(pnlPct>=0?`+${pnlPct.toFixed(1)}%`:`${pnlPct.toFixed(1)}%`):'';
+  const shareText=
+`📊 ${pos.name} (${ticker}) — Thesis Score ${score.score}/100
+${pnlStr?`${pnlStr} in ${months} month${months!==1?'s':''} · `:''}${pos.tier===1?'Tier 1 — Long-term hold':'Tier 2 — Active'}
 
 "${pos.thesis}"
 
 Exit trigger: "${pos.exit_trigger||'Not defined'}"
 
-Held for ${months} month${months!==1?'s':''} · Tier ${pos.tier||1} position
-
-Built with E&A Compass — eacompass.co.za 🧭`;
+Built with E&A Compass 🧭
+ea-compass.vercel.app/app`;
 
   if(navigator.share){
-    navigator.share({
-      title:`${ticker} Investment Thesis`,
-      text:shareText,
-    }).catch(()=>{
-      // Fallback to clipboard
-      navigator.clipboard.writeText(shareText).then(()=>showToast('✓ Thesis copied — ready to share'));
-    });
+    navigator.share({title:`${ticker} Investment Thesis`,text:shareText})
+      .catch(()=>navigator.clipboard?.writeText(shareText).then(()=>showToast('✓ Copied to clipboard')));
   } else {
-    navigator.clipboard.writeText(shareText).then(()=>showToast('✓ Thesis copied — paste anywhere to share'));
+    navigator.clipboard?.writeText(shareText).then(()=>showToast('✓ Thesis card copied — paste to share'));
   }
 }
 
-function editThesis(ticker){
-  // Redirects to new thesis history-aware version below
-  editThesisWithHistory(ticker);
+// Keep old name as alias
+function shareThesis(ticker){ shareThesisCard(ticker); }
+
+// ══════════════════════════════════════════════════════════
+// PRICE ALERTS (Browser push notifications)
+// ══════════════════════════════════════════════════════════
+function setPriceAlert(ticker){
+  const pos=allPositions.find(p=>p.ticker===ticker);
+  if(!pos){return;}
+  const cur=pos.currency==='USD'?'$':'R';
+  const livePrice=priceCache[ticker]?.price||pos.avg_price||0;
+  const existing=DB.get('alert_'+ticker);
+
+  const modal=document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML=`
+    <div style="background:var(--navy-light);border:1px solid var(--border-strong);border-radius:16px;padding:24px;max-width:340px;width:100%">
+      <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">Price Alert — ${ticker}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:20px">Current: ${cur}${livePrice.toFixed(2)} · Avg: ${cur}${pos.avg_price?.toFixed(2)||'–'}</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div>
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Alert when price rises above</label>
+          <input id="alert-high" type="number" class="form-input" placeholder="${cur}${(livePrice*1.1).toFixed(2)}" value="${existing?.high||''}" step="0.01">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Alert when price falls below</label>
+          <input id="alert-low" type="number" class="form-input" placeholder="${cur}${(livePrice*0.9).toFixed(2)}" value="${existing?.low||''}" step="0.01">
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:20px">
+        <button onclick="this.closest('[style*=fixed]').remove()" style="flex:1;padding:11px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:10px;color:var(--muted);cursor:pointer;font-family:inherit">Cancel</button>
+        ${existing?`<button onclick="clearPriceAlert('${ticker}');this.closest('[style*=fixed]').remove()" style="padding:11px 16px;background:rgba(224,82,82,0.12);border:1px solid rgba(224,82,82,0.3);border-radius:10px;color:#E05252;cursor:pointer;font-family:inherit">Clear</button>`:''}
+        <button onclick="savePriceAlert('${ticker}');this.closest('[style*=fixed]').remove()" style="flex:1;padding:11px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;cursor:pointer;font-family:inherit">Set Alert</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+}
+
+function savePriceAlert(ticker){
+  const high=parseFloat(document.getElementById('alert-high')?.value)||null;
+  const low=parseFloat(document.getElementById('alert-low')?.value)||null;
+  if(!high&&!low){showToast('Enter at least one price level','error');return;}
+  DB.set('alert_'+ticker,{high,low,set:Date.now()});
+  // Request notification permission
+  if('Notification' in window && Notification.permission==='default'){
+    Notification.requestPermission().then(p=>{
+      if(p==='granted') showToast(`✓ Alert set for ${ticker} — you'll be notified`,'success');
+      else showToast(`✓ Alert saved — check portfolio for triggers`,'success');
+    });
+  } else {
+    showToast(`✓ Price alert set for ${ticker}`,'success');
+  }
+}
+
+function clearPriceAlert(ticker){
+  DB.set('alert_'+ticker,null);
+  showToast(`Alert cleared for ${ticker}`);
+}
+
+function checkPriceAlerts(){
+  allPositions.forEach(p=>{
+    const alert=DB.get('alert_'+p.ticker);
+    if(!alert) return;
+    const price=priceCache[p.ticker]?.price;
+    if(!price) return;
+    const cur=p.currency==='USD'?'$':'R';
+    const lastFired=DB.get('alert_fired_'+p.ticker)||0;
+    const cooldown=1000*60*60; // 1 hour cooldown
+    if(Date.now()-lastFired<cooldown) return;
+
+    let msg=null;
+    if(alert.high&&price>=alert.high) msg=`${p.ticker} hit ${cur}${price.toFixed(2)} — above your ${cur}${alert.high} target 🎯`;
+    if(alert.low&&price<=alert.low)   msg=`${p.ticker} at ${cur}${price.toFixed(2)} — below your ${cur}${alert.low} floor ⚠️`;
+
+    if(msg){
+      DB.set('alert_fired_'+p.ticker, Date.now());
+      showToast(msg,'success');
+      if('Notification' in window && Notification.permission==='granted'){
+        new Notification('E&A Compass Price Alert',{body:msg,icon:'/app/icon-192.png'});
+      }
+    }
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// HABIT STREAKS — Discipline tracking
+// ══════════════════════════════════════════════════════════
+function getStreaks(){
+  const trades=allTrades||[];
+  const now=Date.now();
+  const dayMs=1000*60*60*24;
+
+  // Streak 1: Days since last emotional trade (no thesis)
+  const emotionalTrades=trades.filter(t=>{
+    const thesis=t.thesis||'';
+    return t.action==='BUY'&&thesis.length<30;
+  });
+  const lastEmotional=emotionalTrades.length?
+    Math.max(...emotionalTrades.map(t=>new Date(t.date).getTime())):0;
+  const daysSinceEmotional=lastEmotional?Math.floor((now-lastEmotional)/dayMs):null;
+
+  // Streak 2: Consecutive months with thesis review
+  const reviewDates=(DB.get('thesis_reviews')||[]).map(d=>new Date(d).getTime());
+  const thisMonth=new Date().toISOString().slice(0,7);
+  const reviewedThisMonth=reviewDates.some(d=>new Date(d).toISOString().slice(0,7)===thisMonth);
+
+  // Streak 3: Avg thesis score trending up
+  const recentScores=trades.filter(t=>t.action==='BUY'&&t.thesis?.length>30)
+    .slice(-10)
+    .map(t=>calcThesisScore(t).score);
+  const avgScore=recentScores.length?Math.round(recentScores.reduce((a,b)=>a+b,0)/recentScores.length):null;
+
+  return {daysSinceEmotional, reviewedThisMonth, avgScore};
+}
+
+function renderStreakBadges(){
+  const el=document.getElementById('streak-badges');
+  if(!el) return;
+  const s=getStreaks();
+  const badges=[];
+
+  if(s.daysSinceEmotional===null){
+    badges.push({icon:'🧭',text:'Log your first thesis-backed trade',color:'var(--muted)'});
+  } else if(s.daysSinceEmotional>=30){
+    badges.push({icon:'🔥',text:`${s.daysSinceEmotional} days without an emotional trade`,color:'#3DB87A'});
+  } else if(s.daysSinceEmotional>=7){
+    badges.push({icon:'⚡',text:`${s.daysSinceEmotional} days — keep the discipline`,color:'var(--gold)'});
+  } else {
+    badges.push({icon:'⚠️',text:`Last emotional trade was ${s.daysSinceEmotional}d ago — write the thesis`,color:'#F5A623'});
+  }
+
+  if(s.avgScore!==null){
+    const scoreColor=s.avgScore>=75?'#3DB87A':s.avgScore>=50?'var(--gold)':'#F5A623';
+    badges.push({icon:'📊',text:`Avg thesis score: ${s.avgScore}/100`,color:scoreColor});
+  }
+
+  el.innerHTML=badges.map(b=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px">
+      <span style="font-size:16px">${b.icon}</span>
+      <span style="font-size:12px;color:${b.color}">${b.text}</span>
+    </div>`).join('');
 }
 
 // ══════════════════════════════════════════════════════════
@@ -5989,6 +6442,17 @@ function saveThesisEdit(){
   showToast(`✓ Thesis updated — version ${getThesisHistory(ticker).length} saved`,'success');
 }
 
+function dismissStrengthNudge(ticker){
+  DB.set('needs_thesis_strength_'+ticker, null);
+  renderPortfolio();
+}
+
+function strengthenThesis(ticker){
+  DB.set('needs_thesis_strength_'+ticker, null);
+  editThesisWithHistory(ticker);
+}
+
+function editThesis(ticker){ editThesisWithHistory(ticker); }
 function editThesisWithHistory(ticker){
   const pos=allPositions.find(p=>p.ticker===ticker);
   if(!pos) return;
@@ -6167,8 +6631,15 @@ function addToWatchlist(){
   const inp=document.getElementById('watch-ticker');
   const ticker=inp.value.trim().toUpperCase();
   const note=document.getElementById('watch-note').value.trim();
-  if(!ticker){showToast('⚠️ Enter a ticker','error');return}
-  if(watchlist.find(w=>w.ticker===ticker)){showToast('Already in watchlist');return}
+  if(!ticker){showToast('⚠ Enter a ticker','error');return;}
+  if(!note){
+    showToast('⚠ Add a reason — why are you watching this?','error');
+    document.getElementById('watch-note').focus();
+    document.getElementById('watch-note').style.borderColor='#E05252';
+    setTimeout(()=>document.getElementById('watch-note').style.borderColor='',2000);
+    return;
+  }
+  if(watchlist.find(w=>w.ticker===ticker)){showToast('Already in watchlist');return;}
   const name=inp.dataset.selectedName||STOCKS[ticker]?.name||ticker;
   delete inp.dataset.selectedName;
   watchlist.push({ticker,name,note,added:new Date().toISOString().split('T')[0]});
@@ -6477,7 +6948,7 @@ Format: Return exactly 2 questions, one per line, no numbering, no preamble, no 
   output.innerHTML=`
     <div class="aio-header"><span class="aio-badge">${isExpert?'✦ Expert Challenge':'✦ Thesis Challenge'}</span></div>
     ${questions.map(q=>`<div class="aio-question">${q}</div>`).join('')}
-    ${!hasTier('ai_unlimited')?`<div style="font-size:11px;color:var(--gold-dim);margin-top:10px;font-style:italic">${3-getAIUsageThisMonth()-1} free challenge${3-getAIUsageThisMonth()-1!==1?'s':''} left this month · <span style="cursor:pointer;text-decoration:underline" onclick="showUpgradeModal('ai_unlimited')">Upgrade for unlimited</span></div>`:''}
+    ${!hasTier('ai_unlimited')?`<div style="font-size:11px;color:var(--gold-dim);margin-top:10px;font-style:italic">${3-getAIUsageThisMonth()-1} Devil's Advocate${3-getAIUsageThisMonth()-1!==1?'s':''} left this month · <span style="cursor:pointer;text-decoration:underline" onclick="showUpgradeModal('ai_unlimited')">Upgrade for unlimited</span></div>`:''}
     <button class="aio-dismiss" onclick="document.getElementById('thesis-interrogator-panel').style.display='none'">Dismiss ↑</button>`;
 
   // Count usage for free users
@@ -6615,33 +7086,46 @@ function calcThesisScore(pos){
   let score=0;
   const t=pos.thesis||'';
   const e=pos.exit_trigger||'';
+  const breakdown=[];
 
-  // Thesis length — must be substantive to score anything
-  // "test 1" (6 chars) = 0. Need real sentences.
-  if(t.length>300)     score+=40;
-  else if(t.length>150) score+=30;
-  else if(t.length>80)  score+=18;
-  else if(t.length>30)  score+=8;
-  // under 30 chars = 0 — not a thesis
+  // ── DEPTH (40pts) ──
+  let depthScore=0;
+  if(t.length>300)      depthScore=40;
+  else if(t.length>150) depthScore=30;
+  else if(t.length>80)  depthScore=18;
+  else if(t.length>30)  depthScore=8;
+  score+=depthScore;
+  if(depthScore>=30)      breakdown.push({label:'Depth',note:'Strong reasoning',ok:true});
+  else if(depthScore>=18) breakdown.push({label:'Depth',note:'Needs more detail',ok:null});
+  else                    breakdown.push({label:'Depth',note:'Too brief',ok:false});
 
-  // Quality signals — only count if thesis is at least somewhat real
+  // ── QUALITY SIGNALS (35pts) ──
+  let qualityScore=0;
   if(t.length>30){
-    const qualityWords=['because','market','undervalued','growth','catalyst','moat','margin','revenue','earnings','cash flow','competitive','advantage','misunderstood','edge','discount','rate','yield','expect','believe','think','position','opportunity'];
+    const qualityWords=['because','market','undervalued','growth','catalyst','moat','margin','revenue','earnings','cash flow','competitive','advantage','misunderstood','edge','discount','rate','yield','expect','believe','position','opportunity'];
     const hits=qualityWords.filter(w=>t.toLowerCase().includes(w)).length;
-    score+=Math.min(35, hits*6);
+    qualityScore=Math.min(35, hits*6);
+    score+=qualityScore;
   }
+  if(qualityScore>=20)   breakdown.push({label:'Quality',note:'Good investment language',ok:true});
+  else if(qualityScore>0)breakdown.push({label:'Quality',note:'Add valuation context',ok:null});
+  else                   breakdown.push({label:'Quality',note:'No investment reasoning',ok:false});
 
-  // Exit trigger — "Manual sale" or very short = 0
-  // Must be a real condition, not a placeholder
+  // ── EXIT TRIGGER (25pts) ──
   const genericExits=['manual sale','not defined','tbd','n/a','exit'];
   const isGenericExit=genericExits.some(g=>e.toLowerCase().trim()===g)||e.length<15;
+  let exitScore=0;
   if(!isGenericExit){
-    if(e.length>80)  score+=25;
-    else if(e.length>40) score+=18;
-    else if(e.length>15) score+=10;
+    if(e.length>80)      exitScore=25;
+    else if(e.length>40) exitScore=18;
+    else if(e.length>15) exitScore=10;
   }
+  score+=exitScore;
+  if(exitScore>=18)      breakdown.push({label:'Exit trigger',note:'Thesis-based exit',ok:true});
+  else if(exitScore>0)   breakdown.push({label:'Exit trigger',note:'Be more specific',ok:null});
+  else                   breakdown.push({label:'Exit trigger',note:'No exit defined',ok:false});
 
-  // Bonus: has both a substantive thesis AND a real exit trigger
+  // ── BONUS ──
   if(t.length>80&&!isGenericExit) score+=5;
 
   score=Math.min(100,score);
@@ -6652,7 +7136,22 @@ function calcThesisScore(pos){
   else if(score>=25){cls='score-weak';   label=`Thin ${score}/100`}
   else              {cls='score-none';   label=`Weak ${score}/100`}
 
-  return {score, pct:score, cls, label};
+  return {score, pct:score, cls, label, breakdown};
+}
+
+// Render thesis score breakdown tooltip on position card
+function renderThesisBreakdown(score){
+  if(!score?.breakdown) return '';
+  return `<div class="thesis-breakdown" style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+    ${score.breakdown.map(b=>{
+      const col=b.ok===true?'#3DB87A':b.ok===false?'#E05252':'var(--gold)';
+      const icon=b.ok===true?'✓':b.ok===false?'✗':'~';
+      return `<div style="font-size:10px;color:${col};display:flex;align-items:center;gap:3px">
+        <span style="font-weight:700">${icon}</span>
+        <span>${b.note}</span>
+      </div>`;
+    }).join('')}
+  </div>`;
 }
 
 // ══════════════════════════════════════════════════════════
@@ -7941,10 +8440,110 @@ window.addEventListener('beforeinstallprompt',e=>{
 function philBegin(){
   DB.set('phil_seen', true);
   document.getElementById('phil-screen').classList.add('hidden');
+  // Show quiz for new users only
   const profile=DB.get('profile');
+  if(!profile && !DB.get('quiz_done')){
+    document.getElementById('quiz-screen').classList.remove('hidden');
+  } else {
+    document.getElementById('auth-screen').classList.remove('hidden');
+    if(profile) showUnlock();
+    else showSetup();
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// ONBOARDING QUIZ
+// ══════════════════════════════════════════════════════════
+const _quizAnswers={};
+
+function quizPick(step, value){
+  _quizAnswers[step]=value;
+
+  // Highlight selected
+  const stepEl=document.getElementById('quiz-step-'+step);
+  stepEl?.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));
+  event?.target?.closest('.quiz-option')?.classList.add('selected');
+
+  // Mark dot as done
+  const dot=document.getElementById('qdot-'+step);
+  if(dot){ dot.classList.remove('active'); dot.classList.add('done'); }
+
+  // Short delay then advance
+  setTimeout(()=>{
+    stepEl?.classList.add('hidden');
+    const nextStep=step+1;
+    const next=document.getElementById('quiz-step-'+nextStep);
+    if(next){
+      next.classList.remove('hidden');
+      const nextDot=document.getElementById('qdot-'+nextStep);
+      if(nextDot) nextDot.classList.add('active');
+    }
+    // Show results on last step
+    if(nextStep===3) buildQuizResult();
+  }, 350);
+}
+
+function buildQuizResult(){
+  const exp=_quizAnswers[0];   // beginner / intermediate / experienced
+  const style=_quizAnswers[1]; // longterm / mixed / active
+  const market=_quizAnswers[2]; // jse / us / both
+
+  // Determine suggested mode
+  const suggestExpert=exp==='experienced'&&style!=='active';
+  const suggestSpeed=style==='active';
+  const defaultCur=market==='us'?'USD':'ZAR';
+
+  // Build profile suggestion
+  const modeLabel=suggestExpert?'Expert mode — full valuation canvas':suggestSpeed?'Speed mode — log fast, think later':'Guided mode — step-by-step thesis builder';
+  const tierHint=exp==='beginner'?'Start with Free — upgrade when ready':exp==='intermediate'?'Pro plan recommended — unlimited positions + live prices':'Elite plan when ready — Intelligence Brief unlocks';
+
+  const resultCard=document.getElementById('quiz-result-card');
+  if(resultCard){
+    resultCard.innerHTML=`
+      <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;font-weight:600">Your setup</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px">🧭</span>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--white)">${modeLabel}</div>
+            <div style="font-size:11px;color:var(--muted)">Default thesis mode — change anytime in Log Trade</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px">${market==='us'?'🇺🇸':market==='both'?'🌍':'🇿🇦'}</span>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--white)">${market==='us'?'USD default currency':market==='both'?'ZAR + USD split portfolio':'ZAR default currency'}</div>
+            <div style="font-size:11px;color:var(--muted)">Set as default — you can log any currency</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px">💡</span>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:var(--white)">${tierHint}</div>
+            <div style="font-size:11px;color:var(--muted)">Use a beta code in Settings to unlock instantly</div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // Store quiz preferences to apply on setup
+  DB.set('quiz_prefs',{exp, style, market, suggestExpert, suggestSpeed, defaultCur});
+}
+
+function quizComplete(){
+  DB.set('quiz_done', true);
+  document.getElementById('quiz-screen').classList.add('hidden');
   document.getElementById('auth-screen').classList.remove('hidden');
-  if(profile) showUnlock();
-  else showSetup();
+  showSetup();
+
+  // Apply quiz preferences after setup
+  const prefs=DB.get('quiz_prefs');
+  if(prefs){
+    if(prefs.suggestExpert) setTimeout(()=>{ DB.set('thesis_mode','expert'); },500);
+    else if(prefs.suggestSpeed) setTimeout(()=>{ DB.set('speed_mode',true); },500);
+    // Default currency hint stored for form pre-fill
+    DB.set('default_currency', prefs.defaultCur);
+  }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -9151,6 +9750,13 @@ function initThesisMode(){
   const savedMode = DB.get('thesis_mode') || 'guided';
   const btn = document.getElementById(savedMode === 'expert' ? 'expert-mode-btn' : 'guided-mode-btn');
   setThesisMode(savedMode, btn);
+  // Restore speed mode state
+  const speedBtn=document.getElementById('speed-mode-btn');
+  if(speedBtn){
+    speedBtn.textContent=_speedMode?'On':'Off';
+    speedBtn.classList.toggle('active',_speedMode);
+  }
+  if(_speedMode) setTimeout(applySpeedMode, 100);
 }
 
 // ══════════════════════════════════════════════════════════
@@ -9191,10 +9797,18 @@ document.addEventListener('click', e=>{
 
   const profile=DB.get('profile');
   const philSeen=DB.get('phil_seen');
+  const hasSession=sessionStorage.getItem('ea_session');
 
   // First-ever visit: show philosophy screen
   if(!profile&&!philSeen){
     document.getElementById('phil-screen').classList.remove('hidden');
+    return;
+  }
+
+  // Active session (tab refresh) — skip PIN, go straight in
+  if(profile && hasSession){
+    document.getElementById('auth-screen').classList.add('hidden');
+    initApp(profile.name);
     return;
   }
 
