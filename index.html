@@ -342,6 +342,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 /* Price loading pulse */
 .pos-price-loading{color:var(--muted);font-size:12px;animation:pulse-dot 1.5s ease infinite}
 .cache-dot.live{background:#3DB87A;box-shadow:0 0 6px rgba(61,184,122,0.5)}
+.cache-dot.stale{background:#F5A623;box-shadow:0 0 6px rgba(245,166,35,0.4)}
+.cache-dot.partial{background:var(--gold)}
 .cache-dot.partial{background:#F5A623}
 .cache-dot.none{background:var(--muted)}
 .cache-dot.fetching{background:var(--gold);animation:pulse-dot 0.8s infinite}
@@ -495,7 +497,8 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 /* ── TOAST ── */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(13,30,43,0.98);border:1px solid var(--border-strong);color:var(--white);padding:12px 22px;border-radius:40px;font-size:13px;z-index:9999;transition:transform 0.38s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 @media(max-width:620px){.toast{bottom:80px}}
-.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast{opacity:0;transition:transform 0.38s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s ease}
 .toast.success{border-color:rgba(30,138,82,0.5);background:rgba(9,30,20,0.98)}
 .toast.error{border-color:rgba(181,50,50,0.5);background:rgba(28,10,10,0.98)}
 .loading-state{text-align:center;padding:50px 20px;color:var(--muted)}
@@ -1868,6 +1871,11 @@ body.beginner-mode .beginner-hint{display:block}
           <div class="form-hint">Pre-commit before emotion enters. If you can't write this, you shouldn't be buying.</div>
         </div>
         <button type="button" class="ai-interrogate-btn" id="ai-interrogate-btn" onclick="interrogateThesis()">✦ Challenge my thesis</button>
+        <!-- AI usage counter for free users -->
+        <div id="ai-usage-bar" style="display:none;margin-top:-10px;margin-bottom:12px;padding:8px 12px;background:rgba(192,155,69,0.06);border:1px solid var(--border);border-radius:8px;font-size:11px;display:flex;align-items:center;justify-content:space-between">
+          <span id="ai-usage-text" style="color:var(--muted)"></span>
+          <div style="display:flex;gap:4px" id="ai-usage-dots"></div>
+        </div>
         <!-- Shared interrogator output — works in both guided and expert mode -->
         <div id="thesis-interrogator-panel-shared" style="display:none;margin-bottom:14px">
           <div class="ai-interrogator-output" id="ai-interrogator-output-shared"></div>
@@ -5890,21 +5898,42 @@ function updateCacheBar(prices){
 
   bar.classList.remove('hidden');
   const live=sp.filter(p=>prices[p.ticker]!=null).length;
-  const rateLimited=isAVRateLimited();
-  const hasTD=!!getTDKey();
-  const hasAV=!!getAVKey();
-
   const btn=(label,fn)=>`<button onclick="${fn}()" style="background:none;border:none;color:var(--gold);cursor:pointer;font-family:inherit;font-size:11px;padding:0;text-decoration:underline;font-weight:600">${label}</button>`;
 
+  // Check for stale prices
+  const now=Date.now();
+  const stalePrices=sp.filter(p=>{
+    const cache=priceCache[p.ticker];
+    return cache && (now-cache.ts)>CACHE_TTL_STALE;
+  });
+  const oldestCache=sp.reduce((oldest,p)=>{
+    const cache=priceCache[p.ticker];
+    if(!cache) return oldest;
+    return (!oldest||cache.ts<oldest)?cache.ts:oldest;
+  },null);
+
   if(live===sp.length&&live>0){
-    dot.className='cache-dot live';
-    txt.textContent=`All ${live} price${live!==1?'s':''} live`;
-    const ts=document.getElementById('pf-last-updated');
-    if(ts) ts.textContent=`Updated ${new Date().toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'})}`;
+    if(stalePrices.length>0){
+      // Prices exist but are stale
+      const minsOld=Math.floor((now-oldestCache)/60000);
+      dot.className='cache-dot stale';
+      txt.innerHTML=`Using cached prices from ${minsOld} min ago · ${btn('Refresh','manualRefresh')}`;
+      // Show toast only once per stale period
+      const lastStaleToast=parseInt(sessionStorage.getItem('last_stale_toast')||'0');
+      if(now-lastStaleToast>1000*60*10){
+        sessionStorage.setItem('last_stale_toast',now.toString());
+        showToast('⚠ Prices are over 30 min old — tap refresh','info');
+      }
+    } else {
+      dot.className='cache-dot live';
+      txt.textContent=`All ${live} price${live!==1?'s':''} live`;
+      const ts=document.getElementById('pf-last-updated');
+      if(ts) ts.textContent=`Updated ${new Date().toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'})}`;
+    }
   } else if(live>0){
     dot.className='cache-dot partial';
     const missing=sp.filter(p=>prices[p.ticker]==null).map(p=>p.ticker).join(', ');
-    txt.innerHTML=`${live} of ${sp.length} prices live · <span style="color:var(--muted-light)">${missing}</span> using cost basis`;
+    txt.innerHTML=`${live} of ${sp.length} prices live · <span style="color:var(--muted-light)">${missing}</span> using cost basis · ${btn('Refresh','manualRefresh')}`;
   } else {
     dot.className='cache-dot none';
     txt.innerHTML=`Fetching prices… ${btn('Try again','manualRefresh')}`;
@@ -6668,6 +6697,37 @@ function saveThesisEdit(){
   showToast(`✓ Thesis updated — version ${getThesisHistory(ticker).length} saved`,'success');
 }
 
+function renderAIUsageBar(){
+  if(hasTier('ai_unlimited')) return;
+  const bar=document.getElementById('ai-usage-bar');
+  const txt=document.getElementById('ai-usage-text');
+  const dots=document.getElementById('ai-usage-dots');
+  if(!bar||!txt||!dots) return;
+
+  const used=getAIUsageThisMonth();
+  const remaining=3-used;
+  bar.style.display='flex';
+
+  // Dots
+  dots.innerHTML=[0,1,2].map(i=>`
+    <div style="width:8px;height:8px;border-radius:50%;background:${i<used?'rgba(224,82,82,0.4)':i===used&&remaining===1?'var(--gold)':'rgba(61,184,122,0.6)'}"></div>
+  `).join('');
+
+  // Text
+  if(remaining===0){
+    txt.style.color='#E05252';
+    txt.textContent='No Devil\'s Advocates left this month';
+    const btn=document.getElementById('ai-interrogate-btn');
+    if(btn) btn.style.opacity='0.5';
+  } else if(remaining===1){
+    txt.style.color='var(--gold)';
+    txt.textContent='Last Devil\'s Advocate this month — use it wisely';
+  } else {
+    txt.style.color='var(--muted)';
+    txt.textContent=`${remaining} Devil's Advocates remaining this month`;
+  }
+}
+
 function dismissStrengthNudge(ticker){
   DB.set('needs_thesis_strength_'+ticker, null);
   renderPortfolio();
@@ -7306,6 +7366,7 @@ async function callClaude(prompt, maxTokens=400){
 
 // ── 1. THESIS INTERROGATOR ──────────────────────────────────
 async function interrogateThesis(){
+  renderAIUsageBar();
   if(!canUseAI()){
     showUpgradeModal('ai_unlimited','You\'ve used your 3 free AI challenges this month. Resets on the 1st.');
     return;
@@ -8671,7 +8732,7 @@ function showToast(msg,type=''){
   const t=document.getElementById('toast');
   if(!t){console.log('[toast]',msg);return}
   t.textContent=msg;t.className=`toast ${type} show`;
-  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200);
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2000);
 }
 
 // ══════════════════════════════════════════════════════════
@@ -9939,18 +10000,28 @@ function setThesisMode(mode, el){
   const expert=document.getElementById('expert-thesis-mode');
   const exitGroup=document.getElementById('exit-trigger-group');
   const interrogateBtn=document.getElementById('ai-interrogate-btn');
+  const stockThesis=document.getElementById('stock-thesis');
 
   if(mode==='guided'){
+    // Switching to guided — sync expert textarea back to stock-thesis
+    const expertThesis=document.getElementById('expert-thesis');
+    if(expertThesis?.value && stockThesis){
+      stockThesis.value=expertThesis.value;
+    }
     if(guided) guided.style.display='block';
     if(expert) expert.style.display='none';
     if(exitGroup) exitGroup.style.display='none';
     if(interrogateBtn) interrogateBtn.style.display='none';
   } else {
+    // Switching to expert — sync stock-thesis into expert textarea
+    const expertThesis=document.getElementById('expert-thesis');
+    if(stockThesis?.value && expertThesis && !expertThesis.value){
+      expertThesis.value=stockThesis.value;
+    }
     if(guided) guided.style.display='none';
     if(expert) expert.style.display='block';
     if(exitGroup) exitGroup.style.display='block';
     if(interrogateBtn) interrogateBtn.style.display='';
-    // Restore saved expert state
     restoreExpertState();
   }
 }
