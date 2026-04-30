@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#09161F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="E&A Compass">
+<meta name="apple-mobile-web-app-title" content="Penthesis">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2309161F'/><text y='.9em' font-size='80' x='10'>🧭</text></svg>">
 <link id="pwa-manifest" rel="manifest" href="">
-<title>E&A Compass — Investment Thinking Layer</title>
+<title>Penthesis — Pen your thesis. Build your wealth.</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -311,6 +311,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 /* ── PORTFOLIO ── */
 .pf-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
 .pf-card{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:var(--transition);position:relative;overflow:hidden}
+.sentiment-btn{padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;-webkit-tap-highlight-color:transparent}
+.sentiment-btn:active{transform:scale(0.95)}
+.pf-blurred{filter:blur(8px);user-select:none;pointer-events:none;transition:filter 0.4s ease}
 .pf-card:hover{border-color:var(--border-strong);transform:translateY(-1px)}
 .pf-card.featured{background:linear-gradient(135deg,rgba(192,155,69,0.14),rgba(192,155,69,0.04));border-color:var(--border-strong);box-shadow:var(--gold-glow)}
 .pf-card-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
@@ -1187,7 +1190,7 @@ body.beginner-mode .beginner-hint{display:block}
 <!-- ════ PHILOSOPHY ONBOARDING ════ -->
 <div id="phil-screen" class="phil-screen hidden">
   <div class="phil-wrap">
-    <div class="phil-eyebrow">E&amp;A Compass · Investment Thinking Layer</div>
+    <div class="phil-eyebrow">Penthesis · Pen your thesis. Build your wealth.</div>
     <div class="phil-headline">
       Most investors lose not because they<br>
       pick bad stocks — but because they<br>
@@ -1292,7 +1295,7 @@ body.beginner-mode .beginner-hint{display:block}
   <div class="auth-left">
     <div>
       <div class="auth-logo">E&A<span>Compass</span></div>
-      <div class="auth-tagline">Investment Thinking Layer</div>
+      <div class="auth-tagline">Pen your thesis. Build your wealth.</div>
       <div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6">The discipline layer between impulse and execution.<br>Every position must earn its place — in writing.</div>
     </div>
     <div class="auth-quote">
@@ -1318,7 +1321,7 @@ body.beginner-mode .beginner-hint{display:block}
       <p>Your data lives on this device — nothing is sent to a server</p>
       <div class="form-group">
         <label class="form-label">Your Name</label>
-        <input class="form-input" id="su-name" type="text" placeholder="e.g. E&A Compass" autocomplete="name">
+        <input class="form-input" id="su-name" type="text" placeholder="e.g. Penthesis" autocomplete="name">
       </div>
       <div class="form-group">
         <label class="form-label">PIN (4 digits)</label>
@@ -1358,7 +1361,7 @@ body.beginner-mode .beginner-hint{display:block}
     <div class="header-inner">
       <div class="brand">
         <div class="brand-crest">E&A</div>
-        <div><div class="brand-name">E&A <span>Compass</span></div><div class="brand-sub">Investment Thinking Layer</div></div>
+        <div><div class="brand-name"><span>Penthesis</span></div><div class="brand-sub">Pen your thesis. Build your wealth.</div></div>
       </div>
       <div class="header-meta">
         <a href="../" id="back-to-site" style="font-size:11px;color:var(--muted);text-decoration:none;padding:4px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:6px;transition:all 0.2s;display:none" onmouseover="this.style.color='var(--white)';this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='rgba(255,255,255,0.08)'">← Site</a>
@@ -1870,7 +1873,14 @@ body.beginner-mode .beginner-hint{display:block}
           <div class="exit-nudge" id="exit-nudge"></div>
           <div class="form-hint">Pre-commit before emotion enters. If you can't write this, you shouldn't be buying.</div>
         </div>
-        <button type="button" class="ai-interrogate-btn" id="ai-interrogate-btn" onclick="interrogateThesis()">✦ Challenge my thesis</button>
+        <!-- PRE-MORTEM FIELD -->
+        <div class="form-group" id="pre-mortem-group" style="display:none">
+          <label class="form-label">Pre-Mortem <span style="font-size:10px;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">optional but powerful</span></label>
+          <textarea class="form-input" id="stock-premortem" rows="2"
+            placeholder="Imagine it's 2028 and this investment has failed. What was the most likely reason why?"
+            style="resize:none;font-size:13px;line-height:1.5"></textarea>
+          <div class="form-hint">Forces you to confront your biggest fear before you buy. Feeds the Devil's Advocate.</div>
+        </div>
         <!-- AI usage counter for free users -->
         <div id="ai-usage-bar" style="display:none;margin-top:-10px;margin-bottom:12px;padding:8px 12px;background:rgba(192,155,69,0.06);border:1px solid var(--border);border-radius:8px;font-size:11px;display:flex;align-items:center;justify-content:space-between">
           <span id="ai-usage-text" style="color:var(--muted)"></span>
@@ -2028,11 +2038,36 @@ body.beginner-mode .beginner-hint{display:block}
       <div id="pf-narrative-text" class="pf-narrative-text"></div>
       <div id="pf-narrative-flags" class="pf-narrative-flags"></div>
     </div>
+    <!-- REACTION GATE — blur P&L until sentiment logged -->
+    <div id="reaction-gate" style="display:none;margin-bottom:16px;padding:16px 18px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:4px">How are you feeling today?</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Log your mindset before you see your P&L. Builds self-awareness over time.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="logSentiment('disciplined')" class="sentiment-btn" style="background:rgba(61,184,122,0.1);border:1px solid rgba(61,184,122,0.3);color:#3DB87A">🧘 Disciplined</button>
+        <button onclick="logSentiment('curious')" class="sentiment-btn" style="background:rgba(192,155,69,0.1);border:1px solid rgba(192,155,69,0.3);color:var(--gold-light)">🔍 Curious</button>
+        <button onclick="logSentiment('anxious')" class="sentiment-btn" style="background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.3);color:#F5A623">😟 Anxious</button>
+        <button onclick="logSentiment('impatient')" class="sentiment-btn" style="background:rgba(224,82,82,0.1);border:1px solid rgba(224,82,82,0.3);color:#E05252">⚡ Impatient</button>
+        <button onclick="logSentiment('euphoric')" class="sentiment-btn" style="background:rgba(224,82,82,0.1);border:1px solid rgba(224,82,82,0.3);color:#E05252">🚀 Euphoric</button>
+      </div>
+    </div>
+
     <div class="pf-summary">
       <div class="pf-card featured"><div class="pf-card-label">Market Value</div><div class="pf-card-value" id="pf-total-val">–</div><div class="pf-card-sub" id="pf-currency-note">–</div></div>
       <div class="pf-card"><div class="pf-card-label">Unrealised P&L</div><div class="pf-card-value" id="pf-total-pnl">–</div><div class="pf-card-sub" id="pf-pnl-pct">–</div></div>
       <div class="pf-card"><div class="pf-card-label">Positions</div><div class="pf-card-value" id="pf-count">–</div><div class="pf-card-sub" id="pf-tier-split">–</div></div>
       <div class="pf-card"><div class="pf-card-label">Cost Basis</div><div class="pf-card-value" id="pf-cost">–</div><div class="pf-card-sub">Total deployed</div></div>
+    </div>
+    <!-- DRY POWDER / CASH BUCKET -->
+    <div id="dry-powder-section" style="margin-bottom:16px;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600">💧 Dry Powder</div>
+          <div style="font-size:22px;font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--white);margin-top:2px" id="dp-amount">R 0.00</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px" id="dp-pct">0% of portfolio uninvested</div>
+        </div>
+        <button onclick="editDryPowder()" style="padding:8px 14px;background:rgba(192,155,69,0.08);border:1px solid var(--border-strong);border-radius:8px;color:var(--gold-dim);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Edit</button>
+      </div>
+      <div id="dp-insight" style="font-size:11px;color:var(--muted);line-height:1.5"></div>
     </div>
     <!-- SPLIT CURRENCY BREAKDOWN — shows when mixed currencies detected -->
     <div id="pf-currency-split" style="display:none;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -2265,7 +2300,7 @@ body.beginner-mode .beginner-hint{display:block}
     </div>
     <div class="letter-controls">
       <div class="form-group" style="margin:0"><label class="form-label">Period</label><select class="form-select" id="letter-period" onchange="generateLetter()"><option value="all">All Time</option></select></div>
-      <div class="form-group" style="margin:0"><label class="form-label">Signatory</label><input class="form-input" id="letter-name" placeholder="Your name / fund name" value="E&A Compass" oninput="generateLetter()"></div>
+      <div class="form-group" style="margin:0"><label class="form-label">Signatory</label><input class="form-input" id="letter-name" placeholder="Your name / fund name" value="Penthesis" oninput="generateLetter()"></div>
     </div>
     <div id="letter-output-area">
       <!-- Rendered view -->
@@ -2580,7 +2615,7 @@ body.beginner-mode .beginner-hint{display:block}
     <div class="settings-section">
       <div class="settings-section-title">Investment Tiers</div>
       <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">
-        Your framework for categorising positions. Default tiers follow the E&A Compass discipline framework. Customise in Year 2.
+        Your framework for categorising positions. Default tiers follow the Penthesis discipline framework. Customise in Year 2.
       </div>
 
       <div class="tier-card">
@@ -2614,7 +2649,7 @@ body.beginner-mode .beginner-hint{display:block}
 
     <!-- API Keys — simplified for users -->
     <div class="settings-section" id="settings-api-section">
-      <div class="settings-section-title">Compass Intelligence</div>
+      <div class="settings-section-title">Penthesis Intelligence</div>
       <div class="settings-row">
         <div>
           <div class="settings-row-label">AI Features</div>
@@ -2694,8 +2729,8 @@ body.beginner-mode .beginner-hint{display:block}
 
     <!-- About -->
     <div class="settings-section" style="text-align:center">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);margin-bottom:6px">E&A Compass</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Investment Thinking Layer · v21</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);margin-bottom:6px">Penthesis</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Pen your thesis. Build your wealth. · v21</div>
       <div style="font-size:12px;color:var(--muted);font-style:italic;margin-bottom:14px">"The thesis protects against ignorance." — Siyabonga Mazibuko</div>
       <div style="font-size:11px;color:var(--muted);line-height:1.7">
         Built by Elizabeth and Albert (Pty) Ltd<br>
@@ -3001,7 +3036,7 @@ function showUpgradeModal(feature, context=''){
     },
     expert_mode:{
       title:'Expert mode — Pro feature',
-      body:'Full technical canvas — valuation methods, moat selector, thesis quality scoring, and all Compass Intelligence features.',
+      body:'Full technical canvas — valuation methods, moat selector, thesis quality scoring, and all Penthesis Intelligence features.',
       cta:'Upgrade to Pro — R29/month →'
     },
     watchlist:{
@@ -3016,7 +3051,7 @@ function showUpgradeModal(feature, context=''){
     },
     drift:{
       title:'Drift Detection — Pro feature',
-      body:'Compass Intelligence checks whether your thesis still holds — or whether you\'re holding out of habit. Upgrade to unlock.',
+      body:'Penthesis Intelligence checks whether your thesis still holds — or whether you\'re holding out of habit. Upgrade to unlock.',
       cta:'Upgrade to Pro — R29/month →'
     },
     ai_narrative:{
@@ -3026,7 +3061,7 @@ function showUpgradeModal(feature, context=''){
     },
     ai_letter:{
       title:'AI Annual Letter — Pro feature',
-      body:'Compass Intelligence reads every thesis you\'ve written and composes a genuine investor letter in your voice. Upgrade to unlock.',
+      body:'Penthesis Intelligence reads every thesis you\'ve written and composes a genuine investor letter in your voice. Upgrade to unlock.',
       cta:'Upgrade to Pro — R29/month →'
     },
     dividend:{
@@ -3666,7 +3701,7 @@ async function fetchPriceStooqCSV(ticker){
 // Twelve Data supports CORS directly — no proxy required.
 // JSE tickers use exchange suffix :JSE
 let _tdKey=null;
-const _SHARED_TD_KEY='aa85591c77bc4e75a72b53d601f42869'; // Shared beta key — E&A Compass
+const _SHARED_TD_KEY='aa85591c77bc4e75a72b53d601f42869'; // Shared beta key — Penthesis
 function getTDKey(){
   if(_tdKey) return _tdKey;
   // User's own key takes priority — shared key as fallback
@@ -4309,7 +4344,7 @@ function renderSettingsPlan(){
           </div>
         </div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6">
-          Upgrade to Pro for unlimited positions, all Compass Intelligence features, expert mode, dividend tracking, CGT report, and more.
+          Upgrade to Pro for unlimited positions, all Penthesis Intelligence features, expert mode, dividend tracking, CGT report, and more.
         </div>
         <button onclick="showUpgradeModal('unlimited_pos')" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s">
           Upgrade to Compass Pro — R29/month →
@@ -5260,9 +5295,17 @@ function renderGraveyard(){
     const exitReason=sells[sells.length-1]?.thesis||'No exit reason documented.';
     const buyPrice=buys[0]?.price||0;
     const sellPrice=sells[sells.length-1]?.price||0;
+    const sellDate=new Date(sells[sells.length-1]?.date||0);
     const gainPct=buyPrice>0?((sellPrice-buyPrice)/buyPrice)*100:0;
     const verdict=getGraveyardVerdict(ticker);
     const vObj=verdictOptions.find(v=>v.key===verdict);
+
+    // Ghost tracking — current price vs sell price
+    const ghostPrice=priceCache[ticker]?.price||null;
+    const ghostGain=ghostPrice&&sellPrice?((ghostPrice-sellPrice)/sellPrice)*100:null;
+    const monthsSinceSell=Math.floor((Date.now()-sellDate)/(1000*60*60*24*30));
+    const isWithin12Months=monthsSinceSell<=12;
+    const isAnniversary=monthsSinceSell>=12&&monthsSinceSell<=13;
 
     return `<div class="graveyard-card">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
@@ -5278,6 +5321,27 @@ function renderGraveyard(){
       </div>
       <div class="graveyard-thesis">"${thesis.length>150?thesis.slice(0,150)+'…':thesis}"</div>
       ${exitReason&&exitReason!=='Position exit'?`<div style="font-size:11px;color:var(--muted);margin-bottom:10px;font-style:italic">Exit: ${exitReason.slice(0,100)}</div>`:''}
+
+      ${isWithin12Months&&ghostPrice?`
+      <div style="margin-bottom:10px;padding:8px 12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase">👻 Ghost tracking · ${monthsSinceSell} months since exit</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:12px;color:var(--muted)">You sold at <span style="color:var(--white);font-family:'DM Mono',monospace">R${sellPrice.toFixed(2)}</span></div>
+          <div style="font-size:12px;color:var(--muted)">Now <span style="font-family:'DM Mono',monospace;color:${ghostGain>=0?'#3DB87A':'#E05252'}">R${ghostPrice.toFixed(2)} (${ghostGain>=0?'+':''}${ghostGain?.toFixed(1)}%)</span></div>
+        </div>
+      </div>`:''}
+
+      ${isAnniversary?`
+      <div style="margin-bottom:10px;padding:10px 12px;background:rgba(192,155,69,0.06);border:1px solid var(--gold-dim);border-radius:8px">
+        <div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:4px">📅 One year since you sold ${ticker}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">
+          You sold at R${sellPrice.toFixed(2)}${ghostPrice?`. It's now R${ghostPrice.toFixed(2)} (${ghostGain>=0?'+':''}${ghostGain?.toFixed(1)}% since your exit).`:'.'}
+          ${ghostGain>0?` You left R${((ghostGain/100)*sellPrice).toFixed(2)}/share on the table.`:ghostGain<0?' Your exit protected capital.':''}
+        </div>
+        <div style="font-size:11px;font-weight:600;color:var(--white)">Was your exit logic correct?</div>
+        <div style="font-size:11px;color:var(--muted)">Exit reason: "${exitReason.slice(0,80)}"</div>
+      </div>`:''}
+
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         ${verdictOptions.map(v=>`<button onclick="setGraveyardVerdict('${ticker}','${v.key}')" style="padding:4px 10px;font-size:11px;font-weight:600;border-radius:5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;background:${verdict===v.key?'rgba(192,155,69,0.15)':'transparent'};border:1px solid ${verdict===v.key?'var(--gold-dim)':'var(--border)'};color:${verdict===v.key?'var(--gold-light)':'var(--muted)'}">${v.label}</button>`).join('')}
       </div>
@@ -5480,6 +5544,28 @@ function logStock(){
     const held=pos?pos.quantity:0;
     if(held<=0){showFormError(`❌ No position in ${ticker} to sell`);return}
     if(shares>held){showFormError(`❌ You hold ${held.toFixed(4)} shares — cannot sell ${shares.toFixed(4)}`);return}
+
+    // Inertia check for Tier 1 positions
+    if(pos?.tier===1){
+      const sellReason=document.getElementById('sell-reason')?.value.trim()||'';
+      const emotionalReasons=['bored','anxious','nervous','scared','worried','price','dropped','fell','down'];
+      const isEmotional=emotionalReasons.some(w=>sellReason.toLowerCase().includes(w));
+
+      // Check if 24hr lock is active
+      const lockKey='sell_lock_'+ticker;
+      const lockUntil=DB.get(lockKey)||0;
+      if(Date.now()<lockUntil){
+        const hoursLeft=Math.ceil((lockUntil-Date.now())/1000/60/60);
+        showFormError(`⏳ 24-hour reflection lock active — ${hoursLeft}hr remaining. This is the discipline.`);
+        return;
+      }
+
+      if(isEmotional||!sellReason||sellReason.length<20){
+        // Show inertia modal
+        showInertiaCheck(ticker, pos);
+        return;
+      }
+    }
   }
 
   // Run sanity check async — Pro+ only, doesn't block the trade
@@ -5487,7 +5573,8 @@ function logStock(){
 
   const isTfsa=document.getElementById('stock-is-tfsa')?.checked||false;
   const expertData=currentMode==='expert'?getExpertData():null;
-  insertTrade({date:new Date().toISOString().split('T')[0], ticker, company, asset_type:'stock', action, currency, price, shares, entry_value:price*shares, tier:currentTier, thesis, exit_trigger:exit, is_tfsa:isTfsa, ...(expertData?{expert:expertData}:{})});
+  const premortem=document.getElementById('stock-premortem')?.value.trim()||'';
+  insertTrade({date:new Date().toISOString().split('T')[0], ticker, company, asset_type:'stock', action, currency, price, shares, entry_value:price*shares, tier:currentTier, thesis, exit_trigger:exit, pre_mortem:premortem, is_tfsa:isTfsa, ...(expertData?{expert:expertData}:{})});
 
   // Log mood if captured
   if(_tradeMood && action==='BUY') logJournalMood(_tradeMood);
@@ -5566,7 +5653,7 @@ function logProperty(){
 
 function clearForm(type){
   if(type==='stock'){
-    ['stock-ticker','stock-company','stock-price','stock-shares','stock-thesis','stock-exit','sell-reason','speed-thesis-input'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+    ['stock-ticker','stock-company','stock-price','stock-shares','stock-thesis','stock-exit','stock-premortem','sell-reason','speed-thesis-input'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
     const det=document.getElementById('stock-detect');if(det)det.style.display='none';
     document.getElementById('trade-calc').classList.add('hidden');
     document.getElementById('sell-shares-hint').classList.add('hidden');
@@ -5978,8 +6065,31 @@ function renderPositionCards(positions,prices,filter){
     const noteCount=notes.length;
     const anniv=getAnniversaryState(p);
 
-    return `<div class="pos-card tier${p.tier}" id="pos-${p.ticker}">
+    // Zombie detection — Tier 2 held > 18 months
+    const isZombie=p.tier===2&&parseInt(months)>=18;
+    const zombieProgress=p.tier===2?Math.min(100,(parseInt(months)/18)*100):0;
+
+    return `<div class="pos-card tier${p.tier}${isZombie?' zombie-pos':''}" id="pos-${p.ticker}">
       <div class="thesis-health ${health.cls}">${health.label}</div>
+      ${isZombie?`
+      <div style="margin-bottom:10px;padding:10px 12px;background:rgba(224,82,82,0.06);border:1px solid rgba(224,82,82,0.2);border-radius:8px">
+        <div style="font-size:12px;font-weight:700;color:#E05252;margin-bottom:4px">⚠ Zombie Position — ${months} months held</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">This Tier 2 catalyst play is past its 18-month window. The thesis has either played out or failed. Decide now.</div>
+        <div style="display:flex;gap:6px">
+          <button onclick="resolveZombie('${p.ticker}','sell')" style="flex:1;padding:7px;background:rgba(224,82,82,0.12);border:1px solid rgba(224,82,82,0.3);border-radius:7px;color:#E05252;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">Admit defeat → Sell</button>
+          <button onclick="resolveZombie('${p.ticker}','promote')" style="flex:1;padding:7px;background:rgba(61,184,122,0.08);border:1px solid rgba(61,184,122,0.2);border-radius:7px;color:#3DB87A;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">Promote to Tier 1 →</button>
+        </div>
+      </div>`:''}
+      ${p.tier===2&&!isZombie&&zombieProgress>50?`
+      <div style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:3px">
+          <span>Thesis seepage</span>
+          <span style="color:${zombieProgress>80?'#E05252':'#F5A623'}">${Math.round(zombieProgress)}% of 18mo window</span>
+        </div>
+        <div style="height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
+          <div style="height:100%;width:${zombieProgress}%;background:${zombieProgress>80?'#E05252':'#F5A623'};border-radius:2px;transition:width 0.6s"></div>
+        </div>
+      </div>`:''}
       <div class="pos-top">
         <div>
           <div class="pos-ticker">${p.ticker}</div>
@@ -6257,6 +6367,8 @@ function updateSummaryCards(positions,prices){
   // ── STREAKS & ALERTS ──────────────────────────────────────
   renderStreakBadges();
   setTimeout(checkPriceAlerts, 2000);
+  checkReactionGate();
+  renderDryPowder(totalMV);
   // Earnings calendar
   const ecWrap=document.getElementById('earnings-calendar-wrap');
   if(ecWrap) ecWrap.innerHTML=renderEarningsCalendar();
@@ -6461,7 +6573,7 @@ ${pnlStr?`${pnlStr} in ${months} month${months!==1?'s':''} · `:''}${pos.tier===
 
 Exit trigger: "${pos.exit_trigger||'Not defined'}"
 
-Built with E&A Compass 🧭
+Built with Penthesis 🧭
 ea-compass.vercel.app/app`;
 
   if(navigator.share){
@@ -6551,7 +6663,7 @@ function checkPriceAlerts(){
       DB.set('alert_fired_'+p.ticker, Date.now());
       showToast(msg,'success');
       if('Notification' in window && Notification.permission==='granted'){
-        new Notification('E&A Compass Price Alert',{body:msg,icon:'/app/icon-192.png'});
+        new Notification('Penthesis Price Alert',{body:msg,icon:'/app/icon-192.png'});
       }
     }
   });
@@ -6726,6 +6838,162 @@ function renderAIUsageBar(){
     txt.style.color='var(--muted)';
     txt.textContent=`${remaining} Devil's Advocates remaining this month`;
   }
+}
+
+// ══════════════════════════════════════════════════════════
+// REACTION GATE — blur P&L until sentiment logged
+// ══════════════════════════════════════════════════════════
+function checkReactionGate(){
+  const gate=document.getElementById('reaction-gate');
+  const summary=document.querySelector('.pf-summary');
+  if(!gate||!summary||!allPositions.length) return;
+
+  // Check if already logged sentiment today
+  const today=new Date().toISOString().split('T')[0];
+  const lastSentiment=DB.get('last_sentiment_date');
+
+  if(lastSentiment===today){
+    // Already logged today — show data normally
+    gate.style.display='none';
+    summary.classList.remove('pf-blurred');
+  } else {
+    // Not logged yet — show gate, blur data
+    gate.style.display='block';
+    summary.classList.add('pf-blurred');
+  }
+}
+
+function logSentiment(mood){
+  const today=new Date().toISOString().split('T')[0];
+  DB.set('last_sentiment_date', today);
+
+  // Save to sentiment log
+  const log=DB.get('sentiment_log')||[];
+  log.push({date:today, mood, ts:Date.now()});
+  // Keep last 90 days
+  const cutoff=Date.now()-1000*60*60*24*90;
+  const trimmed=log.filter(l=>l.ts>cutoff);
+  DB.set('sentiment_log', trimmed);
+
+  // Hide gate, unblur data
+  const gate=document.getElementById('reaction-gate');
+  const summary=document.querySelector('.pf-summary');
+  if(gate) gate.style.display='none';
+  if(summary) summary.classList.remove('pf-blurred');
+
+  // Contextual response
+  const responses={
+    disciplined: '🧘 Disciplined mindset logged. Good time to review your theses.',
+    curious:     '🔍 Curiosity is healthy. Read before you act.',
+    anxious:     '😟 Anxiety noted. Remember — price is not the business.',
+    impatient:   '⚡ Impatience noted. What thesis has actually changed?',
+    euphoric:    '🚀 Euphoria is the market\'s most dangerous drug. Review before acting.',
+  };
+  showToast(responses[mood]||'Mindset logged','info');
+}
+
+function resolveZombie(ticker, action){
+  if(action==='sell'){
+    // Pre-fill sell form and switch to log tab
+    document.getElementById('stock-ticker').value=ticker;
+    const pos=allPositions.find(p=>p.ticker===ticker);
+    if(pos) document.getElementById('stock-company').value=pos.name||'';
+    document.getElementById('stock-action').value='SELL';
+    onActionChange();
+    switchTab('log',document.querySelector('[data-tab="log"]'));
+    showToast(`Logging exit for ${ticker} — write your sell reason`,'info');
+  } else {
+    // Promote to Tier 1 — requires writing why
+    const reason=prompt(`Promote ${ticker} to Tier 1 (Core Hold)?\n\nThis requires a higher bar — a "Wonderful Company" you'd hold indefinitely.\n\nWrite your case for promotion:`,'');
+    if(!reason||reason.trim().length<20){
+      showToast('⚠ Write at least a sentence justifying Tier 1 promotion','error');
+      return;
+    }
+    // Update tier
+    allTrades.filter(t=>t.ticker===ticker).forEach(t=>t.tier=1);
+    DB.set('trades',allTrades);
+    loadTrades();rebuildPositionsFromTrades();updateBadge();renderPortfolio();
+    showToast(`✓ ${ticker} promoted to Tier 1 — hold with conviction`,'success');
+  }
+}
+
+function showInertiaCheck(ticker, pos){
+  const months=Math.floor((Date.now()-new Date(pos.entry_date||0))/(1000*60*60*24*30));
+  const modal=document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML=`
+    <div style="background:var(--navy-light);border:1px solid var(--border-strong);border-radius:16px;padding:24px;max-width:380px;width:100%">
+      <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px">You are ending a Tier 1 thesis</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px">${ticker} · held ${months} months · Core position</div>
+      <div style="font-size:13px;color:var(--muted-light);margin-bottom:16px;line-height:1.6">Has the <strong style="color:var(--white)">business</strong> fundamentally changed — or are you reacting to the <strong style="color:var(--white)">price?</strong></div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <button onclick="inertiaDecision('${ticker}','broken',this)" style="padding:11px 14px;background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.2);border-radius:9px;color:#E05252;font-size:12px;text-align:left;cursor:pointer;font-family:inherit">🔴 The business has deteriorated — thesis is broken</button>
+        <button onclick="inertiaDecision('${ticker}','fulfilled',this)" style="padding:11px 14px;background:rgba(61,184,122,0.08);border:1px solid rgba(61,184,122,0.2);border-radius:9px;color:#3DB87A;font-size:12px;text-align:left;cursor:pointer;font-family:inherit">✅ Thesis fully played out — taking profits</button>
+        <button onclick="inertiaDecision('${ticker}','rebalance',this)" style="padding:11px 14px;background:rgba(192,155,69,0.08);border:1px solid rgba(192,155,69,0.2);border-radius:9px;color:var(--gold-light);font-size:12px;text-align:left;cursor:pointer;font-family:inherit">⚖️ Portfolio rebalancing — position too large</button>
+        <button onclick="inertiaDecision('${ticker}','bored',this)" style="padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:12px;text-align:left;cursor:pointer;font-family:inherit">😴 Bored / anxious — no thesis change</button>
+      </div>
+      <button onclick="this.closest('[style*=fixed]').remove()" style="width:100%;padding:10px;background:transparent;border:1px solid var(--border);border-radius:9px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:12px">Cancel — keep my position</button>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+}
+
+function inertiaDecision(ticker, reason, btn){
+  const modal=btn.closest('[style*=fixed]');
+  if(reason==='bored'){
+    // 24 hour lock
+    const until=Date.now()+1000*60*60*24;
+    DB.set('sell_lock_'+ticker, until);
+    modal?.remove();
+    showToast(`⏳ ${ticker} locked for 24 hours. If you still feel this way tomorrow — then act.`,'info');
+    return;
+  }
+  // Allow the sell — fill in sell reason
+  const reasonText={
+    broken:'Thesis broken — business has deteriorated',
+    fulfilled:'Thesis fulfilled — taking profits',
+    rebalance:'Portfolio rebalancing — position too large',
+  }[reason]||'';
+  const sellReasonEl=document.getElementById('sell-reason');
+  if(sellReasonEl&&!sellReasonEl.value) sellReasonEl.value=reasonText;
+  modal?.remove();
+  // Now proceed with the sell
+  logStock();
+}
+
+// ══════════════════════════════════════════════════════════
+// DRY POWDER / CASH BUCKET
+// ══════════════════════════════════════════════════════════
+function renderDryPowder(totalMV){
+  const cash=parseFloat(DB.get('dry_powder')||0);
+  const total=totalMV+cash;
+  const pct=total>0?Math.round((cash/total)*100):0;
+  const fmt=n=>n.toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+  const amtEl=document.getElementById('dp-amount');
+  const pctEl=document.getElementById('dp-pct');
+  const insightEl=document.getElementById('dp-insight');
+
+  if(amtEl) amtEl.textContent=`R ${fmt(cash)}`;
+  if(pctEl) pctEl.textContent=`${pct}% of total portfolio uninvested`;
+
+  if(insightEl){
+    if(pct===0) insightEl.textContent='No dry powder tracked. Set your available cash to see portfolio concentration.';
+    else if(pct>40) insightEl.textContent=`⚠ ${pct}% in cash is significant. Opportunity cost is real — what thesis are you waiting to write?`;
+    else if(pct>20) insightEl.textContent=`${pct}% in cash — healthy reserve. Enough to act on one strong conviction.`;
+    else insightEl.textContent=`${pct}% in cash — fully deployed. No dry powder for new opportunities.`;
+  }
+}
+
+function editDryPowder(){
+  const current=DB.get('dry_powder')||0;
+  const val=prompt(`Update your available cash (Dry Powder)\n\nThis is money in your brokerage account ready to invest.\nCurrent: R${parseFloat(current).toFixed(2)}\n\nEnter amount (ZAR):`,''+current);
+  if(val===null) return;
+  const amount=parseFloat(val.replace(/[^0-9.]/g,''));
+  if(isNaN(amount)||amount<0){showToast('Enter a valid amount','error');return;}
+  DB.set('dry_powder',amount.toFixed(2));
+  renderPortfolio();
+  showToast(`✓ Dry powder updated — R${amount.toFixed(2)}`,'success');
 }
 
 function dismissStrengthNudge(ticker){
@@ -7008,7 +7276,7 @@ function renderWatchlist(){
           DB.set('walert_fired_'+ticker,Date.now());
           showToast(`🎯 ${ticker} hit your buy target of ${isSA?'R':'$'}${target.toFixed(2)} — time to act?`,'success');
           if('Notification' in window&&Notification.permission==='granted'){
-            new Notification('E&A Compass — Buy Target Hit',{body:`${ticker} at ${isSA?'R':'$'}${price.toFixed(2)} — your target was ${isSA?'R':'$'}${target.toFixed(2)}`});
+            new Notification('Penthesis — Buy Target Hit',{body:`${ticker} at ${isSA?'R':'$'}${price.toFixed(2)} — your target was ${isSA?'R':'$'}${target.toFixed(2)}`});
           }
         }
       }
@@ -7109,13 +7377,13 @@ function renderEarningsCalendar(){
 function showReferModal(){
   const profile=DB.get('profile');
   const name=profile?.name?.split(' ')[0]||'a friend';
-  const shareText=`Hey — I've been using E&A Compass to track my investments. It forces you to write WHY you're buying before you buy. Changed how I invest.\n\nFree to use: ea-compass.vercel.app/app\n\nUse code EABETA2026 for full Pro access during beta 🧭`;
+  const shareText=`Hey — I've been using Penthesis to track my investments. It forces you to write WHY you're buying before you buy. Changed how I invest.\n\nFree to use: ea-compass.vercel.app/app\n\nUse code EABETA2026 for full Pro access during beta 🧭`;
 
   const modal=document.createElement('div');
   modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
   modal.innerHTML=`
     <div style="background:var(--navy-light);border:1px solid var(--border-strong);border-radius:16px;padding:24px;max-width:380px;width:100%">
-      <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">Share Compass 🧭</div>
+      <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">Share Penthesis 🧭</div>
       <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Your beta code gives them free Pro access</div>
       <div style="background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;color:var(--muted-light);line-height:1.6;margin-bottom:16px;white-space:pre-line">${shareText}</div>
       <div style="display:flex;gap:8px">
@@ -7139,7 +7407,7 @@ function copyReferText(){
 
 function shareRefer(){
   if(navigator.share){
-    navigator.share({title:'E&A Compass',text:window._referText||''})
+    navigator.share({title:'Penthesis',text:window._referText||''})
       .catch(()=>copyReferText());
   } else { copyReferText(); }
 }
@@ -7254,17 +7522,48 @@ function parseCSV(file){
       if(ticker&&qty>0&&price>0)importRows.push({ticker:ticker.toUpperCase(),name,qty,price,date,value:qty*price});
     }
     if(!importRows.length){showToast('⚠️ No valid trades found in CSV — check format','error');return}
-    // Show preview
+
+    // Show limit warning UPFRONT before user confirms
     const preview=document.getElementById('import-preview');
     preview.classList.remove('hidden');
-    preview.innerHTML=`<div style="font-size:11px;color:var(--gold);margin-bottom:8px;font-weight:600">${importRows.length} positions found</div>`+
-      importRows.map(r=>`<div class="import-preview-row">
-        <span style="font-family:'DM Mono',monospace;color:var(--gold-light);font-size:12px">${r.ticker}</span>
-        <span style="color:var(--muted-light);font-size:12px">${r.name}</span>
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)">${r.qty.toFixed(4)} @ R${r.price.toFixed(2)}</span>
-      </div>`).join('');
+
+    const currentCount=allPositions.length;
+    const newTickers=[...new Set(importRows.map(r=>r.ticker))];
+    const newPositions=newTickers.filter(t=>!allPositions.find(p=>p.ticker===t));
+    const canAdd=hasTier('unlimited_pos')?newPositions.length:Math.max(0,FREE_POSITION_LIMIT-currentCount);
+    const willImport=hasTier('unlimited_pos')?importRows.length:Math.min(importRows.length,canAdd);
+    const blocked=importRows.length-willImport;
+
+    let headerHtml='';
+    if(!hasTier('unlimited_pos')&&blocked>0){
+      headerHtml=`
+        <div style="padding:10px 12px;background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.2);border-radius:8px;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:600;color:#E05252;margin-bottom:4px">⚠ Free tier: ${canAdd} of ${newPositions.length} positions importable</div>
+          <div style="font-size:11px;color:var(--muted)">You have ${currentCount}/${FREE_POSITION_LIMIT} positions used. ${blocked} position${blocked!==1?'s':''} will be skipped.</div>
+          <button onclick="showUpgradeModal('unlimited_pos')" style="margin-top:8px;padding:5px 12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:6px;color:var(--navy);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">Upgrade for unlimited →</button>
+        </div>`;
+    } else {
+      headerHtml=`<div style="font-size:11px;color:var(--gold);margin-bottom:8px;font-weight:600">${importRows.length} position${importRows.length!==1?'s':''} ready to import</div>`;
+    }
+
+    preview.innerHTML=headerHtml+
+      importRows.map((r,i)=>{
+        const skipped=!hasTier('unlimited_pos')&&i>=canAdd;
+        return `<div class="import-preview-row" style="${skipped?'opacity:0.4;text-decoration:line-through;':''}">
+          <span style="font-family:'DM Mono',monospace;color:var(--gold-light);font-size:12px">${r.ticker}</span>
+          <span style="color:var(--muted-light);font-size:12px">${r.name}</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)">${r.qty.toFixed(4)} @ R${r.price.toFixed(2)}</span>
+          ${skipped?'<span style="font-size:10px;color:#E05252">skipped</span>':''}
+        </div>`;
+      }).join('');
+
     const btn=document.getElementById('import-confirm-btn');
-    btn.style.display='';
+    if(willImport>0){
+      btn.style.display='';
+      btn.textContent=`Import ${willImport} position${willImport!==1?'s':''}${blocked>0?` (${blocked} skipped)`:''}`;
+    } else {
+      btn.style.display='none';
+    }
     showToast(`Found ${importRows.length} positions — review and confirm`);
   };
   reader.readAsText(file);
@@ -8105,7 +8404,7 @@ function populateLetterPeriods(){
 function generateLetter(){
   if(!hasTier('ai_letter')){showUpgradeModal('ai_letter');return;}
   const period=document.getElementById('letter-period')?.value||'all';
-  const signatory=document.getElementById('letter-name')?.value||'E&A Compass';
+  const signatory=document.getElementById('letter-name')?.value||'Penthesis';
   let trades=allTrades;
   if(period!=='all'){
     if(period.startsWith('Y')){const y=parseInt(period.slice(1));trades=allTrades.filter(t=>new Date(t.date).getFullYear()===y)}
@@ -8160,8 +8459,8 @@ function generateLetter(){
 
   out.innerHTML=`
   <div class="ls-header">
-    <div class="ls-title">E&A Compass — Investor Letter</div>
-    <div class="ls-subtitle">Investment Thinking Layer</div>
+    <div class="ls-title">Penthesis — Investor Letter</div>
+    <div class="ls-subtitle">Pen your thesis. Build your wealth.</div>
     <div class="ls-period">${pLabel} · Prepared ${new Date().toLocaleDateString('en-ZA',{year:'numeric',month:'long',day:'numeric'})}</div>
   </div>
   <div class="ls-body">
@@ -8220,7 +8519,7 @@ function generateLetter(){
 
     <div class="ls-quote"><p>"${rq.t}"</p><cite>— ${rq.a}</cite></div>
     <p>We remain focused on the long view. Every position in this letter was argued for in writing — and will be held to that argument.</p>
-    <div class="ls-sign">Warmly,<strong>${signatory}</strong><div style="font-size:10px;color:var(--muted);margin-top:4px">E&A Compass — Investment Thinking Layer</div></div>
+    <div class="ls-sign">Warmly,<strong>${signatory}</strong><div style="font-size:10px;color:var(--muted);margin-top:4px">Penthesis — Pen your thesis. Build your wealth.</div></div>
   </div>`;
 
   window._lastLetterText=out.innerText;
@@ -8236,7 +8535,7 @@ function generateLetter(){
 async function generateAILetter(){
   if(!hasTier('ai_letter')){showUpgradeModal('ai_letter');return;}
   const period=document.getElementById('letter-period')?.value||'all';
-  const signatory=document.getElementById('letter-name')?.value||'E&A Compass';
+  const signatory=document.getElementById('letter-name')?.value||'Penthesis';
   let trades=allTrades;
   if(period!=='all'){
     if(period.startsWith('Y')){const y=parseInt(period.slice(1));trades=allTrades.filter(t=>new Date(t.date).getFullYear()===y)}
@@ -8249,7 +8548,7 @@ async function generateAILetter(){
   if(!buys.length){showToast('No buy positions for this period','error');return}
 
   btn.disabled=true; btn.textContent='Composing…';
-  out.innerHTML=`<div class="ai-generating"><div class="ai-spinner"></div><p>Compass Intelligence is reading your investment story…</p><div class="ai-gen-sub">Synthesising theses, exit triggers, and decisions.</div></div>`;
+  out.innerHTML=`<div class="ai-generating"><div class="ai-spinner"></div><p>Penthesis Intelligence is reading your investment story…</p><div class="ai-gen-sub">Synthesising theses, exit triggers, and decisions.</div></div>`;
 
   const pLabel=period==='all'?'Since Inception':period.startsWith('Y')?period.slice(1):period;
   const sells=trades.filter(t=>t.action==='SELL');
@@ -8307,7 +8606,7 @@ async function generateAILetter(){
 
   if(anthropicKey){
     // ── REAL AI LETTER ──
-    const prompt=`You are Compass Intelligence — the investment thinking layer of E&A Compass. You are writing a formal investor letter on behalf of ${signatory} for the period: ${pLabel}.
+    const prompt=`You are Penthesis Intelligence — the investment thinking layer of Penthesis. You are writing a formal investor letter on behalf of ${signatory} for the period: ${pLabel}.
 
 This letter must be written in the first-person plural ("we") as if from an investment partnership, in the style of great investor letters — clear, honest, thoughtful, and grounded in specific positions and actual reasoning.
 
@@ -8338,7 +8637,7 @@ WRITING INSTRUCTIONS:
 6. Discuss what the pattern of theses reveals about their investing philosophy
 7. Be honest — if theses are thin or exit triggers are vague, say so with one sentence
 8. Close with a reflection on discipline and patience — grounded in the specific period
-9. Sign off: "Warmly,\\n${signatory}\\nE&A Compass — Investment Thinking Layer"
+9. Sign off: "Warmly,\\n${signatory}\\nPenthesis — Pen your thesis. Build your wealth."
 10. Do NOT use markdown, bullet points, or headers — pure flowing prose only
 11. Aim for ~400-500 words total — substantive but not bloated
 12. Make it feel like it was written by a thoughtful human investor who has actually READ every thesis`;
@@ -8360,8 +8659,8 @@ WRITING INSTRUCTIONS:
         const paragraphs=letterText.split('\n\n').filter(Boolean);
         out.innerHTML=`
           <div class="ls-header">
-            <div class="ls-title">E&A Compass — Investor Letter</div>
-            <div class="ls-subtitle">Compass Intelligence · Narrative</div>
+            <div class="ls-title">Penthesis — Investor Letter</div>
+            <div class="ls-subtitle">Penthesis Intelligence · Narrative</div>
             <div class="ls-period">${pLabel} · Prepared ${new Date().toLocaleDateString('en-ZA',{year:'numeric',month:'long',day:'numeric'})}</div>
           </div>
           <div class="ls-body">
@@ -8454,17 +8753,17 @@ WRITING INSTRUCTIONS:
 
     // Closing
     const closings=[
-      `We remain focused on the long view. Our edge, if we have one, is not superior information. It is superior patience — and the written discipline to act on logic rather than emotion.\n\nWarmly,\n${signatory}\nE&A Compass — Investment Thinking Layer`,
-      `We close with the reminder we give ourselves before every trade: write the thesis first. Not after the position is on, not during the excitement of a price move, but before. That discipline is the thing we trust most when the market becomes its most persuasive.\n\nWarmly,\n${signatory}\nE&A Compass — Investment Thinking Layer`,
-      `Patience remains our most deliberate strategy. We do not confuse activity with progress. The willingness to sit still — with conviction, and with a written reason for doing so — is a genuine advantage.\n\nWarmly,\n${signatory}\nE&A Compass — Investment Thinking Layer`,
+      `We remain focused on the long view. Our edge, if we have one, is not superior information. It is superior patience — and the written discipline to act on logic rather than emotion.\n\nWarmly,\n${signatory}\nPenthesis — Pen your thesis. Build your wealth.`,
+      `We close with the reminder we give ourselves before every trade: write the thesis first. Not after the position is on, not during the excitement of a price move, but before. That discipline is the thing we trust most when the market becomes its most persuasive.\n\nWarmly,\n${signatory}\nPenthesis — Pen your thesis. Build your wealth.`,
+      `Patience remains our most deliberate strategy. We do not confuse activity with progress. The willingness to sit still — with conviction, and with a written reason for doing so — is a genuine advantage.\n\nWarmly,\n${signatory}\nPenthesis — Pen your thesis. Build your wealth.`,
     ];
     const pClose=closings[buys.length%closings.length];
 
     const paragraphs=[p1,p2,p3,p4,pSells,pDivs,pClose].filter(Boolean);
     out.innerHTML=`
       <div class="ls-header">
-        <div class="ls-title">E&A Compass — Investor Letter</div>
-        <div class="ls-subtitle">Narrative · Investment Thinking Layer</div>
+        <div class="ls-title">Penthesis — Investor Letter</div>
+        <div class="ls-subtitle">Narrative · Pen your thesis. Build your wealth.</div>
         <div class="ls-period">${pLabel} · Prepared ${new Date().toLocaleDateString('en-ZA',{year:'numeric',month:'long',day:'numeric'})}</div>
       </div>
       <div class="ls-body">
@@ -8561,7 +8860,7 @@ function downloadLetterPDF(){
   if(!out||!out.innerHTML.trim()||out.innerHTML.includes('Generate a letter')){
     showToast('Generate a letter first','error');return;
   }
-  const signatory=document.getElementById('letter-name')?.value||'E&A Compass';
+  const signatory=document.getElementById('letter-name')?.value||'Penthesis';
   const printWin=window.open('','_blank','width=800,height=900');
   if(!printWin){showToast('Pop-up blocked — allow pop-ups and try again','error');return;}
   printWin.document.write(`<!DOCTYPE html>
@@ -8907,9 +9206,9 @@ document.addEventListener('keydown', e=>{
 (function setupPWA(){
   // Inject manifest dynamically (works from file:// and http://)
   const manifest={
-    name:'E&A Compass',
+    name:'Penthesis',
     short_name:'Compass',
-    description:'Investment Thinking Layer — your portfolio discipline tool',
+    description:'Pen your thesis. Build your wealth. — your portfolio discipline tool',
     start_url:'.',
     display:'standalone',
     background_color:'#09161F',
@@ -8940,7 +9239,7 @@ window.addEventListener('beforeinstallprompt',e=>{
     const btn=document.createElement('div');
     btn.id='pwa-install-btn';
     btn.style.cssText='position:fixed;bottom:24px;left:24px;z-index:800;background:var(--navy-2);border:1px solid var(--border-strong);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);cursor:pointer;transition:all 0.2s;font-family:DM Sans,sans-serif';
-    btn.innerHTML=`<span style="font-size:22px">🧭</span><div><div style="font-size:13px;font-weight:600;color:var(--gold-light)">Install E&A Compass</div><div style="font-size:11px;color:var(--muted)">Add to home screen</div></div><button onclick="document.getElementById('pwa-install-btn').remove();_deferredInstall=null" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:0 0 0 8px;line-height:1">✕</button>`;
+    btn.innerHTML=`<span style="font-size:22px">🧭</span><div><div style="font-size:13px;font-weight:600;color:var(--gold-light)">Install Penthesis</div><div style="font-size:11px;color:var(--muted)">Add to home screen</div></div><button onclick="document.getElementById('pwa-install-btn').remove();_deferredInstall=null" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:0 0 0 8px;line-height:1">✕</button>`;
     btn.onclick=async(e)=>{
       if(e.target.tagName==='BUTTON')return;
       if(!_deferredInstall)return;
@@ -9176,7 +9475,7 @@ function renderNarrative(){
 }
 
 async function generateAINarrative(apiKey, textEl, flagsEl){
-  textEl.innerHTML=`<div class="pf-narrative-loading"><div class="pf-narrative-dot"></div><div class="pf-narrative-dot"></div><div class="pf-narrative-dot"></div><span style="margin-left:6px">Compass Intelligence is reading your portfolio…</span></div>`;
+  textEl.innerHTML=`<div class="pf-narrative-loading"><div class="pf-narrative-dot"></div><div class="pf-narrative-dot"></div><div class="pf-narrative-dot"></div><span style="margin-left:6px">Penthesis Intelligence is reading your portfolio…</span></div>`;
   if(flagsEl) flagsEl.innerHTML='';
 
   const prices={};
@@ -9264,7 +9563,7 @@ async function generateAINarrative(apiKey, textEl, flagsEl){
   ];
   const angle=angles[new Date().getDay()];
 
-  const prompt=`You are Compass Intelligence — the investment thinking layer of E&A Compass. You write like a thoughtful fund manager reflecting on a portfolio. Not a data summary. Not bullet points. A genuine narrative that makes sense of the trades — the buys, the sells, the reasoning, the outcomes.
+  const prompt=`You are Penthesis Intelligence — the investment thinking layer of Penthesis. You write like a thoughtful fund manager reflecting on a portfolio. Not a data summary. Not bullet points. A genuine narrative that makes sense of the trades — the buys, the sells, the reasoning, the outcomes.
 
 OPEN POSITIONS:
 ${positionStories}
@@ -9891,7 +10190,7 @@ Exit trigger: "${(p.exit_trigger||'Not defined').slice(0,60)}"${history.length>1
 
   const watchlistContext=watchlist.slice(0,5).map(w=>`${w.ticker} (${w.name||w.ticker}) — on watchlist`).join('\n');
 
-  const prompt=`You are Compass Intelligence writing the weekly Intelligence Brief for a South African investor.
+  const prompt=`You are Penthesis Intelligence writing the weekly Intelligence Brief for a South African investor.
 
 THEIR PORTFOLIO (${allPositions.length} positions):
 ${portfolioContext||'No positions logged yet.'}
@@ -10012,6 +10311,8 @@ function setThesisMode(mode, el){
     if(expert) expert.style.display='none';
     if(exitGroup) exitGroup.style.display='none';
     if(interrogateBtn) interrogateBtn.style.display='none';
+    const pm=document.getElementById('pre-mortem-group');
+    if(pm) pm.style.display='none';
   } else {
     // Switching to expert — sync stock-thesis into expert textarea
     const expertThesis=document.getElementById('expert-thesis');
@@ -10022,6 +10323,8 @@ function setThesisMode(mode, el){
     if(expert) expert.style.display='block';
     if(exitGroup) exitGroup.style.display='block';
     if(interrogateBtn) interrogateBtn.style.display='';
+    const pm=document.getElementById('pre-mortem-group');
+    if(pm) pm.style.display='block';
     restoreExpertState();
   }
 }
