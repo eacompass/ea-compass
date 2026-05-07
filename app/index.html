@@ -9114,5 +9114,354 @@ document.addEventListener('click', e=>{
   else showSetup();
 })();
 </script>
+<!-- ============================================================
+     PENTHESIS · AUTH UI
+     Drop into app/index.html. Three modals + the soft-wall trigger.
+     Styled to match Penthesis palette (deep navy, gold accent).
+============================================================ -->
+
+<style>
+  /* PENTHESIS AUTH PALETTE */
+  :root {
+    --p-bg: #0A0E1A;
+    --p-card: #131826;
+    --p-border: #1E2435;
+    --p-text: #E8EAED;
+    --p-muted: #8A92A4;
+    --p-gold: #C9A961;
+    --p-gold-soft: #C9A96120;
+    --p-danger: #E45A5A;
+    --p-success: #5AC97E;
+  }
+
+  .p-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5, 8, 15, 0.85);
+    backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 9000; padding: 20px;
+  }
+  .p-modal-overlay.active { display: flex; }
+
+  .p-modal {
+    background: var(--p-card);
+    border: 1px solid var(--p-border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    max-width: 400px; width: 100%;
+    color: var(--p-text);
+    font-family: -apple-system, system-ui, sans-serif;
+  }
+
+  .p-modal h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px; font-weight: 400;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+  .p-modal h2 em {
+    color: var(--p-gold);
+    font-style: italic;
+  }
+
+  .p-modal .sub {
+    color: var(--p-muted);
+    font-size: 14px; line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .p-input {
+    width: 100%;
+    background: var(--p-bg);
+    border: 1px solid var(--p-border);
+    color: var(--p-text);
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+  }
+  .p-input:focus {
+    outline: none;
+    border-color: var(--p-gold);
+  }
+
+  .p-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px; font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 10px;
+  }
+  .p-btn-primary {
+    background: var(--p-gold);
+    color: var(--p-bg);
+  }
+  .p-btn-primary:hover { filter: brightness(1.1); }
+  .p-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .p-btn-google {
+    background: var(--p-bg);
+    color: var(--p-text);
+    border: 1px solid var(--p-border);
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+  }
+  .p-btn-google:hover { border-color: var(--p-gold); }
+
+  .p-btn-ghost {
+    background: transparent;
+    color: var(--p-muted);
+    font-size: 13px;
+  }
+  .p-btn-ghost:hover { color: var(--p-text); }
+
+  .p-divider {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--p-muted); font-size: 12px;
+    margin: 16px 0;
+  }
+  .p-divider::before, .p-divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: var(--p-border);
+  }
+
+  .p-error {
+    background: var(--p-danger)20;
+    color: var(--p-danger);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .p-error.active { display: block; }
+
+  .p-link {
+    color: var(--p-gold);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .p-demo-banner {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--p-gold-soft);
+    border-bottom: 1px solid var(--p-gold);
+    color: var(--p-gold);
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 13px;
+    z-index: 8000;
+    display: none;
+  }
+  .p-demo-banner.active { display: block; }
+  .p-demo-banner button {
+    background: var(--p-gold);
+    color: var(--p-bg);
+    border: none;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-left: 8px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+</style>
+
+<!-- ============================================================
+     DEMO BANNER · top of app when not signed in
+============================================================ -->
+<div id="p-demo-banner" class="p-demo-banner">
+  Viewing demo portfolio · <button onclick="window.penthesisAuth.openSignup()">Sign up to start your own</button>
+</div>
+
+<!-- ============================================================
+     SIGNUP MODAL
+============================================================ -->
+<div id="p-signup-modal" class="p-modal-overlay">
+  <div class="p-modal">
+    <h2>Pen your <em>thesis.</em></h2>
+    <p class="sub" id="p-signup-sub">Create your account. Your portfolio, your thinking, your record. Across every device.</p>
+
+    <div id="p-signup-error" class="p-error"></div>
+
+    <button class="p-btn p-btn-google" onclick="window.penthesisAuth.googleSignup()">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+      Continue with Google
+    </button>
+
+    <div class="p-divider">or</div>
+
+    <input id="p-signup-email" class="p-input" type="email" placeholder="Email" autocomplete="email">
+    <input id="p-signup-password" class="p-input" type="password" placeholder="Password (min 6 characters)" autocomplete="new-password">
+    <button class="p-btn p-btn-primary" id="p-signup-submit" onclick="window.penthesisAuth.emailSignup()">Create account</button>
+
+    <button class="p-btn p-btn-ghost" onclick="window.penthesisAuth.switchToLogin()">Already have an account? Sign in</button>
+    <button class="p-btn p-btn-ghost" onclick="window.penthesisAuth.closeAll()">Keep browsing demo</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     LOGIN MODAL
+============================================================ -->
+<div id="p-login-modal" class="p-modal-overlay">
+  <div class="p-modal">
+    <h2>Welcome <em>back.</em></h2>
+    <p class="sub">Your thesis is waiting.</p>
+
+    <div id="p-login-error" class="p-error"></div>
+
+    <button class="p-btn p-btn-google" onclick="window.penthesisAuth.googleSignup()">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+      Continue with Google
+    </button>
+
+    <div class="p-divider">or</div>
+
+    <input id="p-login-email" class="p-input" type="email" placeholder="Email" autocomplete="email">
+    <input id="p-login-password" class="p-input" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="p-btn p-btn-primary" id="p-login-submit" onclick="window.penthesisAuth.emailLogin()">Sign in</button>
+
+    <button class="p-btn p-btn-ghost" onclick="window.penthesisAuth.switchToSignup()">Don't have an account? Sign up</button>
+    <button class="p-btn p-btn-ghost" onclick="window.penthesisAuth.closeAll()">Cancel</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     CONTROLLER
+============================================================ -->
+<script type="module">
+  import { db } from './data-layer.js';
+
+  const $ = id => document.getElementById(id);
+  const overlay = name => $(`p-${name}-modal`);
+
+  function showError(modal, msg) {
+    const el = $(`p-${modal}-error`);
+    el.textContent = msg;
+    el.classList.add('active');
+  }
+  function clearError(modal) {
+    const el = $(`p-${modal}-error`);
+    el.classList.remove('active');
+    el.textContent = '';
+  }
+  function setLoading(buttonId, isLoading, label) {
+    const btn = $(buttonId);
+    btn.disabled = isLoading;
+    btn.textContent = isLoading ? 'Loading…' : label;
+  }
+
+  window.penthesisAuth = {
+    openSignup(actionContext = null) {
+      this.closeAll();
+      if (actionContext) {
+        $('p-signup-sub').textContent = `Sign up to ${actionContext}. Takes 10 seconds.`;
+      }
+      overlay('signup').classList.add('active');
+    },
+    openLogin() {
+      this.closeAll();
+      overlay('login').classList.add('active');
+    },
+    switchToLogin() { this.closeAll(); overlay('login').classList.add('active'); },
+    switchToSignup() { this.closeAll(); overlay('signup').classList.add('active'); },
+    closeAll() {
+      overlay('signup').classList.remove('active');
+      overlay('login').classList.remove('active');
+      clearError('signup'); clearError('login');
+    },
+
+    async emailSignup() {
+      clearError('signup');
+      const email = $('p-signup-email').value.trim();
+      const pw = $('p-signup-password').value;
+      if (!email || !pw) return showError('signup', 'Email and password required');
+      if (pw.length < 6) return showError('signup', 'Password must be at least 6 characters');
+      setLoading('p-signup-submit', true, 'Create account');
+      try {
+        await db.auth.signUpEmail(email, pw);
+        // onChange listener handles UI update
+      } catch (e) {
+        showError('signup', e.message || 'Sign up failed');
+        setLoading('p-signup-submit', false, 'Create account');
+      }
+    },
+
+    async emailLogin() {
+      clearError('login');
+      const email = $('p-login-email').value.trim();
+      const pw = $('p-login-password').value;
+      if (!email || !pw) return showError('login', 'Email and password required');
+      setLoading('p-login-submit', true, 'Sign in');
+      try {
+        await db.auth.signInEmail(email, pw);
+      } catch (e) {
+        showError('login', 'Wrong email or password');
+        setLoading('p-login-submit', false, 'Sign in');
+      }
+    },
+
+    async googleSignup() {
+      try { await db.auth.signInGoogle(); }
+      catch (e) { showError('signup', e.message || 'Google sign-in failed'); }
+    },
+
+    async signOut() {
+      await db.auth.signOut();
+      window.location.reload();
+    },
+  };
+
+  // ============================================================
+  // SOFT WALL · catch DemoError, show signup with context
+  // ============================================================
+  window.penthesisDemoBlock = function(action) {
+    window.penthesisAuth.openSignup(action);
+  };
+
+  // ============================================================
+  // AUTH STATE LISTENER · drives banner + reload on login
+  // ============================================================
+  db.auth.onChange(({ event, user, isDemo }) => {
+    const banner = $('p-demo-banner');
+    if (isDemo) {
+      banner.classList.add('active');
+    } else {
+      banner.classList.remove('active');
+      window.penthesisAuth.closeAll();
+      // refresh app data — your existing code re-renders portfolio
+      if (window.refreshPortfolio) window.refreshPortfolio();
+    }
+  });
+</script>
+
+<!-- ============================================================
+     HOW TO USE IN YOUR EXISTING CODE
+============================================================
+     Replace every spot where the user does something that needs an account:
+
+     OLD:
+       function addTrade(t) {
+         const trades = JSON.parse(localStorage.getItem('ea_trades') || '[]');
+         trades.push(t);
+         localStorage.setItem('ea_trades', JSON.stringify(trades));
+       }
+
+     NEW:
+       async function addTrade(t) {
+         try {
+           await db.trades.add(t);
+         } catch (e) {
+           if (e.isDemoBlock) return penthesisDemoBlock(e.action);
+           throw e;
+         }
+       }
+
+     The DemoError raises a friendly "Sign up to add a trade" modal.
+============================================================ -->
 </body>
 </html>
