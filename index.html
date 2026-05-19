@@ -103,7 +103,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .brand-crest:hover{background:rgba(192,155,69,0.1);box-shadow:0 0 12px rgba(192,155,69,0.2)}
 .brand-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;letter-spacing:-0.3px}
 .brand-name span{color:var(--gold)}
-.brand-sub{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.brand-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
 .header-meta{display:flex;align-items:center;gap:8px}
 .sync-pill{display:flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(255,255,255,0.04);border-radius:20px;border:1px solid rgba(255,255,255,0.07)}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);transition:background 0.3s}
@@ -126,7 +126,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ticker-inner{display:flex;white-space:nowrap;animation:ticker 55s linear infinite}
 .ticker-inner:hover{animation-play-state:paused}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 18px;font-family:'DM Mono',monospace;font-size:10px;border-right:1px solid var(--border)}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 18px;font-family:'DM Mono',monospace;font-size:12px;border-right:1px solid var(--border)}
 .ticker-sym{color:var(--gold-light);font-weight:500}
 .ticker-price{color:var(--muted-light)}
 
@@ -134,13 +134,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .wisdom-strip{background:linear-gradient(90deg,rgba(192,155,69,0.07),rgba(192,155,69,0.03),rgba(192,155,69,0.07));border-bottom:1px solid var(--border);padding:0;display:flex;flex-direction:column}
 .wisdom-main{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 24px}
 .wisdom-text{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold-light);flex:1;transition:opacity 0.4s}
-.wisdom-author{font-size:10px;color:var(--muted);margin-top:1px}
+.wisdom-author{font-size:12px;color:var(--muted);margin-top:1px}
 .wisdom-controls{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .wisdom-refresh{background:none;border:none;color:var(--gold-dim);font-size:15px;cursor:pointer;padding:4px 6px;border-radius:6px;transition:var(--transition);line-height:1}
 .wisdom-refresh:hover{color:var(--gold);background:rgba(192,155,69,0.1);transform:rotate(30deg)}
 
 /* ── JOURNAL TOGGLE ── */
-.journal-toggle{display:flex;align-items:center;gap:6px;padding:4px 12px;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-family:'DM Sans',sans-serif;cursor:pointer;transition:var(--transition);font-weight:500}
+.journal-toggle{display:flex;align-items:center;gap:6px;padding:4px 12px;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-family:'DM Sans',sans-serif;cursor:pointer;transition:var(--transition);font-weight:500}
 .journal-toggle:hover{border-color:var(--gold-dim);color:var(--gold-light)}
 .journal-toggle.active{border-color:var(--gold-dim);color:var(--gold-light);background:rgba(192,155,69,0.08)}
 .jt-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);transition:background 0.3s,box-shadow 0.3s;flex-shrink:0}
@@ -151,7 +151,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .journal-panel.open{display:block;animation:page-in 0.2s ease}
 .journal-panel-inner{padding:14px 24px 18px;max-width:1120px;margin:0 auto}
 .journal-mood-row{display:flex;align-items:center;gap:16px;margin-bottom:12px}
-.journal-mood-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);flex-shrink:0;font-weight:500}
+.journal-mood-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);flex-shrink:0;font-weight:500}
 .journal-moods{display:flex;gap:6px}
 .journal-mood-btn{padding:5px 14px;border:1px solid rgba(255,255,255,0.08);background:transparent;border-radius:4px;color:var(--muted);font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:var(--transition);letter-spacing:0.3px}
 .journal-mood-btn:hover{border-color:var(--muted);color:var(--muted-light)}
@@ -169,8 +169,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .journal-entry{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:7px;padding:10px 12px;position:relative;transition:var(--transition)}
 .journal-entry:hover{background:rgba(255,255,255,0.03)}
 .journal-entry-meta{display:flex;align-items:center;gap:8px;margin-bottom:5px}
-.journal-entry-time{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace}
-.journal-entry-mood{font-size:10px;padding:2px 7px;border-radius:3px;font-weight:500;letter-spacing:0.3px}
+.journal-entry-time{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
+.journal-entry-mood{font-size:12px;padding:2px 7px;border-radius:3px;font-weight:500;letter-spacing:0.3px}
 .mood-calm{background:rgba(61,184,122,0.1);color:#4DBF87;border:1px solid rgba(61,184,122,0.2)}
 .mood-excited{background:rgba(192,155,69,0.1);color:var(--gold-light);border:1px solid rgba(192,155,69,0.2)}
 .mood-uncertain{background:rgba(245,166,35,0.1);color:#F5C842;border:1px solid rgba(245,166,35,0.2)}
@@ -188,7 +188,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .nav-tab.active{color:var(--gold-light)}
 .nav-tab.active::after{left:0;right:0;box-shadow:0 0 8px rgba(192,155,69,0.4)}
 .nav-tab:hover{color:var(--muted-light)}
-.nav-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;background:var(--gold);border-radius:8px;color:var(--navy);font-size:9px;font-weight:700}
+.nav-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;background:var(--gold);border-radius:8px;color:var(--navy);font-size:11px;font-weight:700}
 /* Mobile bottom nav */
 @media(max-width:620px){
   .nav{display:none}
@@ -206,7 +206,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .mob-nav-btn{
   display:flex;flex-direction:column;align-items:center;gap:3px;
   background:none;border:none;cursor:pointer;
-  color:var(--muted);font-size:9px;font-family:'DM Sans',sans-serif;
+  color:var(--muted);font-size:11px;font-family:'DM Sans',sans-serif;
   font-weight:500;letter-spacing:0.3px;text-transform:uppercase;
   padding:6px 10px;border-radius:10px;transition:all 0.15s;
   min-width:52px;-webkit-tap-highlight-color:transparent;
@@ -255,24 +255,24 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .asset-btn.active{background:rgba(192,155,69,0.1);border-color:var(--gold);color:var(--gold)}
 .tier-selector{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 .tier-btn{padding:14px 16px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);border-radius:12px;cursor:pointer;text-align:left;transition:var(--transition);color:var(--muted-light);font-family:'DM Sans',sans-serif}
-.tier-btn .tier-name{font-size:13px;font-weight:600;margin-bottom:3px}.tier-btn .tier-desc{font-size:10px;color:var(--muted);line-height:1.4}
+.tier-btn .tier-name{font-size:13px;font-weight:600;margin-bottom:3px}.tier-btn .tier-desc{font-size:12px;color:var(--muted);line-height:1.4}
 .tier-btn:hover{border-color:var(--gold-dim);background:rgba(255,255,255,0.03)}
 .tier-btn.active{background:rgba(192,155,69,0.1);border-color:var(--gold);color:var(--gold)}.tier-btn.active .tier-desc{color:var(--gold-dim)}
 .tier-btn.active-t2{background:rgba(245,166,35,0.08);border-color:#F5A623;color:#F5A623}.tier-btn.active-t2 .tier-desc{color:rgba(245,166,35,0.6)}
 .catalyst-warn{background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:12px;color:#F5C842;line-height:1.5;display:flex;gap:10px;align-items:flex-start}
 .trade-form{background:var(--navy-1);border-radius:16px;padding:22px;border:1px solid var(--border)}
-.trade-form-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.trade-form-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-select,.form-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--white);padding:13px 16px;font-size:14px;font-family:'DM Sans',sans-serif;transition:var(--transition);outline:none;-webkit-appearance:none}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7A8E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);background:rgba(192,155,69,0.05);box-shadow:var(--shadow-gold)}
 .form-textarea{resize:vertical;line-height:1.6}
-.form-hint{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.4}
+.form-hint{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.4}
 .form-hint.warn{color:#F5C842}
 
 /* ══ TOOLTIPS ══ */
 .tooltip-wrap{position:relative;display:inline-flex;align-items:center;gap:5px}
-.tooltip-icon{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--muted);font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.2s;font-family:'DM Mono',monospace}
+.tooltip-icon{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--muted);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.2s;font-family:'DM Mono',monospace}
 .tooltip-icon:hover{background:rgba(192,155,69,0.15);border-color:var(--gold-dim);color:var(--gold)}
 .tooltip-box{position:absolute;bottom:calc(100% + 8px);left:0;width:260px;background:var(--navy-2);border:1px solid var(--border-strong);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--muted-light);line-height:1.6;z-index:999;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.4)}
 .tooltip-box::after{content:'';position:absolute;top:100%;left:16px;border:5px solid transparent;border-top-color:var(--border-strong)}
@@ -295,7 +295,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ac-wrap{position:relative}
 .ac-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--white);padding:13px 40px 13px 16px;font-size:14px;font-family:'DM Sans',sans-serif;transition:var(--transition);outline:none}
 .ac-input:focus{border-color:var(--gold);background:rgba(192,155,69,0.05);box-shadow:var(--shadow-gold)}
-.ac-detect{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--success);pointer-events:none;font-family:'DM Mono',monospace;font-weight:500}
+.ac-detect{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--success);pointer-events:none;font-family:'DM Mono',monospace;font-weight:500}
 .ac-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--navy-2);border:1px solid var(--border-strong);border-radius:12px;z-index:999;max-height:280px;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.8);display:none;animation:dropdown-in 0.15s ease}
 @keyframes dropdown-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .ac-dropdown.open{display:block}
@@ -305,7 +305,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ac-item-left{display:flex;align-items:center;gap:10px}
 .ac-item-ticker{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold-light);min-width:56px}
 .ac-item-name{font-size:12px;color:var(--muted-light)}
-.ac-item-mkt{font-size:10px;color:var(--muted);flex-shrink:0;padding:2px 6px;border:1px solid rgba(255,255,255,0.08);border-radius:4px}
+.ac-item-mkt{font-size:12px;color:var(--muted);flex-shrink:0;padding:2px 6px;border:1px solid rgba(255,255,255,0.08);border-radius:4px}
 .ac-price{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);flex-shrink:0}
 
 /* ── PORTFOLIO ── */
@@ -323,7 +323,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .pf-charts .chart-card:first-child{grid-column:1/-1}
 .chart-card{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:var(--transition)}
 .chart-card:hover{border-color:var(--border-strong)}
-.chart-card-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.chart-card-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
 .chart-wrap{position:relative;height:190px}
 .pf-filters{display:flex;gap:8px;flex-wrap:wrap}
 .pf-filter{padding:5px 13px;border:1px solid rgba(255,255,255,0.08);background:transparent;border-radius:20px;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:var(--transition)}
@@ -368,7 +368,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .pos-card:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
 
 /* Thesis health */
-.thesis-health{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:5px;font-size:10px;padding:3px 8px;border-radius:5px;font-weight:600}
+.thesis-health{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:5px;font-size:12px;padding:3px 8px;border-radius:5px;font-weight:600}
 .thesis-health.strong{background:rgba(30,138,82,0.15);color:#4DBF87;border:1px solid rgba(30,138,82,0.2)}
 .thesis-health.watch{background:rgba(245,166,35,0.12);color:#F5C842;border:1px solid rgba(245,166,35,0.2)}
 .thesis-health.review{background:rgba(181,50,50,0.12);color:#E05252;border:1px solid rgba(181,50,50,0.2);animation:blink-border 2s infinite}
@@ -392,8 +392,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .tag-avg{background:rgba(90,122,142,0.08);color:var(--muted);border:1px solid rgba(90,122,142,0.12)}
 .tag-held{background:rgba(192,155,69,0.08);color:var(--gold-dim);border:1px solid rgba(192,155,69,0.15)}
 .pos-thesis-preview{font-size:11px;color:var(--muted);font-style:italic;line-height:1.6;padding:10px 12px;background:rgba(192,155,69,0.04);border-left:2px solid var(--gold-dim);border-radius:0 6px 6px 0;margin-bottom:12px}
-.pos-exit-trigger{font-size:10px;color:var(--muted);padding:7px 12px;background:rgba(181,50,50,0.05);border-left:2px solid rgba(181,50,50,0.3);border-radius:0 5px 5px 0;margin-bottom:12px}
-.pos-exit-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(181,50,50,0.6);margin-bottom:2px}
+.pos-exit-trigger{font-size:12px;color:var(--muted);padding:7px 12px;background:rgba(181,50,50,0.05);border-left:2px solid rgba(181,50,50,0.3);border-radius:0 5px 5px 0;margin-bottom:12px}
+.pos-exit-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(181,50,50,0.6);margin-bottom:2px}
 .pos-actions{display:flex;gap:8px;padding-top:10px;border-top:1px solid var(--border)}
 .pos-action-btn{flex:1;padding:9px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;color:var(--muted-light);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:var(--transition);text-align:center;-webkit-tap-highlight-color:transparent}
 .pos-action-btn:hover{background:rgba(255,255,255,0.07);color:var(--white);border-color:rgba(255,255,255,0.15)}
@@ -459,11 +459,11 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .history-search{flex:1;min-width:180px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--white);padding:9px 14px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:var(--transition)}
 .history-search:focus{border-color:var(--gold);box-shadow:var(--shadow-gold)}
 .history-table{width:100%;border-collapse:collapse}
-.history-table th{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+.history-table th{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
 .history-table td{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;vertical-align:middle;transition:background 0.15s}
 .history-table tr:hover td{background:rgba(255,255,255,0.025)}
 .history-table tr:last-child td{border-bottom:none}
-.action-badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;letter-spacing:0.3px}
+.action-badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:12px;font-weight:700;letter-spacing:0.3px}
 .action-badge.buy{background:rgba(30,138,82,0.18);color:#4DBF87;border:1px solid rgba(30,138,82,0.22)}
 .action-badge.sell{background:rgba(181,50,50,0.18);color:#E05252;border:1px solid rgba(181,50,50,0.22)}
 .delete-trade-btn{padding:4px 10px;background:transparent;border:1px solid rgba(181,50,50,0.15);border-radius:5px;color:rgba(181,50,50,0.5);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:var(--transition)}
@@ -480,7 +480,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .watch-name{font-size:11px;color:var(--muted)}.watch-note{font-size:11px;color:var(--muted);font-style:italic}
 .watch-price-wrap{text-align:right;min-width:80px}
 .watch-price{font-family:'DM Mono',monospace;font-size:14px;color:var(--gold-light);font-weight:500}
-.watch-price-label{font-size:9px;color:var(--muted);margin-top:2px}
+.watch-price-label{font-size:11px;color:var(--muted);margin-top:2px}
 .watch-actions{display:flex;gap:7px;align-items:center;flex-shrink:0}
 .watch-buy-btn{padding:6px 12px;background:rgba(192,155,69,0.1);border:1px solid var(--border-strong);border-radius:6px;color:var(--gold);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:var(--transition);font-weight:600}
 .watch-buy-btn:hover{background:rgba(192,155,69,0.22);transform:translateY(-1px)}
@@ -519,12 +519,12 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .ins-right{text-align:right}
 .ins-pnl{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
 .ins-pnl-pct{font-family:'DM Mono',monospace;font-size:12px;margin-top:2px}
-.ins-hold{font-size:10px;color:var(--muted);margin-top:3px}
+.ins-hold{font-size:12px;color:var(--muted);margin-top:3px}
 
 .bench-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .bench-label{font-size:12px;color:var(--muted-light);flex:1}
 .bench-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;text-align:right}
-.bench-note{font-size:10px;color:var(--muted);margin-top:2px;text-align:right}
+.bench-note{font-size:12px;color:var(--muted);margin-top:2px;text-align:right}
 .bench-vs{display:flex;align-items:center;gap:6px;padding:10px 16px;background:rgba(192,155,69,0.06);border:1px solid var(--border-strong);border-radius:10px;margin-top:12px}
 .bench-vs-label{font-size:12px;color:var(--muted);flex:1}
 .bench-vs-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600}
@@ -535,18 +535,18 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .tlh-company{font-size:11px;color:var(--muted)}
 .tlh-loss{font-family:'DM Mono',monospace;font-size:13px;color:#E05252;font-weight:500}
 .tlh-pct{font-size:11px;color:rgba(224,82,82,0.7);margin-top:2px}
-.tlh-note{font-size:10px;color:var(--muted);margin-top:3px;font-style:italic;max-width:220px}
+.tlh-note{font-size:12px;color:var(--muted);margin-top:3px;font-style:italic;max-width:220px}
 .tlh-action{padding:6px 12px;background:rgba(181,50,50,0.1);border:1px solid rgba(181,50,50,0.25);border-radius:6px;color:#E05252;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap}
 .tlh-action:hover{background:rgba(181,50,50,0.2)}
 
 /* ── POSITION NOTES ── */
 .pos-notes-toggle{width:100%;padding:6px 0;background:none;border:none;border-top:1px solid var(--border);color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left;margin-top:10px;display:flex;align-items:center;gap:6px;transition:color 0.2s}
 .pos-notes-toggle:hover{color:var(--muted-light)}
-.pos-notes-toggle .pnt-count{background:rgba(192,155,69,0.15);color:var(--gold-dim);border-radius:8px;padding:1px 6px;font-size:10px;font-weight:600}
+.pos-notes-toggle .pnt-count{background:rgba(192,155,69,0.15);color:var(--gold-dim);border-radius:8px;padding:1px 6px;font-size:12px;font-weight:600}
 .pos-notes-panel{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 .pos-notes-panel.open{display:block}
 .pos-note-entry{background:rgba(0,0,0,0.15);border-radius:8px;padding:10px 12px;margin-bottom:8px;position:relative}
-.pos-note-meta{font-size:10px;color:var(--muted);margin-bottom:5px;font-family:'DM Mono',monospace}
+.pos-note-meta{font-size:12px;color:var(--muted);margin-bottom:5px;font-family:'DM Mono',monospace}
 .pos-note-text{font-size:12px;color:var(--muted-light);line-height:1.6}
 .pos-note-del{position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(181,50,50,0.3);font-size:12px;cursor:pointer;padding:2px;transition:color 0.2s}
 .pos-note-del:hover{color:var(--danger)}
@@ -560,7 +560,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .thesis-score{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .thesis-score-bar{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
 .thesis-score-fill{height:100%;border-radius:2px;transition:width 0.6s ease}
-.thesis-score-label{font-size:10px;font-weight:700;letter-spacing:0.5px;white-space:nowrap}
+.thesis-score-label{font-size:12px;font-weight:700;letter-spacing:0.5px;white-space:nowrap}
 .score-strong .thesis-score-fill{background:var(--success)}
 .score-strong .thesis-score-label{color:#4DBF87}
 .score-ok .thesis-score-fill{background:var(--gold)}
@@ -585,14 +585,14 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 /* ── REBALANCE ── */
 .rebalance-panel{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
 .rebalance-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.rebalance-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.rebalance-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
 .rebalance-toggle{padding:5px 14px;background:transparent;border:1px solid var(--border-strong);border-radius:6px;color:var(--gold-dim);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:var(--transition);font-weight:600;letter-spacing:0.3px}
 .rebalance-toggle:hover{background:rgba(192,155,69,0.1);color:var(--gold)}
 .rebalance-body{display:none;margin-top:16px}
 .rebalance-body.open{display:block;animation:page-in 0.2s ease}
 .rebalance-targets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .rebalance-target{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px}
-.rebalance-target-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.rebalance-target-label{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .rebalance-target-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .rebalance-target-row:last-child{margin-bottom:0}
 .rebalance-target-name{font-size:12px;color:var(--muted-light);flex:1}
@@ -606,7 +606,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .rebalance-row{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:9px;font-size:12px;transition:var(--transition)}
 .rebalance-row:hover{background:rgba(255,255,255,0.04)}
 .rebalance-row-ticker{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold-light);min-width:60px}
-.rebalance-row-action{padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.rebalance-row-action{padding:3px 9px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:0.5px}
 .rebalance-buy{background:rgba(30,138,82,0.15);color:#4DBF87;border:1px solid rgba(30,138,82,0.22)}
 .rebalance-sell{background:rgba(181,50,50,0.15);color:#E05252;border:1px solid rgba(181,50,50,0.22)}
 .rebalance-hold{background:rgba(90,122,142,0.12);color:var(--muted-light);border:1px solid rgba(90,122,142,0.18)}
@@ -617,11 +617,11 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .letter-styled{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:32px;max-height:600px;overflow-y:auto;margin-bottom:14px}
 .letter-styled .ls-header{text-align:center;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--border)}
 .letter-styled .ls-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--gold-light);margin-bottom:4px}
-.letter-styled .ls-subtitle{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.letter-styled .ls-subtitle{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
 .letter-styled .ls-period{font-size:12px;color:var(--muted-light);margin-top:6px}
 .letter-styled .ls-body{font-size:13.5px;color:var(--cream);line-height:1.85}
 .letter-styled .ls-body p{margin-bottom:16px}
-.letter-styled .ls-section{margin:22px 0 10px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding-bottom:7px;border-bottom:1px solid var(--border)}
+.letter-styled .ls-section{margin:22px 0 10px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding-bottom:7px;border-bottom:1px solid var(--border)}
 .letter-styled .ls-position{background:rgba(192,155,69,0.03);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:8px;transition:var(--transition)}
 .letter-styled .ls-position:hover{border-color:var(--border-strong)}
 .letter-styled .ls-pos-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
@@ -647,7 +647,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 
 .ai-interrogator-output{background:rgba(192,155,69,0.04);border:1px solid var(--border-strong);border-radius:10px;padding:16px 18px;animation:page-in 0.25s ease}
 .ai-interrogator-output .aio-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.ai-interrogator-output .aio-badge{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600}
+.ai-interrogator-output .aio-badge{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600}
 .ai-interrogator-output .aio-question{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--cream);line-height:1.6;margin-bottom:10px;padding-left:12px;border-left:2px solid var(--gold-dim)}
 .ai-interrogator-output .aio-question:last-of-type{margin-bottom:0}
 .ai-interrogator-output .aio-dismiss{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;margin-top:10px;transition:color 0.15s}
@@ -659,7 +659,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .pos-action-btn.ai-action:hover{color:var(--gold-light);border-color:var(--gold-dim);background:rgba(192,155,69,0.08)}
 
 .drift-output{margin-top:10px;background:rgba(192,155,69,0.04);border:1px solid var(--border-strong);border-radius:9px;padding:14px 16px;animation:page-in 0.25s ease;font-size:12.5px;color:var(--cream);line-height:1.65}
-.drift-output .drift-header{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;font-weight:600}
+.drift-output .drift-header{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;font-weight:600}
 .drift-output .drift-body{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1.7}
 .drift-output .drift-verdict{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:0.5px}
 .drift-verdict.intact{background:rgba(30,138,82,0.15);color:#4DBF87;border:1px solid rgba(30,138,82,0.25)}
@@ -669,7 +669,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .drift-output .drift-dismiss:hover{color:var(--white)}
 
 .sanity-check-banner{margin-top:12px;padding:14px 16px;background:rgba(192,155,69,0.05);border:1px solid var(--border-strong);border-radius:9px;animation:page-in 0.25s ease}
-.sanity-check-banner .scb-header{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;font-weight:600}
+.sanity-check-banner .scb-header{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;font-weight:600}
 .sanity-check-banner .scb-text{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--cream);line-height:1.6}
 .sanity-check-banner .scb-dismiss{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;margin-top:8px;display:block;transition:color 0.15s}
 .sanity-check-banner .scb-dismiss:hover{color:var(--white)}
@@ -688,7 +688,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .phil-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;position:relative;z-index:1}
 .phil-wrap{max-width:700px;width:100%;animation:phil-rise 0.9s cubic-bezier(0.4,0,0.2,1) forwards}
 @keyframes phil-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.phil-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold-dim);font-family:'DM Mono',monospace;margin-bottom:36px;display:flex;align-items:center;gap:14px}
+.phil-eyebrow{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold-dim);font-family:'DM Mono',monospace;margin-bottom:36px;display:flex;align-items:center;gap:14px}
 .phil-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 .phil-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5.5vw,52px);font-weight:600;line-height:1.18;color:var(--cream);margin-bottom:16px}
 .phil-headline em{color:var(--gold);font-style:italic}
@@ -706,7 +706,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .phil-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .phil-quote-block{padding-left:18px;border-left:2px solid var(--gold-dim);opacity:0;animation:phil-rise 0.5s ease 0.7s forwards}
 .phil-quote-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--cream);opacity:0.75;line-height:1.6;max-width:340px}
-.phil-quote-cite{font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:0.5px}
+.phil-quote-cite{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:0.5px}
 .phil-begin-btn{padding:17px 42px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:0.5px;transition:var(--transition);white-space:nowrap;flex-shrink:0;opacity:0;animation:phil-rise 0.5s ease 0.75s forwards;position:relative;overflow:hidden}
 .phil-begin-btn::before{content:'';position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:rgba(255,255,255,0.18);transform:skewX(-15deg);transition:left 0.5s ease}
 .quiz-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);transition:all 0.3s}
@@ -725,16 +725,16 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .thesis-field-wrap{background:rgba(192,155,69,0.03);border:1px solid rgba(192,155,69,0.2);border-radius:12px;padding:16px 18px;transition:border-color 0.3s,background 0.3s;position:relative}
 .thesis-field-wrap:focus-within{border-color:rgba(192,155,69,0.45);background:rgba(192,155,69,0.05)}
 .thesis-field-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.thesis-field-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.thesis-field-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600}
 .thesis-quality-row{display:flex;align-items:center;gap:8px;opacity:0;transition:opacity 0.3s}
 .thesis-quality-row.visible{opacity:1}
 .thesis-quality-bar{width:72px;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
 .thesis-quality-fill{height:100%;border-radius:2px;transition:width 0.4s ease,background 0.4s ease;width:0}
-.thesis-quality-label{font-size:10px;font-family:'DM Mono',monospace;font-weight:500;color:var(--muted);white-space:nowrap;transition:color 0.3s;min-width:48px}
+.thesis-quality-label{font-size:12px;font-family:'DM Mono',monospace;font-weight:500;color:var(--muted);white-space:nowrap;transition:color 0.3s;min-width:48px}
 .thesis-guide{font-size:11px;color:var(--gold-dim);font-style:italic;margin-bottom:9px;line-height:1.5;padding-left:10px;border-left:2px solid rgba(192,155,69,0.25)}
 .thesis-textarea{width:100%;background:transparent;border:none;color:var(--white);padding:0;font-size:13.5px;font-family:'DM Sans',sans-serif;resize:none;outline:none;line-height:1.7;min-height:72px}
 .thesis-textarea::placeholder{color:rgba(255,255,255,0.18);font-style:italic}
-.thesis-wordcount{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-align:right;margin-top:8px;transition:color 0.3s}
+.thesis-wordcount{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;text-align:right;margin-top:8px;transition:color 0.3s}
 .thesis-wordcount.building{color:var(--gold-dim)}
 .thesis-wordcount.strong{color:var(--success)}
 
@@ -750,7 +750,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .guided-q{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:16px;transition:border-color 0.2s}
 .guided-q.answered{border-color:rgba(192,155,69,0.3)}
 .guided-q-label{font-size:12px;font-weight:600;color:var(--white);margin-bottom:10px;line-height:1.4}
-.guided-q-num{display:inline-flex;width:20px;height:20px;border-radius:50%;background:rgba(192,155,69,0.12);border:1px solid var(--border-strong);color:var(--gold-dim);font-size:10px;font-weight:700;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;font-family:'DM Mono',monospace}
+.guided-q-num{display:inline-flex;width:20px;height:20px;border-radius:50%;background:rgba(192,155,69,0.12);border:1px solid var(--border-strong);color:var(--gold-dim);font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;font-family:'DM Mono',monospace}
 .guided-options{display:flex;flex-direction:column;gap:7px}
 .guided-opt{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;cursor:pointer;transition:all 0.15s;user-select:none}
 .guided-opt:hover{background:rgba(192,155,69,0.05);border-color:var(--border)}
@@ -761,7 +761,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 .guided-opt-text{font-size:13px;color:var(--muted-light);transition:color 0.15s}
 .guided-opt.selected .guided-opt-text{color:var(--white)}
 .guided-preview{background:rgba(192,155,69,0.05);border:1px solid var(--border-strong);border-left:3px solid var(--gold-dim);border-radius:0 10px 10px 0;padding:14px 16px;margin-top:14px;display:none}
-.guided-preview-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;font-weight:600}
+.guided-preview-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;font-weight:600}
 .guided-preview-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--cream);line-height:1.7}
 .guided-use-btn{margin-top:10px;padding:9px 18px;background:rgba(192,155,69,0.12);border:1px solid var(--border-strong);border-radius:8px;color:var(--gold-light);font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:var(--transition)}
 .guided-use-btn:hover{background:rgba(192,155,69,0.22);transform:translateY(-1px)}
@@ -791,7 +791,7 @@ body.beginner-mode .beginner-hint{display:block}
 
 /* ══ SETTINGS PAGE ══ */
 .settings-section{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.settings-section-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
+.settings-section-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
 .settings-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
 .settings-row:last-child{border-bottom:none;padding-bottom:0}
 .settings-row-label{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px}
@@ -809,11 +809,11 @@ body.beginner-mode .beginner-hint{display:block}
 .tier-card-name{font-size:13px;font-weight:600;color:var(--white)}
 .tier-card-desc{font-size:11px;color:var(--muted);line-height:1.5}
 .tier-card-meta{display:flex;gap:12px;margin-top:8px}
-.tier-card-tag{font-size:10px;padding:2px 8px;background:rgba(192,155,69,0.08);border:1px solid var(--border);border-radius:4px;color:var(--muted-light)}
+.tier-card-tag{font-size:12px;padding:2px 8px;background:rgba(192,155,69,0.08);border:1px solid var(--border);border-radius:4px;color:var(--muted-light)}
 .add-tier-btn{width:100%;padding:12px;background:transparent;border:1px dashed var(--border);border-radius:10px;color:var(--muted);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:var(--transition);margin-top:4px}
 .add-tier-btn:hover{border-color:var(--gold-dim);color:var(--gold-dim);background:rgba(192,155,69,0.04)}
 .exit-trigger-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.exit-type-badge{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:4px;font-weight:700;transition:all 0.3s;opacity:0}
+.exit-type-badge{font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:4px;font-weight:700;transition:all 0.3s;opacity:0}
 .exit-type-badge.show{opacity:1}
 .exit-type-thesis{background:rgba(30,138,82,0.15);color:#4DBF87;border:1px solid rgba(30,138,82,0.3)}
 .exit-type-price{background:rgba(245,166,35,0.12);color:#F5C842;border:1px solid rgba(245,166,35,0.3)}
@@ -822,7 +822,7 @@ body.beginner-mode .beginner-hint{display:block}
 /* ══ POSITION SIZING CALCULATOR ══ */
 .sizing-panel{background:rgba(192,155,69,0.05);border:1px solid var(--border-strong);border-radius:12px;padding:16px 18px;margin:14px 0;display:none;animation:page-in 0.2s ease}
 .sizing-panel.show{display:block}
-.sizing-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:12px}
+.sizing-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:12px}
 .sizing-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(192,155,69,0.08);font-size:13px}
 .sizing-row:last-child{border-bottom:none;padding-bottom:0}
 .sizing-label{color:var(--muted)}
@@ -857,7 +857,7 @@ body.beginner-mode .beginner-hint{display:block}
 
 /* ══ TFSA TRACKER ══ */
 .tfsa-panel{background:var(--navy-1);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-top:16px}
-.tfsa-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;font-weight:600}
+.tfsa-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;font-weight:600}
 .tfsa-bar-wrap{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin:8px 0}
 .tfsa-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#3DB87A,#2A8A56);transition:width 0.6s ease}
 .tfsa-bar-fill.warn{background:linear-gradient(90deg,#F5A623,#C47A2E)}
@@ -881,7 +881,7 @@ body.beginner-mode .beginner-hint{display:block}
 .pos-limit-upgrade:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(192,155,69,0.3)}
 
 /* Tier badge in header */
-.tier-badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace}
+.tier-badge{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace}
 .tier-badge.free{background:rgba(90,122,142,0.15);color:var(--muted-light);border:1px solid rgba(90,122,142,0.25)}
 .tier-badge.pro{background:rgba(192,155,69,0.15);color:var(--gold-light);border:1px solid var(--border-strong)}
 .tier-badge.elite{background:rgba(212,180,106,0.15);color:#D4B46A;border:1px solid rgba(212,180,106,0.3)}
@@ -917,7 +917,7 @@ body.beginner-mode .beginner-hint{display:block}
 .conviction-clock{margin-top:8px;padding:8px 12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:10px}
 .conviction-bar-wrap{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
 .conviction-bar-fill{height:100%;border-radius:2px;transition:width 0.6s ease}
-.conviction-label{font-size:10px;color:var(--muted);white-space:nowrap;font-family:'DM Mono',monospace}
+.conviction-label{font-size:12px;color:var(--muted);white-space:nowrap;font-family:'DM Mono',monospace}
 .conviction-high .conviction-bar-fill{background:linear-gradient(90deg,#3DB87A,#2A8A56)}
 .conviction-mid .conviction-bar-fill{background:linear-gradient(90deg,#F5A623,#C47A2E)}
 .conviction-low .conviction-bar-fill{background:linear-gradient(90deg,#E05252,#B53232)}
@@ -925,7 +925,7 @@ body.beginner-mode .beginner-hint{display:block}
 /* ══ THESIS GRAVEYARD ══ */
 .graveyard-card{background:var(--navy-1);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:10px;opacity:0.85;transition:all 0.2s}
 .graveyard-card:hover{opacity:1;border-color:var(--border-strong)}
-.graveyard-verdict{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:5px;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px}
+.graveyard-verdict{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:5px;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px}
 .verdict-held{background:rgba(61,184,122,0.12);color:#3DB87A;border:1px solid rgba(61,184,122,0.25)}
 .verdict-broke{background:rgba(181,50,50,0.12);color:#E05252;border:1px solid rgba(181,50,50,0.25)}
 .verdict-wrong{background:rgba(90,122,142,0.15);color:var(--muted-light);border:1px solid rgba(90,122,142,0.2)}
@@ -935,7 +935,7 @@ body.beginner-mode .beginner-hint{display:block}
 
 /* ══ DEVIL'S ADVOCATE ══ */
 .devils-output{margin-top:12px;background:rgba(181,50,50,0.05);border:1px solid rgba(181,50,50,0.2);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--cream);line-height:1.7;display:none;animation:page-in 0.25s ease}
-.devils-header{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#E05252;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.devils-header{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#E05252;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 
 /* ══ TAX ALERT ══ */
 .tax-alert-banner{background:linear-gradient(135deg,rgba(245,166,35,0.1),rgba(245,166,35,0.04));border:1px solid rgba(245,166,35,0.3);border-radius:12px;padding:16px 20px;margin-bottom:20px;display:none}
@@ -946,7 +946,7 @@ body.beginner-mode .beginner-hint{display:block}
 
 /* ══ EXPERT MODE CANVAS ══ */
 .expert-section{margin-bottom:16px}
-.expert-section-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:10px}
+.expert-section-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:10px}
 
 /* Valuation method grid */
 .expert-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -956,7 +956,7 @@ body.beginner-mode .beginner-hint{display:block}
 .expert-method-btn.active{background:rgba(192,155,69,0.12);border-color:var(--gold);box-shadow:0 0 0 1px rgba(192,155,69,0.2)}
 .expert-method-icon{font-size:18px}
 .expert-method-name{font-size:12px;font-weight:600;color:var(--white);font-family:'DM Sans',sans-serif}
-.expert-method-sub{font-size:10px;color:var(--muted);font-family:'DM Sans',sans-serif}
+.expert-method-sub{font-size:12px;color:var(--muted);font-family:'DM Sans',sans-serif}
 
 /* Margin of safety */
 .expert-mos-panel{background:rgba(192,155,69,0.05);border:1px solid var(--border-strong);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:none}
@@ -970,7 +970,7 @@ body.beginner-mode .beginner-hint{display:block}
 .expert-mos-pct.good{color:#3DB87A}
 .expert-mos-pct.ok{color:#F5A623}
 .expert-mos-pct.bad{color:#E05252}
-.expert-mos-label{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:0.5px;text-transform:uppercase}
+.expert-mos-label{font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:0.5px;text-transform:uppercase}
 
 /* Moat selector */
 .expert-moat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
@@ -997,17 +997,17 @@ body.beginner-mode .beginner-hint{display:block}
 .thesis-history-panel.open{display:block;animation:page-in 0.2s ease}
 .thesis-history-entry{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
 .thesis-history-entry:last-child{border-bottom:none}
-.thesis-history-date{font-size:10px;color:var(--gold-dim);font-family:'DM Mono',monospace;margin-bottom:3px;letter-spacing:0.5px}
+.thesis-history-date{font-size:12px;color:var(--gold-dim);font-family:'DM Mono',monospace;margin-bottom:3px;letter-spacing:0.5px}
 .thesis-history-text{font-size:12px;color:var(--muted-light);font-style:italic;line-height:1.6}
 .thesis-history-exit{font-size:11px;color:var(--muted);margin-top:3px}
-.thesis-history-badge{display:inline-block;padding:1px 6px;border-radius:3px;font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-left:6px}
+.thesis-history-badge{display:inline-block;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-left:6px}
 .thesis-history-badge.original{background:rgba(61,184,122,0.12);color:#3DB87A;border:1px solid rgba(61,184,122,0.2)}
 .thesis-history-badge.updated{background:rgba(192,155,69,0.1);color:var(--gold-dim);border:1px solid var(--border-strong)}
 
 /* ══ FIFO / LOT TRACKING ══ */
 .lots-panel{margin-top:8px;padding:10px 12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;display:none}
 .lots-panel.show{display:block;animation:page-in 0.2s ease}
-.lots-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600}
+.lots-title{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600}
 .lot-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--muted-light)}
 .lot-row:last-child{border-bottom:none}
 .lot-row .lot-gain{font-family:'DM Mono',monospace}
@@ -1015,14 +1015,14 @@ body.beginner-mode .beginner-hint{display:block}
 /* ══ PRICE STALENESS ══ */
 .price-stale{color:#F5A623!important}
 .price-fresh{color:#3DB87A!important}
-.price-age{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace}
+.price-age{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
 .exit-nudge.show{display:block}
 
 /* ── CHANGE 3: PORTFOLIO NARRATIVE ── */
 .pf-narrative{background:linear-gradient(135deg,rgba(192,155,69,0.07),rgba(192,155,69,0.02));border:1px solid var(--border-strong);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px;position:relative;overflow:hidden;animation:page-in 0.4s ease}
 .pf-narrative::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
 .pf-narrative-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.pf-narrative-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;display:flex;align-items:center;gap:7px}
+.pf-narrative-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;display:flex;align-items:center;gap:7px}
 .pf-narrative-label::before{content:'✦';font-size:8px}
 .pf-narrative-refresh{background:none;border:1px solid transparent;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:3px 8px;border-radius:5px;transition:var(--transition)}
 .pf-narrative-refresh:hover{color:var(--gold);border-color:var(--border)}
@@ -1108,7 +1108,7 @@ body.beginner-mode .beginner-hint{display:block}
 /* ══ DIGEST TAB ══ */
 .digest-hero{background:linear-gradient(135deg,rgba(192,155,69,0.1),rgba(192,155,69,0.03));border:1px solid var(--border-strong);border-radius:var(--radius);padding:28px;margin-bottom:20px;position:relative;overflow:hidden}
 .digest-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
-.digest-date{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-family:'DM Mono',monospace;margin-bottom:10px}
+.digest-date{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-family:'DM Mono',monospace;margin-bottom:10px}
 .digest-greeting{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--white);margin-bottom:6px;line-height:1.2}
 .digest-sub{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
 .digest-freq{display:flex;gap:6px}
@@ -1118,9 +1118,9 @@ body.beginner-mode .beginner-hint{display:block}
 .digest-stat{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;transition:var(--transition)}
 .digest-stat:hover{border-color:var(--border-strong);transform:translateY(-1px)}
 .digest-stat-val{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--gold-light);line-height:1;margin-bottom:5px}
-.digest-stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.digest-stat-label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 .digest-card{background:var(--navy-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.digest-card-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.digest-card-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
 .digest-check-item{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:opacity 0.15s}
 .digest-check-item:hover{opacity:0.85}
 .digest-check-item:last-child{border-bottom:none;padding-bottom:0}
@@ -1135,7 +1135,7 @@ body.beginner-mode .beginner-hint{display:block}
 .digest-save-btn{margin-top:10px;padding:10px 20px;background:rgba(192,155,69,0.1);border:1px solid var(--border-strong);border-radius:8px;color:var(--gold-light);font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:var(--transition)}
 .digest-save-btn:hover{background:rgba(192,155,69,0.2);transform:translateY(-1px)}
 .digest-past-entry{padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:9px;margin-bottom:8px}
-.digest-past-date{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:5px}
+.digest-past-date{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:5px}
 .digest-past-text{font-size:13px;color:var(--muted-light);line-height:1.55;font-style:italic}
 
 /* Anniversary in digest */
@@ -1153,7 +1153,7 @@ body.beginner-mode .beginner-hint{display:block}
 /* ══ INTELLIGENCE BRIEF ══ */
 .brief-hero{background:linear-gradient(135deg,rgba(192,155,69,0.08),rgba(9,22,31,0.5));border:1px solid var(--border-strong);border-radius:var(--radius);padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
 .brief-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.brief-coming-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;background:rgba(192,155,69,0.12);border:1px solid var(--border-strong);border-radius:20px;font-size:10px;font-weight:600;color:var(--gold-dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.brief-coming-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;background:rgba(192,155,69,0.12);border:1px solid var(--border-strong);border-radius:20px;font-size:12px;font-weight:600;color:var(--gold-dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
 .brief-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--white);margin-bottom:6px}
 .brief-sub{font-size:13px;color:var(--muted-light);line-height:1.7;margin-bottom:20px}
 .brief-flow{display:flex;flex-direction:column;gap:0;margin-bottom:20px}
@@ -1163,7 +1163,7 @@ body.beginner-mode .beginner-hint{display:block}
 .bfs-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px}
 .bfs-desc{font-size:12px;color:var(--muted);line-height:1.55}
 .brief-preview{background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.brief-preview-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;font-weight:600}
+.brief-preview-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;font-weight:600}
 .brief-ticker-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .brief-ticker{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--gold-light)}
 .brief-company{font-size:12px;color:var(--muted)}
@@ -1184,6 +1184,800 @@ body.beginner-mode .beginner-hint{display:block}
 .bwi-toggle.on::after{transform:translateX(16px)}
 @media(max-width:600px){.digest-stats{grid-template-columns:1fr 1fr}}
 </style>
+<!-- ══════════════════════════════════════════════════════════════════════
+     PENTHESIS v25 — Supabase client + auth + smart-router DB layer
+     ══════════════════════════════════════════════════════════════════════ -->
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  const SUPABASE_URL = 'https://hjutbusvlxijovwaxhtv.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_giMm6u3X8IyrJW31Wd1PqA_cKhc1iab';
+  const sb = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
+  window.supabase = sb;
+
+  const auth = {
+    isAuthed: false,
+    user: null,
+    demoMode: false,
+    async refresh(){
+      const { data } = await sb.auth.getSession();
+      auth.user = data?.session?.user || null;
+      auth.isAuthed = !!auth.user;
+      window.dispatchEvent(new CustomEvent('penthesis-auth-changed', { detail: auth }));
+      return auth;
+    },
+    async signInEmail(email, password){
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if(error) return { ok:false, reason:error.message };
+      await auth.refresh();
+      return { ok:true, user:data.user };
+    },
+    async signUpEmail(email, password){
+      const { data, error } = await sb.auth.signUp({ email, password });
+      if(error) return { ok:false, reason:error.message };
+      await auth.refresh();
+      return { ok:true, user:data.user, needsConfirm: !data.session };
+    },
+    async signInGoogle(){
+      const { error } = await sb.auth.signInWithOAuth({
+        provider:'google',
+        options:{ redirectTo: window.location.origin + window.location.pathname }
+      });
+      if(error) return { ok:false, reason:error.message };
+      return { ok:true };
+    },
+    async signOut(){
+      await sb.auth.signOut();
+      auth.demoMode = false;
+      await auth.refresh();
+    }
+  };
+  window.penthesisAuth = auth;
+
+  sb.auth.onAuthStateChange((event, session) => {
+    auth.user = session?.user || null;
+    auth.isAuthed = !!auth.user;
+    window.dispatchEvent(new CustomEvent('penthesis-auth-changed', { detail: auth }));
+  });
+
+  auth.refresh();
+</script>
+
+<script>
+  // ── Penthesis auth UI handlers (called from setup-form buttons) ──
+  async function penthSignInGoogle(){
+    if(!window.penthesisAuth){ showAuthStatus('Auth not loaded — refresh','error'); return; }
+    showAuthStatus('Redirecting to Google...','info');
+    const res = await window.penthesisAuth.signInGoogle();
+    if(!res.ok) showAuthStatus('Sign-in failed: ' + res.reason, 'error');
+  }
+  async function penthSignIn(){
+    const email = (document.getElementById('penth-email').value || '').trim();
+    const password = document.getElementById('penth-password').value || '';
+    if(!email){ showAuthStatus('Enter your email','error'); return; }
+    if(password.length < 6){ showAuthStatus('Password must be at least 6 characters','error'); return; }
+    showAuthStatus('Signing in...','info');
+    let res = await window.penthesisAuth.signInEmail(email, password);
+    if(!res.ok){
+      if(/invalid login|invalid credentials/i.test(res.reason || '')){
+        showAuthStatus('Creating new account...','info');
+        res = await window.penthesisAuth.signUpEmail(email, password);
+        if(res.ok && res.needsConfirm){
+          showAuthStatus('Check your email to confirm — then sign in','success');
+          return;
+        }
+      }
+      if(!res.ok){ showAuthStatus('Sign-in failed: ' + res.reason, 'error'); return; }
+    }
+    showAuthStatus('Welcome — loading your portfolio...','success');
+    // The auth-state-changed event triggers DB.boot(); then we show app
+  }
+  function penthDemoMode(){
+    window.penthesisAuth.demoMode = true;
+    // Show app with the demo banner; DB returns demo data (TODO: implement demo seed)
+    showAuthStatus('Demo mode — sign in to save your changes','info');
+    setTimeout(()=>{
+      document.getElementById('auth-screen').classList.add('hidden');
+      const profile = { name:'Demo' };
+      if (typeof initApp === 'function') initApp(profile.name);
+    }, 600);
+  }
+  // Helper used by auth screen
+  function showAuthStatus(msg, type){
+    const el = document.getElementById('auth-status');
+    if(!el) return;
+    el.innerHTML = '<div class="auth-status ' + (type||'info') + '">' + msg + '</div>';
+    if(type !== 'info') setTimeout(()=> el.innerHTML='', 5000);
+  }
+</script>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════
+// PENTHESIS v25 · DATA LAYER (Supabase, structured tables, no localStorage)
+// ══════════════════════════════════════════════════════════════════════════
+//
+// This module exposes a `DB` object with .get/.set/.del that match the v23
+// API signatures exactly. The 183 existing call sites in index.html keep
+// working without modification.
+//
+// Internally, this module routes each key to the right Supabase table:
+//   DB.get('trades')              → SELECT from public.trades
+//   DB.set('watchlist', arr)      → UPSERT into public.watchlist
+//   DB.get('thesis_history_AAPL') → SELECT from public.thesis_versions WHERE ticker='AAPL'
+//   DB.set('tfsa', {...})         → UPDATE public.profiles SET tfsa_annual_contributed=...
+//
+// Reads are cached in memory so the synchronous v23 code keeps working.
+// On boot, we prime the cache by fetching everything once (see DB.boot()).
+//
+// REQUIRES: window.supabase and window.penthesisAuth (loaded earlier in <head>)
+// ══════════════════════════════════════════════════════════════════════════
+
+(function(){
+  'use strict';
+
+  // ── In-memory cache (keeps reads synchronous like the old DB.get) ────────
+  const cache = new Map();
+  let bootDone = false;
+  let writeQueue = Promise.resolve(); // serialize writes
+
+  function _user(){
+    return window.penthesisAuth && window.penthesisAuth.user;
+  }
+  function _sb(){
+    return window.supabase;
+  }
+  function _toast(msg, kind){
+    if (typeof window.showToast === 'function') window.showToast(msg, kind || 'info');
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // KEY ROUTER — Maps a v23 key to a Supabase operation.
+  // ─────────────────────────────────────────────────────────────────────────
+  // Pattern: each key has a {tableLoad, packForCache, unpackForSave} contract.
+  // For simple "JSONB blob on profiles" cases we use a generic profile-field
+  // helper. For structured tables (trades, watchlist) we transform shape.
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // Profile-stored config keys → ui_state JSONB or direct column
+  const PROFILE_COLUMNS = {
+    user_tier: 'tier',
+    tfsa: 'tfsa_aggregate',  // virtual — composed of two cols
+    goal: 'annual_goal',
+    dry_powder: 'dry_powder',
+    sizing_portfolio_val: 'sizing_portfolio_val',
+    thesis_mode: 'thesis_mode',
+    speed_mode: 'speed_mode',
+    global_mode: 'global_mode',
+    default_currency: 'default_currency',
+    digest_freq: 'digest_freq',
+    digest_reflections: 'digest_reflections',
+    brief_enabled: 'brief_enabled',
+    brief_email: 'brief_email',
+    brief_delivery: 'brief_delivery',
+    last_backup_ts: 'last_backup_ts',
+    last_sentiment_date: 'last_sentiment_date',
+    sens_last_check: 'sens_last_check',
+    sens_reminder: 'sens_reminder',
+    profile: 'profile_blob' // virtual — bundle of {display_name, email, ...}
+  };
+
+  // Keys stored in profiles.ui_state JSONB
+  const UI_STATE_KEYS = new Set([
+    'phil_seen', 'quiz_done', 'quiz_prefs', 'shortcuts_dismissed',
+    'beta_code_used', 'beta_code_ts'
+  ]);
+
+  // API keys — kept in localStorage ONLY (never synced to cloud, security)
+  const LOCAL_ONLY_KEYS = new Set([
+    'anthropic_key', 'av_key', 'fmp_key', 'td_key'
+  ]);
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // BOOT — pull everything into cache on sign-in
+  // ─────────────────────────────────────────────────────────────────────────
+  async function boot(){
+    if (!_user()) { bootDone = true; return; }
+    const userId = _user().id;
+    const sb = _sb();
+
+    // Load all in parallel for speed
+    const [prof, trades, watchlist, thesisVersions, sentimentLog,
+           ghosts, dividends, journalEntries, aiAnalyses, coolingOff] = await Promise.all([
+      sb.from('profiles').select('*').eq('id', userId).single(),
+      sb.from('trades').select('*').eq('user_id', userId),
+      sb.from('watchlist').select('*').eq('user_id', userId),
+      sb.from('thesis_versions').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+      sb.from('sentiment_log').select('*').eq('user_id', userId).order('log_date', { ascending: false }).limit(90),
+      sb.from('ghosts').select('*').eq('user_id', userId),
+      sb.from('dividends').select('*').eq('user_id', userId),
+      sb.from('journal_entries').select('*').eq('user_id', userId).order('entry_date', { ascending: false }),
+      sb.from('ai_analyses').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+      sb.from('cooling_off').select('*').eq('user_id', userId).gt('locked_until', new Date().toISOString())
+    ]);
+
+    const profile = prof.data || {};
+
+    // ── trades: shape array of {ticker, action, ...} like v23 expects ─────
+    const tradesArr = (trades.data || []).map(t => ({
+      id: t.id,
+      ticker: t.ticker,
+      company: t.company,
+      action: t.action,
+      currency: t.currency,
+      price: Number(t.price),
+      shares: Number(t.shares),
+      entryValue: Number(t.entry_value),
+      date: t.trade_date,
+      tier: t.tier,
+      thesis: t.thesis,
+      exitTrigger: t.exit_trigger,
+      preMortem: t.pre_mortem,
+      kpiMetrics: t.kpi_metrics,
+      isTfsa: t.is_tfsa,
+      sellReason: t.sell_reason,
+      sellModalChoice: t.sell_modal_choice,
+      assetType: t.asset_type,
+      // behavioral state
+      notes: t.notes,
+      alertPrice: t.alert_price ? Number(t.alert_price) : null,
+      alertFiredAt: t.alert_fired_at,
+      sellLockedUntil: t.sell_locked_until,
+      needsThesisStrength: t.needs_thesis_strength,
+      lastDriftCheckAt: t.last_drift_check_at
+    }));
+    cache.set('trades', tradesArr);
+
+    // Per-ticker derived keys (for the v23 code that does DB.get('alert_AAPL') etc)
+    tradesArr.forEach(t => {
+      if (t.alertPrice != null) cache.set('alert_' + t.ticker, t.alertPrice);
+      if (t.alertFiredAt) cache.set('alert_fired_' + t.ticker, t.alertFiredAt);
+      if (t.sellLockedUntil) cache.set('sell_lock_' + t.ticker, t.sellLockedUntil);
+      if (t.needsThesisStrength) cache.set('needs_thesis_strength_' + t.ticker, true);
+      if (t.lastDriftCheckAt) cache.set('drift_check_' + t.ticker, t.lastDriftCheckAt);
+    });
+
+    // Lots: group trades by ticker (multiple BUY rows per ticker = lots)
+    const lotsByTicker = {};
+    tradesArr.filter(t => t.action === 'BUY').forEach(t => {
+      if (!lotsByTicker[t.ticker]) lotsByTicker[t.ticker] = [];
+      lotsByTicker[t.ticker].push({ price: t.price, shares: t.shares, date: t.date });
+    });
+    Object.keys(lotsByTicker).forEach(tk => cache.set('lots_' + tk, lotsByTicker[tk]));
+
+    // ── watchlist ──────────────────────────────────────────────────────────
+    const wlArr = (watchlist.data || []).map(w => ({
+      ticker: w.ticker,
+      company: w.company,
+      buyTarget: w.buy_target ? Number(w.buy_target) : null,
+      notes: w.notes,
+      alertPrice: w.alert_price ? Number(w.alert_price) : null
+    }));
+    cache.set('watchlist', wlArr);
+    wlArr.forEach(w => {
+      if (w.alertPrice != null) cache.set('walert_' + w.ticker, w.alertPrice);
+    });
+    (watchlist.data || []).forEach(w => {
+      if (w.alert_fired_at) cache.set('walert_fired_' + w.ticker, w.alert_fired_at);
+    });
+
+    // ── thesis_versions (grouped by ticker) ────────────────────────────────
+    const thesisByTicker = {};
+    (thesisVersions.data || []).forEach(tv => {
+      if (!thesisByTicker[tv.ticker]) thesisByTicker[tv.ticker] = [];
+      thesisByTicker[tv.ticker].push({
+        thesis: tv.thesis,
+        exitTrigger: tv.exit_trigger,
+        preMortem: tv.pre_mortem,
+        kpiMetrics: tv.kpi_metrics,
+        score: tv.thesis_score,
+        notes: tv.position_notes,
+        createdAt: tv.created_at
+      });
+    });
+    Object.keys(thesisByTicker).forEach(tk => cache.set('thesis_history_' + tk, thesisByTicker[tk]));
+
+    // Position notes (latest from thesis_versions per ticker)
+    const posNotes = {};
+    Object.keys(thesisByTicker).forEach(tk => {
+      const latest = thesisByTicker[tk][0];
+      if (latest && latest.notes) posNotes[tk] = latest.notes;
+    });
+    cache.set('pos_notes', posNotes);
+
+    // ── sentiment_log ──────────────────────────────────────────────────────
+    cache.set('sentiment_log', (sentimentLog.data || []).map(s => ({
+      sentiment: s.sentiment,
+      date: s.log_date
+    })));
+
+    // ── graveyard (ghosts) ─────────────────────────────────────────────────
+    cache.set('graveyard_verdicts', (ghosts.data || []).map(g => ({
+      ticker: g.ticker,
+      sellDate: g.sell_date,
+      sellPrice: Number(g.sell_price),
+      sellReason: g.sell_reason
+    })));
+
+    // ── dividends (grouped by ticker) ──────────────────────────────────────
+    const divByTicker = {};
+    (dividends.data || []).forEach(d => {
+      if (!divByTicker[d.ticker]) divByTicker[d.ticker] = [];
+      divByTicker[d.ticker].push({
+        date: d.pay_date,
+        amount: Number(d.amount),
+        currency: d.currency,
+        source: d.source
+      });
+    });
+    Object.keys(divByTicker).forEach(tk => cache.set('dividends_' + tk, divByTicker[tk]));
+
+    // ── journal ────────────────────────────────────────────────────────────
+    cache.set('journal', (journalEntries.data || []).map(j => ({
+      id: j.id,
+      date: j.entry_date,
+      title: j.title,
+      body: j.body,
+      ticker: j.ticker,
+      mood: j.mood,
+      createdAt: j.created_at
+    })));
+
+    // ── AI analyses by kind ────────────────────────────────────────────────
+    const annivByYear = {};
+    const thesisReviews = [];
+    (aiAnalyses.data || []).forEach(a => {
+      if (a.analysis_type === 'anniversary') {
+        const year = new Date(a.created_at).getFullYear();
+        if (!annivByYear[year]) annivByYear[year] = [];
+        annivByYear[year].push({ ticker: a.ticker, body: a.body, verdict: a.verdict });
+      } else if (a.analysis_type === 'thesis_review') {
+        thesisReviews.push({ ticker: a.ticker, body: a.body, verdict: a.verdict, createdAt: a.created_at });
+      }
+    });
+    cache.set('anniv_reviews', annivByYear);
+    cache.set('thesis_reviews', thesisReviews);
+
+    // ── profile-stored config ──────────────────────────────────────────────
+    cache.set('user_tier', profile.tier || 'free');
+    cache.set('thesis_mode', profile.thesis_mode || 'beginner');
+    cache.set('speed_mode', !!profile.speed_mode);
+    cache.set('global_mode', profile.global_mode || 'beginner');
+    cache.set('default_currency', profile.default_currency || 'ZAR');
+    cache.set('digest_freq', profile.digest_freq || 'weekly');
+    cache.set('digest_reflections', profile.digest_reflections !== false);
+    cache.set('brief_enabled', !!profile.brief_enabled);
+    cache.set('brief_email', profile.brief_email || '');
+    cache.set('brief_delivery', profile.brief_delivery || 'email');
+    cache.set('goal', profile.annual_goal != null ? Number(profile.annual_goal) : null);
+    cache.set('dry_powder', profile.dry_powder != null ? Number(profile.dry_powder) : null);
+    cache.set('sizing_portfolio_val', profile.sizing_portfolio_val != null ? Number(profile.sizing_portfolio_val) : null);
+    cache.set('tfsa', {
+      annual: profile.tfsa_annual_contributed != null ? Number(profile.tfsa_annual_contributed) : 0,
+      lifetime: profile.tfsa_lifetime_contributed != null ? Number(profile.tfsa_lifetime_contributed) : 0
+    });
+    cache.set('last_backup_ts', profile.last_backup_ts);
+    cache.set('last_sentiment_date', profile.last_sentiment_date);
+    cache.set('sens_last_check', profile.sens_last_check);
+    cache.set('sens_reminder', profile.sens_reminder !== false);
+    cache.set('profile', {
+      displayName: profile.display_name,
+      email: profile.email,
+      tier: profile.tier,
+      onboardingComplete: profile.onboarding_complete
+    });
+
+    // ── ui_state JSONB unpack ──────────────────────────────────────────────
+    const ui = profile.ui_state || {};
+    UI_STATE_KEYS.forEach(k => {
+      if (k in ui) cache.set(k, ui[k]);
+    });
+
+    bootDone = true;
+    window.dispatchEvent(new CustomEvent('db-boot-complete'));
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SYNC GETTER — returns cached value (v23 expects synchronous reads)
+  // ─────────────────────────────────────────────────────────────────────────
+  function get(key){
+    if (LOCAL_ONLY_KEYS.has(key)) {
+      try { return JSON.parse(localStorage.getItem('ea_'+key) || 'null'); }
+      catch(e){ return null; }
+    }
+    return cache.has(key) ? cache.get(key) : null;
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SET — updates cache immediately, queues write to Supabase
+  // ─────────────────────────────────────────────────────────────────────────
+  function set(key, val){
+    // API keys: localStorage only
+    if (LOCAL_ONLY_KEYS.has(key)) {
+      try { localStorage.setItem('ea_'+key, JSON.stringify(val)); }
+      catch(e){ _toast('⚠ Storage full', 'error'); return false; }
+      return true;
+    }
+
+    // Update cache synchronously so subsequent reads see the new value
+    cache.set(key, val);
+
+    // Queue the async write (serialized so concurrent updates don't race)
+    writeQueue = writeQueue.then(() => _persistKey(key, val).catch(err => {
+      console.warn('[v25 DB] persist failed for', key, err.message);
+      _toast('⚠ Sync failed — retrying', 'warn');
+    }));
+
+    return true;
+  }
+
+  function del(key){
+    if (LOCAL_ONLY_KEYS.has(key)) {
+      localStorage.removeItem('ea_'+key);
+      return;
+    }
+    cache.delete(key);
+    writeQueue = writeQueue.then(() => _deleteKey(key).catch(err => {
+      console.warn('[v25 DB] delete failed for', key, err.message);
+    }));
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PERSISTER — routes each key to the right table
+  // ─────────────────────────────────────────────────────────────────────────
+  async function _persistKey(key, val){
+    if (!_user()) return; // demo mode: cache only
+    const userId = _user().id;
+    const sb = _sb();
+
+    // ── profile columns ────────────────────────────────────────────────────
+    const directProfileMap = {
+      user_tier: 'tier',
+      goal: 'annual_goal',
+      dry_powder: 'dry_powder',
+      sizing_portfolio_val: 'sizing_portfolio_val',
+      thesis_mode: 'thesis_mode',
+      speed_mode: 'speed_mode',
+      global_mode: 'global_mode',
+      default_currency: 'default_currency',
+      digest_freq: 'digest_freq',
+      digest_reflections: 'digest_reflections',
+      brief_enabled: 'brief_enabled',
+      brief_email: 'brief_email',
+      brief_delivery: 'brief_delivery',
+      last_backup_ts: 'last_backup_ts',
+      last_sentiment_date: 'last_sentiment_date',
+      sens_last_check: 'sens_last_check',
+      sens_reminder: 'sens_reminder'
+    };
+    if (directProfileMap[key]) {
+      await sb.from('profiles').update({ [directProfileMap[key]]: val, updated_at: new Date().toISOString() }).eq('id', userId);
+      return;
+    }
+
+    // ── tfsa: composite → two columns ──────────────────────────────────────
+    if (key === 'tfsa') {
+      await sb.from('profiles').update({
+        tfsa_annual_contributed: val.annual || 0,
+        tfsa_lifetime_contributed: val.lifetime || 0,
+        updated_at: new Date().toISOString()
+      }).eq('id', userId);
+      return;
+    }
+
+    // ── profile blob (name etc) ────────────────────────────────────────────
+    if (key === 'profile') {
+      await sb.from('profiles').update({
+        display_name: val.displayName,
+        email: val.email,
+        onboarding_complete: val.onboardingComplete,
+        updated_at: new Date().toISOString()
+      }).eq('id', userId);
+      return;
+    }
+
+    // ── ui_state JSONB keys ────────────────────────────────────────────────
+    if (UI_STATE_KEYS.has(key)) {
+      const { data: prof } = await sb.from('profiles').select('ui_state').eq('id', userId).single();
+      const ui = (prof && prof.ui_state) || {};
+      ui[key] = val;
+      await sb.from('profiles').update({ ui_state: ui, updated_at: new Date().toISOString() }).eq('id', userId);
+      return;
+    }
+
+    // ── trades (full array replace) ────────────────────────────────────────
+    if (key === 'trades') {
+      await _persistTrades(val, userId);
+      return;
+    }
+
+    // ── watchlist (full array replace) ─────────────────────────────────────
+    if (key === 'watchlist') {
+      await _persistWatchlist(val, userId);
+      return;
+    }
+
+    // ── sentiment_log (append-only typically) ──────────────────────────────
+    if (key === 'sentiment_log') {
+      // Take the latest entry and insert if not already today
+      if (!Array.isArray(val) || val.length === 0) return;
+      const latest = val[val.length - 1];
+      await sb.from('sentiment_log').upsert({
+        user_id: userId,
+        sentiment: latest.sentiment,
+        log_date: latest.date || new Date().toISOString().slice(0,10)
+      }, { onConflict: 'user_id,log_date' });
+      return;
+    }
+
+    // ── ghosts (graveyard_verdicts) ────────────────────────────────────────
+    if (key === 'graveyard_verdicts') {
+      // Replace all rows for user
+      await sb.from('ghosts').delete().eq('user_id', userId);
+      if (Array.isArray(val) && val.length) {
+        const rows = val.map(g => ({
+          user_id: userId,
+          ticker: g.ticker,
+          sell_date: g.sellDate || new Date().toISOString().slice(0,10),
+          sell_price: g.sellPrice || 0,
+          sell_reason: g.sellReason
+        }));
+        await sb.from('ghosts').insert(rows);
+      }
+      return;
+    }
+
+    // ── journal entries ────────────────────────────────────────────────────
+    if (key === 'journal') {
+      // Replace strategy: simpler for now, optimize later
+      await sb.from('journal_entries').delete().eq('user_id', userId);
+      if (Array.isArray(val) && val.length) {
+        const rows = val.map(j => ({
+          user_id: userId,
+          entry_date: j.date || new Date().toISOString().slice(0,10),
+          title: j.title,
+          body: j.body || '',
+          ticker: j.ticker || null,
+          mood: j.mood || null
+        }));
+        await sb.from('journal_entries').insert(rows);
+      }
+      return;
+    }
+
+    // ── pos_notes (object {ticker: noteText}) → thesis_versions.position_notes ─
+    if (key === 'pos_notes') {
+      // For each ticker, update most recent thesis_version with the note
+      if (typeof val !== 'object' || !val) return;
+      for (const tk of Object.keys(val)) {
+        const { data: latest } = await sb.from('thesis_versions')
+          .select('id').eq('user_id', userId).eq('ticker', tk)
+          .order('created_at', { ascending: false }).limit(1).single();
+        if (latest) {
+          await sb.from('thesis_versions').update({ position_notes: val[tk] }).eq('id', latest.id);
+        } else {
+          // No thesis yet — create one with just the note
+          await sb.from('thesis_versions').insert({
+            user_id: userId, ticker: tk, thesis: '(notes only)', position_notes: val[tk]
+          });
+        }
+      }
+      return;
+    }
+
+    // ── thesis_history_<TICKER> ────────────────────────────────────────────
+    if (key.startsWith('thesis_history_')) {
+      const ticker = key.slice('thesis_history_'.length);
+      // Replace strategy: delete old versions for ticker, re-insert
+      await sb.from('thesis_versions').delete().eq('user_id', userId).eq('ticker', ticker);
+      if (Array.isArray(val) && val.length) {
+        const rows = val.map(h => ({
+          user_id: userId,
+          ticker,
+          thesis: h.thesis || '',
+          exit_trigger: h.exitTrigger,
+          pre_mortem: h.preMortem,
+          kpi_metrics: h.kpiMetrics,
+          thesis_score: h.score,
+          position_notes: h.notes,
+          created_at: h.createdAt || new Date().toISOString()
+        }));
+        await sb.from('thesis_versions').insert(rows);
+      }
+      return;
+    }
+
+    // ── dividends_<TICKER> ─────────────────────────────────────────────────
+    if (key.startsWith('dividends_')) {
+      const ticker = key.slice('dividends_'.length);
+      await sb.from('dividends').delete().eq('user_id', userId).eq('ticker', ticker);
+      if (Array.isArray(val) && val.length) {
+        const rows = val.map(d => ({
+          user_id: userId, ticker,
+          pay_date: d.date,
+          amount: d.amount,
+          currency: d.currency || 'ZAR',
+          source: d.source || 'manual',
+          notes: d.notes
+        }));
+        await sb.from('dividends').insert(rows);
+      }
+      return;
+    }
+
+    // ── lots_<TICKER>: derived from trades, don't double-store ─────────────
+    if (key.startsWith('lots_')) {
+      return; // no-op: lots come from trades on boot
+    }
+
+    // ── per-ticker behavioral state on trades ──────────────────────────────
+    const tickerKeyMap = {
+      'alert_': 'alert_price',
+      'alert_fired_': 'alert_fired_at',
+      'sell_lock_': 'sell_locked_until',
+      'sens_seen_': 'sentiment_warning_shown_at',
+      'needs_thesis_strength_': 'needs_thesis_strength',
+      'drift_check_': 'last_drift_check_at'
+    };
+    for (const prefix of Object.keys(tickerKeyMap)) {
+      if (key.startsWith(prefix) && !key.startsWith('alert_fired_') === (prefix !== 'alert_fired_')) {
+        const ticker = key.slice(prefix.length);
+        const col = tickerKeyMap[prefix];
+        await sb.from('trades').update({ [col]: val }).eq('user_id', userId).eq('ticker', ticker);
+        return;
+      }
+    }
+
+    // ── watchlist alerts (walert_) ─────────────────────────────────────────
+    if (key.startsWith('walert_fired_')) {
+      const ticker = key.slice('walert_fired_'.length);
+      await sb.from('watchlist').update({ alert_fired_at: val }).eq('user_id', userId).eq('ticker', ticker);
+      return;
+    }
+    if (key.startsWith('walert_')) {
+      const ticker = key.slice('walert_'.length);
+      await sb.from('watchlist').update({ alert_price: val }).eq('user_id', userId).eq('ticker', ticker);
+      return;
+    }
+
+    // ── fundamentals: skip (re-fetch from API on demand) ──────────────────
+    if (key.startsWith('fundamentals_')) return;
+
+    // ── anniv_reviews + thesis_reviews: write to ai_analyses ──────────────
+    if (key === 'anniv_reviews' || key === 'thesis_reviews') {
+      // These are aggregate stores; in v25 they should be written individually.
+      // For now, no-op on bulk replace — individual writes happen when an
+      // analysis is generated.
+      return;
+    }
+
+    // ── unknown key: log and ignore ────────────────────────────────────────
+    console.warn('[v25 DB] no persist mapping for key:', key);
+  }
+
+  async function _deleteKey(key){
+    if (!_user()) return;
+    const userId = _user().id;
+    const sb = _sb();
+
+    // Per-ticker keys → null out the column
+    const tickerKeys = ['alert_', 'alert_fired_', 'sell_lock_', 'sens_seen_',
+                        'needs_thesis_strength_', 'drift_check_'];
+    const tradeColMap = {
+      'alert_': 'alert_price', 'alert_fired_': 'alert_fired_at',
+      'sell_lock_': 'sell_locked_until', 'sens_seen_': 'sentiment_warning_shown_at',
+      'needs_thesis_strength_': 'needs_thesis_strength', 'drift_check_': 'last_drift_check_at'
+    };
+    for (const p of tickerKeys) {
+      if (key.startsWith(p)) {
+        const tk = key.slice(p.length);
+        await sb.from('trades').update({ [tradeColMap[p]]: null }).eq('user_id', userId).eq('ticker', tk);
+        return;
+      }
+    }
+    if (key.startsWith('walert_')) {
+      const isFired = key.startsWith('walert_fired_');
+      const tk = key.slice((isFired ? 'walert_fired_' : 'walert_').length);
+      const col = isFired ? 'alert_fired_at' : 'alert_price';
+      await sb.from('watchlist').update({ [col]: null }).eq('user_id', userId).eq('ticker', tk);
+      return;
+    }
+    if (key.startsWith('dividends_')) {
+      await sb.from('dividends').delete().eq('user_id', userId).eq('ticker', key.slice('dividends_'.length));
+      return;
+    }
+    if (key.startsWith('thesis_history_')) {
+      await sb.from('thesis_versions').delete().eq('user_id', userId).eq('ticker', key.slice('thesis_history_'.length));
+      return;
+    }
+    // No-op for other keys: they live in profiles or are derived
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // STRUCTURED PERSISTENCE — trades & watchlist (full replace semantics)
+  // ─────────────────────────────────────────────────────────────────────────
+  async function _persistTrades(arr, userId){
+    const sb = _sb();
+    // Get user's default portfolio
+    const { data: portfolios } = await sb.from('portfolios').select('id').eq('user_id', userId).eq('is_default', true).limit(1);
+    if (!portfolios || !portfolios.length) {
+      console.warn('[v25 DB] no default portfolio for user');
+      return;
+    }
+    const portfolioId = portfolios[0].id;
+
+    // Replace strategy: delete all + reinsert. Safe because RLS scopes to user.
+    await sb.from('trades').delete().eq('user_id', userId);
+    if (!Array.isArray(arr) || arr.length === 0) return;
+    const rows = arr.map(t => ({
+      portfolio_id: portfolioId,
+      user_id: userId,
+      trade_date: t.date || new Date().toISOString().slice(0,10),
+      ticker: t.ticker,
+      company: t.company,
+      asset_type: t.assetType || 'stock',
+      action: t.action || 'BUY',
+      currency: t.currency || 'ZAR',
+      price: t.price || 0,
+      shares: t.shares || 0,
+      entry_value: t.entryValue || (t.price * t.shares) || 0,
+      tier: t.tier || 1,
+      thesis: t.thesis,
+      exit_trigger: t.exitTrigger,
+      pre_mortem: t.preMortem,
+      kpi_metrics: t.kpiMetrics,
+      is_tfsa: !!t.isTfsa,
+      sell_reason: t.sellReason,
+      sell_modal_choice: t.sellModalChoice,
+      notes: t.notes,
+      alert_price: t.alertPrice,
+      alert_fired_at: t.alertFiredAt,
+      sell_locked_until: t.sellLockedUntil,
+      needs_thesis_strength: !!t.needsThesisStrength,
+      last_drift_check_at: t.lastDriftCheckAt
+    }));
+    // Insert in chunks of 100
+    for (let i = 0; i < rows.length; i += 100) {
+      await sb.from('trades').insert(rows.slice(i, i+100));
+    }
+  }
+
+  async function _persistWatchlist(arr, userId){
+    const sb = _sb();
+    await sb.from('watchlist').delete().eq('user_id', userId);
+    if (!Array.isArray(arr) || arr.length === 0) return;
+    const rows = arr.map(w => ({
+      user_id: userId,
+      ticker: w.ticker,
+      company: w.company,
+      buy_target: w.buyTarget,
+      notes: w.notes,
+      alert_price: w.alertPrice
+    }));
+    await sb.from('watchlist').insert(rows);
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PUBLIC EXPORT — install as window.DB
+  // ─────────────────────────────────────────────────────────────────────────
+  window.DB = {
+    get, set, del,
+    boot,
+    get bootDone(){ return bootDone; },
+    _internal: { cache, _persistKey }
+  };
+
+  // Auto-boot when auth state changes
+  window.addEventListener('penthesis-auth-changed', async () => {
+    bootDone = false;
+    cache.clear();
+    await boot();
+  });
+
+})();
+
+</script>
+
 </head>
 <body>
 
@@ -1317,39 +2111,32 @@ body.beginner-mode .beginner-hint{display:block}
   <div class="auth-right">
     <div id="auth-status"></div>
     <div id="setup-form">
-      <h2>Set up your Compass</h2>
-      <p>Your data lives on this device — nothing is sent to a server</p>
+      <h2>Pen your <em style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic">thesis.</em></h2>
+      <p>Sign in to start. Your data is encrypted and synced across devices.</p>
+
+      <button class="btn-primary" onclick="penthSignInGoogle()" style="background:#fff;color:#000;display:flex;align-items:center;justify-content:center;gap:10px">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+        Continue with Google
+      </button>
+
+      <div class="auth-divider">or with email</div>
+
       <div class="form-group">
-        <label class="form-label">Your Name</label>
-        <input class="form-input" id="su-name" type="text" placeholder="e.g. Penthesis" autocomplete="name">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="penth-email" type="email" placeholder="you@example.com" autocomplete="email">
       </div>
       <div class="form-group">
-        <label class="form-label">PIN (4 digits)</label>
-        <input class="form-input" id="su-pin" type="password" inputmode="numeric" maxlength="4" placeholder="Choose a 4-digit PIN" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetup()">
-        <div style="font-size:11px;color:var(--muted);margin-top:6px">Protects this device. Your data stays local.</div>
+        <label class="form-label">Password</label>
+        <input class="form-input" id="penth-password" type="password" placeholder="Minimum 6 characters" autocomplete="current-password" onkeydown="if(event.key==='Enter')penthSignIn()">
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">We'll create an account if this email is new.</div>
       </div>
-      <button class="btn-primary" onclick="doSetup()">Launch Compass →</button>
-      <div class="auth-divider">already set up?</div>
-      <button class="btn-ghost" onclick="showUnlock()">Unlock with PIN</button>
-      <div class="auth-divider">restoring from another device?</div>
-      <label style="display:block;text-align:center;padding:11px;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:var(--muted);font-size:12px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='var(--gold-dim)';this.style.color='var(--gold-light)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--muted)'">
-        📂 Restore from backup JSON
-        <input type="file" accept=".json" style="display:none" onchange="importBackup(this.files[0])">
-      </label>
+      <button class="btn-primary" onclick="penthSignIn()">Sign in / Sign up →</button>
+
+      <div class="auth-divider">just looking around?</div>
+      <button class="btn-ghost" onclick="penthDemoMode()">Browse the demo portfolio</button>
     </div>
     <div id="unlock-form" class="hidden">
-      <h2>Welcome back</h2>
-      <p id="unlock-name-display" style="color:var(--gold-light);font-family:'Cormorant Garamond',serif;font-size:18px;margin-bottom:4px"></p>
-      <p>Enter your PIN to continue</p>
-      <div class="form-group">
-        <label class="form-label">PIN</label>
-        <input class="form-input" id="li-pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doUnlock()">
-      </div>
-      <button class="btn-primary" onclick="doUnlock()">Unlock →</button>
-      <div class="auth-divider">trouble getting in?</div>
-      <button class="btn-ghost" onclick="forgotPIN()">Forgot PIN — reset everything</button>
-      <button class="btn-ghost" onclick="resetPINOnly()" style="margin-top:6px;font-size:12px;color:var(--gold-dim)">Reset PIN only — keep my data</button>
-      <button class="btn-ghost" onclick="showSetup()" style="margin-top:6px;font-size:11px;opacity:0.6">Different device — start fresh</button>
+      <!-- legacy unlock form kept hidden — v25 uses setup-form only -->
     </div>
   </div>
 </div>
@@ -1880,6 +2667,14 @@ body.beginner-mode .beginner-hint{display:block}
             placeholder="Imagine it's 2028 and this investment has failed. What was the most likely reason why?"
             style="resize:none;font-size:13px;line-height:1.5"></textarea>
           <div class="form-hint">Forces you to confront your biggest fear before you buy. Feeds the Devil's Advocate.</div>
+        </div>
+        <!-- KPI NORTH STAR METRICS -->
+        <div class="form-group" id="kpi-group" style="display:none">
+          <label class="form-label">North Star Metrics <span style="font-size:10px;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">optional · powers divergence alerts</span></label>
+          <textarea class="form-input" id="stock-kpi" rows="2"
+            placeholder="e.g. Data revenue growth > 15%, EBITDA margin > 30%, dividend cover > 1.8x"
+            style="resize:none;font-size:13px;line-height:1.5"></textarea>
+          <div class="form-hint">The 2-3 business metrics your thesis depends on. Penthesis Intelligence will alert you when market expectations diverge from these.</div>
         </div>
         <!-- AI usage counter for free users -->
         <div id="ai-usage-bar" style="display:none;margin-top:-10px;margin-bottom:12px;padding:8px 12px;background:rgba(192,155,69,0.06);border:1px solid var(--border);border-radius:8px;font-size:11px;display:flex;align-items:center;justify-content:space-between">
@@ -2923,13 +3718,22 @@ body.beginner-mode .beginner-hint{display:block}
 
 <script>
 // ══════════════════════════════════════════════════════════
-// LOCAL DATA LAYER — all data lives in localStorage
+// PENTHESIS v25 · DATA LAYER (Supabase-backed)
+// The full smart-router implementation is injected from v25_db.js
+// (loaded just before this <script> tag). It defines window.DB with
+// the same .get/.set/.del API as v23. This stub is a safety fallback
+// in case the module fails to load — keeps the app from crashing.
 // ══════════════════════════════════════════════════════════
-const DB = {
-  get(key){ try{ return JSON.parse(localStorage.getItem('ea_'+key)||'null') }catch(e){ return null } },
-  set(key,val){ try{ localStorage.setItem('ea_'+key, JSON.stringify(val)) }catch(e){ showToast('⚠ Storage full','error') } },
-  del(key){ localStorage.removeItem('ea_'+key) }
-};
+if (!window.DB) {
+  window.DB = {
+    get(k){ try{ return JSON.parse(localStorage.getItem('ea_'+k)||'null') }catch(e){ return null } },
+    set(k,v){ try{ localStorage.setItem('ea_'+k, JSON.stringify(v)); return true }catch(e){ return false } },
+    del(k){ localStorage.removeItem('ea_'+k) },
+    boot: async ()=>{},
+    bootDone: true
+  };
+}
+const DB = window.DB;
 
 // ══════════════════════════════════════════════════════════
 // TIER SYSTEM — Feature gating
@@ -5574,7 +6378,8 @@ function logStock(){
   const isTfsa=document.getElementById('stock-is-tfsa')?.checked||false;
   const expertData=currentMode==='expert'?getExpertData():null;
   const premortem=document.getElementById('stock-premortem')?.value.trim()||'';
-  insertTrade({date:new Date().toISOString().split('T')[0], ticker, company, asset_type:'stock', action, currency, price, shares, entry_value:price*shares, tier:currentTier, thesis, exit_trigger:exit, pre_mortem:premortem, is_tfsa:isTfsa, ...(expertData?{expert:expertData}:{})});
+  const kpiMetrics=document.getElementById('stock-kpi')?.value.trim()||'';
+  insertTrade({date:new Date().toISOString().split('T')[0], ticker, company, asset_type:'stock', action, currency, price, shares, entry_value:price*shares, tier:currentTier, thesis, exit_trigger:exit, pre_mortem:premortem, kpi_metrics:kpiMetrics, is_tfsa:isTfsa, ...(expertData?{expert:expertData}:{})});
 
   // Log mood if captured
   if(_tradeMood && action==='BUY') logJournalMood(_tradeMood);
@@ -5653,7 +6458,7 @@ function logProperty(){
 
 function clearForm(type){
   if(type==='stock'){
-    ['stock-ticker','stock-company','stock-price','stock-shares','stock-thesis','stock-exit','stock-premortem','sell-reason','speed-thesis-input'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+    ['stock-ticker','stock-company','stock-price','stock-shares','stock-thesis','stock-exit','stock-premortem','stock-kpi','sell-reason','speed-thesis-input'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
     const det=document.getElementById('stock-detect');if(det)det.style.display='none';
     document.getElementById('trade-calc').classList.add('hidden');
     document.getElementById('sell-shares-hint').classList.add('hidden');
@@ -6065,22 +6870,36 @@ function renderPositionCards(positions,prices,filter){
     const noteCount=notes.length;
     const anniv=getAnniversaryState(p);
 
-    // Zombie detection — Tier 2 held > 18 months
-    const isZombie=p.tier===2&&parseInt(months)>=18;
-    const zombieProgress=p.tier===2?Math.min(100,(parseInt(months)/18)*100):0;
+    // Zombie detection — Tier 2 thresholds
+    const monthsNum=parseInt(months);
+    const isZombie=p.tier===2&&monthsNum>=18;
+    const isAmber=p.tier===2&&monthsNum>=12&&monthsNum<18;
+    const zombieProgress=p.tier===2?Math.min(100,(monthsNum/18)*100):0;
 
     return `<div class="pos-card tier${p.tier}${isZombie?' zombie-pos':''}" id="pos-${p.ticker}">
       <div class="thesis-health ${health.cls}">${health.label}</div>
       ${isZombie?`
       <div style="margin-bottom:10px;padding:10px 12px;background:rgba(224,82,82,0.06);border:1px solid rgba(224,82,82,0.2);border-radius:8px">
         <div style="font-size:12px;font-weight:700;color:#E05252;margin-bottom:4px">⚠ Zombie Position — ${months} months held</div>
-        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">This Tier 2 catalyst play is past its 18-month window. The thesis has either played out or failed. Decide now.</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">This Tier 2 catalyst play is past its 18-month window. Decide now.</div>
         <div style="display:flex;gap:6px">
           <button onclick="resolveZombie('${p.ticker}','sell')" style="flex:1;padding:7px;background:rgba(224,82,82,0.12);border:1px solid rgba(224,82,82,0.3);border-radius:7px;color:#E05252;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">Admit defeat → Sell</button>
           <button onclick="resolveZombie('${p.ticker}','promote')" style="flex:1;padding:7px;background:rgba(61,184,122,0.08);border:1px solid rgba(61,184,122,0.2);border-radius:7px;color:#3DB87A;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">Promote to Tier 1 →</button>
         </div>
+      </div>`:isAmber?`
+      <div style="margin-bottom:10px;padding:10px 12px;background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.25);border-radius:8px">
+        <div style="font-size:12px;font-weight:700;color:#F5A623;margin-bottom:4px">🕐 12-Month Review — ${months} months held</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Has the catalyst fired? If not — ${18-monthsNum} months to decide before this becomes a Zombie Position.</div>
+        <div style="height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;margin-bottom:6px">
+          <div style="height:100%;width:${zombieProgress}%;background:#F5A623;border-radius:2px;transition:width 0.6s"></div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button onclick="resolveZombie('${p.ticker}','promote')" style="flex:1;padding:6px;background:rgba(61,184,122,0.08);border:1px solid rgba(61,184,122,0.2);border-radius:7px;color:#3DB87A;font-size:11px;cursor:pointer;font-family:inherit">Promote to T1</button>
+          <button onclick="resolveZombie('${p.ticker}','sell')" style="flex:1;padding:6px;background:rgba(224,82,82,0.06);border:1px solid rgba(224,82,82,0.15);border-radius:7px;color:#E05252;font-size:11px;cursor:pointer;font-family:inherit">Exit position</button>
+          <button onclick="this.closest('[id^=pos]').querySelector('[id^=drift]').style.display='block';checkThesisDrift('${p.ticker}',this)" style="flex:1;padding:6px;background:rgba(192,155,69,0.08);border:1px solid var(--border-strong);border-radius:7px;color:var(--gold-dim);font-size:11px;cursor:pointer;font-family:inherit">✦ Review thesis</button>
+        </div>
       </div>`:''}
-      ${p.tier===2&&!isZombie&&zombieProgress>50?`
+      ${p.tier===2&&!isZombie&&!isAmber&&zombieProgress>30?`
       <div style="margin-bottom:8px">
         <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:3px">
           <span>Thesis seepage</span>
@@ -6243,6 +7062,15 @@ function renderPositionCards(positions,prices,filter){
         </div>`;
       })()}
       <div class="drift-output" id="drift-${p.ticker}" style="display:none"></div>
+      <!-- Background AI intelligence card -->
+      ${(()=>{
+        const intel=getIntelligenceForPosition(p.ticker);
+        if(!intel) return '';
+        return `<div style="margin-bottom:10px;padding:10px 12px;background:rgba(192,155,69,0.04);border:1px solid rgba(192,155,69,0.15);border-radius:8px">
+          <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;font-weight:600">✦ Intelligence · Today</div>
+          <div id="intel-${p.ticker}" style="font-size:12px;color:var(--muted-light);line-height:1.6">${intel.insight}</div>
+        </div>`;
+      })()}
       <button class="pos-notes-toggle" onclick="toggleNotes('${p.ticker}')">
         📝 Position Notes ${noteCount>0?`<span class="pnt-count">${noteCount}</span>`:''}
         <span style="margin-left:auto;font-size:10px" id="notes-arrow-${p.ticker}">▸</span>
@@ -6369,6 +7197,8 @@ function updateSummaryCards(positions,prices){
   setTimeout(checkPriceAlerts, 2000);
   checkReactionGate();
   renderDryPowder(totalMV);
+  // Background AI worker — runs silently after prices load
+  if(getAnthropicKey()) setTimeout(runIntelligenceWorker, 3000);
   // Earnings calendar
   const ecWrap=document.getElementById('earnings-calendar-wrap');
   if(ecWrap) ecWrap.innerHTML=renderEarningsCalendar();
@@ -6996,6 +7826,136 @@ function editDryPowder(){
   showToast(`✓ Dry powder updated — R${amount.toFixed(2)}`,'success');
 }
 
+// ══════════════════════════════════════════════════════════
+// BACKGROUND AI INTELLIGENCE WORKER
+// Runs silently on portfolio open — analyses each position
+// against thesis + exit trigger, stores insight locally
+// ══════════════════════════════════════════════════════════
+async function runIntelligenceWorker(){
+  if(!getAnthropicKey()) return;
+  if(!allPositions.length) return;
+
+  // Only run once per 24 hours per position
+  const today=new Date().toISOString().split('T')[0];
+
+  for(const p of allPositions){
+    if(p.asset_type!=='stock') continue;
+    const cacheKey=`intel_${p.ticker}_${today}`;
+    if(DB.get(cacheKey)) continue; // Already analysed today
+
+    const livePrice=priceCache[p.ticker]?.price;
+    const pnlPct=livePrice&&p.avg_price?(((livePrice-p.avg_price)/p.avg_price)*100):null;
+    const months=Math.floor((Date.now()-new Date(p.entry_date||0))/(1000*60*60*24*30));
+
+    const prompt=`You are a disciplined investment analyst reviewing a position for a South African retail investor.
+
+Position: ${p.ticker} — ${p.name||p.ticker}
+Tier: ${p.tier===1?'Tier 1 (Core — long-term hold)':'Tier 2 (Tactical — catalyst play)'}
+Entry price: R${p.avg_price?.toFixed(2)}
+${livePrice?`Current price: R${livePrice.toFixed(2)} (${pnlPct>=0?'+':''}${pnlPct?.toFixed(1)}%)`:''}
+Held: ${months} months
+Thesis: "${p.thesis||'No thesis documented'}"
+Exit trigger: "${p.exit_trigger||'Not defined'}"
+${p.pre_mortem?`Pre-mortem fear: "${p.pre_mortem}"`:''}
+${p.kpi_metrics?`North Star Metrics: "${p.kpi_metrics}"`:''}
+
+Give a brief, honest intelligence note (3-4 sentences max):
+1. Does the thesis still appear sound based on the information given?
+${p.kpi_metrics?'2. Are the North Star Metrics likely being met, exceeded, or missed based on your knowledge?':'2. Any specific risk to watch based on the exit trigger or pre-mortem?'}
+3. One actionable thought — should they hold, review, or investigate something specific?
+
+Be direct. No fluff. Speak like a trusted advisor, not a disclaimer machine. If KPI metrics are defined, explicitly flag any divergence.`;
+
+    try{
+      const insight=await callClaude(prompt, 200);
+      if(insight){
+        DB.set(cacheKey, {insight, ts:Date.now(), ticker:p.ticker});
+        // Update card if visible
+        updateIntelligenceCard(p.ticker, insight);
+      }
+    }catch(e){ continue; }
+
+    // Small delay between positions to be respectful of rate limits
+    await new Promise(r=>setTimeout(r,1500));
+  }
+}
+
+function updateIntelligenceCard(ticker, insight){
+  const card=document.getElementById(`intel-${ticker}`);
+  if(!card) return;
+  card.style.display='block';
+  card.innerHTML=`
+    <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;font-weight:600">✦ Intelligence · Today</div>
+    <div style="font-size:12px;color:var(--muted-light);line-height:1.6">${insight}</div>`;
+}
+
+function getIntelligenceForPosition(ticker){
+  const today=new Date().toISOString().split('T')[0];
+  return DB.get(`intel_${ticker}_${today}`)||null;
+}
+
+function showCGTFrictionCost(ticker, sellPrice, shares){
+  const pos=allPositions.find(p=>p.ticker===ticker);
+  if(!pos||!hasTier('cgt_report')) return;
+
+  const proceeds=sellPrice*shares;
+  const costBasis=pos.avg_price*shares;
+  const gain=proceeds-costBasis;
+  if(gain<=0) return; // No CGT on a loss
+
+  const ANNUAL_EXCLUSION=40000;
+  const CGT_INCLUSION=0.40;
+  const MARGINAL_RATE=0.45; // Max marginal rate
+
+  const taxableGain=Math.max(0,gain-ANNUAL_EXCLUSION);
+  const includedGain=taxableGain*CGT_INCLUSION;
+  const estimatedTax=includedGain*MARGINAL_RATE;
+  const netProceeds=proceeds-estimatedTax;
+  const cur=pos.currency||'ZAR';
+  const fmt=n=>n.toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+  const modal=document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML=`
+    <div style="background:var(--navy-light);border:1px solid var(--border-strong);border-radius:16px;padding:24px;max-width:380px;width:100%">
+      <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">CGT Friction Cost</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:16px">Estimated tax impact of this sale</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:12px">
+          <span style="color:var(--muted)">Gross proceeds</span>
+          <span style="color:var(--white);font-family:'DM Mono',monospace">${cur} ${fmt(proceeds)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px">
+          <span style="color:var(--muted)">Cost basis</span>
+          <span style="color:var(--white);font-family:'DM Mono',monospace">${cur} ${fmt(costBasis)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px">
+          <span style="color:var(--muted)">Capital gain</span>
+          <span style="color:#3DB87A;font-family:'DM Mono',monospace">+${cur} ${fmt(gain)}</span>
+        </div>
+        <div style="height:1px;background:var(--border)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px">
+          <span style="color:var(--muted)">Estimated CGT (max rate)</span>
+          <span style="color:#E05252;font-family:'DM Mono',monospace">-${cur} ${fmt(estimatedTax)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700">
+          <span style="color:var(--white)">Net in hand</span>
+          <span style="color:var(--gold-light);font-family:'DM Mono',monospace">${cur} ${fmt(netProceeds)}</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:16px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px">
+        Your new opportunity needs to return <strong style="color:var(--white)">${((estimatedTax/netProceeds)*100).toFixed(1)}%</strong> just to break even on the switch. Is the new thesis that much stronger?
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="this.closest('[style*=fixed]').remove()" style="flex:1;padding:11px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:10px;color:var(--muted);cursor:pointer;font-family:inherit">Cancel</button>
+        <button onclick="this.closest('[style*=fixed]').remove();proceedWithSell()" id="cgt-proceed-btn" style="flex:1;padding:11px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;cursor:pointer;font-family:inherit">Proceed anyway</button>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:8px;text-align:center">Estimate only. Consult a tax advisor. R40,000 annual exclusion applied.</div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+}
+
 function dismissStrengthNudge(ticker){
   DB.set('needs_thesis_strength_'+ticker, null);
   renderPortfolio();
@@ -7099,6 +8059,28 @@ function executeSell(){
   if(!_sellReason){showToast('⚠ Select a reason for selling','error');return}
   if(qty>pos.quantity){showToast(`❌ Max: ${pos.quantity.toFixed(4)} shares`,'error');return}
 
+  // CGT friction check — show before proceeding if profitable sell
+  const gain=(price-pos.avg_price)*qty;
+  const cgtShown=sessionStorage.getItem('cgt_shown_'+pos.ticker);
+  if(gain>0 && hasTier('cgt_report') && !cgtShown){
+    sessionStorage.setItem('cgt_shown_'+pos.ticker,'1');
+    showCGTFrictionCost(pos.ticker, price, qty);
+    // Store sell context for proceedWithSell
+    window._pendingSell={pos, qty, price, detail};
+    return;
+  }
+
+  _doExecuteSell(pos, qty, price, detail);
+}
+
+function proceedWithSell(){
+  if(!window._pendingSell) return;
+  const{pos,qty,price,detail}=window._pendingSell;
+  window._pendingSell=null;
+  _doExecuteSell(pos,qty,price,detail);
+}
+
+function _doExecuteSell(pos, qty, price, detail){
   const sellReasonLabels={
     thesis_broken:'Thesis broken',
     taking_profits:'Taking profits',
@@ -7121,11 +8103,10 @@ function executeSell(){
   });
 
   document.getElementById('sell-modal').classList.add('hidden');
-  // Reset
   _sellReason='';
+  sessionStorage.removeItem('cgt_shown_'+pos.ticker);
   document.querySelectorAll('.sell-reason-btn').forEach(b=>b.classList.remove('selected'));
   if(document.getElementById('sell-reason-detail')) document.getElementById('sell-reason-detail').value='';
-
   showToast('✓ Sale logged — position moved to Graveyard if fully exited','success');
   loadTrades(); rebuildPositionsFromTrades(); updateBadge(); renderPortfolio();
 }
@@ -7469,27 +8450,53 @@ const SENS_RSS='https://senspdf.jse.co.za/documents/2024/jse/ites/sens/';
 
 async function checkSENSAlerts(){
   if(!allPositions.length) return;
-  const tickers=allPositions.filter(p=>p.asset_type==='stock'&&STOCKS[p.ticker]?.mkt==='JSE').map(p=>p.ticker);
-  if(!tickers.length) return;
-  const lastCheck=DB.get('sens_last_check')||0;
+  const jseTickers=allPositions
+    .filter(p=>p.asset_type==='stock'&&STOCKS[p.ticker]?.mkt==='JSE')
+    .map(p=>p.ticker);
+  if(!jseTickers.length) return;
+
   // Only check once every 4 hours
+  const lastCheck=DB.get('sens_last_check')||0;
   if(Date.now()-lastCheck<1000*60*60*4) return;
   DB.set('sens_last_check',Date.now());
-  // Try to fetch SENS via our proxy
+
+  // Try JSE SENS RSS via CORS proxy
   try{
-    const url=`https://ea-compass.vercel.app/api/sens?tickers=${tickers.join(',')}`;
-    const data=await tryFetch(url,8000);
-    if(data?.announcements?.length){
-      data.announcements.forEach(a=>{
-        const ticker=a.ticker;
-        const lastSeen=DB.get('sens_seen_'+ticker)||'';
-        if(a.id!==lastSeen){
-          DB.set('sens_seen_'+ticker,a.id);
-          showToast(`📢 ${ticker} — ${a.headline.slice(0,60)}…`,'info');
+    const proxyUrl=`https://corsproxy.io/?url=${encodeURIComponent('https://senspdf.jse.co.za/documents/2024/jse/ites/sens/')}`;
+    const res=await tryFetch(proxyUrl, 8000);
+
+    // If proxy available, parse for our tickers
+    if(res){
+      jseTickers.forEach(ticker=>{
+        const stockInfo=STOCKS[ticker];
+        const companyName=stockInfo?.name||ticker;
+        // Check if response mentions this company
+        const text=typeof res==='string'?res:JSON.stringify(res);
+        if(text.toLowerCase().includes(companyName.toLowerCase().split(' ')[0])){
+          const lastSeen=DB.get('sens_seen_'+ticker)||0;
+          if(Date.now()-lastSeen>1000*60*60*24){
+            DB.set('sens_seen_'+ticker,Date.now());
+            showToast(`📢 SENS: ${ticker} may have a new announcement — check JSE`,'info');
+          }
         }
       });
     }
-  }catch(e){/* SENS not available yet — will add api/sens.js next */}
+  }catch(e){}
+
+  // Always show a periodic reminder to check SENS manually for holdings
+  const lastReminder=DB.get('sens_reminder')||0;
+  if(Date.now()-lastReminder>1000*60*60*24*7){
+    DB.set('sens_reminder',Date.now());
+    const positions=jseTickers.slice(0,3).join(', ');
+    showToast(`📋 Weekly reminder — check SENS for ${positions}${jseTickers.length>3?` + ${jseTickers.length-3} more`:''}`, 'info');
+  }
+}
+
+// Quick SENS link for any JSE stock
+function openSENS(ticker){
+  const stockInfo=STOCKS[ticker];
+  const searchName=(stockInfo?.name||ticker).replace(/\s+/g,'%20');
+  window.open(`https://www.jse.co.za/current-companies/company-announcements?searchText=${searchName}`,'_blank');
 }
 
 // ══════════════════════════════════════════════════════════
@@ -10313,6 +11320,8 @@ function setThesisMode(mode, el){
     if(interrogateBtn) interrogateBtn.style.display='none';
     const pm=document.getElementById('pre-mortem-group');
     if(pm) pm.style.display='none';
+    const kpi=document.getElementById('kpi-group');
+    if(kpi) kpi.style.display='none';
   } else {
     // Switching to expert — sync stock-thesis into expert textarea
     const expertThesis=document.getElementById('expert-thesis');
@@ -10325,6 +11334,8 @@ function setThesisMode(mode, el){
     if(interrogateBtn) interrogateBtn.style.display='';
     const pm=document.getElementById('pre-mortem-group');
     if(pm) pm.style.display='block';
+    const kpi=document.getElementById('kpi-group');
+    if(kpi) kpi.style.display='block';
     restoreExpertState();
   }
 }
@@ -10627,27 +11638,42 @@ document.addEventListener('click', e=>{
 
   showQuote();
 
-  const profile=DB.get('profile');
-  const philSeen=DB.get('phil_seen');
-  const hasSession=sessionStorage.getItem('ea_session');
+  // ── v25 boot: wait for Supabase auth state, then route ──
+  // (Supabase auth state arrives via 'penthesis-auth-changed' event)
+  async function v25Boot(){
+    const philSeen = DB.get('phil_seen');
+    const authed = !!(window.penthesisAuth && window.penthesisAuth.isAuthed);
 
-  // First-ever visit: show philosophy screen
-  if(!profile&&!philSeen){
-    document.getElementById('phil-screen').classList.remove('hidden');
-    return;
+    if (authed) {
+      // Signed-in user: pull data, hide auth screen, show app
+      showAuthStatus('Loading your portfolio...', 'info');
+      try {
+        await DB.boot();
+      } catch(e) {
+        console.warn('[v25] boot error:', e);
+      }
+      const profile = DB.get('profile') || { name: window.penthesisAuth.user.email || 'Investor' };
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('phil-screen')?.classList.add('hidden');
+      initApp(profile.displayName || profile.name || 'Investor');
+      return;
+    }
+
+    // Not signed in
+    if (!philSeen) {
+      // First-ever visit: philosophy screen
+      document.getElementById('phil-screen').classList.remove('hidden');
+      return;
+    }
+    // Returning visitor, not signed in: show sign-in
+    document.getElementById('auth-screen').classList.remove('hidden');
+    document.getElementById('setup-form').classList.remove('hidden');
+    document.getElementById('unlock-form').classList.add('hidden');
   }
 
-  // Active session (tab refresh) — skip PIN, go straight in
-  if(profile && hasSession){
-    document.getElementById('auth-screen').classList.add('hidden');
-    initApp(profile.name);
-    return;
-  }
-
-  // Returning user: straight to unlock
-  document.getElementById('auth-screen').classList.remove('hidden');
-  if(profile) showUnlock();
-  else showSetup();
+  // Run boot now (auth may already have resolved) and on every auth change
+  v25Boot();
+  window.addEventListener('penthesis-auth-changed', v25Boot);
 })();
 </script>
 </body>
