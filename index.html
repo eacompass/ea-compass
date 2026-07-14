@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#09161F">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0C1A21">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Penthesis">
@@ -16,7 +16,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --navy:#09161F;--navy-1:#0D1E2B;--navy-2:#122435;--navy-3:#1A3347;
+  --navy:#0C1A21;--navy-1:#101F2C;--navy-2:#152438;--navy-3:#1C3249;
   --gold:#C09B45;--gold-light:#D4B46A;--gold-dim:#8A6B2E;
   --cream:#F2EDE4;--white:#FAFAF8;--muted:#5A7A8E;--muted-light:#8AA4B4;
   --success:#1E8A52;--danger:#B53232;
@@ -193,14 +193,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 @media(max-width:620px){
   .nav{display:none}
   .mobile-bottom-nav{display:flex!important}
-  .page{padding:16px 14px 88px!important}
+  .page{padding:16px 14px 110px!important}
   .header-inner{padding:10px 16px}
 }
 .mobile-bottom-nav{
   display:none;position:fixed;bottom:0;left:0;right:0;
   background:rgba(9,22,31,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   border-top:1px solid var(--border);
-  padding:6px 0 calc(env(safe-area-inset-bottom,0px) + 6px);
+  padding:8px 0 calc(env(safe-area-inset-bottom, 16px) + 8px);
   z-index:500;justify-content:space-around;align-items:flex-start;
 }
 .mob-nav-btn{
@@ -263,6 +263,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .trade-form{background:var(--navy-1);border-radius:16px;padding:22px;border:1px solid var(--border)}
 .trade-form-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-select option{background:#0D1E2B;color:#FAFAF8}
 .form-select,.form-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--white);padding:13px 16px;font-size:14px;font-family:'DM Sans',sans-serif;transition:var(--transition);outline:none;-webkit-appearance:none}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7A8E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);background:rgba(192,155,69,0.05);box-shadow:var(--shadow-gold)}
@@ -1183,6 +1184,73 @@ body.beginner-mode .beginner-hint{display:block}
 .bwi-toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:white;transition:transform 0.2s}
 .bwi-toggle.on::after{transform:translateX(16px)}
 @media(max-width:600px){.digest-stats{grid-template-columns:1fr 1fr}}
+
+/* ══ IPS CARD ══ */
+.ips-card-wrap{background:var(--navy-1);border:1px solid var(--border-strong);border-radius:var(--radius);padding:18px 20px;margin-top:0}
+.ips-view{display:flex;flex-direction:column;gap:0}
+.ips-view-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.ips-view-row:last-child{border-bottom:none}
+.ips-view-label{font-size:12px;color:var(--muted)}
+.ips-view-val{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold-light);font-weight:500}
+.ips-edit-btn{width:100%;padding:10px;background:rgba(192,155,69,0.08);border:1px solid var(--border-strong);border-radius:9px;color:var(--gold-light);font-size:12px;font-weight:600;cursor:pointer;margin-top:14px;transition:var(--transition);font-family:'DM Sans',sans-serif;letter-spacing:0.5px}
+.ips-edit-btn:active{background:rgba(192,155,69,0.15);transform:scale(0.98)}
+.ips-not-set{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+/* ══ IPS MODAL ══ */
+.ips-modal-overlay{position:fixed;inset:0;background:rgba(9,22,31,0.92);z-index:400;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px)}
+.ips-modal-overlay.hidden{display:none}
+.ips-modal{background:var(--navy-1);border:1px solid var(--border-strong);border-radius:20px 20px 0 0;padding:28px 22px 36px;width:100%;max-width:520px;max-height:85vh;overflow-y:auto}
+.ips-modal-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--white);margin-bottom:4px}
+.ips-modal-sub{font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+.ips-field-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:6px;margin-top:16px;display:block}
+.ips-field-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.ips-save-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:10px;color:#09161F;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:22px;transition:var(--transition)}
+.ips-save-btn:active{transform:scale(0.98);background:var(--gold-light)}
+.ips-cancel-btn{width:100%;padding:10px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;margin-top:8px;font-family:'DM Sans',sans-serif}
+
+/* ── MOBILE NAV SAFE AREA FIX ── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-bottom-nav {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+  }
+}
+@media(max-width:620px) {
+  body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+/* ══ GUIDED CHECK-IN FLOW ══ */
+.checkin-wrap{padding:0}
+.checkin-step{display:none;animation:page-in 0.25s ease}
+.checkin-step.active{display:block}
+.checkin-step-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:10px}
+.checkin-step-title{font-size:14px;color:var(--white);font-weight:500;margin-bottom:14px;line-height:1.4}
+.checkin-moods{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.checkin-mood-btn{padding:6px 14px;border:1px solid rgba(255,255,255,0.12);border-radius:20px;background:none;color:var(--muted);font-size:12px;cursor:pointer;transition:var(--transition);font-family:"DM Sans",sans-serif}
+.checkin-mood-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(192,155,69,0.08)}
+.checkin-sentiment-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.checkin-sent-btn{padding:10px 8px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:none;color:var(--muted);font-size:12px;cursor:pointer;transition:var(--transition);font-family:"DM Sans",sans-serif;text-align:center}
+.checkin-sent-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(192,155,69,0.08)}
+.checkin-sent-btn .sent-icon{font-size:18px;display:block;margin-bottom:4px}
+.checkin-prompt{background:rgba(192,155,69,0.06);border-left:3px solid var(--gold-dim);border-radius:0 8px 8px 0;padding:10px 12px;font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;margin-bottom:14px}
+.checkin-next-btn{width:100%;padding:11px;background:var(--gold);border:none;border-radius:9px;color:#09161F;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:"DM Sans",sans-serif}
+.checkin-next-btn:active{transform:scale(0.98)}
+.checkin-skip{width:100%;padding:6px;background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;margin-top:4px;font-family:"DM Sans",sans-serif}
+.checkin-progress{display:flex;gap:4px;margin-bottom:16px}
+.checkin-prog-dot{height:3px;flex:1;background:rgba(255,255,255,0.1);border-radius:2px;transition:background 0.3s}
+.checkin-prog-dot.done{background:var(--gold)}
+.checkin-prog-dot.active{background:var(--gold-light)}
+.checkin-pl-reveal{background:rgba(192,155,69,0.05);border:1px solid rgba(192,155,69,0.15);border-radius:10px;padding:14px;margin-bottom:14px;text-align:center}
+.checkin-pl-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.checkin-pl-value{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600}
+.checkin-pl-value.pos{color:#4DBF87}
+.checkin-pl-value.neg{color:#E05252}
+.checkin-pl-value.neutral{color:var(--muted)}
+.checkin-insight{font-size:12px;color:var(--muted);text-align:center;line-height:1.5;margin-top:8px;font-style:italic}
+.checkin-done-btn{width:100%;padding:11px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:var(--muted);font-size:12px;cursor:pointer;margin-top:8px;font-family:"DM Sans",sans-serif}
+.checkin-done-btn:active{background:rgba(255,255,255,0.07)}
+.checkin-history-divider{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:16px 0 10px;opacity:0.6}
+
+/* Force hide keyboard shortcuts bar */
+#shortcuts-hint, .shortcuts-hint { display: none !important; }
 </style>
 <!-- ══════════════════════════════════════════════════════════════════════
      PENTHESIS v25 — Supabase client + auth + smart-router DB layer
@@ -1991,7 +2059,7 @@ body.beginner-mode .beginner-hint{display:block}
       never wrote down <em>why</em> they picked them.
     </div>
     <div class="phil-sub">
-      Compass is the discipline layer between impulse and execution.
+      Penthesis is the discipline layer between impulse and execution.
       Every position must earn its place — in writing, before you buy.
     </div>
     <div class="phil-principles">
@@ -2031,7 +2099,7 @@ body.beginner-mode .beginner-hint{display:block}
 <div id="quiz-screen" class="phil-screen hidden">
   <div class="phil-wrap" style="max-width:480px">
     <div class="phil-eyebrow">Quick setup · 3 questions</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);font-weight:600;line-height:1.2;margin-bottom:8px">Help us set up<br>your Compass</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);font-weight:600;line-height:1.2;margin-bottom:8px">Help us set up<br>your Penthesis</div>
     <div style="font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.6">Three questions. No wrong answers. Sets the right defaults for you.</div>
 
     <!-- Progress dots -->
@@ -2076,7 +2144,7 @@ body.beginner-mode .beginner-hint{display:block}
 
     <!-- Results -->
     <div class="quiz-step hidden" id="quiz-step-3">
-      <div style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:16px">Your Compass is ready 🧭</div>
+      <div style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:16px">Your Penthesis is ready 🎯</div>
       <div id="quiz-result-card" style="background:rgba(192,155,69,0.08);border:1px solid var(--border-strong);border-radius:12px;padding:18px 20px;margin-bottom:20px"></div>
       <button onclick="quizComplete()" style="width:100%;padding:15px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif">Set up my account →</button>
     </div>
@@ -2088,7 +2156,7 @@ body.beginner-mode .beginner-hint{display:block}
 <div class="auth-wrap">
   <div class="auth-left">
     <div>
-      <div class="auth-logo">E&A<span>Compass</span></div>
+      <div class="auth-logo">Penthesis</div>
       <div class="auth-tagline">Pen your thesis. Build your wealth.</div>
       <div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6">The discipline layer between impulse and execution.<br>Every position must earn its place — in writing.</div>
     </div>
@@ -2111,26 +2179,65 @@ body.beginner-mode .beginner-hint{display:block}
   <div class="auth-right">
     <div id="auth-status"></div>
     <div id="setup-form">
-      <h2>Pen your <em style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic">thesis.</em></h2>
-      <p>Sign in to start. Your data is encrypted and synced across devices.</p>
 
-      <button class="btn-primary" onclick="penthSignInGoogle()" style="background:#fff;color:#000;display:flex;align-items:center;justify-content:center;gap:10px">
+      <!-- AUTH TABS -->
+      <div style="display:flex;gap:0;margin-bottom:24px;background:rgba(255,255,255,0.04);border-radius:10px;padding:4px;border:1px solid var(--border)">
+        <button id="tab-signin" onclick="authTab('signin')" style="flex:1;padding:9px;border:none;border-radius:7px;background:var(--gold);color:#09161F;font-weight:700;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s">Sign In</button>
+        <button id="tab-signup" onclick="authTab('signup')" style="flex:1;padding:9px;border:none;border-radius:7px;background:none;color:var(--muted);font-weight:600;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s">Create Account</button>
+      </div>
+
+      <!-- GOOGLE -->
+      <button class="btn-primary" onclick="penthSignInGoogle()" style="background:#fff;color:#000;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px">
         <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
         Continue with Google
       </button>
-
       <div class="auth-divider">or with email</div>
 
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" id="penth-email" type="email" placeholder="you@example.com" autocomplete="email">
+      <!-- SIGN IN FORM -->
+      <div id="auth-signin-form">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="penth-email" type="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div style="position:relative">
+            <input class="form-input" id="penth-password" type="password" placeholder="Your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')penthSignIn()" style="padding-right:44px">
+            <button type="button" onclick="togglePwd()" id="pwd-toggle-btn" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px;line-height:1">&#128065;</button>
+          </div>
+          <div style="text-align:right;margin-top:6px">
+            <button onclick="authForgotPassword()" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif">Forgot password?</button>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="penthSignIn()">Sign In &#8594;</button>
+        <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted)">
+          No account? <button onclick="authTab('signup')" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600">Create one free &#8594;</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Password</label>
-        <input class="form-input" id="penth-password" type="password" placeholder="Minimum 6 characters" autocomplete="current-password" onkeydown="if(event.key==='Enter')penthSignIn()">
-        <div style="font-size:11px;color:var(--muted);margin-top:6px">We'll create an account if this email is new.</div>
+
+      <!-- SIGN UP FORM -->
+      <div id="auth-signup-form" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="penth-name" type="text" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="penth-email-signup" type="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div style="position:relative">
+            <input class="form-input" id="penth-password-signup" type="password" placeholder="Minimum 6 characters" autocomplete="new-password" onkeydown="if(event.key==='Enter')penthSignUp()" style="padding-right:44px">
+            <button type="button" onclick="togglePwdSignup()" id="pwd-toggle-btn-signup" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px;line-height:1">&#128065;</button>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">Your data is encrypted and synced across devices.</div>
+        </div>
+        <button class="btn-primary" onclick="penthSignUp()">Create My Account &#8594;</button>
+        <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted)">
+          Already have an account? <button onclick="authTab('signin')" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600">Sign in &#8594;</button>
+        </div>
       </div>
-      <button class="btn-primary" onclick="penthSignIn()">Sign in / Sign up →</button>
 
       <div class="auth-divider">just looking around?</div>
       <button class="btn-ghost" onclick="penthDemoMode()">Browse the demo portfolio</button>
@@ -2186,22 +2293,83 @@ body.beginner-mode .beginner-hint{display:block}
     </div>
     <div class="journal-panel" id="journal-panel">
       <div class="journal-panel-inner">
-        <div class="journal-mood-row">
-          <span class="journal-mood-label">Mindset</span>
-          <div class="journal-moods">
-            <button class="journal-mood-btn" data-mood="calm" onclick="selectMood(this)">Calm</button>
-            <button class="journal-mood-btn" data-mood="excited" onclick="selectMood(this)">Bullish</button>
-            <button class="journal-mood-btn" data-mood="uncertain" onclick="selectMood(this)">Uncertain</button>
-            <button class="journal-mood-btn" data-mood="fearful" onclick="selectMood(this)">Cautious</button>
+        <div class="checkin-wrap" id="checkin-wrap">
+
+          <!-- Progress dots -->
+          <div class="checkin-progress">
+            <div class="checkin-prog-dot active" id="cp0"></div>
+            <div class="checkin-prog-dot" id="cp1"></div>
+            <div class="checkin-prog-dot" id="cp2"></div>
+            <div class="checkin-prog-dot" id="cp3"></div>
           </div>
+
+          <!-- STEP 1: MOOD -->
+          <div class="checkin-step active" id="ci-step0">
+            <div class="checkin-step-label">Step 1 of 4 &nbsp;&middot;&nbsp; Mood Check</div>
+            <div class="checkin-step-title">How are you feeling right now?</div>
+            <div class="checkin-moods">
+              <button class="checkin-mood-btn" data-mood="calm" onclick="ciSelectMood(this)">&#128524; Calm</button>
+              <button class="checkin-mood-btn" data-mood="focused" onclick="ciSelectMood(this)">&#127919; Focused</button>
+              <button class="checkin-mood-btn" data-mood="anxious" onclick="ciSelectMood(this)">&#128560; Anxious</button>
+              <button class="checkin-mood-btn" data-mood="excited" onclick="ciSelectMood(this)">&#128293; Excited</button>
+              <button class="checkin-mood-btn" data-mood="fearful" onclick="ciSelectMood(this)">&#128543; Fearful</button>
+              <button class="checkin-mood-btn" data-mood="uncertain" onclick="ciSelectMood(this)">&#129300; Uncertain</button>
+            </div>
+            <button class="checkin-next-btn" onclick="ciNext(1)">Continue &#8594;</button>
+            <button class="checkin-skip" onclick="ciSkipAll()">Skip check-in</button>
+          </div>
+
+          <!-- STEP 2: MARKET SENTIMENT -->
+          <div class="checkin-step" id="ci-step1">
+            <div class="checkin-step-label">Step 2 of 4 &nbsp;&middot;&nbsp; Market Read</div>
+            <div class="checkin-step-title">How do you read the market today?</div>
+            <div class="checkin-sentiment-btns">
+              <button class="checkin-sent-btn" data-sent="bullish" onclick="ciSelectSent(this)">
+                <span class="sent-icon">&#128200;</span>Bullish
+              </button>
+              <button class="checkin-sent-btn" data-sent="neutral" onclick="ciSelectSent(this)">
+                <span class="sent-icon">&#128528;</span>Neutral
+              </button>
+              <button class="checkin-sent-btn" data-sent="bearish" onclick="ciSelectSent(this)">
+                <span class="sent-icon">&#128201;</span>Bearish
+              </button>
+            </div>
+            <button class="checkin-next-btn" onclick="ciNext(2)">Continue &#8594;</button>
+            <button class="checkin-skip" onclick="ciNext(2)">Skip this step</button>
+          </div>
+
+          <!-- STEP 3: ADAPTIVE PROMPT + JOURNAL -->
+          <div class="checkin-step" id="ci-step2">
+            <div class="checkin-step-label">Step 3 of 4 &nbsp;&middot;&nbsp; Reflection</div>
+            <div class="checkin-prompt" id="ci-adaptive-prompt">What&#39;s on your mind today?</div>
+            <div class="journal-input-row">
+              <textarea class="journal-textarea" id="journal-input" placeholder="Be honest &#8212; external pressures, news, gut feelings, thesis doubts&#8230;" rows="3"></textarea>
+              <button class="journal-submit" onclick="ciSaveAndNext()">Log &#8594;</button>
+            </div>
+            <button class="checkin-skip" onclick="ciNext(3)">Skip writing</button>
+          </div>
+
+          <!-- STEP 4: P&L REVEAL -->
+          <div class="checkin-step" id="ci-step3">
+            <div class="checkin-step-label">Step 4 of 4 &nbsp;&middot;&nbsp; Portfolio</div>
+            <div class="checkin-step-title">Mindset logged. Here&#39;s your portfolio.</div>
+            <div class="checkin-pl-reveal">
+              <div class="checkin-pl-label">Unrealised P&amp;L</div>
+              <div class="checkin-pl-value" id="ci-pl-value">&#8212;</div>
+              <div class="checkin-insight" id="ci-insight"></div>
+            </div>
+            <button class="checkin-next-btn" onclick="ciComplete()">View Portfolio &#8594;</button>
+            <button class="checkin-done-btn" onclick="ciReset()">&#8635; New Check-in</button>
+          </div>
+
         </div>
-        <div class="journal-input-row">
-          <textarea class="journal-textarea" id="journal-input" placeholder="What's driving your thinking before this trade? Be honest — external pressures, news, gut feelings…" rows="2"></textarea>
-          <button class="journal-submit" onclick="saveJournalEntry()">Log</button>
-        </div>
+
+        <!-- JOURNAL HISTORY always visible below -->
+        <div class="checkin-history-divider">Recent entries</div>
         <div class="journal-entries" id="journal-entries"></div>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="nav">
@@ -2742,7 +2910,7 @@ body.beginner-mode .beginner-hint{display:block}
       <div class="trade-form-title">Crypto</div>
       <div class="crypto-sars-banner">
         <span>⚠</span>
-        <span>SARS treats crypto as a capital asset. CGT applies on every disposal. You must declare this on your ITR12. Compass tracks this for you — consult a tax practitioner for your submission.</span>
+        <span>SARS treats crypto as a capital asset. CGT applies on every disposal. You must declare this on your ITR12. Penthesis tracks this for you — consult a tax practitioner for your submission.</span>
       </div>
       <div class="form-group" style="margin-top:14px">
         <label class="form-label">Asset</label>
@@ -2906,7 +3074,7 @@ body.beginner-mode .beginner-hint{display:block}
         <button class="rebalance-toggle" onclick="toggleRebalance()">Show →</button>
       </div>
       <div class="rebalance-body" id="rebalance-body">
-        <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">Set your target allocation by tier. Compass will calculate the exact trades needed to rebalance your portfolio.</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">Set your target allocation by tier. Penthesis will calculate the exact trades needed to rebalance your portfolio.</div>
         <div class="rebalance-targets">
           <div class="rebalance-target">
             <div class="rebalance-target-label">Tier Targets (%)</div>
@@ -3209,7 +3377,7 @@ body.beginner-mode .beginner-hint{display:block}
         <span class="brief-coming-badge" id="brief-tier-badge">Elite feature</span>
       </div>
       <div class="brief-sub" style="font-size:13px;color:var(--muted-light);line-height:1.7;margin-bottom:16px">
-        Compass researches your watchlist and portfolio and writes you a one-page investment brief. Read it. Decide. One tap to log the trade.
+        Penthesis researches your watchlist and portfolio and writes you a one-page investment brief. Read it. Decide. One tap to log the trade.
       </div>
 
       <!-- Generate Brief Button -->
@@ -3225,7 +3393,7 @@ body.beginner-mode .beginner-hint{display:block}
       <div class="brief-flow">
         <div class="brief-flow-step">
           <div class="bfs-num">1</div>
-          <div><div class="bfs-title">Compass reads your watchlist + portfolio</div><div class="bfs-desc">Every stock you're watching and holding gets analysed against your original thesis.</div></div>
+          <div><div class="bfs-title">Penthesis reads your watchlist + portfolio</div><div class="bfs-desc">Every stock you're watching and holding gets analysed against your original thesis.</div></div>
         </div>
         <div class="brief-flow-step">
           <div class="bfs-num">2</div>
@@ -3331,7 +3499,7 @@ body.beginner-mode .beginner-hint{display:block}
         <div class="rebalance-header">
           <div>
             <div class="rebalance-title">What is Value Investing?</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:2px">The philosophy behind Compass</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">The philosophy behind Penthesis</div>
           </div>
           <span id="art4-chevron" style="color:var(--gold-dim)">▸</span>
         </div>
@@ -3356,7 +3524,7 @@ body.beginner-mode .beginner-hint{display:block}
           <p><strong style="color:var(--white)">Step 1 — Open a brokerage account.</strong> EasyEquities is the most accessible for SA retail investors. Low fees, fractional shares, and access to JSE and US markets. Standard Bank, FNB, and Investec also offer trading accounts.</p>
           <p style="margin-top:12px"><strong style="color:var(--white)">Step 2 — Use your TFSA first.</strong> Your Tax-Free Savings Account allows R46,000/year (R500,000 lifetime) of tax-free growth. No CGT, no dividends tax, no income tax on returns. Always max this before taxable accounts.</p>
           <p style="margin-top:12px"><strong style="color:var(--white)">Step 3 — Start with ETFs.</strong> Before picking individual stocks, get market exposure through ETFs like the Satrix 40 (JSE Top 40) or Satrix World (global equities). You get instant diversification and don't need to pick winners.</p>
-          <p style="margin-top:12px"><strong style="color:var(--white)">Step 4 — Learn before you stock-pick.</strong> When you're ready to pick individual stocks, write a thesis for every position. Compass is designed for exactly this — it forces the discipline that separates long-term wealth builders from gamblers.</p>
+          <p style="margin-top:12px"><strong style="color:var(--white)">Step 4 — Learn before you stock-pick.</strong> When you're ready to pick individual stocks, write a thesis for every position. Penthesis is designed for exactly this — it forces the discipline that separates long-term wealth builders from gamblers.</p>
           <p style="margin-top:12px"><strong style="color:var(--white)">Step 5 — Be patient.</strong> Compounding takes time. R1,000/month at 15% annual return for 20 years becomes R1.5M. The strategy is not the hard part. Staying the course is.</p>
           <p style="margin-top:12px;padding:12px;background:rgba(192,155,69,0.06);border-left:3px solid var(--gold-dim);border-radius:0 8px 8px 0;color:var(--gold-light);font-style:italic">"The stock market is a device for transferring money from the impatient to the patient." — Warren Buffett</p>
         </div>
@@ -3403,6 +3571,15 @@ body.beginner-mode .beginner-hint{display:block}
           <div class="settings-row-sub">Full technical UI — valuation methods, moat types, thesis quality scoring, all AI tools. For experienced investors. <span style="color:var(--gold-dim);font-size:10px;font-weight:600">PRO</span></div>
         </div>
         <button class="settings-toggle" id="st-expert" onclick="setGlobalMode('expert',null)"></button>
+      </div>
+    </div>
+
+    <!-- IPS CARD -->
+    <div class="settings-section">
+      <div class="settings-section-title">Investment Policy Statement</div>
+      <div class="ips-card-wrap" id="ips-settings-card">
+        <!-- Populated by renderIPS() -->
+        <div class="ips-not-set">Loading your investment policy...</div>
       </div>
     </div>
 
@@ -3514,7 +3691,7 @@ body.beginner-mode .beginner-hint{display:block}
       <!-- Refer a friend -->
       <div style="margin-bottom:16px;padding:14px 16px;background:rgba(61,184,122,0.06);border:1px solid rgba(61,184,122,0.2);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px">
         <div>
-          <div style="font-size:13px;font-weight:600;color:var(--white)">Share Compass</div>
+          <div style="font-size:13px;font-weight:600;color:var(--white)">Share Penthesis</div>
           <div style="font-size:11px;color:var(--muted);margin-top:2px">Give a friend free Pro access with your beta code</div>
         </div>
         <button onclick="showReferModal()" style="padding:8px 16px;background:rgba(61,184,122,0.12);border:1px solid rgba(61,184,122,0.3);border-radius:8px;color:#3DB87A;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">Share 🧭</button>
@@ -3741,9 +3918,9 @@ const DB = window.DB;
 const TIERS = {
   free:    { label:'Free',           price:0,    color:'#5A7A8E' },
   student: { label:'Student',        price:9.99, color:'#3DB87A' },
-  pro:     { label:'Compass Pro',    price:29,   color:'#C09B45' },
-  elite:   { label:'Compass Elite',  price:79,   color:'#D4B46A' },
-  fund:    { label:'Compass Fund',   price:299,  color:'#FAFAF8' },
+  pro:     { label:'Penthesis Pro',    price:29,   color:'#C09B45' },
+  elite:   { label:'Penthesis Elite',  price:79,   color:'#D4B46A' },
+  fund:    { label:'Penthesis Fund',   price:299,  color:'#FAFAF8' },
 };
 
 // Feature flags per tier
@@ -3895,14 +4072,14 @@ function showUpgradeModal(feature, context=''){
     },
     brief:{
       title:'Intelligence Brief — Elite feature',
-      body:'Every Monday at 7am — your watchlist researched, opportunities surfaced, draft theses ready. Upgrade to Compass Elite.',
+      body:'Every Monday at 7am — your watchlist researched, opportunities surfaced, draft theses ready. Upgrade to Penthesis Elite.',
       cta:'Upgrade to Elite — R79/month →'
     },
   };
 
   const msg=messages[feature]||{
     title:'Pro feature',
-    body:'Upgrade to Compass Pro to unlock this feature.',
+    body:'Upgrade to Penthesis Pro to unlock this feature.',
     cta:'Upgrade to Pro — R29/month →'
   };
 
@@ -3914,7 +4091,7 @@ function showUpgradeModal(feature, context=''){
     modal.className='modal-overlay';
     modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)';
     modal.innerHTML=`<div style="background:var(--navy-1);border:1px solid var(--border-strong);border-radius:16px;padding:32px;max-width:420px;width:100%;position:relative;animation:page-in 0.2s ease">
-      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:12px">Compass Pro</div>
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:12px">Penthesis Pro</div>
       <div id="upgrade-title" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--white);margin-bottom:12px"></div>
       <div id="upgrade-body" style="font-size:14px;color:var(--muted-light);line-height:1.7;margin-bottom:24px"></div>
       <a href="https://elizabethalbert.co.za/#pricing" target="_blank" id="upgrade-cta" style="display:block;width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;color:var(--navy);font-weight:700;font-size:14px;text-align:center;text-decoration:none;margin-bottom:12px;transition:all 0.2s"></a>
@@ -4787,7 +4964,7 @@ function doSetup(){
     const tier=getUserTier();
     const msg=tier==='fund'
       ? `Welcome, ${name.split(' ')[0]}. Employee #1 — Fund tier activated. 🧭`
-      : `Welcome, ${name.split(' ')[0]}. Your Compass is ready.`;
+      : `Welcome, ${name.split(' ')[0]}. Your Penthesis is ready.`;
     showToast(msg,'success');
   },600);
 }
@@ -4810,7 +4987,7 @@ function forgotPIN(){
 }
 
 function clearAllData(){
-  const confirmed=confirm('Clear ALL Compass data?\n\nThis deletes every trade, thesis, and note. Download a backup first if you want to keep your data.\n\nThis cannot be undone.');
+  const confirmed=confirm('Clear ALL Penthesis data?\n\nThis deletes every trade, thesis, and note. Download a backup first if you want to keep your data.\n\nThis cannot be undone.');
   if(!confirmed) return;
   const doubleConfirm=confirm('Last chance — delete everything?');
   if(!doubleConfirm) return;
@@ -4882,7 +5059,7 @@ function doLock(){
 function initApp(name){
   document.getElementById('auth-screen').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
-  const displayName=name||(DB.get('profile')?.name||'Compass');
+  const displayName=name||(DB.get('profile')?.name||'Investor');
   document.getElementById('user-email-text').textContent=displayName;
   document.getElementById('user-avatar').textContent=displayName.charAt(0).toUpperCase();
   showQuote();
@@ -4894,7 +5071,7 @@ function initApp(name){
   renderWatchlist();
   updateTierBadge();
   const hint=document.getElementById('shortcuts-hint');
-  if(hint&&!DB.get('shortcuts_dismissed')) hint.style.display='flex';
+  if(hint) hint.style.display='none'; // Hidden — not needed on mobile/demo
 
   // ── Modal scroll lock — watch all modals for hidden class changes ──
   const modalObserver=new MutationObserver(()=>{
@@ -5081,6 +5258,8 @@ function initGlobalMode(){
 }
 
 function renderSettings(){
+  renderIPS();
+  renderIPS();
   const mode=DB.get('global_mode')||'beginner';
   const stBeginner=document.getElementById('st-beginner');
   const stExpert=document.getElementById('st-expert');
@@ -5151,7 +5330,7 @@ function renderSettingsPlan(){
           Upgrade to Pro for unlimited positions, all Penthesis Intelligence features, expert mode, dividend tracking, CGT report, and more.
         </div>
         <button onclick="showUpgradeModal('unlimited_pos')" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:10px;color:var(--navy);font-weight:700;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s">
-          Upgrade to Compass Pro — R29/month →
+          Upgrade to Penthesis Pro — R29/month →
         </button>
         <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px">14-day free trial · No card required · Beta pricing locked for life</div>
       </div>
@@ -5204,20 +5383,20 @@ function resetTierForTesting(){
 // These are private codes — share directly with beta testers
 const BETA_CODES = {
   // Pro tier codes
-  'EABETA2026':    {tier:'pro',   label:'Compass Pro',   note:'Beta tester — Pro unlocked 🧭'},
-  'EAPRO2026':     {tier:'pro',   label:'Compass Pro',   note:'Pro access activated'},
-  'COMPASSPRO':    {tier:'pro',   label:'Compass Pro',   note:'Pro access activated'},
+  'EABETA2026':    {tier:'pro',   label:'Penthesis Pro',   note:'Beta tester — Pro unlocked 🧭'},
+  'EAPRO2026':     {tier:'pro',   label:'Penthesis Pro',   note:'Pro access activated'},
+  'COMPASSPRO':    {tier:'pro',   label:'Penthesis Pro',   note:'Pro access activated'},
 
   // Student tier
   'EASTUDENT':     {tier:'student',label:'Student Pro',  note:'Student access activated'},
 
   // Elite tier codes
-  'EAELITE2026':   {tier:'elite', label:'Compass Elite', note:'Elite access activated — Intelligence Brief unlocked'},
-  'COMPASSELITE':  {tier:'elite', label:'Compass Elite', note:'Elite access activated'},
+  'EAELITE2026':   {tier:'elite', label:'Penthesis Elite', note:'Elite access activated — Intelligence Brief unlocked'},
+  'COMPASSELITE':  {tier:'elite', label:'Penthesis Elite', note:'Elite access activated'},
 
   // Fund tier codes — keep these very private
-  'EAFUND2026':    {tier:'fund',  label:'Compass Fund',  note:'Fund tier activated — full access 🧭🔥'},
-  'ELIZABETHALBERT':{tier:'fund', label:'Compass Fund',  note:'Welcome — full Fund access activated'},
+  'EAFUND2026':    {tier:'fund',  label:'Penthesis Fund',  note:'Fund tier activated — full access 🧭🔥'},
+  'ELIZABETHALBERT':{tier:'fund', label:'Penthesis Fund',  note:'Welcome — full Fund access activated'},
 };
 
 function redeemBetaCode(){
@@ -5323,7 +5502,7 @@ function updateSizing(){
   if(price>0||portfolioVal>0) panel.classList.add('show');
 
   const tier=currentTier||1;
-  const maxPct=tier===1?25:15;
+  const _ips=getIPS?getIPS():{t1:25,t2:15}; const maxPct=tier===1?(_ips.t1||25):(_ips.t2||15);
   const maxRand=portfolioVal>0?(portfolioVal*(maxPct/100)):0;
   const suggestedShares=maxRand>0&&price>0?Math.floor(maxRand/price):0;
   const currentTradeVal=price*shares;
@@ -6647,7 +6826,7 @@ async function renderPortfolio(){
   if(!allPositions.length){
     list.innerHTML=`
     <div style="margin-bottom:20px;padding:16px 20px;background:rgba(192,155,69,0.06);border:1px solid var(--border-strong);border-radius:12px">
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;font-weight:600">✦ Sample Position — How Compass Works</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;font-weight:600">✦ Sample Position — How Penthesis Works</div>
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
         <div>
           <div style="font-size:18px;font-weight:700;color:var(--white);font-family:'DM Mono',monospace">MTN</div>
@@ -7403,8 +7582,8 @@ ${pnlStr?`${pnlStr} in ${months} month${months!==1?'s':''} · `:''}${pos.tier===
 
 Exit trigger: "${pos.exit_trigger||'Not defined'}"
 
-Built with Penthesis 🧭
-ea-compass.vercel.app/app`;
+Built with Penthesis
+penthesis.co.za`;
 
   if(navigator.share){
     navigator.share({title:`${ticker} Investment Thesis`,text:shareText})
@@ -8358,7 +8537,7 @@ function renderEarningsCalendar(){
 function showReferModal(){
   const profile=DB.get('profile');
   const name=profile?.name?.split(' ')[0]||'a friend';
-  const shareText=`Hey — I've been using Penthesis to track my investments. It forces you to write WHY you're buying before you buy. Changed how I invest.\n\nFree to use: ea-compass.vercel.app/app\n\nUse code EABETA2026 for full Pro access during beta 🧭`;
+  const shareText=`Hey — I've been using Penthesis to track my investments. It forces you to write WHY you're buying before you buy. Changed how I invest.\n\nFree to use: penthesis.co.za\n\nUse code EABETA2026 for full Pro access during beta 🧭`;
 
   const modal=document.createElement('div');
   modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
@@ -9859,7 +10038,7 @@ function downloadLetter(){
   const t=getLetterText();
   if(!t||t.includes('Select a period')){showToast('Generate first','error');return}
   const b=new Blob([t],{type:'text/plain'});const a=document.createElement('a');
-  a.href=URL.createObjectURL(b);a.download=`EA_Compass_Letter_${new Date().toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(a.href);showToast('✓ Downloaded','success')
+  a.href=URL.createObjectURL(b);a.download=`Penthesis_Letter_${new Date().toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(a.href);showToast('✓ Downloaded','success')
 }
 
 function downloadLetterPDF(){
@@ -9892,9 +10071,104 @@ function downloadLetterPDF(){
     .ls-holding-pct{color:#8B6914}
     .ls-signoff{margin-top:32px;padding-top:20px;border-top:1px solid #e0d0a0}
     @media print{body{padding:20px}}
-  </style>
+  
+/* ══ IPS CARD ══ */
+.ips-card-wrap{background:var(--navy-1);border:1px solid var(--border-strong);border-radius:var(--radius);padding:18px 20px;margin-top:0}
+.ips-view{display:flex;flex-direction:column;gap:0}
+.ips-view-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.ips-view-row:last-child{border-bottom:none}
+.ips-view-label{font-size:12px;color:var(--muted)}
+.ips-view-val{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold-light);font-weight:500}
+.ips-edit-btn{width:100%;padding:10px;background:rgba(192,155,69,0.08);border:1px solid var(--border-strong);border-radius:9px;color:var(--gold-light);font-size:12px;font-weight:600;cursor:pointer;margin-top:14px;transition:var(--transition);font-family:'DM Sans',sans-serif;letter-spacing:0.5px}
+.ips-edit-btn:active{background:rgba(192,155,69,0.15);transform:scale(0.98)}
+.ips-not-set{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+/* ══ IPS MODAL ══ */
+.ips-modal-overlay{position:fixed;inset:0;background:rgba(9,22,31,0.92);z-index:400;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px)}
+.ips-modal-overlay.hidden{display:none}
+.ips-modal{background:var(--navy-1);border:1px solid var(--border-strong);border-radius:20px 20px 0 0;padding:28px 22px 36px;width:100%;max-width:520px;max-height:85vh;overflow-y:auto}
+.ips-modal-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--white);margin-bottom:4px}
+.ips-modal-sub{font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+.ips-field-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:6px;margin-top:16px;display:block}
+.ips-field-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.ips-save-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:10px;color:#09161F;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:22px;transition:var(--transition)}
+.ips-save-btn:active{transform:scale(0.98);background:var(--gold-light)}
+.ips-cancel-btn{width:100%;padding:10px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;margin-top:8px;font-family:'DM Sans',sans-serif}
+
+/* ── MOBILE NAV SAFE AREA FIX ── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-bottom-nav {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+  }
+}
+@media(max-width:620px) {
+  body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+/* ══ GUIDED CHECK-IN FLOW ══ */
+.checkin-wrap{padding:0}
+.checkin-step{display:none;animation:page-in 0.25s ease}
+.checkin-step.active{display:block}
+.checkin-step-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);font-weight:600;margin-bottom:10px}
+.checkin-step-title{font-size:14px;color:var(--white);font-weight:500;margin-bottom:14px;line-height:1.4}
+.checkin-moods{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.checkin-mood-btn{padding:6px 14px;border:1px solid rgba(255,255,255,0.12);border-radius:20px;background:none;color:var(--muted);font-size:12px;cursor:pointer;transition:var(--transition);font-family:"DM Sans",sans-serif}
+.checkin-mood-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(192,155,69,0.08)}
+.checkin-sentiment-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.checkin-sent-btn{padding:10px 8px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:none;color:var(--muted);font-size:12px;cursor:pointer;transition:var(--transition);font-family:"DM Sans",sans-serif;text-align:center}
+.checkin-sent-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(192,155,69,0.08)}
+.checkin-sent-btn .sent-icon{font-size:18px;display:block;margin-bottom:4px}
+.checkin-prompt{background:rgba(192,155,69,0.06);border-left:3px solid var(--gold-dim);border-radius:0 8px 8px 0;padding:10px 12px;font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;margin-bottom:14px}
+.checkin-next-btn{width:100%;padding:11px;background:var(--gold);border:none;border-radius:9px;color:#09161F;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:"DM Sans",sans-serif}
+.checkin-next-btn:active{transform:scale(0.98)}
+.checkin-skip{width:100%;padding:6px;background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;margin-top:4px;font-family:"DM Sans",sans-serif}
+.checkin-progress{display:flex;gap:4px;margin-bottom:16px}
+.checkin-prog-dot{height:3px;flex:1;background:rgba(255,255,255,0.1);border-radius:2px;transition:background 0.3s}
+.checkin-prog-dot.done{background:var(--gold)}
+.checkin-prog-dot.active{background:var(--gold-light)}
+.checkin-pl-reveal{background:rgba(192,155,69,0.05);border:1px solid rgba(192,155,69,0.15);border-radius:10px;padding:14px;margin-bottom:14px;text-align:center}
+.checkin-pl-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.checkin-pl-value{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600}
+.checkin-pl-value.pos{color:#4DBF87}
+.checkin-pl-value.neg{color:#E05252}
+.checkin-pl-value.neutral{color:var(--muted)}
+.checkin-insight{font-size:12px;color:var(--muted);text-align:center;line-height:1.5;margin-top:8px;font-style:italic}
+.checkin-done-btn{width:100%;padding:11px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:var(--muted);font-size:12px;cursor:pointer;margin-top:8px;font-family:"DM Sans",sans-serif}
+.checkin-done-btn:active{background:rgba(255,255,255,0.07)}
+.checkin-history-divider{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:16px 0 10px;opacity:0.6}
+</style>
 </head>
-<body>${out.innerHTML}<script>window.onload=function(){window.print();}<\/script></body></html>`);
+<body>${out.innerHTML}<script>window.onload=function(){window.print();}<\/script>
+<!-- IPS EDIT MODAL -->
+<div class="ips-modal-overlay hidden" id="ipsModalOverlay" onclick="if(event.target===this)closeIPSModal()">
+  <div class="ips-modal">
+    <div class="ips-modal-title">Investment Policy Statement</div>
+    <div class="ips-modal-sub">Your personal rules — enforced on every trade. Set once, update anytime.</div>
+
+    <label class="ips-field-label">Total Portfolio Value (ZAR)</label>
+    <input type="number" class="form-input" id="ips-pv-input" placeholder="e.g. 250000" min="0" step="1000">
+    <div class="ips-field-hint">Include everything — EasyEquities, unit trusts, property, RA. Used to calculate your max position sizes.</div>
+
+    <label class="ips-field-label">Tier 1 — Max Position Size (%)</label>
+    <input type="number" class="form-input" id="ips-t1-input" placeholder="25" min="5" max="100" step="1">
+    <div class="ips-field-hint">Core holdings — max % of portfolio in any single Tier 1 stock. Default: 25%</div>
+
+    <label class="ips-field-label">Tier 2 — Max Position Size (%)</label>
+    <input type="number" class="form-input" id="ips-t2-input" placeholder="15" min="5" max="100" step="1">
+    <div class="ips-field-hint">Tactical / catalyst positions — smaller size, time-limited. Default: 15%</div>
+
+    <label class="ips-field-label">Max Sector Concentration (%)</label>
+    <input type="number" class="form-input" id="ips-sc-input" placeholder="40" min="10" max="100" step="5">
+    <div class="ips-field-hint">Max % of portfolio in any single sector. Penthesis warns if you exceed this. Default: 40%</div>
+
+    <label class="ips-field-label">Minimum Cash Buffer (%)</label>
+    <input type="number" class="form-input" id="ips-cash-input" placeholder="10" min="0" max="50" step="1">
+    <div class="ips-field-hint">Keep this % of portfolio in cash at all times. Default: 10%</div>
+
+    <button class="ips-save-btn" onclick="saveIPS()">Save My IPS</button>
+    <button class="ips-cancel-btn" onclick="closeIPSModal()">Cancel</button>
+  </div>
+</div>
+</body></html>`);
   printWin.document.close();
   showToast('✓ Print dialog — save as PDF','success');
 }
@@ -9920,6 +10194,160 @@ function toggleJournal(){
   panel.classList.toggle('open',!isOpen);
   toggle.classList.toggle('active',!isOpen);
   if(!isOpen)renderJournalEntries();
+}
+
+
+// ══════════════════════════════════════════════════
+// GUIDED CHECK-IN FLOW
+// ══════════════════════════════════════════════════
+let ciMood = null;
+let ciSentiment = null;
+let ciCurrentStep = 0;
+
+const CI_PROMPTS = {
+  calm:      "You are calm — a great state for clear thinking. What are you observing today?",
+  focused:   "Focus is your edge. What specific thesis or idea has your full attention right now?",
+  anxious:   "Anxiety before a trade is worth exploring. What specifically is making you uneasy? Name it.",
+  excited:   "Excitement is useful data. Is it thesis-based conviction — or are you reacting to price movement?",
+  fearful:   "Fear is a signal. Before acting — re-read your last thesis. What does it say?",
+  uncertain: "Uncertainty is honest. What information would make you more confident? Do you need to wait?",
+};
+
+function ciSelectMood(btn) {
+  document.querySelectorAll('.checkin-mood-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ciMood = btn.dataset.mood;
+  // Also sync to existing selectedMood for backward compat
+  selectedMood = ciMood;
+}
+
+function ciSelectSent(btn) {
+  document.querySelectorAll('.checkin-sent-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ciSentiment = btn.dataset.sent;
+}
+
+function ciNext(step) {
+  // Update progress dots
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('cp' + i);
+    if (!dot) continue;
+    dot.className = 'checkin-prog-dot' + (i < step ? ' done' : i === step ? ' active' : '');
+  }
+  // Hide current, show next
+  document.querySelectorAll('.checkin-step').forEach((s, i) => {
+    s.classList.toggle('active', i === step);
+  });
+  ciCurrentStep = step;
+
+  // Set adaptive prompt based on mood
+  if (step === 2) {
+    const prompt = document.getElementById('ci-adaptive-prompt');
+    if (prompt && ciMood) {
+      prompt.textContent = CI_PROMPTS[ciMood] || "What is on your mind today?";
+    }
+  }
+
+  // Set P&L reveal
+  if (step === 3) {
+    ciShowPL();
+  }
+}
+
+function ciSaveAndNext() {
+  const inp = document.getElementById('journal-input');
+  const text = inp ? inp.value.trim() : '';
+  if (text) {
+    const entry = {
+      id: Date.now(),
+      text,
+      mood: ciMood,
+      sentiment: ciSentiment,
+      ts: new Date().toISOString()
+    };
+    journalEntries.unshift(entry);
+    if (journalEntries.length > 50) journalEntries = journalEntries.slice(0, 50);
+    saveJournalState();
+    if (inp) inp.value = '';
+    renderJournalEntries();
+    updateJournalDot();
+  }
+  ciNext(3);
+}
+
+function ciShowPL() {
+  const plEl = document.getElementById('ci-pl-value');
+  const insightEl = document.getElementById('ci-insight');
+  if (!plEl) return;
+
+  // Calculate today's P&L from positions
+  let totalPL = 0;
+  let hasData = false;
+  if (allPositions && allPositions.length) {
+    allPositions.forEach(p => {
+      const cp = priceCache[p.ticker]?.price;
+      if (cp) {
+        totalPL += (cp - p.avg_price) * p.quantity;
+        hasData = true;
+      }
+    });
+  }
+
+  if (!hasData) {
+    plEl.textContent = 'No live prices';
+    plEl.className = 'checkin-pl-value neutral';
+    if (insightEl) insightEl.textContent = 'Add a price API key in settings to see live P&L.';
+    return;
+  }
+
+  const formatted = (totalPL >= 0 ? '+R ' : '-R ') + Math.abs(totalPL).toLocaleString('en-ZA', {maximumFractionDigits: 0});
+  plEl.textContent = formatted;
+  plEl.className = 'checkin-pl-value ' + (totalPL >= 0 ? 'pos' : 'neg');
+
+  // Mood-aware insight
+  const insights = {
+    calm:      totalPL >= 0 ? "Calm and profitable — ideal state." : "Down today, but you are calm. Good. Thesis intact?",
+    anxious:   totalPL >= 0 ? "Up despite anxiety. The market does not know how you feel." : "Anxious and down — resist the urge to act emotionally.",
+    excited:   totalPL >= 0 ? "Excited and up — be careful of overconfidence." : "Excited but down — is the excitement thesis-based?",
+    fearful:   totalPL >= 0 ? "Fearful but profitable — fear is lying to you today." : "Fearful and down — re-read your thesis before selling.",
+    focused:   totalPL >= 0 ? "Focused and profitable. Stay the course." : "Down today. Your focus is your edge — use it.",
+    uncertain: totalPL >= 0 ? "Uncertain but up. Sometimes the market rewards patience." : "Uncertain and down. What would resolve your uncertainty?",
+  };
+  if (insightEl && ciMood) {
+    insightEl.textContent = insights[ciMood] || '';
+  }
+}
+
+function ciComplete() {
+  // Close journal panel and navigate to portfolio
+  toggleJournal();
+  const portTab = document.querySelector('[data-tab="portfolio"]');
+  if (portTab) switchTab('portfolio', portTab);
+  showToast('Check-in complete — viewing portfolio', 'success');
+}
+
+function ciReset() {
+  ciMood = null;
+  ciSentiment = null;
+  ciCurrentStep = 0;
+  document.querySelectorAll('.checkin-mood-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.checkin-sent-btn').forEach(b => b.classList.remove('selected'));
+  const inp = document.getElementById('journal-input');
+  if (inp) inp.value = '';
+  // Reset progress
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('cp' + i);
+    if (dot) dot.className = 'checkin-prog-dot' + (i === 0 ? ' active' : '');
+  }
+  // Show step 0
+  document.querySelectorAll('.checkin-step').forEach((s, i) => {
+    s.classList.toggle('active', i === 0);
+  });
+}
+
+function ciSkipAll() {
+  // Just open the free-write directly
+  ciNext(2);
 }
 
 function saveJournalEntry(){
@@ -10117,7 +10545,7 @@ function _origExportBackup_inner(){
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download=`EA_Compass_Backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.download=`Penthesis_Backup_${new Date().toISOString().slice(0,10)}.json`;
   a.click();
   URL.revokeObjectURL(a.href);
   showToast('✓ Full backup downloaded — all data included','success');
@@ -10214,7 +10642,7 @@ document.addEventListener('keydown', e=>{
   // Inject manifest dynamically (works from file:// and http://)
   const manifest={
     name:'Penthesis',
-    short_name:'Compass',
+    short_name:'Penthesis',
     description:'Pen your thesis. Build your wealth. — your portfolio discipline tool',
     start_url:'.',
     display:'standalone',
@@ -11675,6 +12103,232 @@ document.addEventListener('click', e=>{
   v25Boot();
   window.addEventListener('penthesis-auth-changed', v25Boot);
 })();
+</script>
+
+<!-- IPS EDIT MODAL -->
+<div class="ips-modal-overlay hidden" id="ipsModalOverlay" onclick="if(event.target===this)closeIPSModal()">
+  <div class="ips-modal">
+    <div class="ips-modal-title">Investment Policy Statement</div>
+    <div class="ips-modal-sub">Your personal rules — enforced on every trade. Set once, update anytime.</div>
+
+    <label class="ips-field-label">Total Portfolio Value (ZAR)</label>
+    <input type="number" class="form-input" id="ips-pv-input" placeholder="e.g. 250000" min="0" step="1000">
+    <div class="ips-field-hint">Include everything — EasyEquities, unit trusts, property, RA. Used to calculate your max position sizes.</div>
+
+    <label class="ips-field-label">Tier 1 — Max Position Size (%)</label>
+    <input type="number" class="form-input" id="ips-t1-input" placeholder="25" min="5" max="100" step="1">
+    <div class="ips-field-hint">Core holdings — max % of portfolio in any single Tier 1 stock. Default: 25%</div>
+
+    <label class="ips-field-label">Tier 2 — Max Position Size (%)</label>
+    <input type="number" class="form-input" id="ips-t2-input" placeholder="15" min="5" max="100" step="1">
+    <div class="ips-field-hint">Tactical / catalyst positions — smaller size, time-limited. Default: 15%</div>
+
+    <label class="ips-field-label">Max Sector Concentration (%)</label>
+    <input type="number" class="form-input" id="ips-sc-input" placeholder="40" min="10" max="100" step="5">
+    <div class="ips-field-hint">Max % of portfolio in any single sector. Penthesis warns if you exceed this. Default: 40%</div>
+
+    <label class="ips-field-label">Minimum Cash Buffer (%)</label>
+    <input type="number" class="form-input" id="ips-cash-input" placeholder="10" min="0" max="50" step="1">
+    <div class="ips-field-hint">Keep this % of portfolio in cash at all times. Default: 10%</div>
+
+    <button class="ips-save-btn" onclick="saveIPS()">Save My IPS</button>
+    <button class="ips-cancel-btn" onclick="closeIPSModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// IPS — INVESTMENT POLICY STATEMENT
+// ═══════════════════════════════════════════════════
+
+
+// ══════════════════════════════════════
+// AUTH SCREEN — SIGN IN / SIGN UP TABS
+// ══════════════════════════════════════
+function authTab(tab) {
+  const signin = document.getElementById('auth-signin-form');
+  const signup = document.getElementById('auth-signup-form');
+  const tabSignin = document.getElementById('tab-signin');
+  const tabSignup = document.getElementById('tab-signup');
+  if (!signin || !signup) return;
+
+  if (tab === 'signin') {
+    signin.style.display = 'block';
+    signup.style.display = 'none';
+    if (tabSignin) { tabSignin.style.background = 'var(--gold)'; tabSignin.style.color = '#09161F'; tabSignin.style.fontWeight = '700'; }
+    if (tabSignup) { tabSignup.style.background = 'none'; tabSignup.style.color = 'var(--muted)'; tabSignup.style.fontWeight = '600'; }
+  } else {
+    signin.style.display = 'none';
+    signup.style.display = 'block';
+    if (tabSignup) { tabSignup.style.background = 'var(--gold)'; tabSignup.style.color = '#09161F'; tabSignup.style.fontWeight = '700'; }
+    if (tabSignin) { tabSignin.style.background = 'none'; tabSignin.style.color = 'var(--muted)'; tabSignin.style.fontWeight = '600'; }
+  }
+}
+
+async function penthSignUp() {
+  const name = (document.getElementById('penth-name')?.value || '').trim();
+  const email = (document.getElementById('penth-email-signup')?.value || '').trim();
+  const password = document.getElementById('penth-password-signup')?.value || '';
+
+  if (!name) { showAuthStatus('Enter your name', 'error'); return; }
+  if (!email) { showAuthStatus('Enter your email', 'error'); return; }
+  if (password.length < 6) { showAuthStatus('Password must be at least 6 characters', 'error'); return; }
+
+  showAuthStatus('Creating your account...', 'info');
+
+  // signUpEmail only takes email + password
+  const res = await window.penthesisAuth.signUpEmail(email, password);
+
+  if (res.ok) {
+    if (res.needsConfirm) {
+      // Email confirmation required
+      showAuthStatus('Check your email to confirm your account, then sign in.', 'success');
+      authTab('signin');
+      const emailEl = document.getElementById('penth-email');
+      if (emailEl) emailEl.value = email;
+      return;
+    }
+    // No confirmation needed — auto sign in
+    showAuthStatus('Account created! Signing you in...', 'success');
+    // Save name to profile
+    if (typeof DB !== 'undefined') {
+      DB.set('profile', { name: name, email: email });
+    }
+    // Already signed in via signUpEmail (session returned)
+    // Trigger app boot
+    setTimeout(() => {
+      if (typeof v25Boot === 'function') v25Boot();
+    }, 500);
+  } else {
+    if (/already registered|user already registered|already exists/i.test(res.reason || '')) {
+      showAuthStatus('Account exists — signing you in...', 'info');
+      // Try to sign in with same credentials
+      const signInRes = await window.penthesisAuth.signInEmail(email, password);
+      if (signInRes.ok) {
+        showAuthStatus('Welcome back!', 'success');
+      } else {
+        showAuthStatus('Account exists — check your password and sign in', 'error');
+        authTab('signin');
+        const emailEl = document.getElementById('penth-email');
+        if (emailEl) emailEl.value = email;
+      }
+    } else {
+      showAuthStatus(res.reason || 'Sign up failed — try again', 'error');
+    }
+  }
+}
+
+function authForgotPassword() {
+  const email = (document.getElementById('penth-email')?.value || '').trim();
+  if (!email) { showAuthStatus('Enter your email above, then click Forgot password', 'error'); return; }
+  showAuthStatus('Sending reset email...', 'info');
+  // Use supabase directly since resetPassword not in penthesisAuth
+  const sb = window.supabase;
+  if (!sb) { showAuthStatus('Auth not ready — refresh and try again', 'error'); return; }
+  sb.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin
+  }).then(({ error }) => {
+    if (error) showAuthStatus(error.message || 'Reset failed', 'error');
+    else showAuthStatus('Reset email sent — check your inbox', 'success');
+  });
+}
+
+function togglePwdSignup() {
+  const input = document.getElementById('penth-password-signup');
+  const btn = document.getElementById('pwd-toggle-btn-signup');
+  if (!input) return;
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  if (btn) { btn.innerHTML = isHidden ? '&#128584;' : '&#128065;'; }
+}
+
+function togglePwd() {
+  const input = document.getElementById('penth-password');
+  const btn = document.getElementById('pwd-toggle-btn');
+  if (!input) return;
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  btn.innerHTML = isHidden ? '&#128584;' : '&#128065;';
+  btn.title = isHidden ? 'Hide password' : 'Show password';
+  input.focus();
+}
+
+function getIPS() {
+  const saved = DB.get('ips_settings');
+  if (saved) return saved;
+  return { pv: null, t1: 25, t2: 15, sc: 40, cash: 10 };
+}
+
+function saveIPS() {
+  const pv    = parseFloat(document.getElementById('ips-pv-input')?.value) || null;
+  const t1    = parseFloat(document.getElementById('ips-t1-input')?.value) || 25;
+  const t2    = parseFloat(document.getElementById('ips-t2-input')?.value) || 15;
+  const sc    = parseFloat(document.getElementById('ips-sc-input')?.value) || 40;
+  const cash  = parseFloat(document.getElementById('ips-cash-input')?.value) || 10;
+  const ips   = { pv, t1, t2, sc, cash };
+  DB.set('ips_settings', ips);
+  if (pv) DB.set('sizing_portfolio_val', pv);
+  closeIPSModal();
+  renderIPS();
+  showToast('IPS saved — your limits are now enforced on every trade.');
+  if (typeof updateSizing === 'function') updateSizing();
+}
+
+function openIPSModal() {
+  const ips = getIPS();
+  const fields = {
+    'ips-pv-input': ips.pv || '',
+    'ips-t1-input': ips.t1 || 25,
+    'ips-t2-input': ips.t2 || 15,
+    'ips-sc-input': ips.sc || 40,
+    'ips-cash-input': ips.cash || 10
+  };
+  Object.entries(fields).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  });
+  const overlay = document.getElementById('ipsModalOverlay');
+  if (overlay) overlay.classList.remove('hidden');
+}
+
+function closeIPSModal() {
+  const overlay = document.getElementById('ipsModalOverlay');
+  if (overlay) overlay.classList.add('hidden');
+}
+
+function renderIPS() {
+  const card = document.getElementById('ips-settings-card');
+  if (!card) return;
+  const ips = getIPS();
+  const isSet = ips.pv != null;
+  const pvStr = isSet ? 'R ' + Number(ips.pv).toLocaleString('en-ZA') : 'Not set';
+  card.innerHTML = `
+    <div class="ips-view">
+      <div class="ips-view-row">
+        <span class="ips-view-label">Portfolio Value</span>
+        <span class="ips-view-val" style="${!isSet ? 'color:var(--muted)' : ''}">${pvStr}</span>
+      </div>
+      <div class="ips-view-row">
+        <span class="ips-view-label">Tier 1 max position</span>
+        <span class="ips-view-val">${ips.t1}%</span>
+      </div>
+      <div class="ips-view-row">
+        <span class="ips-view-label">Tier 2 max position</span>
+        <span class="ips-view-val">${ips.t2}%</span>
+      </div>
+      <div class="ips-view-row">
+        <span class="ips-view-label">Sector concentration cap</span>
+        <span class="ips-view-val">${ips.sc}%</span>
+      </div>
+      <div class="ips-view-row">
+        <span class="ips-view-label">Minimum cash buffer</span>
+        <span class="ips-view-val">${ips.cash}%</span>
+      </div>
+    </div>
+    ${!isSet ? '<div class="ips-not-set" style="margin-top:12px">&#9888;&#65039; Set your portfolio value to activate position sizing on every trade.</div>' : ''}
+    <button class="ips-edit-btn" onclick="openIPSModal()">${isSet ? '&#9998; Edit My IPS' : '&#43; Set Up My IPS'}</button>
+  `;
+}
 </script>
 </body>
 </html>
